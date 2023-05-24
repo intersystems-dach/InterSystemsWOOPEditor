@@ -82,6 +82,9 @@
             "styles": ["src/styles.sass"],
             "scripts": ["node_modules/marked/marked.min.js"]
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
