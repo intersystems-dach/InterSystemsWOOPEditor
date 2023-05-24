@@ -1,0 +1,25 @@
+<div class="heading">
+  <h1>{{ chapter.title }}</h1>
+  <p>
+    <i>{{ "Page " + (currentPage + 1) + "/" + chapter.pages.length }}</i>
+  </p>
+</div>
+<app-page
+  *ngFor="let p of chapter.pages; let i = index"
+  [page]="p"
+  [show]="i == currentPage"
+  [showTip]="tipVisible"
+  [showResult]="resultVisible"
+></app-page>
+<app-page-nav-bar
+  [showPrevButton]="currentPage != 0"
+  [showNextButton]="currentPage != chapter.pages.length - 1"
+  [showResultButton]="
+    chapter.pages[currentPage].resultURL != '' && !resultVisible
+  "
+  [showTipButton]="chapter.pages[currentPage].tipURL != '' && !tipVisible"
+  (showNextEmitter)="showNextPage()"
+  (showPrevEmitter)="showPrevPage()"
+  (showTipEmitter)="showTip()"
+  (showResultEmitter)="showResult()"
+></app-page-nav-bar>

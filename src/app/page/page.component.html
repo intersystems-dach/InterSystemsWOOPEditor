@@ -1,0 +1,11 @@
+<div *ngIf="show">
+  <app-markdown-content [url]="page.contentURL"></app-markdown-content>
+  <div *ngIf="showTip">
+    <h1 class="heading">Tip</h1>
+    <app-markdown-content [url]="page.tipURL"></app-markdown-content>
+  </div>
+  <div *ngIf="showResult">
+    <h1 class="heading">Result</h1>
+    <app-markdown-content [url]="page.resultURL"></app-markdown-content>
+  </div>
+</div>

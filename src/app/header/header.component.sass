@@ -8,12 +8,16 @@ header
         background: none
 
     .settingsButton
+        position: absolute
         right: 30px
-        position: fixed
         height: 40px
         width: 40px
         cursor: pointer
-        top: 30px
+        top: 20px
+        &:hover
+            animation-name: rotate
+            animation-duration: 1200ms
+            animation-fill-mode: forwards
 
 .logo
     height: 40px
@@ -28,3 +32,9 @@ header
  top: 30px
  height: 30px
  width: 30px */
+
+@keyframes rotate
+    0%
+        transform: rotateZ(0deg)
+    100%
+        transform: rotateZ(360deg)

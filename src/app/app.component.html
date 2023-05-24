@@ -1,5 +1,18 @@
-<app-header class=""></app-header>
-<app-markdown-content url="assets/chapters/test.md"></app-markdown-content>
-<app-markdown-content url="assets/chapters/test.md"></app-markdown-content>
-
-<div style="height: 2000px"></div>
+<app-header class="sticky" (goBackEmitter)="goBack()"></app-header>
+<div class="container">
+  <app-chapter
+    [chapter]="currentChapter"
+    *ngIf="chapterSelected && currentChapter.verified"
+  ></app-chapter>
+  <app-chapter-selection
+    [chapterNames]="chapterNames"
+    (chapterSelected)="selectChapter($event)"
+    *ngIf="!chapterSelected"
+  >
+  </app-chapter-selection>
+</div>
+<app-password-query
+  *ngIf="chapterSelected && !currentChapter.verified"
+  [password]="currentChapter.config.password"
+  (passwordEntered)="verifyChapter($event)"
+></app-password-query>

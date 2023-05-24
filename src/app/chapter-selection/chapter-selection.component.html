@@ -1,0 +1,9 @@
+<div class="container">
+  <button
+    class="chapterButton"
+    *ngFor="let chapter of chapterNames"
+    (click)="onChapterSelected(chapter)"
+  >
+    {{ chapter }}
+  </button>
+</div>
