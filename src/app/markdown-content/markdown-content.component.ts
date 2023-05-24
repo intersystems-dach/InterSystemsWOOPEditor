@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.sass'],
+  selector: 'app-markdown-content',
+  templateUrl: './markdown-content.component.html',
+  styleUrls: ['./markdown-content.component.sass'],
 })
-export class AppComponent {
+export class MarkdownContentComponent {
   title = 'InterSystemsWUI';
+
+  @Input() url: string = '';
 
   markdown: string | undefined;
 
@@ -16,11 +18,11 @@ export class AppComponent {
 
   async ngOnInit() {
     const markdownRaw = await this.http
-      .get('assets/chapters/test.md', { responseType: 'text' })
+      .get(this.url, { responseType: 'text' })
       .toPromise();
 
     if (markdownRaw === undefined) {
-      console.log('markdownRaw is undefined');
+      console.error('Could not get markdown file!');
       return;
     }
     this.markdown = this.mdService.parse(markdownRaw);
