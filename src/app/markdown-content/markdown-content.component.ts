@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./markdown-content.component.sass'],
 })
 export class MarkdownContentComponent {
-  title = 'InterSystemsWUI';
+  title = 'InterSystemsWOOP';
 
   @Input() url: string = '';
 

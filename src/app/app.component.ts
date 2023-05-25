@@ -12,7 +12,7 @@ import config from 'src/assets/chapters/config.json';
   styleUrls: ['./app.component.sass'],
 })
 export class AppComponent {
-  title = 'InterSystemsWUI';
+  title = 'InterSystemsWOOP';
 
   private static baseURL = 'assets/chapters/';
 
