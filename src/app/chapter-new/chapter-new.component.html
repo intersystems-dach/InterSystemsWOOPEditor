@@ -1,1 +1,42 @@
-<p>chapter-new works!</p>
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>Create new Chapter</h1>
+  <p class="wrong" *ngIf="isWrong">{{ wrongText }}</p>
+  <button class="closeButton" (click)="close()">X</button>
+  <p style="top: 60px">Name</p>
+  <input
+    type="text"
+    class="usernameInput"
+    name="title"
+    [(ngModel)]="name"
+    (keydown.enter)="submit()"
+    style="top: 100px"
+  />
+  <p style="top: 110px">Language</p>
+  <input
+    type="text"
+    class="usernameInput"
+    name="language"
+    [(ngModel)]="language"
+    (keydown.enter)="submit()"
+    style="top: 150px"
+  />
+  <p style="top: 160px">Password</p>
+  <input
+    type="text"
+    class="usernameInput"
+    name="password"
+    [(ngModel)]="password"
+    (keydown.enter)="submit()"
+    style="top: 200px"
+  />
+  <p style="top: 210px">Description</p>
+  <textarea
+    name="description"
+    style="top: 320px"
+    [(ngModel)]="description"
+  ></textarea>
+  <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
+    Create
+  </button>
+</div>
