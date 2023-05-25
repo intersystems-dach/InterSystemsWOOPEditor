@@ -1,6 +1,6 @@
 <div align="center">
   <br />
-  <!-- <img src="" alt="InterSystemsWOOPLogo" width="30%"/> -->
+  <img src="src/assets/imgs/InterSystemsWOOPLogo.png" alt="InterSystemsWOOPLogo" width="40%"/>
   <h1>InterSystems Workshop Organizer and Optimizer Program</h1>
   <p>
      Description
