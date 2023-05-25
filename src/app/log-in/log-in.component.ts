@@ -1,5 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-log-in',
@@ -15,7 +16,12 @@ export class LogInComponent {
 
   @Output() closeEmitter = new EventEmitter<boolean>();
 
+  constructor(private apiService: ApiService) {}
+
   submit() {
+    console.log(
+      this.apiService.checkUser(this.enteredUsername, this.enteredPassword)
+    );
     let users = AppComponent.globalConfig.users;
     for (let user of users) {
       if (

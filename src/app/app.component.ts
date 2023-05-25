@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
-
 import config from 'src/assets/chapters/config.json';
 import { FileManager } from '../utils/FileManager';
 import { UserLevel } from '../utils/classes';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'InterSystemsWOOP';
 
   private static baseURL = 'assets/chapters/';
@@ -27,9 +27,12 @@ export class AppComponent {
 
   chapterSelected = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
   async ngOnInit() {
+    this.apiService.getMessage().subscribe((data) => {
+      console.log(data);
+    });
     FileManager.init(this.http, AppComponent.baseURL);
 
     for (let chapterName of this.chapterNames) {

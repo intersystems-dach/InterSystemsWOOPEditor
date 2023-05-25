@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "username": "pbonin",
+      "password": "123",
+      "level": 1
+    },
+    {
+      "username": "pb",
+      "password": "123",
+      "level": 2
+    }
+  ]
+}
