@@ -1,4 +1,9 @@
 <div class="contentBox">
-  <markdown [src]="url" [line]="line" lineNumbers lineHighlight></markdown>
+  <markdown
+    [src]="url"
+    [line]="line"
+    [style.font-size]="getFontSize() + 'px'"
+    lineHighlight
+  ></markdown>
 </div>
 <!-- [data]="markdown" -->

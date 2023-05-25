@@ -15,6 +15,8 @@ import { PasswordQueryComponent } from './password-query/password-query.componen
 import { FormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings/settings.component';
 import { ChapterMetaDataComponent } from './chapter-meta-data/chapter-meta-data.component';
+import { LogInComponent } from './log-in/log-in.component';
+import { ChapterNewComponent } from './chapter-new/chapter-new.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +29,8 @@ import { ChapterMetaDataComponent } from './chapter-meta-data/chapter-meta-data.
     PasswordQueryComponent,
     SettingsComponent,
     ChapterMetaDataComponent,
+    LogInComponent,
+    ChapterNewComponent,
   ],
   imports: [
     BrowserModule,

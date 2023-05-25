@@ -1,11 +1,26 @@
-<div class="container" *ngFor="let chapter of chapters">
-  <div class="chapterContainer">
-    <button class="chapterButton" (click)="onChapterSelected(chapter.title)">
-      {{ chapter.title }}
-    </button>
-    <app-chapter-meta-data
-      [chapter]="chapter"
-      class="metaData"
-    ></app-chapter-meta-data>
+<div class="container">
+  <div *ngFor="let chapter of chapters">
+    <div class="chapterContainer">
+      <button class="chapterButton" (click)="onChapterSelected(chapter.title)">
+        {{ chapter.title }}
+      </button>
+      <div
+        class="editButton"
+        *ngIf="
+          getUserLevel() == 2 ||
+          (getUserLevel() == 1 && getUserName() == chapter.config.author)
+        "
+      >
+        <button>Edit</button>
+        <button>Delete</button>
+      </div>
+      <app-chapter-meta-data
+        [chapter]="chapter"
+        class="metaData"
+      ></app-chapter-meta-data>
+    </div>
+  </div>
+  <div class="newButton" *ngIf="getUserLevel() > 0">
+    <button>+ New</button>
   </div>
 </div>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Chapter, Config, Page } from 'src/utils/classes';
+import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 import config from 'src/assets/chapters/config.json';
+import { FileManager } from '../utils/FileManager';
+import { UserLevel } from '../utils/classes';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +16,10 @@ export class AppComponent {
 
   private static baseURL = 'assets/chapters/';
 
+  public static UserLevel = UserLevel.NONE;
+  public static UserName = '';
+  public static globalConfig = config;
+
   chapterNames: string[] = config.chapterNames;
   chapters: Chapter[] = [];
   errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
@@ -26,12 +30,10 @@ export class AppComponent {
   constructor(private http: HttpClient) {}
 
   async ngOnInit() {
+    FileManager.init(this.http, AppComponent.baseURL);
+
     for (let chapterName of this.chapterNames) {
-      let chapter = await readChapter(
-        this.http,
-        AppComponent.baseURL,
-        chapterName
-      );
+      let chapter = await FileManager.readChapter(chapterName);
       this.chapters.push(chapter);
     }
 
@@ -46,6 +48,15 @@ export class AppComponent {
   selectChapter(chapterName: string) {
     this.currentChapter = this.getChapterByName(chapterName);
     this.chapterSelected = true;
+    if (AppComponent.UserLevel == UserLevel.ADMIN) {
+      this.currentChapter.verified = true;
+    }
+    if (
+      AppComponent.UserLevel == UserLevel.USER &&
+      this.currentChapter.config.author == AppComponent.UserName
+    ) {
+      this.currentChapter.verified = true;
+    }
   }
 
   goBack() {
@@ -60,6 +71,7 @@ export class AppComponent {
     }
     return this.errorChapter;
   }
+
   verifyChapter(value: boolean) {
     if (value) {
       this.currentChapter.verified = true;
@@ -67,83 +79,12 @@ export class AppComponent {
       this.chapterSelected = false;
     }
   }
-}
 
-function readConfigFile(
-  http: HttpClient,
-  filePath: string
-): Promise<Config | undefined> {
-  return http
-    .get<Config>(filePath)
-    .toPromise()
-    .then((data) => {
-      return data;
-    });
-}
-
-async function readChapter(http: HttpClient, baseURL: string, name: string) {
-  let pages = [];
-  let i = 1;
-  while (true) {
-    let page = await readPage(http, baseURL, name, i);
-    if (page == null) {
-      break;
-    }
-    pages.push(page);
-    i++;
+  getUserLevel() {
+    return AppComponent.UserLevel;
   }
 
-  let config = await readConfigFile(http, baseURL + name + '/config.json');
-  if (config == undefined) {
-    console.log('Config file not found');
-    config = new Config('', '', '', '');
+  getUserName() {
+    return AppComponent.UserName;
   }
-
-  let chapter = new Chapter(name, pages, config);
-
-  return chapter;
-}
-async function readPage(
-  http: HttpClient,
-  baseURL: string,
-  chapterName: string,
-  pageNumber: number
-) {
-  let content = baseURL + chapterName + '/' + pageNumber + '/content.md';
-  if (!(await fileExists(http, content))) {
-    return null;
-  }
-  let tip = baseURL + chapterName + '/' + pageNumber + '/tip.md';
-  if (!(await fileExists(http, tip))) {
-    tip = '';
-  }
-  let result = baseURL + chapterName + '/' + pageNumber + '/result.md';
-  if (!(await fileExists(http, result))) {
-    result = '';
-  }
-  return new Page(content, tip, result);
-}
-
-/* function fileExists(http: HttpClient, url: string): Observable<boolean> {
-  return http.get(url).pipe(
-    map((response) => {
-      return true;
-    }),
-    catchError((error) => {
-      return false;
-    })
-  );
-} */
-
-function fileExists(
-  http: HttpClient,
-  filePath: string
-): Promise<boolean | undefined> {
-  return http
-    .head(filePath, { observe: 'response' })
-    .pipe(
-      map((response) => response.status === 200),
-      catchError(() => of(false))
-    )
-    .toPromise();
 }

@@ -1,4 +1,12 @@
 <div class="settings">
   <button>Toggle Mode</button>
-  <button>Log in</button>
+  <div class="dividedButton">
+    <button class="smallButton" (click)="decreaseFontSize()">-</button>
+    <p class="text">Font Size</p>
+    <button class="smallButton" (click)="increaseFontSize()">+</button>
+  </div>
+  <button (click)="toggleLogIn()" *ngIf="getUserLevel() == 0">Log in</button>
+  <button (click)="logOut()" *ngIf="getUserLevel() > 0">Log out</button>
 </div>
+
+<app-log-in *ngIf="logIn" (closeEmitter)="toggleLogIn()"></app-log-in>

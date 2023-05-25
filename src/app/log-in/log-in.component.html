@@ -1,0 +1,26 @@
+<div class="background"></div>
+<div class="container">
+  <h1>Log in</h1>
+  <p class="wrong" *ngIf="isWrong">Wrong username or password</p>
+  <button class="closeButton" (click)="close()">X</button>
+  <input
+    type="text"
+    class="usernameInput"
+    name="username"
+    [(ngModel)]="enteredUsername"
+    (keydown.enter)="submit()"
+  />
+  <input
+    [type]="type"
+    class="passwordInput"
+    name="password"
+    [(ngModel)]="enteredPassword"
+    (keydown.enter)="submit()"
+  />
+  <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
+    Submit
+  </button>
+  <button class="viewButton" (click)="viewPassword()">
+    {{ type == "password" ? "View" : "Hide" }}
+  </button>
+</div>

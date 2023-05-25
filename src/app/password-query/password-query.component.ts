@@ -9,7 +9,7 @@ export class PasswordQueryComponent {
   enteredPassword: string = '';
   isWrong: boolean = false;
   type: string = 'password';
-  @Input() password: string = 'abc';
+  @Input() password: string = '';
 
   @Output() passwordEntered = new EventEmitter<boolean>();
 

@@ -42,3 +42,9 @@ export class Config {
     this.description = description;
   }
 }
+
+export enum UserLevel {
+  NONE = 0,
+  USER = 1,
+  ADMIN = 2,
+}
