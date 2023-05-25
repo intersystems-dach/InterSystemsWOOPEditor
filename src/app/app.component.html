@@ -5,7 +5,7 @@
     *ngIf="chapterSelected && currentChapter.verified"
   ></app-chapter>
   <app-chapter-selection
-    [chapterNames]="chapterNames"
+    [chapters]="chapters"
     (chapterSelected)="selectChapter($event)"
     *ngIf="!chapterSelected"
   >

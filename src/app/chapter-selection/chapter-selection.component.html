@@ -1,9 +1,11 @@
-<div class="container">
-  <button
-    class="chapterButton"
-    *ngFor="let chapter of chapterNames"
-    (click)="onChapterSelected(chapter)"
-  >
-    {{ chapter }}
-  </button>
+<div class="container" *ngFor="let chapter of chapters">
+  <div class="chapterContainer">
+    <button class="chapterButton" (click)="onChapterSelected(chapter.title)">
+      {{ chapter.title }}
+    </button>
+    <app-chapter-meta-data
+      [chapter]="chapter"
+      class="metaData"
+    ></app-chapter-meta-data>
+  </div>
 </div>

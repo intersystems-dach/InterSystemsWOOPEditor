@@ -1,4 +1,6 @@
 {
-  "password": "abc123",
-  "language": "en"
+  "password": "123",
+  "language": "en",
+  "author": "pbonin",
+  "description": "A python Introduction"
 }

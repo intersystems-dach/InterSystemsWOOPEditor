@@ -7,8 +7,11 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent {
   @Output() goBackEmitter = new EventEmitter<string>();
-
+  showSettings = false;
   goBack() {
     this.goBackEmitter.emit();
+  }
+  toggleSettings() {
+    this.showSettings = !this.showSettings;
   }
 }

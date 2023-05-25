@@ -8,6 +8,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 export class PasswordQueryComponent {
   enteredPassword: string = '';
   isWrong: boolean = false;
+  type: string = 'password';
   @Input() password: string = 'abc';
 
   @Output() passwordEntered = new EventEmitter<boolean>();
@@ -20,6 +21,13 @@ export class PasswordQueryComponent {
     } else {
       this.isWrong = true;
       this.enteredPassword = '';
+    }
+  }
+  viewPassword() {
+    if (this.type === 'password') {
+      this.type = 'text';
+    } else {
+      this.type = 'password';
     }
   }
   close() {

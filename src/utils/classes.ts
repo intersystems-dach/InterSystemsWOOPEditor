@@ -28,8 +28,17 @@ export class Page {
 export class Config {
   public password: string;
   public language: string;
-  constructor(password: string, language: string) {
+  public author: string;
+  public description: string;
+  constructor(
+    password: string,
+    language: string,
+    author: string,
+    description: string
+  ) {
     this.password = password;
     this.language = language;
+    this.author = author;
+    this.description = description;
   }
 }

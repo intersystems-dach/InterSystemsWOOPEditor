@@ -14,6 +14,7 @@ import { ChapterSelectionComponent } from './chapter-selection/chapter-selection
 import { PasswordQueryComponent } from './password-query/password-query.component';
 import { FormsModule } from '@angular/forms';
 import { SettingsComponent } from './settings/settings.component';
+import { ChapterMetaDataComponent } from './chapter-meta-data/chapter-meta-data.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +26,7 @@ import { SettingsComponent } from './settings/settings.component';
     ChapterSelectionComponent,
     PasswordQueryComponent,
     SettingsComponent,
+    ChapterMetaDataComponent,
   ],
   imports: [
     BrowserModule,

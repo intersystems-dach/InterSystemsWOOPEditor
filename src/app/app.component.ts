@@ -18,7 +18,8 @@ export class AppComponent {
 
   chapterNames: string[] = config.chapterNames;
   chapters: Chapter[] = [];
-  currentChapter: Chapter = new Chapter('Empty', [], new Config('', ''));
+  errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
+  currentChapter: Chapter = this.errorChapter;
 
   chapterSelected = false;
 
@@ -57,7 +58,7 @@ export class AppComponent {
         return chapter;
       }
     }
-    return new Chapter('Empty', [], new Config('', ''));
+    return this.errorChapter;
   }
   verifyChapter(value: boolean) {
     if (value) {
@@ -95,7 +96,7 @@ async function readChapter(http: HttpClient, baseURL: string, name: string) {
   let config = await readConfigFile(http, baseURL + name + '/config.json');
   if (config == undefined) {
     console.log('Config file not found');
-    config = new Config('', '');
+    config = new Config('', '', '', '');
   }
 
   let chapter = new Chapter(name, pages, config);

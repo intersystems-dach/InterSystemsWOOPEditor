@@ -1,4 +1,6 @@
 {
-  "password": "abc123",
-  "language": "en"
+  "password": "",
+  "language": "en",
+  "author": "pbonin",
+  "description": "A java Introduction"
 }

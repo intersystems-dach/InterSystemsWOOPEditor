@@ -10,5 +10,8 @@
   <img
     src="https://cdn-icons-png.flaticon.com/512/2956/2956788.png"
     class="settingsButton"
+    (click)="toggleSettings()"
+    alt="Settings"
   />
 </header>
+<app-settings *ngIf="showSettings"></app-settings>

@@ -13,6 +13,7 @@ export class MarkdownContentComponent {
   @Input() url: string = '';
 
   markdown: string | undefined;
+  line: string = '';
 
   constructor(private mdService: MarkdownService, private http: HttpClient) {}
 
@@ -26,5 +27,21 @@ export class MarkdownContentComponent {
       return;
     }
     this.markdown = this.mdService.parse(markdownRaw);
+    let markDownLines = markdownRaw.split('\n');
+    let opened = false;
+    let openedIndex = 0;
+    for (let i = 0; i < markDownLines.length; i++) {
+      console.log(markDownLines[i]);
+      if (markDownLines[i].includes('```') && !opened) {
+        opened = true;
+        openedIndex = i;
+      } else if (markDownLines[i].includes('```') && opened) {
+        opened = false;
+        this.line += openedIndex + 2 + '-' + i + ', ';
+      }
+    }
+    if (this.line.length > 0)
+      this.line = this.line.substring(0, this.line.length - 2);
+    console.log(this.line);
   }
 }

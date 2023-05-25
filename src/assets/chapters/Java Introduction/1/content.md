@@ -1,3 +1,5 @@
+<img src="assets/chapters/Java Introduction/imgs/javaLogo.png" width="20%">
+
 # Install Java
 
 ## Windows
