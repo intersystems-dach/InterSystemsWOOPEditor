@@ -21,6 +21,7 @@ import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component
 import { EditContentComponent } from './edit/edit-content/edit-content.component';
 import { EditPageComponent } from './edit/edit-page/edit-page.component';
 import { MarkdownEditorComponent } from './edit/markdown-editor/markdown-editor.component';
+import { AreYouSureComponent } from './user-input/are-you-sure/are-you-sure.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +40,7 @@ import { MarkdownEditorComponent } from './edit/markdown-editor/markdown-editor.
     EditContentComponent,
     EditPageComponent,
     MarkdownEditorComponent,
+    AreYouSureComponent,
   ],
   imports: [
     BrowserModule,

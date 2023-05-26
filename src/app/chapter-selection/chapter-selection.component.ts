@@ -15,6 +15,8 @@ export class ChapterSelectionComponent {
 
   newChapter: boolean = false;
 
+  chapterToDelete: Chapter | undefined = undefined;
+
   constructor(private apiService: ApiService) {}
 
   onChapterSelected(chapterName: string) {
@@ -23,6 +25,17 @@ export class ChapterSelectionComponent {
 
   onChapterEditSelected(chapterName: string) {
     this.chapterEditSelected.emit(chapterName);
+  }
+
+  setChapterToDelete(chapter: Chapter) {
+    this.chapterToDelete = chapter;
+  }
+
+  areYouSure(value: boolean) {
+    if (value) {
+      this.deleteChapter(this.chapterToDelete!);
+    }
+    this.chapterToDelete = undefined;
   }
 
   deleteChapter(chapter: Chapter) {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Page } from 'src/utils/classes';
 
 @Component({
@@ -11,4 +11,10 @@ export class EditPageComponent {
   @Input() show: boolean = false;
   @Input() showTip: boolean = false;
   @Input() showResult: boolean = false;
+
+  @Output() changeEmitter = new EventEmitter<Page>();
+
+  onChange() {
+    this.changeEmitter.emit();
+  }
 }

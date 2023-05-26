@@ -12,7 +12,7 @@
         "
       >
         <button (click)="onChapterEditSelected(chapter.title)">Edit</button>
-        <button (click)="deleteChapter(chapter)">Delete</button>
+        <button (click)="setChapterToDelete(chapter)">Delete</button>
       </div>
       <app-chapter-meta-data
         [chapter]="chapter"
@@ -28,3 +28,7 @@
   *ngIf="newChapter"
   (closeEmitter)="toggleNewChapter()"
 ></app-chapter-new>
+<app-are-you-sure
+  *ngIf="chapterToDelete != undefined"
+  (sureEmitter)="areYouSure($event)"
+></app-are-you-sure>

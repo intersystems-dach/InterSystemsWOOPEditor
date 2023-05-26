@@ -17,12 +17,14 @@ export class ChapterComponent {
     this.currentPage++;
     this.tipVisible = false;
     this.resultVisible = false;
+    window.scrollTo({ top: 0 });
   }
 
   showPrevPage(): void {
     this.currentPage--;
     this.tipVisible = false;
     this.resultVisible = false;
+    window.scrollTo({ top: 0 });
   }
 
   showTip() {

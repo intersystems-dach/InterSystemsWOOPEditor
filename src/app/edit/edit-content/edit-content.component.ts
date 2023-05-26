@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MarkdownContentComponent } from '../../markdown-content/markdown-content.component';
 import { Page } from 'src/utils/classes';
 
@@ -10,6 +10,7 @@ import { Page } from 'src/utils/classes';
 export class EditContentComponent {
   @Input() type: string = '';
   @Input() page!: Page;
+  @Output() changeEmitter = new EventEmitter<Page>();
   data: string = '';
 
   ngOnInit() {
@@ -26,6 +27,7 @@ export class EditContentComponent {
     if (this.type === 'content') this.page.content = this.data;
     if (this.type === 'tip') this.page.tip = this.data;
     if (this.type === 'result') this.page.result = this.data;
+    this.changeEmitter.emit();
   }
 
   getFontSize() {

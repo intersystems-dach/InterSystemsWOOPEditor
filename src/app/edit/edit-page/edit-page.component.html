@@ -1,11 +1,23 @@
 <div *ngIf="show">
-  <app-edit-content [page]="page" type="content"></app-edit-content>
+  <app-edit-content
+    [page]="page"
+    type="content"
+    (changeEmitter)="onChange()"
+  ></app-edit-content>
   <div *ngIf="showTip">
     <h1 class="heading">Tip</h1>
-    <app-edit-content [page]="page" type="tip"></app-edit-content>
+    <app-edit-content
+      [page]="page"
+      type="tip"
+      (changeEmitter)="onChange()"
+    ></app-edit-content>
   </div>
   <div *ngIf="showResult">
     <h1 class="heading">Result</h1>
-    <app-edit-content [page]="page" type="result"></app-edit-content>
+    <app-edit-content
+      [page]="page"
+      type="result"
+      (changeEmitter)="onChange()"
+    ></app-edit-content>
   </div>
 </div>

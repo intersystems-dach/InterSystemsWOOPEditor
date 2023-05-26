@@ -12,6 +12,8 @@ export class EditChapterComponent {
   currentPage: number = 0;
   preview: boolean = false;
   changes: boolean = false;
+  sureDelete: boolean = false;
+  editMetaData: boolean = false;
 
   public static autoSave: boolean = false;
   public static interval: any;
@@ -19,10 +21,12 @@ export class EditChapterComponent {
 
   showNextPage(): void {
     this.currentPage++;
+    window.scrollTo({ top: 0 });
   }
 
   showPrevPage(): void {
     this.currentPage--;
+    window.scrollTo({ top: 0 });
   }
 
   addPage(): void {
@@ -32,14 +36,21 @@ export class EditChapterComponent {
     this.changes = true;
   }
 
-  deletePage(): void {
-    this.chapter.pages.splice(this.currentPage, 1);
-    this.currentPage = this.currentPage - 1;
-    if (this.currentPage < 0) {
-      this.currentPage = 0;
+  setSureDelete(value: boolean): void {
+    this.sureDelete = value;
+  }
+
+  deletePage(value: boolean): void {
+    if (value) {
+      this.chapter.pages.splice(this.currentPage, 1);
+      this.currentPage = this.currentPage - 1;
+      if (this.currentPage < 0) {
+        this.currentPage = 0;
+      }
+      window.scrollTo({ top: 0 });
+      this.changes = true;
     }
-    window.scrollTo({ top: 0 });
-    this.changes = true;
+    this.sureDelete = false;
   }
 
   save(alertSaved: boolean = true) {
@@ -55,6 +66,10 @@ export class EditChapterComponent {
     });
   }
 
+  onChange() {
+    this.changes = true;
+  }
+
   togglePreview() {
     this.preview = !this.preview;
     window.scrollTo({ top: 0 });
@@ -63,6 +78,10 @@ export class EditChapterComponent {
   toggleAutoSave() {
     EditChapterComponent.autoSave = !EditChapterComponent.autoSave;
     this.setAutoSave();
+  }
+
+  toggleEditMetaData() {
+    this.editMetaData = !this.editMetaData;
   }
 
   getAutoSave() {

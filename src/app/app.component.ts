@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
 
   private static baseURL = 'assets/chapters/';
 
-  public static UserLevel = UserLevel.ADMIN;
-  public static UserName = 'pb';
+  public static UserLevel = UserLevel.NONE;
+  public static UserName = '';
   public static chapters: Chapter[] = [];
 
   errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
@@ -49,6 +49,10 @@ export class AppComponent implements OnInit {
       AppComponent.UserLevel == UserLevel.USER &&
       this.currentChapter.config.author == AppComponent.UserName
     ) {
+      this.currentChapter.verified = true;
+    }
+
+    if (this.currentChapter.config.password === '') {
       this.currentChapter.verified = true;
     }
   }

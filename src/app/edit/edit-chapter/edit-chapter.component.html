@@ -1,9 +1,3 @@
-<div class="editButtons">
-  <button (click)="deletePage()">Edit meta data</button>
-  <button (click)="toggleAutoSave()">
-    {{ "Autosave " + (getAutoSave() ? "ON" : "OFF") }}
-  </button>
-</div>
 <div *ngIf="!preview">
   <div class="heading">
     <h1>{{ chapter.title + " EDIT" }}</h1>
@@ -21,6 +15,7 @@
     [show]="i == currentPage"
     [showTip]="true"
     [showResult]="true"
+    (changeEmitter)="onChange()"
   ></app-edit-page>
   <app-page-nav-bar
     [showPrevButton]="currentPage != 0"
@@ -31,9 +26,17 @@
     (showPrevEmitter)="showPrevPage()"
   ></app-page-nav-bar>
   <div class="editButtons">
-    <button (click)="deletePage()">Remove Page</button>
+    <button (click)="setSureDelete(true)" *ngIf="chapter.pages.length > 0">
+      Remove Page
+    </button>
     <button (click)="addPage()">Add Page</button>
     <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
+  </div>
+  <div class="editButtons">
+    <button (click)="toggleEditMetaData()">Edit meta data</button>
+    <button (click)="toggleAutoSave()">
+      {{ "Autosave " + (getAutoSave() ? "ON" : "OFF") }}
+    </button>
   </div>
 </div>
 <app-chapter
@@ -42,5 +45,22 @@
   *ngIf="preview"
 ></app-chapter>
 <div class="editButtons">
-  <button (click)="togglePreview()">{{ preview ? "Edit" : "Preview" }}</button>
+  <button (click)="togglePreview()" *ngIf="chapter.pages.length > 0">
+    {{ preview ? "Edit" : "Preview" }}
+  </button>
 </div>
+
+<app-chapter-new
+  [updateChapter]="chapter"
+  [name]="chapter.title"
+  [description]="chapter.config.description"
+  [language]="chapter.config.language"
+  [password]="chapter.config.password"
+  *ngIf="editMetaData"
+  (closeEmitter)="toggleEditMetaData()"
+></app-chapter-new>
+
+<app-are-you-sure
+  *ngIf="sureDelete"
+  (sureEmitter)="deletePage($event)"
+></app-are-you-sure>
