@@ -19,28 +19,22 @@ export class LogInComponent {
   constructor(private apiService: ApiService) {}
 
   submit() {
-    console.log(
-      this.apiService.checkUser(this.enteredUsername, this.enteredPassword)
-    );
-    let users = AppComponent.globalConfig.users;
-    for (let user of users) {
-      if (
-        user.username === this.enteredUsername &&
-        user.password === this.enteredPassword
-      ) {
-        AppComponent.UserLevel = user.level;
-        AppComponent.UserName = user.username;
-        this.isWrong = false;
+    this.apiService
+      .checkUser(this.enteredUsername, this.enteredPassword)
+      .subscribe((data) => {
+        if (data.level > 0) {
+          AppComponent.UserLevel = data.level;
+          AppComponent.UserName = data.username;
+          this.isWrong = false;
+          this.enteredPassword = '';
+          this.enteredUsername = '';
+          this.closeEmitter.emit();
+          return;
+        }
+        this.isWrong = true;
         this.enteredPassword = '';
         this.enteredUsername = '';
-        this.closeEmitter.emit();
-        return;
-      }
-    }
-
-    this.isWrong = true;
-    this.enteredPassword = '';
-    this.enteredUsername = '';
+      });
   }
   viewPassword() {
     if (this.type === 'password') {

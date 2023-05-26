@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Chapter, Config } from 'src/utils/classes';
-import { FileManager } from 'src/utils/FileManager';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-chapter-new',
@@ -19,6 +19,8 @@ export class ChapterNewComponent {
 
   @Output() closeEmitter = new EventEmitter<boolean>();
 
+  constructor(private apiService: ApiService) {}
+
   async submit() {
     if (this.name === '') {
       this.isWrong = true;
@@ -35,18 +37,19 @@ export class ChapterNewComponent {
         this.description
       )
     );
-
-    let r = await FileManager.writeNewChapter(newChapter);
-    if (r) {
-      this.closeEmitter.emit();
-      this.name = '';
-      this.language = 'english';
-      this.password = '';
-      this.description = '';
-    } else {
-      this.isWrong = true;
-      this.wrongText = 'Could not save chapter';
-    }
+    this.apiService.addNewChapter(newChapter).subscribe((data) => {
+      if (data.ok) {
+        this.closeEmitter.emit();
+        this.name = '';
+        this.language = 'english';
+        this.password = '';
+        this.description = '';
+        AppComponent.chapters.push(newChapter);
+      } else {
+        this.isWrong = true;
+        this.wrongText = data.message;
+      }
+    });
   }
 
   close() {

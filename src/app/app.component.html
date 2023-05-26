@@ -1,13 +1,18 @@
 <app-header class="sticky" (goBackEmitter)="goBack()"></app-header>
 <div class="container">
+  <app-edit-chapter
+    [chapter]="currentChapter"
+    *ngIf="chapterEditSelected && currentChapter.verified"
+  ></app-edit-chapter>
   <app-chapter
     [chapter]="currentChapter"
     *ngIf="chapterSelected && currentChapter.verified"
   ></app-chapter>
   <app-chapter-selection
-    [chapters]="chapters"
+    [chapters]="getChapters()"
     (chapterSelected)="selectChapter($event)"
-    *ngIf="!chapterSelected"
+    (chapterEditSelected)="selectEditChapter($event)"
+    *ngIf="!chapterSelected && !chapterEditSelected"
   >
   </app-chapter-selection>
 </div>
@@ -20,4 +25,3 @@
   {{ getUserLevel() == 0 ? "" : getUserLevel() == 1 ? "User " : "Admin "
   }}<i>{{ getUserLevel() == 0 ? "" : getUserName() }}</i>
 </p>
-<!-- <app-chapter-new></app-chapter-new> -->

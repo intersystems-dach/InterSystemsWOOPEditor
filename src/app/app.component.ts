@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
-import config from 'src/assets/chapters/config.json';
-import { FileManager } from '../utils/FileManager';
 import { UserLevel } from '../utils/classes';
 import { ApiService } from './api.service';
 
@@ -18,29 +16,20 @@ export class AppComponent implements OnInit {
 
   public static UserLevel = UserLevel.NONE;
   public static UserName = '';
-  public static globalConfig = config;
+  public static chapters: Chapter[] = [];
 
-  chapterNames: string[] = config.chapterNames;
-  chapters: Chapter[] = [];
   errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
   currentChapter: Chapter = this.errorChapter;
 
   chapterSelected = false;
+  chapterEditSelected = false;
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   async ngOnInit() {
-    this.apiService.getMessage().subscribe((data) => {
-      console.log(data);
-    });
-    FileManager.init(this.http, AppComponent.baseURL);
-
-    for (let chapterName of this.chapterNames) {
-      let chapter = await FileManager.readChapter(chapterName);
-      this.chapters.push(chapter);
-    }
-
-    for (let chapter of this.chapters) {
+    AppComponent.chapters = await this.apiService.getAllChapters().toPromise();
+    console.log(AppComponent.chapters);
+    for (let chapter of AppComponent.chapters) {
       if (window.location.href.includes(chapter.title.replace(' ', '-'))) {
         this.currentChapter = chapter;
         this.chapterSelected = true;
@@ -61,13 +50,27 @@ export class AppComponent implements OnInit {
       this.currentChapter.verified = true;
     }
   }
+  selectEditChapter(chapterName: string) {
+    this.currentChapter = this.getChapterByName(chapterName);
+    this.chapterEditSelected = true;
+    if (AppComponent.UserLevel == UserLevel.ADMIN) {
+      this.currentChapter.verified = true;
+    }
+    if (
+      AppComponent.UserLevel == UserLevel.USER &&
+      this.currentChapter.config.author == AppComponent.UserName
+    ) {
+      this.currentChapter.verified = true;
+    }
+  }
 
   goBack() {
     this.chapterSelected = false;
+    this.chapterEditSelected = false;
   }
 
   getChapterByName(chapterName: string): Chapter {
-    for (let chapter of this.chapters) {
+    for (let chapter of AppComponent.chapters) {
       if (chapter.title == chapterName) {
         return chapter;
       }
@@ -81,6 +84,10 @@ export class AppComponent implements OnInit {
     } else {
       this.chapterSelected = false;
     }
+  }
+
+  getChapters() {
+    return AppComponent.chapters;
   }
 
   getUserLevel() {

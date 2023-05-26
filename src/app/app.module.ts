@@ -17,6 +17,9 @@ import { SettingsComponent } from './settings/settings.component';
 import { ChapterMetaDataComponent } from './chapter-meta-data/chapter-meta-data.component';
 import { LogInComponent } from './log-in/log-in.component';
 import { ChapterNewComponent } from './chapter-new/chapter-new.component';
+import { EditChapterComponent } from './edit-chapter/edit-chapter.component';
+import { EditContentComponent } from './edit-content/edit-content.component';
+import { EditPageComponent } from './edit-page/edit-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +34,9 @@ import { ChapterNewComponent } from './chapter-new/chapter-new.component';
     ChapterMetaDataComponent,
     LogInComponent,
     ChapterNewComponent,
+    EditChapterComponent,
+    EditContentComponent,
+    EditPageComponent,
   ],
   imports: [
     BrowserModule,

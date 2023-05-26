@@ -11,8 +11,8 @@
           (getUserLevel() == 1 && getUserName() == chapter.config.author)
         "
       >
-        <button>Edit</button>
-        <button>Delete</button>
+        <button (click)="onChapterEditSelected(chapter.title)">Edit</button>
+        <button (click)="deleteChapter(chapter)">Delete</button>
       </div>
       <app-chapter-meta-data
         [chapter]="chapter"
@@ -21,6 +21,10 @@
     </div>
   </div>
   <div class="newButton" *ngIf="getUserLevel() > 0">
-    <button>+ New</button>
+    <button (click)="toggleNewChapter()">+ New</button>
   </div>
 </div>
+<app-chapter-new
+  *ngIf="newChapter"
+  (closeEmitter)="toggleNewChapter()"
+></app-chapter-new>

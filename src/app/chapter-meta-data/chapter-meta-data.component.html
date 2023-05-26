@@ -2,5 +2,8 @@
   <p>{{ "Title: " + chapter.title }}</p>
   <p>{{ "Author: " + chapter.config.author }}</p>
   <p>{{ "Language: " + chapter.config.language }}</p>
-  <p>{{ "Description: " + chapter.config.description }}</p>
+  <p>{{ "Pages: " + chapter.pages.length }}</p>
+  <p *ngIf="chapter.config.description != ''">
+    {{ "Description: " + chapter.config.description }}
+  </p>
 </div>

@@ -1,5 +1,5 @@
 <div class="heading">
-  <h1>{{ chapter.title }}</h1>
+  <h1>{{ chapter.title + " EDIT" }}</h1>
   <p>
     <i>{{
       chapter.pages.length > 0
@@ -8,20 +8,26 @@
     }}</i>
   </p>
 </div>
-<app-page
+<app-edit-page
   *ngFor="let p of chapter.pages; let i = index"
   [page]="p"
   [show]="i == currentPage"
-  [showTip]="tipVisible"
-  [showResult]="resultVisible"
-></app-page>
+  [showTip]="true"
+  [showResult]="true"
+></app-edit-page>
 <app-page-nav-bar
   [showPrevButton]="currentPage != 0"
   [showNextButton]="currentPage != chapter.pages.length - 1"
-  [showResultButton]="chapter.pages[currentPage].result != '' && !resultVisible"
-  [showTipButton]="chapter.pages[currentPage].tip != '' && !tipVisible"
+  [showResultButton]="false"
+  [showTipButton]="false"
   (showNextEmitter)="showNextPage()"
   (showPrevEmitter)="showPrevPage()"
-  (showTipEmitter)="showTip()"
-  (showResultEmitter)="showResult()"
 ></app-page-nav-bar>
+<div class="editButtons">
+  <button (click)="addPage()">Add Page</button>
+  <button (click)="save()">Save</button>
+</div>
+<div class="editButtons">
+  <button (click)="deletePage()">Remove Page</button>
+  <button>Preview</button>
+</div>
