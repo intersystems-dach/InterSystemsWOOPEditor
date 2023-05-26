@@ -1,0 +1,9 @@
+<div class="searchBar">
+  <input
+    type="text"
+    placeholder="Search"
+    [(ngModel)]="searchValue"
+    (ngModelChange)="onSearchChange()"
+  />
+  <!-- <button (click)="clear()" *ngIf="searchValue != ''">Clear</button> -->
+</div>

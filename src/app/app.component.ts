@@ -13,11 +13,10 @@ import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component
 export class AppComponent implements OnInit {
   title = 'InterSystemsWOOP';
 
-  private static baseURL = 'assets/chapters/';
-
-  public static UserLevel = UserLevel.NONE;
+  public static UserLevel = UserLevel.ADMIN;
   public static UserName = '';
   public static chapters: Chapter[] = [];
+  public static allChapters: Chapter[] = [];
 
   errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
   currentChapter: Chapter = this.errorChapter;
@@ -30,13 +29,16 @@ export class AppComponent implements OnInit {
   async ngOnInit() {
     /* let online = await this.apiService.isServerOnline();
     console.log('Server online: ' + online); */
-    AppComponent.chapters = await this.apiService.getAllChapters().toPromise();
-    for (let chapter of AppComponent.chapters) {
+    AppComponent.allChapters = await this.apiService
+      .getAllChapters()
+      .toPromise();
+    for (let chapter of AppComponent.allChapters) {
       if (window.location.href.includes(chapter.title.replace(' ', '-'))) {
         this.currentChapter = chapter;
         this.chapterSelected = true;
       }
     }
+    AppComponent.chapters = AppComponent.allChapters;
   }
 
   selectChapter(chapterName: string) {
@@ -75,6 +77,7 @@ export class AppComponent implements OnInit {
     this.chapterEditSelected = false;
     EditChapterComponent.autoSave = false;
     clearInterval(EditChapterComponent.interval);
+    AppComponent.chapters = AppComponent.allChapters;
   }
 
   getChapterByName(chapterName: string): Chapter {

@@ -11,8 +11,8 @@
           (getUserLevel() == 1 && getUserName() == chapter.config.author)
         "
       >
-        <button (click)="onChapterEditSelected(chapter.title)">Edit</button>
         <button (click)="setChapterToDelete(chapter)">Delete</button>
+        <button (click)="onChapterEditSelected(chapter.title)">Edit</button>
       </div>
       <app-chapter-meta-data
         [chapter]="chapter"

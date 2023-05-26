@@ -22,6 +22,9 @@ import { EditContentComponent } from './edit/edit-content/edit-content.component
 import { EditPageComponent } from './edit/edit-page/edit-page.component';
 import { MarkdownEditorComponent } from './edit/markdown-editor/markdown-editor.component';
 import { AreYouSureComponent } from './user-input/are-you-sure/are-you-sure.component';
+import { FilterBarComponent } from './filter-bar/filter-bar.component';
+import { SearchBarComponent } from './search-bar/search-bar.component';
+import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-cheat-sheet.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +44,9 @@ import { AreYouSureComponent } from './user-input/are-you-sure/are-you-sure.comp
     EditPageComponent,
     MarkdownEditorComponent,
     AreYouSureComponent,
+    FilterBarComponent,
+    SearchBarComponent,
+    MarkdownCheatSheetComponent,
   ],
   imports: [
     BrowserModule,

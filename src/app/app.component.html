@@ -1,5 +1,9 @@
 <app-header class="sticky" (goBackEmitter)="goBack()"></app-header>
 <div class="container">
+  <!-- <app-markdown-cheat-sheet></app-markdown-cheat-sheet> -->
+  <app-search-bar
+    *ngIf="!chapterSelected && !chapterEditSelected"
+  ></app-search-bar>
   <app-edit-chapter
     [chapter]="currentChapter"
     *ngIf="chapterEditSelected && currentChapter.verified"

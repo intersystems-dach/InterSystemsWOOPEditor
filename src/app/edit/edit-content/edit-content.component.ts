@@ -24,13 +24,49 @@ export class EditContentComponent {
   }
 
   setData() {
+    //this.autoComplete();
     if (this.type === 'content') this.page.content = this.data;
     if (this.type === 'tip') this.page.tip = this.data;
     if (this.type === 'result') this.page.result = this.data;
     this.changeEmitter.emit();
   }
 
+  autoComplete() {
+    //get last character
+    let lastChar = this.data[this.data.length - 1];
+    if (lastChar === '[') {
+      this.data += ']';
+    }
+    if (lastChar === '(') {
+      this.data += ')';
+    }
+    if (lastChar === '"') {
+      this.data += '"';
+    }
+    if (lastChar === "'") {
+      this.data += "'";
+    }
+    if (lastChar === '{') {
+      this.data += '}';
+    }
+    if (lastChar === '_') {
+      this.data += '_';
+    }
+    if (lastChar === '*') {
+      this.data += '*';
+    }
+    if (lastChar === '`') {
+      this.data += '`';
+    }
+  }
+
   getFontSize() {
     return MarkdownContentComponent.fontSize;
+  }
+
+  getHeight() {
+    let height = this.data.split('\n').length * this.getFontSize() * 1.2;
+    if (height < 50) return 50;
+    return height;
   }
 }
