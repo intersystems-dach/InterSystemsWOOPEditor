@@ -2,9 +2,12 @@
   <button>Toggle Mode</button>
   <div class="dividedButton">
     <button class="smallButton" (click)="decreaseFontSize()">-</button>
-    <p class="text">Font Size</p>
+    <p class="text">{{ "Font Size " + getFontSize() }}</p>
     <button class="smallButton" (click)="increaseFontSize()">+</button>
   </div>
+  <button (click)="toggleAutoSave()" *ngIf="getUserLevel() > 0">
+    {{ "Autosave " + (getAutoSave() ? "ON" : "OFF") }}
+  </button>
   <button (click)="toggleLogIn()" *ngIf="getUserLevel() == 0">Log in</button>
   <button (click)="logOut()" *ngIf="getUserLevel() > 0">Log out</button>
 </div>

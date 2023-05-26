@@ -10,6 +10,8 @@ import { AppComponent } from '../app.component';
 export class SettingsComponent {
   logIn: boolean = false;
 
+  public static autoSave: boolean = false;
+
   increaseFontSize() {
     MarkdownContentComponent.fontSize += 2;
   }
@@ -18,6 +20,10 @@ export class SettingsComponent {
     if (MarkdownContentComponent.fontSize > 2) {
       MarkdownContentComponent.fontSize -= 2;
     }
+  }
+
+  getFontSize() {
+    return MarkdownContentComponent.fontSize;
   }
 
   toggleLogIn() {
@@ -31,5 +37,13 @@ export class SettingsComponent {
 
   getUserLevel() {
     return AppComponent.UserLevel;
+  }
+
+  toggleAutoSave() {
+    SettingsComponent.autoSave = !SettingsComponent.autoSave;
+  }
+
+  getAutoSave() {
+    return SettingsComponent.autoSave;
   }
 }

@@ -3,6 +3,7 @@ import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
 import { UserLevel } from '../utils/classes';
 import { ApiService } from './api.service';
+import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,8 @@ export class AppComponent implements OnInit {
 
   private static baseURL = 'assets/chapters/';
 
-  public static UserLevel = UserLevel.NONE;
-  public static UserName = '';
+  public static UserLevel = UserLevel.ADMIN;
+  public static UserName = 'pb';
   public static chapters: Chapter[] = [];
 
   errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
@@ -27,8 +28,9 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
   async ngOnInit() {
+    /* let online = await this.apiService.isServerOnline();
+    console.log('Server online: ' + online); */
     AppComponent.chapters = await this.apiService.getAllChapters().toPromise();
-    console.log(AppComponent.chapters);
     for (let chapter of AppComponent.chapters) {
       if (window.location.href.includes(chapter.title.replace(' ', '-'))) {
         this.currentChapter = chapter;
@@ -67,6 +69,8 @@ export class AppComponent implements OnInit {
   goBack() {
     this.chapterSelected = false;
     this.chapterEditSelected = false;
+    EditChapterComponent.autoSave = false;
+    clearInterval(EditChapterComponent.interval);
   }
 
   getChapterByName(chapterName: string): Chapter {

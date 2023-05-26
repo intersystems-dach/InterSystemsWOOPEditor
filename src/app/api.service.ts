@@ -12,6 +12,16 @@ export class ApiService {
   private static port: number = 3000;
 
   constructor(private http: HttpClient) {}
+
+  isServerOnline() {
+    return this.http
+      .get<string>('http://' + ApiService.host + ':' + ApiService.port + '/')
+      .subscribe((res) => {
+        console.log(res);
+        return true;
+      });
+  }
+
   /**
    * Checks if the user exists and if the password is correct
    * @param username The username

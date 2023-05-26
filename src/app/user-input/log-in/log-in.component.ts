@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { AppComponent } from '../app.component';
-import { ApiService } from '../api.service';
+import { AppComponent } from '../../app.component';
+import { ApiService } from '../../api.service';
 
 @Component({
   selector: 'app-log-in',

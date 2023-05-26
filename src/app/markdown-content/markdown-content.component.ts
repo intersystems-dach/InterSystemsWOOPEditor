@@ -15,7 +15,7 @@ export class MarkdownContentComponent {
 
   constructor(private mdService: MarkdownService, private http: HttpClient) {}
 
-  public static fontSize = 20;
+  public static fontSize = 16;
 
   async ngOnInit() {
     this.markdown = this.mdService.parse(this.data);

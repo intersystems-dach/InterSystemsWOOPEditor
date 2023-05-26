@@ -8,7 +8,7 @@ import { Chapter } from 'src/utils/classes';
 })
 export class ChapterComponent {
   @Input() chapter!: Chapter;
-  currentPage: number = 0;
+  @Input() currentPage: number = 0;
 
   tipVisible: boolean = false;
   resultVisible: boolean = false;

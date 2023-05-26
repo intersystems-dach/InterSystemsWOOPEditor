@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
+import { MarkdownContentComponent } from '../../markdown-content/markdown-content.component';
 import { Page } from 'src/utils/classes';
 
 @Component({

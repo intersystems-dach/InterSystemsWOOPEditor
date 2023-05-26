@@ -19,7 +19,10 @@ app.use((req, res, next) => {
   );
   next();
 });
-
+app.get("/", (req, res) => {
+  console.log("Hello World!");
+  res.send("Hello World!");
+});
 // checks if the user exists in the db.json file
 app.get("/api/woop/checkuser", (req, res) => {
   updateDB();
@@ -47,14 +50,7 @@ app.post("/api/woop/chapter/new", (req, res) => {
       return;
     }
   }
-  /* let chapter = {
-    title: req.body.title,
-    pages: [],
-    password: req.body.config.password,
-    language: req.body.config.language,
-    author: req.body.config.author,
-    description: req.body.config.description,
-  }; */
+
   req.body.verified = false;
   db.chapters.push(req.body);
   saveDB();
@@ -80,14 +76,17 @@ app.post("/api/woop/chapter/update", (req, res) => {
 app.post("/api/woop/chapter/delete", (req, res) => {
   updateDB();
   for (let i in db.chapters) {
-    if (db.chapters[i].title == req.body.title) {
+    if (
+      db.chapters[i].title == req.body.title &&
+      db.chapters[i].config.password == req.body.config.password
+    ) {
       db.chapters.splice(i, 1);
       saveDB();
       res.json({ ok: true, message: "Chapter deleted" });
       return;
     }
   }
-  res.json({ ok: false, message: "Could not find chapter" });
+  res.json({ ok: false, message: "Could not delete chapter" });
 });
 
 app.listen(3000, () => {
