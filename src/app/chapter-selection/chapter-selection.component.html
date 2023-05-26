@@ -1,27 +1,42 @@
 <div class="container">
   <div *ngFor="let chapter of chapters">
     <div class="chapterContainer">
-      <button class="chapterButton" (click)="onChapterSelected(chapter.title)">
-        {{ chapter.title }}
-      </button>
-      <div
-        class="editButton"
-        *ngIf="
-          getUserLevel() == 2 ||
-          (getUserLevel() == 1 && getUserName() == chapter.config.author)
-        "
-      >
-        <button (click)="setChapterToDelete(chapter)">Delete</button>
-        <button (click)="onChapterEditSelected(chapter.title)">Edit</button>
+      <div class="row">
+        <div
+          class="editButton"
+          *ngIf="
+            getUserLevel() == 2 ||
+            (getUserLevel() == 1 && getUserName() == chapter.config.author)
+          "
+        >
+          <button (click)="setChapterToDelete(chapter)">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
+              alt="Edit"
+            />
+          </button>
+          <button (click)="onChapterEditSelected(chapter.title)">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg/1024px-Edit_icon_%28the_Noun_Project_30184%29.svg.png"
+              alt="Edit"
+            />
+          </button>
+        </div>
+        <button
+          class="chapterButton"
+          (click)="onChapterSelected(chapter.title)"
+        >
+          {{ chapter.title }}
+        </button>
+        <app-chapter-meta-data
+          [chapter]="chapter"
+          class="metaData"
+        ></app-chapter-meta-data>
       </div>
-      <app-chapter-meta-data
-        [chapter]="chapter"
-        class="metaData"
-      ></app-chapter-meta-data>
     </div>
   </div>
   <div class="newButton" *ngIf="getUserLevel() > 0">
-    <button (click)="toggleNewChapter()">+ New</button>
+    <button (click)="toggleNewChapter()">+</button>
   </div>
 </div>
 <app-chapter-new
