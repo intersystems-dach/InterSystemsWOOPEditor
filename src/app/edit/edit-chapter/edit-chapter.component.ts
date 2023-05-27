@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Chapter, Page } from 'src/utils/classes';
 import { ApiService } from '../../api.service';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -96,5 +97,9 @@ export class EditChapterComponent {
     } else {
       clearInterval(EditChapterComponent.interval);
     }
+  }
+
+  goBack() {
+    AppComponent.goBack();
   }
 }

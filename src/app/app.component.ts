@@ -13,16 +13,19 @@ import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component
 export class AppComponent implements OnInit {
   title = 'InterSystemsWOOP';
 
-  public static UserLevel = UserLevel.ADMIN;
+  public static UserLevel = UserLevel.NONE;
   public static UserName = '';
   public static chapters: Chapter[] = [];
   public static allChapters: Chapter[] = [];
+  public static chapterSelected = false;
+  public static chapterEditSelected = false;
 
-  errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
+  errorChapter = new Chapter(
+    'Error 404',
+    [],
+    new Config('', '', '', '', false)
+  );
   currentChapter: Chapter = this.errorChapter;
-
-  chapterSelected = false;
-  chapterEditSelected = false;
 
   constructor(private http: HttpClient, private apiService: ApiService) {}
 
@@ -35,7 +38,7 @@ export class AppComponent implements OnInit {
     for (let chapter of AppComponent.allChapters) {
       if (window.location.href.includes(chapter.title.replace(' ', '-'))) {
         this.currentChapter = chapter;
-        this.chapterSelected = true;
+        AppComponent.chapterSelected = true;
       }
     }
     AppComponent.chapters = AppComponent.allChapters;
@@ -43,7 +46,7 @@ export class AppComponent implements OnInit {
 
   selectChapter(chapterName: string) {
     this.currentChapter = this.getChapterByName(chapterName);
-    this.chapterSelected = true;
+    AppComponent.chapterSelected = true;
     if (AppComponent.UserLevel == UserLevel.ADMIN) {
       this.currentChapter.verified = true;
     }
@@ -60,7 +63,7 @@ export class AppComponent implements OnInit {
   }
   selectEditChapter(chapterName: string) {
     this.currentChapter = this.getChapterByName(chapterName);
-    this.chapterEditSelected = true;
+    AppComponent.chapterEditSelected = true;
     if (AppComponent.UserLevel == UserLevel.ADMIN) {
       this.currentChapter.verified = true;
     }
@@ -72,9 +75,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  goBack() {
-    this.chapterSelected = false;
-    this.chapterEditSelected = false;
+  public static goBack() {
+    AppComponent.chapterSelected = false;
+    AppComponent.chapterEditSelected = false;
     EditChapterComponent.autoSave = false;
     clearInterval(EditChapterComponent.interval);
     AppComponent.chapters = AppComponent.allChapters;
@@ -93,7 +96,7 @@ export class AppComponent implements OnInit {
     if (value) {
       this.currentChapter.verified = true;
     } else {
-      this.chapterSelected = false;
+      AppComponent.chapterSelected = false;
     }
   }
 
@@ -107,5 +110,13 @@ export class AppComponent implements OnInit {
 
   getUserName() {
     return AppComponent.UserName;
+  }
+
+  getChapterSelected() {
+    return AppComponent.chapterSelected;
+  }
+
+  getChapterEditSelected() {
+    return AppComponent.chapterEditSelected;
   }
 }

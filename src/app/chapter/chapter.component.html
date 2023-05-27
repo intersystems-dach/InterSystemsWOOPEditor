@@ -1,6 +1,11 @@
+<div class="header">
+  <button (click)="goBack()" class="backButton">Back</button>
+  <button (click)="exportOptionsVisible = true" class="exportButton">
+    Export
+  </button>
+</div>
 <div class="heading">
   <h1>{{ chapter.title }}</h1>
-  <button (click)="exportPDF()">Export</button>
   <p>
     <i>{{
       chapter.pages.length > 0
@@ -26,3 +31,8 @@
   (showTipEmitter)="showTip()"
   (showResultEmitter)="showResult()"
 ></app-page-nav-bar>
+
+<app-export-options
+  *ngIf="exportOptionsVisible"
+  (closeEmitter)="export($event)"
+></app-export-options>

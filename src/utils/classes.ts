@@ -29,16 +29,19 @@ export class Config {
   public language: string;
   public author: string;
   public description: string;
+  public isPrivate: boolean;
   constructor(
     password: string,
     language: string,
     author: string,
-    description: string
+    description: string,
+    isPrivate: boolean
   ) {
     this.password = password;
     this.language = language;
     this.author = author;
     this.description = description;
+    this.isPrivate = isPrivate;
   }
 }
 

@@ -13,11 +13,11 @@ export class ChapterNewComponent {
   @Input() language: string = 'english';
   @Input() password: string = '';
   @Input() description: string = '';
+  @Input() isPrivate: boolean = false;
   @Input() updateChapter: Chapter | undefined = undefined;
 
   isWrong: boolean = false;
   wrongText: string = '';
-
   @Output() closeEmitter = new EventEmitter<boolean>();
 
   constructor(private apiService: ApiService) {}
@@ -36,7 +36,8 @@ export class ChapterNewComponent {
           this.password,
           this.language,
           AppComponent.UserName,
-          this.description
+          this.description,
+          this.isPrivate
         )
       );
       this.apiService.addNewChapter(newChapter).subscribe((data) => {
@@ -46,6 +47,7 @@ export class ChapterNewComponent {
           this.language = 'english';
           this.password = '';
           this.description = '';
+          this.isPrivate = false;
           AppComponent.chapters.push(newChapter);
         } else {
           this.isWrong = true;
@@ -56,6 +58,7 @@ export class ChapterNewComponent {
       this.updateChapter.config.password = this.password;
       this.updateChapter.config.language = this.language;
       this.updateChapter.config.description = this.description;
+      this.updateChapter.config.isPrivate = this.isPrivate;
       this.apiService.updateChapter(this.updateChapter).subscribe((data) => {
         if (data.ok) {
           this.closeEmitter.emit();
@@ -64,6 +67,7 @@ export class ChapterNewComponent {
           this.password = '';
           this.description = '';
           this.updateChapter = undefined;
+          this.isPrivate = false;
         } else {
           this.isWrong = true;
           this.wrongText = data.message;
@@ -79,5 +83,6 @@ export class ChapterNewComponent {
     this.language = 'english';
     this.password = '';
     this.description = '';
+    this.isPrivate = false;
   }
 }

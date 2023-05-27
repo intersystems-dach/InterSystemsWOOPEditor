@@ -1,12 +1,28 @@
 <div class="settings">
-  <button>Toggle Mode</button>
+  <button class="first">Toggle Mode</button>
   <div class="dividedButton">
-    <button class="smallButton" (click)="decreaseFontSize()">-</button>
+    <button
+      class="smallButton"
+      (click)="decreaseFontSize()"
+      style="margin-left: 10px"
+    >
+      -
+    </button>
     <p class="text">{{ "Font Size " + getFontSize() }}</p>
-    <button class="smallButton" (click)="increaseFontSize()">+</button>
+    <button
+      class="smallButton"
+      (click)="increaseFontSize()"
+      style="margin-right: 10px"
+    >
+      +
+    </button>
   </div>
-  <button (click)="toggleLogIn()" *ngIf="getUserLevel() == 0">Log in</button>
-  <button (click)="logOut()" *ngIf="getUserLevel() > 0">Log out</button>
+  <button class="last" (click)="toggleLogIn()" *ngIf="getUserLevel() == 0">
+    Log in
+  </button>
+  <button class="last" (click)="logOut()" *ngIf="getUserLevel() > 0">
+    Log out
+  </button>
 </div>
 
 <app-log-in *ngIf="logIn" (closeEmitter)="toggleLogIn()"></app-log-in>

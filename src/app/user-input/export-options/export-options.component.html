@@ -1,0 +1,41 @@
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>Export Options</h1>
+  <button class="closeButton" (click)="close()">X</button>
+  <div class="checkboxContainer" style="top: 70px">
+    <p>include tip</p>
+    <input
+      type="checkbox"
+      name="includeTip"
+      [(ngModel)]="includeTip"
+      (keydown.enter)="export()"
+    />
+  </div>
+  <div class="checkboxContainer" style="top: 120px">
+    <p>include result</p>
+    <input type="checkbox" name="includeResult" [(ngModel)]="includeResult" />
+  </div>
+  <div class="checkboxContainer" style="top: 170px">
+    <p>PDF</p>
+    <input
+      type="checkbox"
+      name="asPdf"
+      [(ngModel)]="asPdf"
+      (keydown.enter)="export()"
+      (ngModelChange)="setPDF()"
+    />
+  </div>
+  <div class="checkboxContainer" style="top: 220px">
+    <p>Markdown</p>
+    <input
+      type="checkbox"
+      name="asMarkdown"
+      [(ngModel)]="asMarkdown"
+      (keydown.enter)="export()"
+      (ngModelChange)="setMarkdown()"
+    />
+  </div>
+  <button class="submitButton" (click)="export()" (keydown.enter)="export()">
+    Export
+  </button>
+</div>

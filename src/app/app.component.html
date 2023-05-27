@@ -1,27 +1,27 @@
-<app-header class="sticky" (goBackEmitter)="goBack()"></app-header>
+<app-header class="sticky"></app-header>
 <div class="container">
   <!-- <app-markdown-cheat-sheet></app-markdown-cheat-sheet> -->
   <app-search-bar
-    *ngIf="!chapterSelected && !chapterEditSelected"
+    *ngIf="!getChapterSelected() && !getChapterEditSelected()"
   ></app-search-bar>
   <app-edit-chapter
     [chapter]="currentChapter"
-    *ngIf="chapterEditSelected && currentChapter.verified"
+    *ngIf="getChapterEditSelected() && currentChapter.verified"
   ></app-edit-chapter>
   <app-chapter
     [chapter]="currentChapter"
-    *ngIf="chapterSelected && currentChapter.verified"
+    *ngIf="getChapterSelected() && currentChapter.verified"
   ></app-chapter>
   <app-chapter-selection
     [chapters]="getChapters()"
     (chapterSelected)="selectChapter($event)"
     (chapterEditSelected)="selectEditChapter($event)"
-    *ngIf="!chapterSelected && !chapterEditSelected"
+    *ngIf="!getChapterSelected() && !getChapterEditSelected()"
   >
   </app-chapter-selection>
 </div>
 <app-password-query
-  *ngIf="chapterSelected && !currentChapter.verified"
+  *ngIf="getChapterSelected() && !currentChapter.verified"
   [password]="currentChapter.config.password"
   (passwordEntered)="verifyChapter($event)"
 ></app-password-query>

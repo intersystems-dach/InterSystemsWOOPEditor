@@ -25,6 +25,7 @@ import { AreYouSureComponent } from './user-input/are-you-sure/are-you-sure.comp
 import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-cheat-sheet.component';
+import { ExportOptionsComponent } from './user-input/export-options/export-options.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,6 +48,7 @@ import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-che
     FilterBarComponent,
     SearchBarComponent,
     MarkdownCheatSheetComponent,
+    ExportOptionsComponent,
   ],
   imports: [
     BrowserModule,

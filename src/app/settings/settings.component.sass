@@ -8,13 +8,17 @@
     right: 10px
     top: 90px
     animation: slideInFromRight 0.3s ease-in-out
+    border-radius: 10px
+    box-sizing: border-box
 
     .dividedButton
         background-color: #f5f5f5
-        border: 1px solid #2e3399
+        border-bottom: 1px solid #2e3399
+        border-left: 1px solid #2e3399
+        border-right: 1px solid #2e3399
         cursor: pointer
         height: 50px
-        width: 200px
+        width: 199px
         font-size: 20px
         display: flex
         align-items: center
@@ -23,20 +27,36 @@
             width: 100%
             text-align: center
         .smallButton
-            width: 30px
+            border-top: 1px solid #2e3399
+            text-align: center
+            justify-content: center
+            width: 45px
+            height: 30px
+            border-radius: 5px
 
     button
         background-color: #f5f5f5
-        border: 1px solid #2e3399
+        border-bottom: 1px solid #2e3399
+        border-left: 1px solid #2e3399
+        border-right: 1px solid #2e3399
         cursor: pointer
         height: 50px
-        width: 200px
+        width: 201px
         font-size: 20px
 
         &:hover
             background-color: #2e3399
             color: white
             transform: scale(1.05)
+
+.first
+    border-top: 1px solid #2e3399
+
+    border-top-left-radius: 10px
+    border-top-right-radius: 10px
+.last
+    border-bottom-left-radius: 10px
+    border-bottom-right-radius: 10px
 
 @media screen and (max-width: 800px)
     .settings

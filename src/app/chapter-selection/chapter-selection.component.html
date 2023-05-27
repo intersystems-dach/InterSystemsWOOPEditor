@@ -1,7 +1,20 @@
 <div class="container">
   <div *ngFor="let chapter of chapters">
     <div class="chapterContainer">
-      <div class="row">
+      <div
+        [class]="
+          'row' +
+          (getUserLevel() == 2 ||
+          (getUserLevel() == 1 && getUserName() == chapter.config.author)
+            ? ' edit'
+            : '')
+        "
+        *ngIf="
+          !chapter.config.isPrivate ||
+          getUserLevel() == 2 ||
+          (getUserLevel() == 1 && getUserName() == chapter.config.author)
+        "
+      >
         <div
           class="editButton"
           *ngIf="
@@ -12,7 +25,7 @@
           <button (click)="setChapterToDelete(chapter)">
             <img
               src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
-              alt="Edit"
+              alt="Delete"
             />
           </button>
           <button (click)="onChapterEditSelected(chapter.title)">
@@ -26,7 +39,8 @@
           class="chapterButton"
           (click)="onChapterSelected(chapter.title)"
         >
-          {{ chapter.title }}
+          <i *ngIf="chapter.config.isPrivate">{{ chapter.title }}</i>
+          <div *ngIf="!chapter.config.isPrivate">{{ chapter.title }}</div>
         </button>
         <app-chapter-meta-data
           [chapter]="chapter"

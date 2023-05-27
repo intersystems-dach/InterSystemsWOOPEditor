@@ -1,3 +1,6 @@
+<div class="header">
+  <button (click)="goBack()" class="backButton">Back</button>
+</div>
 <div *ngIf="!preview">
   <div class="heading">
     <h1>{{ chapter.title + " EDIT" }}</h1>
@@ -30,7 +33,6 @@
       Remove Page
     </button>
     <button (click)="addPage()">Add Page</button>
-    <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
   </div>
   <div class="editButtons">
     <button (click)="toggleEditMetaData()">Edit meta data</button>
@@ -48,6 +50,7 @@
   <button (click)="togglePreview()" *ngIf="chapter.pages.length > 0">
     {{ preview ? "Edit" : "Preview" }}
   </button>
+  <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
 </div>
 
 <app-chapter-new
@@ -56,6 +59,7 @@
   [description]="chapter.config.description"
   [language]="chapter.config.language"
   [password]="chapter.config.password"
+  [isPrivate]="chapter.config.isPrivate"
   *ngIf="editMetaData"
   (closeEmitter)="toggleEditMetaData()"
 ></app-chapter-new>

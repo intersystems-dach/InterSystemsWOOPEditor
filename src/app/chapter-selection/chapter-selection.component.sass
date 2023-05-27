@@ -66,14 +66,16 @@
             &:hover
                 background: #00b6b0
                 transform: scale(1.1)
-
+.edit
+    padding-right: 112px
 @media screen and (max-width: 800px)
     .container
         .chapterContainer
-
             .row
+                display: flex
+                flex-direction: column
                 .chapterButton
-                    width: 300px
+                    width: 400px
                 &:hover
                     .chapterButton
                         background: #2e3399
@@ -81,6 +83,8 @@
                     .metaData
                         display: none
                 .editButton
+                    margin-right: 0px
+                    margin-bottom: 20px
                     button
                         &:hover
                             transform: scale(1)
@@ -90,3 +94,6 @@
                 &:hover
                     background: #2e3399
                     transform: scale(1)
+
+    .edit
+        padding-right: 0px
