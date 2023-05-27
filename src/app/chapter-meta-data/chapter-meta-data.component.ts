@@ -7,10 +7,5 @@ import { Chapter } from 'src/utils/classes';
   styleUrls: ['./chapter-meta-data.component.sass'],
 })
 export class ChapterMetaDataComponent {
-  @Input() chapter: Chapter = new Chapter('test', [], {
-    password: '',
-    language: 'en',
-    author: 'pbonin',
-    description: 'this is a test',
-  });
+  @Input() chapter!: Chapter;
 }

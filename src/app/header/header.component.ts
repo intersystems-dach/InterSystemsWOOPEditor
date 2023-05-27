@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-header',
@@ -6,10 +7,9 @@ import { Component, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./header.component.sass'],
 })
 export class HeaderComponent {
-  @Output() goBackEmitter = new EventEmitter<string>();
   showSettings = false;
   goBack() {
-    this.goBackEmitter.emit();
+    AppComponent.goBack();
   }
   toggleSettings() {
     this.showSettings = !this.showSettings;

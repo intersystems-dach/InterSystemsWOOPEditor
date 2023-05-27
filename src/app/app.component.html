@@ -1,18 +1,27 @@
-<app-header class="sticky" (goBackEmitter)="goBack()"></app-header>
+<app-header class="sticky"></app-header>
 <div class="container">
+  <!-- <app-markdown-cheat-sheet></app-markdown-cheat-sheet> -->
+  <app-search-bar
+    *ngIf="!getChapterSelected() && !getChapterEditSelected()"
+  ></app-search-bar>
+  <app-edit-chapter
+    [chapter]="currentChapter"
+    *ngIf="getChapterEditSelected() && currentChapter.verified"
+  ></app-edit-chapter>
   <app-chapter
     [chapter]="currentChapter"
-    *ngIf="chapterSelected && currentChapter.verified"
+    *ngIf="getChapterSelected() && currentChapter.verified"
   ></app-chapter>
   <app-chapter-selection
-    [chapters]="chapters"
+    [chapters]="getChapters()"
     (chapterSelected)="selectChapter($event)"
-    *ngIf="!chapterSelected"
+    (chapterEditSelected)="selectEditChapter($event)"
+    *ngIf="!getChapterSelected() && !getChapterEditSelected()"
   >
   </app-chapter-selection>
 </div>
 <app-password-query
-  *ngIf="chapterSelected && !currentChapter.verified"
+  *ngIf="getChapterSelected() && !currentChapter.verified"
   [password]="currentChapter.config.password"
   (passwordEntered)="verifyChapter($event)"
 ></app-password-query>
@@ -20,4 +29,3 @@
   {{ getUserLevel() == 0 ? "" : getUserLevel() == 1 ? "User " : "Admin "
   }}<i>{{ getUserLevel() == 0 ? "" : getUserName() }}</i>
 </p>
-<app-chapter-new></app-chapter-new>

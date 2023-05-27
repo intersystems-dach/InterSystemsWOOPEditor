@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Chapter, Config } from 'src/utils/classes';
-import { FileManager } from 'src/utils/FileManager';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-chapter-new',
@@ -9,15 +9,18 @@ import { FileManager } from 'src/utils/FileManager';
   styleUrls: ['./chapter-new.component.sass'],
 })
 export class ChapterNewComponent {
-  name: string = '';
-  language: string = 'english';
-  password: string = '';
-  description: string = '';
+  @Input() name: string = '';
+  @Input() language: string = 'english';
+  @Input() password: string = '';
+  @Input() description: string = '';
+  @Input() isPrivate: boolean = false;
+  @Input() updateChapter: Chapter | undefined = undefined;
 
   isWrong: boolean = false;
   wrongText: string = '';
-
   @Output() closeEmitter = new EventEmitter<boolean>();
+
+  constructor(private apiService: ApiService) {}
 
   async submit() {
     if (this.name === '') {
@@ -25,27 +28,51 @@ export class ChapterNewComponent {
       this.wrongText = 'Please enter a name';
       return;
     }
-    let newChapter = new Chapter(
-      this.name,
-      [],
-      new Config(
-        this.password,
-        this.language,
-        AppComponent.UserName,
-        this.description
-      )
-    );
-
-    let r = await FileManager.writeNewChapter(newChapter);
-    if (r) {
-      this.closeEmitter.emit();
-      this.name = '';
-      this.language = 'english';
-      this.password = '';
-      this.description = '';
+    if (this.updateChapter === undefined) {
+      let newChapter = new Chapter(
+        this.name,
+        [],
+        new Config(
+          this.password,
+          this.language,
+          AppComponent.UserName,
+          this.description,
+          this.isPrivate
+        )
+      );
+      this.apiService.addNewChapter(newChapter).subscribe((data) => {
+        if (data.ok) {
+          this.closeEmitter.emit();
+          this.name = '';
+          this.language = 'english';
+          this.password = '';
+          this.description = '';
+          this.isPrivate = false;
+          AppComponent.chapters.push(newChapter);
+        } else {
+          this.isWrong = true;
+          this.wrongText = data.message;
+        }
+      });
     } else {
-      this.isWrong = true;
-      this.wrongText = 'Could not save chapter';
+      this.updateChapter.config.password = this.password;
+      this.updateChapter.config.language = this.language;
+      this.updateChapter.config.description = this.description;
+      this.updateChapter.config.isPrivate = this.isPrivate;
+      this.apiService.updateChapter(this.updateChapter).subscribe((data) => {
+        if (data.ok) {
+          this.closeEmitter.emit();
+          this.name = '';
+          this.language = 'english';
+          this.password = '';
+          this.description = '';
+          this.updateChapter = undefined;
+          this.isPrivate = false;
+        } else {
+          this.isWrong = true;
+          this.wrongText = data.message;
+        }
+      });
     }
   }
 
@@ -56,5 +83,6 @@ export class ChapterNewComponent {
     this.language = 'english';
     this.password = '';
     this.description = '';
+    this.isPrivate = false;
   }
 }

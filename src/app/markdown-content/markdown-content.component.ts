@@ -8,28 +8,18 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./markdown-content.component.sass'],
 })
 export class MarkdownContentComponent {
-  title = 'InterSystemsWOOP';
-
-  @Input() url: string = '';
+  @Input() data: string = '';
 
   markdown: string | undefined;
   line: string = '';
 
   constructor(private mdService: MarkdownService, private http: HttpClient) {}
 
-  public static fontSize = 20;
+  public static fontSize = 16;
 
   async ngOnInit() {
-    const markdownRaw = await this.http
-      .get(this.url, { responseType: 'text' })
-      .toPromise();
-
-    if (markdownRaw === undefined) {
-      console.error('Could not get markdown file!');
-      return;
-    }
-    this.markdown = this.mdService.parse(markdownRaw);
-    let markDownLines = markdownRaw.split('\n');
+    this.markdown = this.mdService.parse(this.data);
+    /* let markDownLines = markdownRaw.split('\n');
     let opened = false;
     let openedIndex = 0;
     for (let i = 0; i < markDownLines.length; i++) {
@@ -44,7 +34,7 @@ export class MarkdownContentComponent {
     }
     if (this.line.length > 0)
       this.line = this.line.substring(0, this.line.length - 2);
-    console.log(this.line);
+    console.log(this.line); */
   }
 
   getFontSize() {

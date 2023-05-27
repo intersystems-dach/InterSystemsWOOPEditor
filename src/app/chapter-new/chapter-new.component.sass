@@ -8,7 +8,7 @@
 
 .container
     width: 500px
-    height: 500px
+    height: 620px
     background-color: #00b0a9
     left: 50%
     top: 50%
@@ -24,7 +24,8 @@
         color: white
         font-size: 20px
         cursor: pointer
-
+        &:hover
+            transform: scale(1.2)
     .submitButton
         bottom: 20px
         left: 50%
@@ -37,6 +38,8 @@
         color: white
         font-size: 20px
         cursor: pointer
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5)
+
         &:hover
             transform: translateX(-50%) scale(1.1)
     h1
@@ -45,17 +48,37 @@
         left: 50%
         transform: translateX(-50%)
         width: 100%
-    input, p
+    input
         left: 50%
         transform: translate(-50%, -50%)
         border-radius: 5px
         width: 80%
+        border: none
+        text-align: center
+        font-size: 20px
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5)
+        &:focus-visible
+            outline: none
+    p
+        left: 50%
+        transform: translate(-50%, -50%)
+        border-radius: 5px
+        width: 80%
+        border: none
+        text-align: center
+        font-size: 20px
     textarea
         left: 50%
         transform: translate(-50%, -50%)
         border-radius: 5px
         width: 80%
         height: 150px
+        border: none
+        text-align: center
+        font-size: 20px
+        box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5)
+        &:focus-visible
+            outline: none
 
     .wrong
         color: red

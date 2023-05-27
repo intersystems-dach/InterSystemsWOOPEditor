@@ -1,4 +1,3 @@
-import config from 'src/assets/chapters/config.json';
 export class Chapter {
   public title: string;
   public pages: Page[];
@@ -15,13 +14,13 @@ export class Chapter {
 }
 
 export class Page {
-  public contentURL: string;
-  public tipURL: string;
-  public resultURL: string;
-  constructor(contentURL: string, tipURL: string = '', resultURL: string = '') {
-    this.contentURL = contentURL;
-    this.tipURL = tipURL;
-    this.resultURL = resultURL;
+  public content: string;
+  public tip: string;
+  public result: string;
+  constructor(content: string, tip: string = '', result: string = '') {
+    this.content = content;
+    this.tip = tip;
+    this.result = result;
   }
 }
 
@@ -30,16 +29,19 @@ export class Config {
   public language: string;
   public author: string;
   public description: string;
+  public isPrivate: boolean;
   constructor(
     password: string,
     language: string,
     author: string,
-    description: string
+    description: string,
+    isPrivate: boolean
   ) {
     this.password = password;
     this.language = language;
     this.author = author;
     this.description = description;
+    this.isPrivate = isPrivate;
   }
 }
 

@@ -1,53 +1,69 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
-
-import config from 'src/assets/chapters/config.json';
-import { FileManager } from '../utils/FileManager';
 import { UserLevel } from '../utils/classes';
+import { ApiService } from './api.service';
+import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.sass'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'InterSystemsWOOP';
-
-  private static baseURL = 'assets/chapters/';
 
   public static UserLevel = UserLevel.NONE;
   public static UserName = '';
-  public static globalConfig = config;
+  public static chapters: Chapter[] = [];
+  public static allChapters: Chapter[] = [];
+  public static chapterSelected = false;
+  public static chapterEditSelected = false;
 
-  chapterNames: string[] = config.chapterNames;
-  chapters: Chapter[] = [];
-  errorChapter = new Chapter('Error 404', [], new Config('', '', '', ''));
+  errorChapter = new Chapter(
+    'Error 404',
+    [],
+    new Config('', '', '', '', false)
+  );
   currentChapter: Chapter = this.errorChapter;
 
-  chapterSelected = false;
-
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 
   async ngOnInit() {
-    FileManager.init(this.http, AppComponent.baseURL);
-
-    for (let chapterName of this.chapterNames) {
-      let chapter = await FileManager.readChapter(chapterName);
-      this.chapters.push(chapter);
-    }
-
-    for (let chapter of this.chapters) {
+    /* let online = await this.apiService.isServerOnline();
+    console.log('Server online: ' + online); */
+    AppComponent.allChapters = await this.apiService
+      .getAllChapters()
+      .toPromise();
+    for (let chapter of AppComponent.allChapters) {
       if (window.location.href.includes(chapter.title.replace(' ', '-'))) {
         this.currentChapter = chapter;
-        this.chapterSelected = true;
+        AppComponent.chapterSelected = true;
       }
     }
+    AppComponent.chapters = AppComponent.allChapters;
   }
 
   selectChapter(chapterName: string) {
     this.currentChapter = this.getChapterByName(chapterName);
-    this.chapterSelected = true;
+    AppComponent.chapterSelected = true;
+    if (AppComponent.UserLevel == UserLevel.ADMIN) {
+      this.currentChapter.verified = true;
+    }
+    if (
+      AppComponent.UserLevel == UserLevel.USER &&
+      this.currentChapter.config.author == AppComponent.UserName
+    ) {
+      this.currentChapter.verified = true;
+    }
+
+    if (this.currentChapter.config.password === '') {
+      this.currentChapter.verified = true;
+    }
+  }
+  selectEditChapter(chapterName: string) {
+    this.currentChapter = this.getChapterByName(chapterName);
+    AppComponent.chapterEditSelected = true;
     if (AppComponent.UserLevel == UserLevel.ADMIN) {
       this.currentChapter.verified = true;
     }
@@ -59,12 +75,16 @@ export class AppComponent {
     }
   }
 
-  goBack() {
-    this.chapterSelected = false;
+  public static goBack() {
+    AppComponent.chapterSelected = false;
+    AppComponent.chapterEditSelected = false;
+    EditChapterComponent.autoSave = false;
+    clearInterval(EditChapterComponent.interval);
+    AppComponent.chapters = AppComponent.allChapters;
   }
 
   getChapterByName(chapterName: string): Chapter {
-    for (let chapter of this.chapters) {
+    for (let chapter of AppComponent.chapters) {
       if (chapter.title == chapterName) {
         return chapter;
       }
@@ -76,8 +96,12 @@ export class AppComponent {
     if (value) {
       this.currentChapter.verified = true;
     } else {
-      this.chapterSelected = false;
+      AppComponent.chapterSelected = false;
     }
+  }
+
+  getChapters() {
+    return AppComponent.chapters;
   }
 
   getUserLevel() {
@@ -86,5 +110,13 @@ export class AppComponent {
 
   getUserName() {
     return AppComponent.UserName;
+  }
+
+  getChapterSelected() {
+    return AppComponent.chapterSelected;
+  }
+
+  getChapterEditSelected() {
+    return AppComponent.chapterEditSelected;
   }
 }

@@ -20,6 +20,10 @@ export class SettingsComponent {
     }
   }
 
+  getFontSize() {
+    return MarkdownContentComponent.fontSize;
+  }
+
   toggleLogIn() {
     this.logIn = !this.logIn;
   }
