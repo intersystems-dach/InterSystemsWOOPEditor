@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Component({
   selector: 'app-are-you-sure',
@@ -8,6 +8,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class AreYouSureComponent {
   @Output() sureEmitter = new EventEmitter<boolean>();
 
+  @HostListener('document:keydown.escape', ['$event'])
   close() {
     this.sureEmitter.emit(false);
   }

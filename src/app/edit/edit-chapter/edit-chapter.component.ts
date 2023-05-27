@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Host, HostListener, Input } from '@angular/core';
 import { Chapter, Page } from 'src/utils/classes';
 import { ApiService } from '../../api.service';
 import { AppComponent } from 'src/app/app.component';
@@ -21,11 +21,17 @@ export class EditChapterComponent {
   constructor(private apiService: ApiService) {}
 
   showNextPage(): void {
+    if (this.currentPage == this.chapter.pages.length - 1) {
+      return;
+    }
     this.currentPage++;
     window.scrollTo({ top: 0 });
   }
 
   showPrevPage(): void {
+    if (this.currentPage == 0) {
+      return;
+    }
     this.currentPage--;
     window.scrollTo({ top: 0 });
   }
@@ -54,6 +60,7 @@ export class EditChapterComponent {
     this.sureDelete = false;
   }
 
+  @HostListener('document:keydown.control.alt.s', ['$event'])
   save(alertSaved: boolean = true) {
     this.apiService.updateChapter(this.chapter).subscribe((status) => {
       if (status.ok) {

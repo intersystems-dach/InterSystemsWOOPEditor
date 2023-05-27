@@ -1,4 +1,10 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  HostListener,
+} from '@angular/core';
 import { AppComponent } from '../../app.component';
 import { ApiService } from '../../api.service';
 
@@ -43,6 +49,7 @@ export class LogInComponent {
       this.type = 'password';
     }
   }
+  @HostListener('document:keydown.escape', ['$event'])
   close() {
     this.closeEmitter.emit();
     this.isWrong = false;

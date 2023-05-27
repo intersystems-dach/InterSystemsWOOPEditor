@@ -26,6 +26,9 @@ export class ChapterComponent {
   constructor(private mdService: MarkdownService) {}
 
   showNextPage(): void {
+    if (this.currentPage == this.chapter.pages.length - 1) {
+      return;
+    }
     this.currentPage++;
     this.tipVisible = false;
     this.resultVisible = false;
@@ -33,6 +36,9 @@ export class ChapterComponent {
   }
 
   showPrevPage(): void {
+    if (this.currentPage == 0) {
+      return;
+    }
     this.currentPage--;
     this.tipVisible = false;
     this.resultVisible = false;

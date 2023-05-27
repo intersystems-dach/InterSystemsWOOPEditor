@@ -1,4 +1,10 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  Input,
+  EventEmitter,
+  Output,
+  HostListener,
+} from '@angular/core';
 import { AppComponent } from '../app.component';
 import { Chapter, Config } from 'src/utils/classes';
 import { ApiService } from '../api.service';
@@ -76,6 +82,7 @@ export class ChapterNewComponent {
     }
   }
 
+  @HostListener('document:keydown.escape', ['$event'])
   close() {
     this.closeEmitter.emit();
     this.isWrong = false;

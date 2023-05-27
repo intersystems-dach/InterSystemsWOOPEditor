@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Host, HostListener } from '@angular/core';
 import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
 import { AppComponent } from '../app.component';
 
@@ -24,6 +24,7 @@ export class SettingsComponent {
     return MarkdownContentComponent.fontSize;
   }
 
+  @HostListener('document:keydown.control.alt.l', ['$event'])
   toggleLogIn() {
     this.logIn = !this.logIn;
   }

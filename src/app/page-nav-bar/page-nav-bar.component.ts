@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 
 @Component({
   selector: 'app-page-nav-bar',
@@ -16,10 +22,12 @@ export class PageNavBarComponent {
   @Output() showTipEmitter = new EventEmitter<string>();
   @Output() showResultEmitter = new EventEmitter<string>();
 
+  @HostListener('document:keydown.control.arrowright', ['$event'])
   showNext() {
     this.showNextEmitter.emit('showNext');
   }
 
+  @HostListener('document:keydown.control.arrowleft', ['$event'])
   showPrev() {
     this.showPrevEmitter.emit('showPrev');
   }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Host, HostListener } from '@angular/core';
 import { Chapter } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 
@@ -56,6 +56,7 @@ export class SearchBarComponent {
     this.noMatches = filteredChapters.length == 0;
     AppComponent.chapters = filteredChapters;
   }
+  @HostListener('document:keydown.control.alt.c', ['$event'])
   clear(): void {
     this.searchValue = '';
     this.onSearchChange();

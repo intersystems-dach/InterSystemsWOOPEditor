@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 import { MarkdownContentComponent } from '../../markdown-content/markdown-content.component';
 import { Page } from 'src/utils/classes';
 
@@ -12,9 +18,134 @@ export class EditContentComponent {
   @Input() page!: Page;
   @Output() changeEmitter = new EventEmitter<Page>();
   data: string = '';
+  focus = false;
+  private slectionContent: string = '';
+  private selectionStart: number = -1;
+  private selectionEnd: number = -1;
 
   ngOnInit() {
     this.getData();
+  }
+
+  onFocus() {
+    this.focus = true;
+    console.log('focus in');
+  }
+
+  onFocusOut() {
+    this.focus = false;
+    console.log('focus out');
+  }
+
+  selectionchange(event: any) {
+    this.selectionStart = event.target.selectionStart;
+    this.selectionEnd = event.target.selectionEnd;
+    this.slectionContent = event.target.value.substr(
+      this.selectionStart,
+      this.selectionEnd - this.selectionStart
+    );
+  }
+
+  onEditorInput(value: string) {
+    let oldFocus = this.focus;
+    this.focus = true;
+    if (value === 'bold') {
+      this.bold();
+    } else if (value === 'italic') {
+      this.italic();
+    } else if (value === 'code') {
+      this.code();
+    }
+    this.focus = oldFocus;
+  }
+
+  @HostListener('document:keydown.shift.alt.arrowup', ['$event'])
+  copyLineUp() {
+    if (!this.focus) return;
+
+    let lines = this.data.split('\n');
+    let characterCount = 0;
+    let copylines = [];
+    let start = -1;
+    for (let i = 0; i < lines.length; i++) {
+      characterCount += lines[i].length + 1;
+      if (characterCount > this.selectionStart) {
+        copylines.push(lines[i]);
+        start = i;
+      } else if (copylines.length > 0) {
+        copylines.push(lines[i]);
+      }
+      if (characterCount > this.selectionEnd) {
+        lines.splice(start - 1, 0, copylines.join('\n'));
+        break;
+      }
+    }
+    this.data = lines.join('\n');
+    this.setData();
+  }
+
+  @HostListener('document:keydown.shift.alt.arrowdown', ['$event'])
+  copyLineDown() {
+    if (!this.focus) return;
+
+    let lines = this.data.split('\n');
+    let characterCount = 0;
+    let copylines = [];
+    let start = -1;
+    for (let i = 0; i < lines.length; i++) {
+      characterCount += lines[i].length + 1;
+      if (characterCount > this.selectionStart) {
+        copylines.push(lines[i]);
+        start = i;
+      } else if (copylines.length > 0) {
+        copylines.push(lines[i]);
+      }
+      if (characterCount > this.selectionEnd) {
+        lines.splice(i + 1, 0, copylines.join('\n'));
+        break;
+      }
+    }
+    this.data = lines.join('\n');
+    this.setData();
+  }
+
+  @HostListener('document:keydown.control.alt.b', ['$event'])
+  bold() {
+    if (!this.focus) return;
+
+    this.data =
+      this.data.substr(0, this.selectionStart) +
+      '**' +
+      this.slectionContent +
+      '**' +
+      this.data.substr(this.selectionEnd);
+    this.setData();
+  }
+
+  @HostListener('document:keydown.control.alt.i', ['$event'])
+  italic() {
+    if (!this.focus) return;
+
+    this.data =
+      this.data.substr(0, this.selectionStart) +
+      '_' +
+      this.slectionContent +
+      '_' +
+      this.data.substr(this.selectionEnd);
+    this.setData();
+  }
+
+  @HostListener('document:keydown.control.alt.c', ['$event'])
+  code() {
+    if (!this.focus) return;
+
+    this.data =
+      this.data.substr(0, this.selectionStart) +
+      '`' +
+      this.slectionContent +
+      '`' +
+      this.data.substr(this.selectionEnd);
+    this.setData();
   }
 
   getData() {

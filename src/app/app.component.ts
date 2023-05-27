@@ -13,7 +13,7 @@ import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component
 export class AppComponent implements OnInit {
   title = 'InterSystemsWOOP';
 
-  public static UserLevel = UserLevel.NONE;
+  public static UserLevel = UserLevel.ADMIN;
   public static UserName = '';
   public static chapters: Chapter[] = [];
   public static allChapters: Chapter[] = [];

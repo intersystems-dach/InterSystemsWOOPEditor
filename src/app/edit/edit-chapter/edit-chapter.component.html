@@ -1,5 +1,5 @@
 <div class="header">
-  <button (click)="goBack()" class="backButton">Back</button>
+  <button *ngIf="!preview" (click)="goBack()" class="backButton">Back</button>
 </div>
 <div *ngIf="!preview">
   <div class="heading">

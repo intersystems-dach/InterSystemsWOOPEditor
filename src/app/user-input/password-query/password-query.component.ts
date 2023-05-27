@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 
 @Component({
   selector: 'app-password-query',
@@ -30,6 +36,7 @@ export class PasswordQueryComponent {
       this.type = 'password';
     }
   }
+  @HostListener('document:keydown.escape', ['$event'])
   close() {
     this.passwordEntered.emit(false);
     this.isWrong = false;

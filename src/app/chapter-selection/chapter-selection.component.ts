@@ -1,4 +1,10 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+} from '@angular/core';
 import { Chapter } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 import { ApiService } from '../api.service';
@@ -57,6 +63,7 @@ export class ChapterSelectionComponent {
     return AppComponent.UserName;
   }
 
+  @HostListener('document:keydown.control.alt.n', ['$event'])
   toggleNewChapter() {
     this.newChapter = !this.newChapter;
   }

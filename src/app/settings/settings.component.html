@@ -17,7 +17,12 @@
       +
     </button>
   </div>
-  <button class="last" (click)="toggleLogIn()" *ngIf="getUserLevel() == 0">
+  <button
+    class="last"
+    (click)="toggleLogIn()"
+    (document:keydown.control.alt.l)="toggleLogIn()"
+    *ngIf="getUserLevel() == 0"
+  >
     Log in
   </button>
   <button class="last" (click)="logOut()" *ngIf="getUserLevel() > 0">
