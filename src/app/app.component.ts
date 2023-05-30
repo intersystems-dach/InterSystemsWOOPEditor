@@ -11,6 +11,8 @@ import { ApiService } from './api.service';
 export class AppComponent {
   title = 'InterSystemsWOOP';
 
+  public static darkModeEnabled = false;
+
   public static chapters: Chapter[] = [];
   public static allChapters: Chapter[] = [];
   private static apiService: ApiService;
@@ -24,6 +26,10 @@ export class AppComponent {
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     AppComponent.apiService = apiService;
+  }
+
+  ngOnInit() {
+    AppComponent.lightMode();
   }
 
   static async init() {
@@ -52,5 +58,27 @@ export class AppComponent {
       }
     }
     return AppComponent.errorChapter;
+  }
+
+  static darkMode() {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    AppComponent.darkModeEnabled = true;
+  }
+  static lightMode() {
+    document.documentElement.setAttribute('data-theme', 'light');
+    AppComponent.darkModeEnabled = false;
+  }
+
+  static detectPrefersColorScheme(): string {
+    // Detect if prefers-color-scheme is supported
+    if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
+      // Set colorScheme to Dark if prefers-color-scheme is dark. Otherwise, set it to Light.
+      return window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'darkMode'
+        : 'lightMode';
+    } else {
+      // If the browser does not support prefers-color-scheme, set the default to dark.
+      return 'darkMode';
+    }
   }
 }

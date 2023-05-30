@@ -25,6 +25,9 @@ export class SearchBarComponent {
     if (lowerSearchValue == 'banana') {
       window.location.href = 'https://www.youtube.com/watch?v=9EcjWd-O4jI';
     }
+    if (lowerSearchValue == 'pbonin') {
+      window.location.href = 'https://philipp-bonin.com/';
+    }
 
     let words = lowerSearchValue.split(' ');
     let filteredChapters: Chapter[] = [];

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../utils/interfaces';
 import { UserManger } from 'src/utils/classes';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-header',
@@ -27,5 +28,9 @@ export class HeaderComponent {
 
   getUserName() {
     return UserManger.userName;
+  }
+
+  getDarkModeEnabled() {
+    return AppComponent.darkModeEnabled;
   }
 }

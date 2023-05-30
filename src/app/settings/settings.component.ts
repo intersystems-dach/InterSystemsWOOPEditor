@@ -48,4 +48,17 @@ export class SettingsComponent {
   getUserName() {
     return UserManger.userName;
   }
+
+  getDarkModeEnabled() {
+    return AppComponent.darkModeEnabled;
+  }
+
+  toggleDarkMode() {
+    AppComponent.darkModeEnabled = !AppComponent.darkModeEnabled;
+    if (AppComponent.darkModeEnabled) {
+      AppComponent.darkMode();
+    } else {
+      AppComponent.lightMode();
+    }
+  }
 }

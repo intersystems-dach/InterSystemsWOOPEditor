@@ -1,5 +1,7 @@
 <div class="settings">
-  <button class="first">Toggle Mode</button>
+  <button class="first" (click)="toggleDarkMode()">
+    {{ getDarkModeEnabled() ? "Lightmode" : "Darkmode" }}
+  </button>
   <div class="dividedButton">
     <button
       class="smallButton"

@@ -12,10 +12,10 @@
     box-sizing: border-box
 
     .dividedButton
-        background-color: #f5f5f5
-        border-bottom: 1px solid #2e3399
-        border-left: 1px solid #2e3399
-        border-right: 1px solid #2e3399
+        background-color: var(--header-color)
+        border-bottom: 1px solid var(--primary-color)
+        border-left: 1px solid var(--primary-color)
+        border-right: 1px solid var(--primary-color)
         cursor: pointer
         height: 50px
         width: 199px
@@ -26,37 +26,43 @@
         .text
             width: 100%
             text-align: center
+            color: var(--text-color)
         .smallButton
-            border-top: 1px solid #2e3399
+            border-top: 1px solid var(--primary-color)
             text-align: center
             justify-content: center
             width: 45px
             height: 30px
             border-radius: 5px
+            color: var(--text-color)
 
     button
-        background-color: #f5f5f5
-        border-bottom: 1px solid #2e3399
-        border-left: 1px solid #2e3399
-        border-right: 1px solid #2e3399
+        background-color: var(--header-color)
+        border-bottom: 1px solid var(--primary-color)
+        border-left: 1px solid var(--primary-color)
+        border-right: 1px solid var(--primary-color)
         cursor: pointer
         height: 50px
         width: 201px
         font-size: 20px
+        color: var(--text-color)
 
         &:hover
-            background-color: #2e3399
-            color: white
+            background-color: var(--primary-color)
+            color: var(--inverted-text-color)
             transform: scale(1.05)
 
 .first
-    border-top: 1px solid #2e3399
+    border-top: 1px solid var(--primary-color)
 
     border-top-left-radius: 10px
     border-top-right-radius: 10px
 .last
+    border-top: 1px solid var(--primary-color)
+
     border-bottom-left-radius: 10px
     border-bottom-right-radius: 10px
+    background: var(--header-color)
 
 @media screen and (max-width: 800px)
     .settings
@@ -67,13 +73,19 @@
         button
             width: 100%
             &:hover
-                background-color: #f5f5f5
-                color: black
+                background-color: var(--header-color)
+                color: var(--text-color)
                 transform: scale(1)
         .dividedButton
             width: 100%
             .smallButton
                 width: 50px
+    .first
+        border-top-left-radius: 0px
+        border-top-right-radius: 0px
+    .last
+        border-bottom-left-radius: 0px
+        border-bottom-right-radius: 0px
 
 @keyframes slideInFromRight
     0%

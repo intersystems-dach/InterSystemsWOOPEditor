@@ -1,7 +1,7 @@
 
 .heading
     text-align: center
-
+    color: var(--text-color)
 .sticky
     position: fixed
     top: 0
@@ -14,8 +14,8 @@
     justify-content: center
     margin-bottom: 20px
     button
-        background: #2e3399
-        color: white
+        background: var(--primary-color)
+        color: var(--inverted-text-color)
         border: none
         border-radius: 8px
         padding: 5px 10px
@@ -26,9 +26,8 @@
         font-size: 20px
         transition: 0.3s
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)
-
         &:hover
-            background: #00b6b0
+            background: var(--secondary-color)
             transform: scale(1.05)
 
 .header
@@ -40,15 +39,14 @@
         cursor: pointer
         border: none
         font-size: 20px
-        background-color: #2e3399
+        background-color: var(--primary-color)
         width: 100px
         height: 40px
         border-radius: 5px
-        color: white
+        color: var(--inverted-text-color)
         box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)
-
         &:hover
-            background-color: #00b6b0
+            background-color: var(--secondary-color)
             transform: scale(1.1)
     .backButton
         margin-left: 20px

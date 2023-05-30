@@ -81,6 +81,6 @@ export class ChapterManger {
 }
 
 export class UserManger {
-  public static userLevel = userLevel.NONE;
+  public static userLevel = userLevel.ADMIN;
   public static userName = '';
 }

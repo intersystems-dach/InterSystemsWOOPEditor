@@ -10,11 +10,20 @@
     />
   </button>
   <img
-    src="https://cdn-icons-png.flaticon.com/512/2956/2956788.png"
+    [src]="
+      '../../assets/imgs/' +
+      (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+      '/settings.png'
+    "
     class="settingsButton"
     (click)="toggleSettings()"
     alt="Settings"
   />
+  <!-- <div class="burgerMenu" (click)="toggleSettings()">
+    <div class="burgerBar"></div>
+    <div class="burgerBar"></div>
+    <div class="burgerBar"></div>
+  </div> -->
   <p class="userLabel" *ngIf="getUserLevel() > 0">
     {{ getUserLevel() == 1 ? "User " : "Admin " }}
     <i>{{ getUserName() }}</i>

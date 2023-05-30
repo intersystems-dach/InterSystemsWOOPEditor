@@ -1,14 +1,22 @@
 <img
   *ngIf="showNextButton"
   class="nextButton navButton"
-  src="https://icons.veryicon.com/png/o/miscellaneous/iconpack-223/next-page-8.png"
+  [src]="
+    '../../assets/imgs/' +
+    (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+    '/navigatePage.png'
+  "
   alt="next"
   (click)="showNext()"
 />
 <img
   *ngIf="showPrevButton"
   class="prevButton navButton"
-  src="https://icons.veryicon.com/png/o/miscellaneous/iconpack-223/next-page-8.png"
+  [src]="
+    '../../assets/imgs/' +
+    (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+    '/navigatePage.png'
+  "
   alt="previous"
   (click)="showPrev()"
 />

@@ -38,7 +38,6 @@ app.get("/api/woop/checkuser", (req, res) => {
   res.json({ level: 0, userName: "" });
 });
 app.get("/api/woop/chapter/get/all", (req, res) => {
-  console.log("get all chapters");
   updateDB();
   res.json(db.chapters);
 });

@@ -24,13 +24,21 @@
         >
           <button (click)="setChapterToDelete(chapter)">
             <img
-              src="https://cdn-icons-png.flaticon.com/512/3405/3405244.png"
+              [src]="
+                '../../assets/imgs/' +
+                (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+                '/delete.png'
+              "
               alt="Delete"
             />
           </button>
           <button (click)="onChapterEditSelected(chapter.title)">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Edit_icon_%28the_Noun_Project_30184%29.svg/1024px-Edit_icon_%28the_Noun_Project_30184%29.svg.png"
+              [src]="
+                '../../assets/imgs/' +
+                (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+                '/edit.png'
+              "
               alt="Edit"
             />
           </button>

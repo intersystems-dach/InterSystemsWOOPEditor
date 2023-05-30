@@ -67,4 +67,8 @@ export class ChapterSelectionComponent {
   toggleNewChapter() {
     this.newChapter = !this.newChapter;
   }
+
+  getDarkModeEnabled() {
+    return AppComponent.darkModeEnabled;
+  }
 }

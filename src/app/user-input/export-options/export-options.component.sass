@@ -9,19 +9,19 @@
 .container
     width: 500px
     height: 350px
-    background-color: #00b0a9
+    background-color: var(--secondary-color)
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
     border-radius: 20px
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5)
-    color: white
+    color: var(--inverted-text-color)
     .closeButton
         right: 30px
         top: 10px
         border: none
         background: none
-        color: white
+        color: var(--inverted-text-color)
         font-size: 20px
         cursor: pointer
         &:hover
@@ -31,11 +31,11 @@
         left: 50%
         transform: translateX(-50%)
         border: none
-        background: #2c2a92
+        background: var(--primary-color)
         border-radius: 5px
         width: 40%
         height: 40px
-        color: white
+        color: var(--inverted-text-color)
         font-size: 20px
         cursor: pointer
         box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5)
@@ -65,5 +65,5 @@
             margin-left: 250px
             font-size: 20px
             font-weight: bold
-            color: white
+            color: var(--inverted-text-color)
             text-align: left

@@ -5,6 +5,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-page-nav-bar',
@@ -36,5 +37,8 @@ export class PageNavBarComponent {
   }
   showResult() {
     this.showResultEmitter.emit('showResult');
+  }
+  getDarkModeEnabled() {
+    return AppComponent.darkModeEnabled;
   }
 }
