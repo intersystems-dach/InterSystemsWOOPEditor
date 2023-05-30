@@ -1,12 +1,7 @@
-import {
-  Component,
-  Input,
-  EventEmitter,
-  Output,
-  HostListener,
-} from '@angular/core';
-import { AppComponent } from '../../app.component';
+import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../../api.service';
+import { UserManger } from 'src/utils/classes';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-log-in',
@@ -15,31 +10,26 @@ import { ApiService } from '../../api.service';
 })
 export class LogInComponent {
   enteredPassword: string = '';
-  enteredUsername: string = '';
+  entereduserName: string = '';
 
   isWrong: boolean = false;
   type: string = 'password';
 
-  @Output() closeEmitter = new EventEmitter<boolean>();
-
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private location: Location) {}
 
   submit() {
     this.apiService
-      .checkUser(this.enteredUsername, this.enteredPassword)
+      .checkUser(this.entereduserName, this.enteredPassword)
       .subscribe((data) => {
         if (data.level > 0) {
-          AppComponent.UserLevel = data.level;
-          AppComponent.UserName = data.username;
-          this.isWrong = false;
-          this.enteredPassword = '';
-          this.enteredUsername = '';
-          this.closeEmitter.emit();
+          UserManger.userLevel = data.level;
+          UserManger.userName = data.userName;
+          this.close();
           return;
         }
         this.isWrong = true;
         this.enteredPassword = '';
-        this.enteredUsername = '';
+        this.entereduserName = '';
       });
   }
   viewPassword() {
@@ -51,9 +41,9 @@ export class LogInComponent {
   }
   @HostListener('document:keydown.escape', ['$event'])
   close() {
-    this.closeEmitter.emit();
     this.isWrong = false;
     this.enteredPassword = '';
-    this.enteredUsername = '';
+    this.entereduserName = '';
+    this.location.back();
   }
 }

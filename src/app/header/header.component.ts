@@ -1,5 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../../utils/interfaces';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +10,22 @@ import { AppComponent } from '../app.component';
 })
 export class HeaderComponent {
   showSettings = false;
+
+  constructor(private router: Router) {}
+
   goBack() {
-    AppComponent.goBack();
+    this.router.navigate(['/']);
   }
+
   toggleSettings() {
     this.showSettings = !this.showSettings;
+  }
+
+  getUserLevel() {
+    return UserManger.userLevel;
+  }
+
+  getUserName() {
+    return UserManger.userName;
   }
 }

@@ -5,7 +5,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-import { Chapter } from 'src/utils/classes';
+import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 import { ApiService } from '../api.service';
 @Component({
@@ -56,11 +56,11 @@ export class ChapterSelectionComponent {
     });
   }
 
-  getUserLevel() {
-    return AppComponent.UserLevel;
+  getuserLevel() {
+    return UserManger.userLevel;
   }
-  getUserName() {
-    return AppComponent.UserName;
+  getuserName() {
+    return UserManger.userName;
   }
 
   @HostListener('document:keydown.control.alt.n', ['$event'])

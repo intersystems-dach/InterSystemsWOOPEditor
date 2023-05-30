@@ -1,7 +1,8 @@
-import { Component, Host, HostListener, Input } from '@angular/core';
-import { Chapter, Page } from 'src/utils/classes';
+import { Component, HostListener, Input } from '@angular/core';
+import { Chapter, Page, UserManger } from 'src/utils/classes';
 import { ApiService } from '../../api.service';
 import { AppComponent } from 'src/app/app.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -15,10 +16,37 @@ export class EditChapterComponent {
   changes: boolean = false;
   sureDelete: boolean = false;
   editMetaData: boolean = false;
+  contentVisible = false;
+  chapterName: string = '';
 
   public static autoSave: boolean = false;
   public static interval: any;
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    let x = this.route.snapshot.paramMap.get('chapterName');
+    if (x == null) {
+      this.router.navigate(['/']);
+      return;
+    }
+    this.chapterName = x;
+    AppComponent.init().then(() => {
+      this.chapter = AppComponent.getChapterByName(this.chapterName, true);
+      if (
+        UserManger.userLevel == 2 ||
+        (UserManger.userLevel == 1 &&
+          this.chapter.config.author == UserManger.userName)
+      ) {
+        this.contentVisible = true;
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
+  }
 
   showNextPage(): void {
     if (this.currentPage == this.chapter.pages.length - 1) {
@@ -107,6 +135,10 @@ export class EditChapterComponent {
   }
 
   goBack() {
-    AppComponent.goBack();
+    if (this.changes) {
+      this.save(false);
+    }
+    clearInterval(EditChapterComponent.interval);
+    this.router.navigate(['/']);
   }
 }

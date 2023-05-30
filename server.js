@@ -28,16 +28,17 @@ app.get("/api/woop/checkuser", (req, res) => {
   updateDB();
   for (let user of db.users) {
     if (
-      user.username == req.query.username &&
+      user.userName == req.query.userName &&
       user.password == req.query.password
     ) {
-      res.json({ level: user.level, username: user.username });
+      res.json({ level: user.level, userName: user.userName });
       return;
     }
   }
-  res.json({ level: 0, username: "" });
+  res.json({ level: 0, userName: "" });
 });
 app.get("/api/woop/chapter/get/all", (req, res) => {
+  console.log("get all chapters");
   updateDB();
   res.json(db.chapters);
 });

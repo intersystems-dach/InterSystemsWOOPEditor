@@ -21,13 +21,11 @@
     class="last"
     (click)="toggleLogIn()"
     (document:keydown.control.alt.l)="toggleLogIn()"
-    *ngIf="getUserLevel() == 0"
+    *ngIf="getuserLevel() == 0"
   >
     Log in
   </button>
-  <button class="last" (click)="logOut()" *ngIf="getUserLevel() > 0">
+  <button class="last" (click)="logOut()" *ngIf="getuserLevel() > 0">
     Log out
   </button>
 </div>
-
-<app-log-in *ngIf="logIn" (closeEmitter)="toggleLogIn()"></app-log-in>
