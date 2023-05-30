@@ -1,4 +1,4 @@
-import { Component, Host, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 

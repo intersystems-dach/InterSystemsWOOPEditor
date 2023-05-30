@@ -24,22 +24,57 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 // checks if the user exists in the db.json file
-app.get("/api/woop/checkuser", (req, res) => {
+app.get("/api/woop/user/check", (req, res) => {
   updateDB();
   for (let user of db.users) {
     if (
       user.userName == req.query.userName &&
       user.password == req.query.password
     ) {
-      res.json({ level: user.level, userName: user.userName });
+      res.json({
+        level: user.level,
+        userName: user.userName,
+        darkmode: user.darkmode,
+      });
       return;
     }
   }
   res.json({ level: 0, userName: "" });
 });
+
+app.post("/api/woop/user/setdarkmode", (req, res) => {
+  updateDB();
+  for (let user of db.users) {
+    if (user.userName == req.body.userName) {
+      user.darkmode = req.body.darkmode;
+      saveDB();
+      res.json({ ok: true });
+      return;
+    }
+  }
+  res.json({ ok: false });
+});
+
 app.get("/api/woop/chapter/get/all", (req, res) => {
   updateDB();
   res.json(db.chapters);
+});
+app.get("/api/woop/chapter/verify", (req, res) => {
+  updateDB();
+  console.log(req.query.title);
+  console.log(req.query.password);
+  for (let i in db.chapters) {
+    if (
+      db.chapters[i].title == req.query.title &&
+      db.chapters[i].config.password == req.query.password
+    ) {
+      console.log("chapter verified");
+      res.json({ ok: true, message: "Chapter verified" });
+      return;
+    }
+  }
+  console.log("chapter not verified");
+  res.json({ ok: false, message: "Could not verify chapter" });
 });
 // creates a new chapter in the db.json file
 app.post("/api/woop/chapter/new", (req, res) => {

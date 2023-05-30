@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { ApiService } from '../../api.service';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-log-in',
@@ -20,10 +21,15 @@ export class LogInComponent {
   submit() {
     this.apiService
       .checkUser(this.entereduserName, this.enteredPassword)
-      .subscribe((data) => {
+      .subscribe((data: any) => {
         if (data.level > 0) {
           UserManger.userLevel = data.level;
           UserManger.userName = data.userName;
+          if (data.darkmode) {
+            AppComponent.darkMode();
+          } else {
+            AppComponent.lightMode();
+          }
           this.close();
           return;
         }

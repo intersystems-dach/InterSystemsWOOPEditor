@@ -3,6 +3,7 @@ import { MarkdownContentComponent } from '../markdown-content/markdown-content.c
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +13,7 @@ import { UserManger } from 'src/utils/classes';
 export class SettingsComponent {
   logIn: boolean = false;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiService: ApiService) {}
 
   increaseFontSize() {
     MarkdownContentComponent.fontSize += 2;
@@ -59,6 +60,17 @@ export class SettingsComponent {
       AppComponent.darkMode();
     } else {
       AppComponent.lightMode();
+    }
+
+    if (UserManger.userLevel > 0) {
+      this.apiService
+        .setColorSchemaForUser(
+          UserManger.userName,
+          AppComponent.darkModeEnabled
+        )
+        .subscribe((data: any) => {
+          console.log(data);
+        });
     }
   }
 }

@@ -1,7 +1,7 @@
 <app-header class="sticky"></app-header>
 <app-password-query
   *ngIf="!contentVisible"
-  [password]="chapter.config.password"
+  [chapterName]="chapter.title"
   (passwordEntered)="verifyChapter($event)"
 ></app-password-query>
 <div *ngIf="contentVisible" class="content">

@@ -1,8 +1,8 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { Chapter, Page, UserManger } from 'src/utils/classes';
 import { ApiService } from '../../api.service';
-import { AppComponent } from 'src/app/app.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-edit-chapter',

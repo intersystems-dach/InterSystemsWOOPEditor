@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Chapter, ChapterManger, UserManger } from 'src/utils/classes';
+import { Chapter, UserManger } from 'src/utils/classes';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 /* const { mdToPdf } = require('md-to-pdf'); */
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -11,7 +12,6 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import htmlToPdfmake from 'html-to-pdfmake';
-import { AppComponent } from '../app.component';
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',

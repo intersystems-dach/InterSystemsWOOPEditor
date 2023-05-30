@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
-import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     AppComponent.init();
+    console.log(AppComponent.chapters.length);
   }
 
   selectChapter(chapterName: string) {

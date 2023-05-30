@@ -28,7 +28,6 @@ import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-che
 import { ExportOptionsComponent } from './user-input/export-options/export-options.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { ChapterMangerComponent } from './chapter-manger/chapter-manger.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +52,6 @@ import { ChapterMangerComponent } from './chapter-manger/chapter-manger.componen
     MarkdownCheatSheetComponent,
     ExportOptionsComponent,
     HomeComponent,
-    ChapterMangerComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../utils/interfaces';
 import { UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 

@@ -1,3 +1,4 @@
+import { ApiService } from '../../api.service';
 import {
   Component,
   Input,
@@ -15,20 +16,27 @@ export class PasswordQueryComponent {
   enteredPassword: string = '';
   isWrong: boolean = false;
   type: string = 'password';
-  @Input() password: string = '';
+  @Input() chapterName: string = '';
 
   @Output() passwordEntered = new EventEmitter<boolean>();
 
+  constructor(private apiService: ApiService) {}
+
   submit() {
-    if (this.enteredPassword === this.password) {
-      this.passwordEntered.emit(true);
-      this.isWrong = false;
-      this.enteredPassword = '';
-    } else {
-      this.isWrong = true;
-      this.enteredPassword = '';
-    }
+    this.apiService
+      .verifyChapter(this.chapterName, this.enteredPassword)
+      .subscribe((res: any) => {
+        if (res.ok) {
+          this.passwordEntered.emit(true);
+          this.isWrong = false;
+          this.enteredPassword = '';
+        } else {
+          this.isWrong = true;
+          this.enteredPassword = '';
+        }
+      });
   }
+
   viewPassword() {
     if (this.type === 'password') {
       this.type = 'text';

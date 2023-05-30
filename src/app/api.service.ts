@@ -29,12 +29,12 @@ export class ApiService {
    * @returns A User object
    */
   checkUser(userName: string, password: string): Observable<User> {
-    return this.http.get<User>(
+    return this.http.get<any>(
       'http://' +
         ApiService.host +
         ':' +
         ApiService.port +
-        '/api/woop/checkuser?userName=' +
+        '/api/woop/user/check?userName=' +
         userName +
         '&password=' +
         password
@@ -51,6 +51,18 @@ export class ApiService {
     );
   }
 
+  verifyChapter(chapterName: string, password: string): Observable<any> {
+    return this.http.get(
+      'http://' +
+        ApiService.host +
+        ':' +
+        ApiService.port +
+        '/api/woop/chapter/verify?title=' +
+        chapterName +
+        '&password=' +
+        password
+    );
+  }
   /**
    * Adds a new chapter to the database
    * @param chapter The chapter to add
@@ -64,6 +76,17 @@ export class ApiService {
         ApiService.port +
         '/api/woop/chapter/new',
       chapter
+    );
+  }
+
+  setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {
+    return this.http.post<any>(
+      'http://' +
+        ApiService.host +
+        ':' +
+        ApiService.port +
+        '/api/woop/user/setdarkmode',
+      { userName: userName, darkmode: darkMode }
     );
   }
   updateChapter(chapter: Chapter): Observable<Status> {

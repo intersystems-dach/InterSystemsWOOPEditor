@@ -5,9 +5,9 @@ import {
   Output,
   HostListener,
 } from '@angular/core';
-import { AppComponent } from '../app.component';
 import { Chapter, Config, UserManger } from 'src/utils/classes';
 import { ApiService } from '../api.service';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-chapter-new',
