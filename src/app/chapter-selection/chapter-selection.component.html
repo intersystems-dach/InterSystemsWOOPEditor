@@ -4,22 +4,22 @@
       <div
         [class]="
           'row' +
-          (getUserLevel() == 2 ||
-          (getUserLevel() == 1 && getUserName() == chapter.config.author)
+          (getuserLevel() == 2 ||
+          (getuserLevel() == 1 && getuserName() == chapter.config.author)
             ? ' edit'
             : '')
         "
         *ngIf="
           !chapter.config.isPrivate ||
-          getUserLevel() == 2 ||
-          (getUserLevel() == 1 && getUserName() == chapter.config.author)
+          getuserLevel() == 2 ||
+          (getuserLevel() == 1 && getuserName() == chapter.config.author)
         "
       >
         <div
           class="editButton"
           *ngIf="
-            getUserLevel() == 2 ||
-            (getUserLevel() == 1 && getUserName() == chapter.config.author)
+            getuserLevel() == 2 ||
+            (getuserLevel() == 1 && getuserName() == chapter.config.author)
           "
         >
           <button (click)="setChapterToDelete(chapter)">
@@ -49,7 +49,7 @@
       </div>
     </div>
   </div>
-  <div class="newButton" *ngIf="getUserLevel() > 0">
+  <div class="newButton" *ngIf="getuserLevel() > 0">
     <button (click)="toggleNewChapter()">+</button>
   </div>
 </div>

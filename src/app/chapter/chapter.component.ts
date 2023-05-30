@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { Chapter } from 'src/utils/classes';
+import { Chapter, ChapterManger, UserManger } from 'src/utils/classes';
 import { MarkdownService } from 'ngx-markdown';
+import { ActivatedRoute, Router } from '@angular/router';
 /* const { mdToPdf } = require('md-to-pdf'); */
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -20,11 +21,58 @@ export class ChapterComponent {
   @Input() chapter!: Chapter;
   @Input() currentPage: number = 0;
 
+  chapterName: string = '';
   tipVisible: boolean = false;
   resultVisible: boolean = false;
   exportOptionsVisible = false;
-  constructor(private mdService: MarkdownService) {}
+  contentVisible = false;
 
+  constructor(
+    private mdService: MarkdownService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit(): void {
+    let x = this.route.snapshot.paramMap.get('chapterName');
+    if (x == null) {
+      this.router.navigate(['/']);
+      return;
+    }
+    this.chapterName = x;
+    AppComponent.init().then(() => {
+      this.chapter = AppComponent.getChapterByName(this.chapterName, true);
+      if (!this.chapter.config.isPrivate) {
+        if (
+          UserManger.userLevel == 2 ||
+          (UserManger.userLevel == 1 &&
+            this.chapter.config.author == UserManger.userName)
+        ) {
+          this.chapter.verified = true;
+        }
+
+        this.contentVisible = this.chapter.verified;
+      } else {
+        if (
+          UserManger.userLevel == 2 ||
+          (UserManger.userLevel == 1 &&
+            this.chapter.config.author == UserManger.userName)
+        ) {
+          this.contentVisible = true;
+        } else {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
+  }
+  verifyChapter(event: boolean) {
+    if (event) {
+      this.chapter.verified = true;
+      this.contentVisible = true;
+    } else {
+      this.router.navigate(['/']);
+    }
+  }
   showNextPage(): void {
     if (this.currentPage == this.chapter.pages.length - 1) {
       return;
@@ -101,6 +149,6 @@ export class ChapterComponent {
   }
 
   goBack() {
-    AppComponent.goBack();
+    this.router.navigate(['/']);
   }
 }

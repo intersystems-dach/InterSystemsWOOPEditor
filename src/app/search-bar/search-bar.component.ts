@@ -1,5 +1,5 @@
 import { Component, Host, HostListener } from '@angular/core';
-import { Chapter } from 'src/utils/classes';
+import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -31,12 +31,12 @@ export class SearchBarComponent {
     for (let word of words) {
       for (let chapter of AppComponent.allChapters) {
         if (chapter.config.isPrivate) {
-          if (AppComponent.UserLevel == 0) {
+          if (UserManger.userLevel == 0) {
             continue;
           }
           if (
-            AppComponent.UserLevel == 1 &&
-            chapter.config.author != AppComponent.UserName
+            UserManger.userLevel == 1 &&
+            chapter.config.author != UserManger.userName
           ) {
             continue;
           }

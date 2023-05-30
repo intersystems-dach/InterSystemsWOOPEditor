@@ -1,6 +1,8 @@
 import { Component, Host, HostListener } from '@angular/core';
 import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
 import { AppComponent } from '../app.component';
+import { Router } from '@angular/router';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-settings',
@@ -9,6 +11,8 @@ import { AppComponent } from '../app.component';
 })
 export class SettingsComponent {
   logIn: boolean = false;
+
+  constructor(private router: Router) {}
 
   increaseFontSize() {
     MarkdownContentComponent.fontSize += 2;
@@ -27,14 +31,21 @@ export class SettingsComponent {
   @HostListener('document:keydown.control.alt.l', ['$event'])
   toggleLogIn() {
     this.logIn = !this.logIn;
+    if (this.logIn) {
+      this.router.navigate(['/login']);
+    }
   }
 
   logOut() {
-    AppComponent.UserLevel = 0;
-    AppComponent.UserName = '';
+    UserManger.userLevel = 0;
+    UserManger.userName = '';
   }
 
-  getUserLevel() {
-    return AppComponent.UserLevel;
+  getuserLevel() {
+    return UserManger.userLevel;
+  }
+
+  getUserName() {
+    return UserManger.userName;
   }
 }

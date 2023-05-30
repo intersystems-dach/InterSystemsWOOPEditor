@@ -1,38 +1,48 @@
-<div class="header">
-  <button (click)="goBack()" class="backButton">Back</button>
-  <button (click)="exportOptionsVisible = true" class="exportButton">
-    Export
-  </button>
-</div>
-<div class="heading">
-  <h1>{{ chapter.title }}</h1>
-  <p>
-    <i>{{
-      chapter.pages.length > 0
-        ? "Page " + (currentPage + 1) + "/" + chapter.pages.length
-        : "No pages"
-    }}</i>
-  </p>
-</div>
-<app-page
-  *ngFor="let p of chapter.pages; let i = index"
-  [page]="p"
-  [show]="i == currentPage"
-  [showTip]="tipVisible"
-  [showResult]="resultVisible"
-></app-page>
-<app-page-nav-bar
-  [showPrevButton]="currentPage != 0"
-  [showNextButton]="currentPage != chapter.pages.length - 1"
-  [showResultButton]="chapter.pages[currentPage].result != '' && !resultVisible"
-  [showTipButton]="chapter.pages[currentPage].tip != '' && !tipVisible"
-  (showNextEmitter)="showNextPage()"
-  (showPrevEmitter)="showPrevPage()"
-  (showTipEmitter)="showTip()"
-  (showResultEmitter)="showResult()"
-></app-page-nav-bar>
+<app-header class="sticky"></app-header>
+<app-password-query
+  *ngIf="!contentVisible"
+  [password]="chapter.config.password"
+  (passwordEntered)="verifyChapter($event)"
+></app-password-query>
+<div *ngIf="contentVisible" class="content">
+  <div class="header">
+    <button (click)="goBack()" class="backButton">Back</button>
+    <button (click)="exportOptionsVisible = true" class="exportButton">
+      Export
+    </button>
+  </div>
+  <div class="heading">
+    <h1>{{ chapter.title }}</h1>
+    <p>
+      <i>{{
+        chapter.pages.length > 0
+          ? "Page " + (currentPage + 1) + "/" + chapter.pages.length
+          : "No pages"
+      }}</i>
+    </p>
+  </div>
+  <app-page
+    *ngFor="let p of chapter.pages; let i = index"
+    [page]="p"
+    [show]="i == currentPage"
+    [showTip]="tipVisible"
+    [showResult]="resultVisible"
+  ></app-page>
+  <app-page-nav-bar
+    [showPrevButton]="currentPage != 0"
+    [showNextButton]="currentPage != chapter.pages.length - 1"
+    [showResultButton]="
+      chapter.pages[currentPage].result != '' && !resultVisible
+    "
+    [showTipButton]="chapter.pages[currentPage].tip != '' && !tipVisible"
+    (showNextEmitter)="showNextPage()"
+    (showPrevEmitter)="showPrevPage()"
+    (showTipEmitter)="showTip()"
+    (showResultEmitter)="showResult()"
+  ></app-page-nav-bar>
 
-<app-export-options
-  *ngIf="exportOptionsVisible"
-  (closeEmitter)="export($event)"
-></app-export-options>
+  <app-export-options
+    *ngIf="exportOptionsVisible"
+    (closeEmitter)="export($event)"
+  ></app-export-options>
+</div>

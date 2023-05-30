@@ -24,18 +24,18 @@ export class ApiService {
 
   /**
    * Checks if the user exists and if the password is correct
-   * @param username The username
+   * @param userName The userName
    * @param password The password
    * @returns A User object
    */
-  checkUser(username: string, password: string): Observable<User> {
+  checkUser(userName: string, password: string): Observable<User> {
     return this.http.get<User>(
       'http://' +
         ApiService.host +
         ':' +
         ApiService.port +
-        '/api/woop/checkuser?username=' +
-        username +
+        '/api/woop/checkuser?userName=' +
+        userName +
         '&password=' +
         password
     );

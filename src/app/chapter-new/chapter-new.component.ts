@@ -6,7 +6,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { AppComponent } from '../app.component';
-import { Chapter, Config } from 'src/utils/classes';
+import { Chapter, Config, UserManger } from 'src/utils/classes';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -41,7 +41,7 @@ export class ChapterNewComponent {
         new Config(
           this.password,
           this.language,
-          AppComponent.UserName,
+          UserManger.userName,
           this.description,
           this.isPrivate
         )

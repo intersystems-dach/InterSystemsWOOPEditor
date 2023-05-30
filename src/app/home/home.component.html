@@ -1,0 +1,12 @@
+<app-header class="sticky"></app-header>
+
+<div class="container">
+  <app-search-bar></app-search-bar>
+
+  <app-chapter-selection
+    [chapters]="getChapters()"
+    (chapterSelected)="selectChapter($event)"
+    (chapterEditSelected)="selectEditChapter($event)"
+  >
+  </app-chapter-selection>
+</div>

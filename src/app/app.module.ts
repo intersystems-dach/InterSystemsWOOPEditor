@@ -26,6 +26,9 @@ import { FilterBarComponent } from './filter-bar/filter-bar.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-cheat-sheet.component';
 import { ExportOptionsComponent } from './user-input/export-options/export-options.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HomeComponent } from './home/home.component';
+import { ChapterMangerComponent } from './chapter-manger/chapter-manger.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,12 +52,15 @@ import { ExportOptionsComponent } from './user-input/export-options/export-optio
     SearchBarComponent,
     MarkdownCheatSheetComponent,
     ExportOptionsComponent,
+    HomeComponent,
+    ChapterMangerComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     MarkdownModule.forRoot(),
     FormsModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
