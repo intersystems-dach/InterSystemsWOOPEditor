@@ -6,7 +6,7 @@ import {
   HostListener,
 } from '@angular/core';
 import { Chapter, Config, UserManger } from 'src/utils/classes';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 import { AppComponent } from '../app.component';
 
 @Component({

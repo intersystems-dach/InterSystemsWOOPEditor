@@ -18,7 +18,7 @@
       *ngFor="let p of chapter.pages; let i = index"
       [page]="p"
       [show]="i == currentPage"
-      [showTip]="true"
+      [showhint]="true"
       [showResult]="true"
       (changeEmitter)="onChange()"
     ></app-edit-page>
@@ -26,7 +26,7 @@
       [showPrevButton]="currentPage != 0"
       [showNextButton]="currentPage != chapter.pages.length - 1"
       [showResultButton]="false"
-      [showTipButton]="false"
+      [showhintButton]="false"
       (showNextEmitter)="showNextPage()"
       (showPrevEmitter)="showPrevPage()"
     ></app-page-nav-bar>

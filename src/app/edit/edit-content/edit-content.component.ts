@@ -150,14 +150,14 @@ export class EditContentComponent {
 
   getData() {
     if (this.type === 'content') this.data = this.page.content;
-    if (this.type === 'tip') this.data = this.page.tip;
+    if (this.type === 'hint') this.data = this.page.hint;
     if (this.type === 'result') this.data = this.page.result;
   }
 
   setData() {
     //this.autoComplete();
     if (this.type === 'content') this.page.content = this.data;
-    if (this.type === 'tip') this.page.tip = this.data;
+    if (this.type === 'hint') this.page.hint = this.data;
     if (this.type === 'result') this.page.result = this.data;
     this.changeEmitter.emit();
   }

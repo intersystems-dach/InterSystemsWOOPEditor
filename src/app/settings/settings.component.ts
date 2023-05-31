@@ -3,7 +3,7 @@ import { MarkdownContentComponent } from '../markdown-content/markdown-content.c
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-settings',

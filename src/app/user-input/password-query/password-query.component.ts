@@ -1,4 +1,4 @@
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 import {
   Component,
   Input,

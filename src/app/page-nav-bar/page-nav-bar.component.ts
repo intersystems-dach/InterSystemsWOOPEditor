@@ -15,12 +15,12 @@ import { AppComponent } from '../app.component';
 export class PageNavBarComponent {
   @Input() showNextButton: boolean = true;
   @Input() showPrevButton: boolean = true;
-  @Input() showTipButton: boolean = true;
+  @Input() showhintButton: boolean = true;
   @Input() showResultButton: boolean = true;
 
   @Output() showNextEmitter = new EventEmitter<string>();
   @Output() showPrevEmitter = new EventEmitter<string>();
-  @Output() showTipEmitter = new EventEmitter<string>();
+  @Output() showhintEmitter = new EventEmitter<string>();
   @Output() showResultEmitter = new EventEmitter<string>();
 
   @HostListener('document:keydown.control.arrowright', ['$event'])
@@ -32,8 +32,8 @@ export class PageNavBarComponent {
   showPrev() {
     this.showPrevEmitter.emit('showPrev');
   }
-  showTip() {
-    this.showTipEmitter.emit('showTip');
+  showhint() {
+    this.showhintEmitter.emit('showhint');
   }
   showResult() {
     this.showResultEmitter.emit('showResult');

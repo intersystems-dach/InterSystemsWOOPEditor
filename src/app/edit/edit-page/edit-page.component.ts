@@ -9,7 +9,7 @@ import { Page } from 'src/utils/classes';
 export class EditPageComponent {
   @Input() page!: Page;
   @Input() show: boolean = false;
-  @Input() showTip: boolean = false;
+  @Input() showhint: boolean = false;
   @Input() showResult: boolean = false;
 
   @Output() changeEmitter = new EventEmitter<Page>();

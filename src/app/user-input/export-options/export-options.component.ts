@@ -14,15 +14,15 @@ import {
 export class ExportOptionsComponent {
   asPdf: boolean = true;
   asMarkdown: boolean = false;
-  includeTip: boolean = true;
+  includehint: boolean = true;
   includeResult: boolean = true;
 
   @Output() closeEmitter = new EventEmitter<string>();
 
   export() {
     let msg = this.asMarkdown ? 'md' : 'pdf';
-    if (this.includeTip) {
-      msg += 'tip';
+    if (this.includehint) {
+      msg += 'hint';
     }
     if (this.includeResult) {
       msg += 'result';
@@ -30,7 +30,7 @@ export class ExportOptionsComponent {
     this.closeEmitter.emit(msg);
     this.asPdf = true;
     this.asMarkdown = false;
-    this.includeTip = true;
+    this.includehint = true;
     this.includeResult = true;
   }
 
@@ -47,7 +47,7 @@ export class ExportOptionsComponent {
     this.closeEmitter.emit('close');
     this.asPdf = true;
     this.asMarkdown = false;
-    this.includeTip = true;
+    this.includehint = true;
     this.includeResult = true;
   }
 }

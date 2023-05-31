@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Chapter, Config } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from './api.service';
+import { ApiService } from './services/api.service';
+import { IrisinterfaceService } from './services/irisinterface.service';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,9 @@ export class AppComponent {
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     AppComponent.apiService = apiService;
+    AppComponent.apiService.isServerOnline().subscribe((data: any) => {
+      console.log(data);
+    });
   }
 
   ngOnInit() {

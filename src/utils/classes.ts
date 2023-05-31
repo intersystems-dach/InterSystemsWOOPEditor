@@ -15,11 +15,11 @@ export class Chapter {
 
 export class Page {
   public content: string;
-  public tip: string;
+  public hint: string;
   public result: string;
-  constructor(content: string, tip: string = '', result: string = '') {
+  constructor(content: string, hint: string = '', result: string = '') {
     this.content = content;
-    this.tip = tip;
+    this.hint = hint;
     this.result = result;
   }
 }

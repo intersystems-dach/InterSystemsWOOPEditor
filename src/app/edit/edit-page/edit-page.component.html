@@ -4,11 +4,11 @@
     type="content"
     (changeEmitter)="onChange()"
   ></app-edit-content>
-  <div *ngIf="showTip">
-    <h1 class="heading">Tip</h1>
+  <div *ngIf="showhint">
+    <h1 class="heading">hint</h1>
     <app-edit-content
       [page]="page"
-      type="tip"
+      type="hint"
       (changeEmitter)="onChange()"
     ></app-edit-content>
   </div>

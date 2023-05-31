@@ -25,7 +25,7 @@
     *ngFor="let p of chapter.pages; let i = index"
     [page]="p"
     [show]="i == currentPage"
-    [showTip]="tipVisible"
+    [showhint]="hintVisible"
     [showResult]="resultVisible"
   ></app-page>
   <app-page-nav-bar
@@ -34,10 +34,10 @@
     [showResultButton]="
       chapter.pages[currentPage].result != '' && !resultVisible
     "
-    [showTipButton]="chapter.pages[currentPage].tip != '' && !tipVisible"
+    [showhintButton]="chapter.pages[currentPage].hint != '' && !hintVisible"
     (showNextEmitter)="showNextPage()"
     (showPrevEmitter)="showPrevPage()"
-    (showTipEmitter)="showTip()"
+    (showhintEmitter)="showhint()"
     (showResultEmitter)="showResult()"
   ></app-page-nav-bar>
 

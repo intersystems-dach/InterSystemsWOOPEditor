@@ -1,5 +1,5 @@
 import { Component, HostListener } from '@angular/core';
-import { ApiService } from '../../api.service';
+import { ApiService } from '../../services/api.service';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
@@ -24,7 +24,7 @@ export class LogInComponent {
       .subscribe((data: any) => {
         if (data.level > 0) {
           UserManger.userLevel = data.level;
-          UserManger.userName = data.userName;
+          UserManger.userName = data.username;
           if (data.darkmode) {
             AppComponent.darkMode();
           } else {

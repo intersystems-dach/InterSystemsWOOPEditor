@@ -22,7 +22,7 @@ export class ChapterComponent {
   @Input() currentPage: number = 0;
 
   chapterName: string = '';
-  tipVisible: boolean = false;
+  hintVisible: boolean = false;
   resultVisible: boolean = false;
   exportOptionsVisible = false;
   contentVisible = false;
@@ -78,7 +78,7 @@ export class ChapterComponent {
       return;
     }
     this.currentPage++;
-    this.tipVisible = false;
+    this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });
   }
@@ -88,13 +88,13 @@ export class ChapterComponent {
       return;
     }
     this.currentPage--;
-    this.tipVisible = false;
+    this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });
   }
 
-  showTip() {
-    this.tipVisible = true;
+  showhint() {
+    this.hintVisible = true;
   }
 
   showResult() {
@@ -107,14 +107,14 @@ export class ChapterComponent {
       return;
     }
     let asPDf = event.includes('pdf');
-    let includeTip = event.includes('tip');
+    let includehint = event.includes('hint');
     let includeResult = event.includes('result');
 
     let content = '# ' + this.chapter.title + '\n---\n';
     for (let page of this.chapter.pages) {
       content += page.content + '\n---\n';
-      if (page.tip != '' && includeTip) {
-        content += '## TIP\n\n' + page.tip + '\n---\n';
+      if (page.hint != '' && includehint) {
+        content += '## HINT\n\n' + page.hint + '\n---\n';
       }
       if (page.result != '' && includeResult) {
         content += '## RESULT\n\n' + page.result + '\n---\n';

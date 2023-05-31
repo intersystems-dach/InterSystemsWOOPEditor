@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
+export class ExpressjsService {
   private static host: string = 'localhost';
   private static port: number = 3000;
 
@@ -15,7 +15,9 @@ export class ApiService {
 
   isServerOnline() {
     return this.http
-      .get<string>('http://' + ApiService.host + ':' + ApiService.port + '/')
+      .get<string>(
+        'http://' + ExpressjsService.host + ':' + ExpressjsService.port + '/'
+      )
       .subscribe((res) => {
         console.log(res);
         return true;
@@ -31,9 +33,9 @@ export class ApiService {
   checkUser(userName: string, password: string): Observable<User> {
     return this.http.get<any>(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/user/check?userName=' +
         userName +
         '&password=' +
@@ -44,9 +46,9 @@ export class ApiService {
   getAllChapters(): Observable<any> {
     return this.http.get(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/chapter/get/all'
     );
   }
@@ -54,9 +56,9 @@ export class ApiService {
   verifyChapter(chapterName: string, password: string): Observable<any> {
     return this.http.get(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/chapter/verify?title=' +
         chapterName +
         '&password=' +
@@ -71,9 +73,9 @@ export class ApiService {
   addNewChapter(chapter: Chapter): Observable<Status> {
     return this.http.post<Status>(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/chapter/new',
       chapter
     );
@@ -82,9 +84,9 @@ export class ApiService {
   setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {
     return this.http.post<any>(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/user/setdarkmode',
       { userName: userName, darkmode: darkMode }
     );
@@ -92,9 +94,9 @@ export class ApiService {
   updateChapter(chapter: Chapter): Observable<Status> {
     return this.http.post<Status>(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/chapter/update',
       chapter
     );
@@ -102,9 +104,9 @@ export class ApiService {
   deleteChapter(chapter: Chapter): Observable<Status> {
     return this.http.post<Status>(
       'http://' +
-        ApiService.host +
+        ExpressjsService.host +
         ':' +
-        ApiService.port +
+        ExpressjsService.port +
         '/api/woop/chapter/delete',
       chapter
     );

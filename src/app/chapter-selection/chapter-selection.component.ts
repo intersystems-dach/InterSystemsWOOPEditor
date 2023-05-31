@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
-import { ApiService } from '../api.service';
+import { ApiService } from '../services/api.service';
 @Component({
   selector: 'app-chapter-selection',
   templateUrl: './chapter-selection.component.html',
