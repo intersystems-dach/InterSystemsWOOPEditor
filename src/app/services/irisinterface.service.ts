@@ -24,7 +24,6 @@ export class IrisinterfaceService {
       )
       .pipe(
         catchError((err) => {
-          console.error('error while pinging server');
           throw new Error('error'); //Rethrow it back to component
         })
       );
@@ -38,22 +37,26 @@ export class IrisinterfaceService {
    */
   checkUser(userName: string, password: string): Observable<User> {
     // make request and handle 404 status
-    return this.http.get<User>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/api/woop/user/check?username=' +
-        userName +
-        '&password=' +
-        password
-    );
-    /* .pipe(
-        catchError((err) => {
-          console.log(err);
-          throw new Error('error');
+    return this.http
+      .get<User>(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/user/check?username=' +
+          userName +
+          '&password=' +
+          password
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Username or password is wrong');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
         })
-      ); */
+      );
   }
 
   getAllChapters(): Observable<any> {
@@ -62,36 +65,58 @@ export class IrisinterfaceService {
         IrisinterfaceService.host +
         ':' +
         IrisinterfaceService.port +
-        '/api/woop/chapter/get/all'
+        '/woop/chapter/get/all'
     );
   }
 
   verifyChapter(chapterName: string, password: string): Observable<any> {
-    return this.http.get(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/api/woop/chapter/verify?title=' +
-        chapterName +
-        '&password=' +
-        password
-    );
+    return this.http
+      .get(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/verify?title=' +
+          chapterName +
+          '&password=' +
+          password
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Could not find chapter');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
+        })
+      );
   }
   /**
    * Adds a new chapter to the database
    * @param chapter The chapter to add
    * @returns A Status object
    */
-  addNewChapter(chapter: Chapter): Observable<Status> {
-    return this.http.post<Status>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/api/woop/chapter/new',
-      chapter
-    );
+  addNewChapter(chapter: Chapter): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/new',
+        chapter
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 409) {
+            throw new Error('Chapter already exists');
+          } else if (err.status === 500) {
+            throw new Error('Chapter could not be saved');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
+        })
+      );
   }
 
   setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {

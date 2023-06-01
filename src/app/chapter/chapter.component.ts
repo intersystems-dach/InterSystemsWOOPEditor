@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Chapter, UserManger } from 'src/utils/classes';
+import { Chapter, UserManger, VerifyCache } from 'src/utils/classes';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from '../app.component';
@@ -12,6 +12,7 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import htmlToPdfmake from 'html-to-pdfmake';
+import { ChaptermanagerService } from '../services/chaptermanager.service';
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -30,7 +31,8 @@ export class ChapterComponent {
   constructor(
     private mdService: MarkdownService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private chapterManger: ChaptermanagerService
   ) {}
 
   ngOnInit(): void {
@@ -40,23 +42,26 @@ export class ChapterComponent {
       return;
     }
     this.chapterName = x;
-    AppComponent.init().then(() => {
-      this.chapter = AppComponent.getChapterByName(this.chapterName, true);
-      if (!this.chapter.config.isPrivate) {
+    this.chapterManger.init().then(() => {
+      this.chapter = this.chapterManger.getChapterByName(
+        this.chapterName,
+        true
+      );
+      if (!this.chapter.IsPrivate) {
         if (
           UserManger.userLevel == 2 ||
           (UserManger.userLevel == 1 &&
-            this.chapter.config.author == UserManger.userName)
+            this.chapter.Author == UserManger.userName)
         ) {
-          this.chapter.verified = true;
+          VerifyCache.verifyChapter(this.chapter.Title);
         }
 
-        this.contentVisible = this.chapter.verified;
+        this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
       } else {
         if (
           UserManger.userLevel == 2 ||
           (UserManger.userLevel == 1 &&
-            this.chapter.config.author == UserManger.userName)
+            this.chapter.Author == UserManger.userName)
         ) {
           this.contentVisible = true;
         } else {
@@ -67,14 +72,14 @@ export class ChapterComponent {
   }
   verifyChapter(event: boolean) {
     if (event) {
-      this.chapter.verified = true;
+      VerifyCache.verifyChapter(this.chapter.Title);
       this.contentVisible = true;
     } else {
       this.router.navigate(['/']);
     }
   }
   showNextPage(): void {
-    if (this.currentPage == this.chapter.pages.length - 1) {
+    if (this.currentPage == this.chapter.Pages.length - 1) {
       return;
     }
     this.currentPage++;
@@ -110,14 +115,14 @@ export class ChapterComponent {
     let includehint = event.includes('hint');
     let includeResult = event.includes('result');
 
-    let content = '# ' + this.chapter.title + '\n---\n';
-    for (let page of this.chapter.pages) {
-      content += page.content + '\n---\n';
-      if (page.hint != '' && includehint) {
-        content += '## HINT\n\n' + page.hint + '\n---\n';
+    let content = '# ' + this.chapter.Title + '\n---\n';
+    for (let page of this.chapter.Pages) {
+      content += page.Content + '\n---\n';
+      if (page.Hint != '' && includehint) {
+        content += '## HINT\n\n' + page.Hint + '\n---\n';
       }
-      if (page.result != '' && includeResult) {
-        content += '## RESULT\n\n' + page.result + '\n---\n';
+      if (page.Result != '' && includeResult) {
+        content += '## RESULT\n\n' + page.Result + '\n---\n';
       }
       content += '\n\n';
     }
@@ -127,7 +132,6 @@ export class ChapterComponent {
       { dest: 'path/to/output.pdf' }
     ); */
       let html = this.mdService.parse(content);
-      console.log(html);
       /* let logo =
       '<img src="assets/imgs/InterSystemsWOOPLogo.png" width="100" height="100" />';
     html = logo + html; */
@@ -141,7 +145,7 @@ export class ChapterComponent {
       let url = URL.createObjectURL(blob);
       let a = document.createElement('a');
       a.href = url;
-      a.download = this.chapter.title + '.md';
+      a.download = this.chapter.Title + '.md';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);

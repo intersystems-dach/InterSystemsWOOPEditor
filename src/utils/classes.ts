@@ -1,47 +1,58 @@
 export class Chapter {
-  public title: string;
-  public pages: Page[];
-  public verified: boolean = false;
-  public config: Config;
-  constructor(title: string, pages: Page[], config: Config) {
-    this.title = title;
-    this.pages = pages;
-    this.config = config;
-    if (this.config.password === '') {
-      this.verified = true;
+  public Title: string;
+  public Pages: Page[];
+  public Password: string;
+  public Language: string;
+  public Author: string;
+  public Description: string;
+  public IsPrivate: boolean;
+  constructor(
+    Title: string,
+    Author: string,
+    Pages: Page[],
+    Password: string = '',
+    Language: string = 'en',
+    Description: string = '',
+    IsPrivate: boolean = false
+  ) {
+    this.Title = Title;
+    this.Pages = Pages;
+    this.Password = Password;
+    this.Language = Language;
+    this.Author = Author;
+    this.Description = Description;
+    this.IsPrivate = IsPrivate;
+
+    this.setUndefinedValues();
+  }
+
+  setUndefinedValues() {
+    if (this.Password === undefined) {
+      this.Password = '';
+    }
+    if (this.Language === undefined) {
+      this.Language = '';
+    }
+    if (this.Author === undefined) {
+      this.Author = '';
+    }
+    if (this.Password === undefined) {
+      this.Password = '';
+    }
+    if (this.Description === undefined) {
+      this.Description = '';
     }
   }
 }
 
 export class Page {
-  public content: string;
-  public hint: string;
-  public result: string;
-  constructor(content: string, hint: string = '', result: string = '') {
-    this.content = content;
-    this.hint = hint;
-    this.result = result;
-  }
-}
-
-export class Config {
-  public password: string;
-  public language: string;
-  public author: string;
-  public description: string;
-  public isPrivate: boolean;
-  constructor(
-    password: string,
-    language: string,
-    author: string,
-    description: string,
-    isPrivate: boolean
-  ) {
-    this.password = password;
-    this.language = language;
-    this.author = author;
-    this.description = description;
-    this.isPrivate = isPrivate;
+  public Content: string;
+  public Hint: string;
+  public Result: string;
+  constructor(Content: string, Hint: string = '', Result: string = '') {
+    this.Content = Content;
+    this.Hint = Hint;
+    this.Result = Result;
   }
 }
 
@@ -50,7 +61,7 @@ export enum userLevel {
   USER = 1,
   ADMIN = 2,
 }
-
+/* 
 export class ChapterManger {
   private static errorChapter = new Chapter(
     'Error 404',
@@ -78,9 +89,26 @@ export class ChapterManger {
     }
     return this.errorChapter;
   }
-}
+} */
 
 export class UserManger {
   public static userLevel = userLevel.NONE;
   public static userName = '';
+}
+
+export class VerifyCache {
+  private static verifyCache: any[] = [];
+
+  static isChapterVerified(chapterName: string): boolean {
+    for (let chapter of this.verifyCache) {
+      if (chapter == chapterName) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  static verifyChapter(chapterName: string) {
+    this.verifyCache.push(chapterName);
+  }
 }

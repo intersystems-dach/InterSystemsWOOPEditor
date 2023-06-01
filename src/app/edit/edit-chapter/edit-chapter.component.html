@@ -5,17 +5,17 @@
   </div>
   <div *ngIf="!preview">
     <div class="heading">
-      <h1>{{ chapter.title + " EDIT" }}</h1>
+      <h1>{{ chapter.Title + " EDIT" }}</h1>
       <p>
         <i>{{
-          chapter.pages.length > 0
-            ? "Page " + (currentPage + 1) + "/" + chapter.pages.length
-            : "No pages"
+          chapter.Pages.length > 0
+            ? "Page " + (currentPage + 1) + "/" + chapter.Pages.length
+            : "No Pages"
         }}</i>
       </p>
     </div>
     <app-edit-page
-      *ngFor="let p of chapter.pages; let i = index"
+      *ngFor="let p of chapter.Pages; let i = index"
       [page]="p"
       [show]="i == currentPage"
       [showhint]="true"
@@ -24,14 +24,14 @@
     ></app-edit-page>
     <app-page-nav-bar
       [showPrevButton]="currentPage != 0"
-      [showNextButton]="currentPage != chapter.pages.length - 1"
+      [showNextButton]="currentPage != chapter.Pages.length - 1"
       [showResultButton]="false"
       [showhintButton]="false"
       (showNextEmitter)="showNextPage()"
       (showPrevEmitter)="showPrevPage()"
     ></app-page-nav-bar>
     <div class="editButtons">
-      <button (click)="setSureDelete(true)" *ngIf="chapter.pages.length > 0">
+      <button (click)="setSureDelete(true)" *ngIf="chapter.Pages.length > 0">
         Remove Page
       </button>
       <button (click)="addPage()">Add Page</button>
@@ -49,7 +49,7 @@
     *ngIf="preview"
   ></app-chapter>
   <div class="editButtons">
-    <button (click)="togglePreview()" *ngIf="chapter.pages.length > 0">
+    <button (click)="togglePreview()" *ngIf="chapter.Pages.length > 0">
       {{ preview ? "Edit" : "Preview" }}
     </button>
     <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
@@ -57,11 +57,11 @@
 
   <app-chapter-new
     [updateChapter]="chapter"
-    [name]="chapter.title"
-    [description]="chapter.config.description"
-    [language]="chapter.config.language"
-    [password]="chapter.config.password"
-    [isPrivate]="chapter.config.isPrivate"
+    [name]="chapter.Title"
+    [description]="chapter.Description"
+    [language]="chapter.Language"
+    [password]="chapter.Password"
+    [isPrivate]="chapter.IsPrivate"
     *ngIf="editMetaData"
     (closeEmitter)="toggleEditMetaData()"
   ></app-chapter-new>

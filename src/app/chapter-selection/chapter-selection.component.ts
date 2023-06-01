@@ -46,7 +46,6 @@ export class ChapterSelectionComponent {
 
   deleteChapter(chapter: Chapter) {
     this.apiService.deleteChapter(chapter).subscribe((status) => {
-      console.log(status);
       if (status.ok) {
         this.chapters.splice(this.chapters.indexOf(chapter), 1);
         alert('Chapter deleted');
@@ -54,6 +53,13 @@ export class ChapterSelectionComponent {
         alert('Chapter not deleted: ' + status.message);
       }
     });
+  }
+
+  isChapterAccessible(chapter: Chapter): boolean {
+    return (
+      this.getuserLevel() == 2 ||
+      (this.getuserLevel() == 1 && this.getuserName() == chapter.Author)
+    );
   }
 
   getuserLevel() {

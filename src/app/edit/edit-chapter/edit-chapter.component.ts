@@ -3,6 +3,7 @@ import { Chapter, Page, UserManger } from 'src/utils/classes';
 import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
+import { ChaptermanagerService } from 'src/app/services/chaptermanager.service';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -24,7 +25,8 @@ export class EditChapterComponent {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private chapterManager: ChaptermanagerService
   ) {}
 
   ngOnInit(): void {
@@ -34,12 +36,15 @@ export class EditChapterComponent {
       return;
     }
     this.chapterName = x;
-    AppComponent.init().then(() => {
-      this.chapter = AppComponent.getChapterByName(this.chapterName, true);
+    this.chapterManager.init().then(() => {
+      this.chapter = this.chapterManager.getChapterByName(
+        this.chapterName,
+        true
+      );
       if (
         UserManger.userLevel == 2 ||
         (UserManger.userLevel == 1 &&
-          this.chapter.config.author == UserManger.userName)
+          this.chapter.Author == UserManger.userName)
       ) {
         this.contentVisible = true;
       } else {
@@ -49,7 +54,7 @@ export class EditChapterComponent {
   }
 
   showNextPage(): void {
-    if (this.currentPage == this.chapter.pages.length - 1) {
+    if (this.currentPage == this.chapter.Pages.length - 1) {
       return;
     }
     this.currentPage++;
@@ -65,8 +70,8 @@ export class EditChapterComponent {
   }
 
   addPage(): void {
-    this.chapter.pages.push(new Page('', '', ''));
-    this.currentPage = this.chapter.pages.length - 1;
+    this.chapter.Pages.push(new Page('', '', ''));
+    this.currentPage = this.chapter.Pages.length - 1;
     window.scrollTo({ top: 0 });
     this.changes = true;
   }
@@ -77,7 +82,7 @@ export class EditChapterComponent {
 
   deletePage(value: boolean): void {
     if (value) {
-      this.chapter.pages.splice(this.currentPage, 1);
+      this.chapter.Pages.splice(this.currentPage, 1);
       this.currentPage = this.currentPage - 1;
       if (this.currentPage < 0) {
         this.currentPage = 0;

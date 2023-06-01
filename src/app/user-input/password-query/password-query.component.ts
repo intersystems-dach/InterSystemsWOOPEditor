@@ -15,6 +15,7 @@ import {
 export class PasswordQueryComponent {
   enteredPassword: string = '';
   isWrong: boolean = false;
+  wrongText = '';
   type: string = 'password';
   @Input() chapterName: string = '';
 
@@ -25,15 +26,22 @@ export class PasswordQueryComponent {
   submit() {
     this.apiService
       .verifyChapter(this.chapterName, this.enteredPassword)
-      .subscribe((res: any) => {
-        if (res.ok) {
-          this.passwordEntered.emit(true);
-          this.isWrong = false;
-          this.enteredPassword = '';
-        } else {
+      .subscribe({
+        next: (res: any) => {
+          if (res.status) {
+            this.passwordEntered.emit(true);
+            this.isWrong = false;
+            this.enteredPassword = '';
+          } else {
+            this.isWrong = true;
+            this.enteredPassword = '';
+            this.wrongText = 'Wrong password';
+          }
+        },
+        error: (err: any) => {
           this.isWrong = true;
-          this.enteredPassword = '';
-        }
+          this.wrongText = err.message;
+        },
       });
   }
 

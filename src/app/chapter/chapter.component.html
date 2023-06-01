@@ -1,7 +1,7 @@
 <app-header class="sticky"></app-header>
 <app-password-query
   *ngIf="!contentVisible"
-  [chapterName]="chapter.title"
+  [chapterName]="chapter.Title"
   (passwordEntered)="verifyChapter($event)"
 ></app-password-query>
 <div *ngIf="contentVisible" class="content">
@@ -12,17 +12,17 @@
     </button>
   </div>
   <div class="heading">
-    <h1>{{ chapter.title }}</h1>
+    <h1>{{ chapter.Title }}</h1>
     <p>
       <i>{{
-        chapter.pages.length > 0
-          ? "Page " + (currentPage + 1) + "/" + chapter.pages.length
-          : "No pages"
+        chapter.Pages.length > 0
+          ? "Page " + (currentPage + 1) + "/" + chapter.Pages.length
+          : "No Pages"
       }}</i>
     </p>
   </div>
   <app-page
-    *ngFor="let p of chapter.pages; let i = index"
+    *ngFor="let p of chapter.Pages; let i = index"
     [page]="p"
     [show]="i == currentPage"
     [showhint]="hintVisible"
@@ -30,11 +30,17 @@
   ></app-page>
   <app-page-nav-bar
     [showPrevButton]="currentPage != 0"
-    [showNextButton]="currentPage != chapter.pages.length - 1"
+    [showNextButton]="currentPage != chapter.Pages.length - 1"
     [showResultButton]="
-      chapter.pages[currentPage].result != '' && !resultVisible
+      (chapter.Pages.length > 0
+        ? chapter.Pages[currentPage].Result != ''
+        : false) && !resultVisible
     "
-    [showhintButton]="chapter.pages[currentPage].hint != '' && !hintVisible"
+    [showhintButton]="
+      (chapter.Pages.length > 0
+        ? chapter.Pages[currentPage].Hint != ''
+        : false) && !hintVisible
+    "
     (showNextEmitter)="showNextPage()"
     (showPrevEmitter)="showPrevPage()"
     (showhintEmitter)="showhint()"

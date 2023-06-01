@@ -1,4 +1,4 @@
-import { Component, Host, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
 import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
@@ -69,7 +69,7 @@ export class SettingsComponent {
           AppComponent.darkModeEnabled
         )
         .subscribe((data: any) => {
-          console.log(data);
+          console.log('set color schema');
         });
     }
   }

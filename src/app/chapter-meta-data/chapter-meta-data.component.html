@@ -1,10 +1,10 @@
 <div class="container">
-  <p *ngIf="chapter.config.isPrivate"><i>Private</i></p>
-  <p>{{ "Title: " + chapter.title }}</p>
-  <p>{{ "Author: " + chapter.config.author }}</p>
-  <p>{{ "Language: " + chapter.config.language }}</p>
-  <p>{{ "Pages: " + chapter.pages.length }}</p>
-  <p *ngIf="chapter.config.description != ''">
-    {{ "Description: " + chapter.config.description }}
+  <p *ngIf="chapter.IsPrivate"><i>Private</i></p>
+  <p>{{ "Title: " + chapter.Title }}</p>
+  <p>{{ "Author: " + chapter.Author }}</p>
+  <p>{{ "Language: " + chapter.Language }}</p>
+  <p>{{ "Pages: " + chapter.Pages.length }}</p>
+  <p *ngIf="chapter.Description != ''">
+    {{ "Description: " + chapter.Description }}
   </p>
 </div>

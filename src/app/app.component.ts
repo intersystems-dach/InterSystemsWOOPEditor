@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Chapter, Config } from 'src/utils/classes';
+import { Chapter, VerifyCache } from 'src/utils/classes';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from './services/api.service';
-import { IrisinterfaceService } from './services/irisinterface.service';
 
 @Component({
   selector: 'app-root',
@@ -14,30 +13,53 @@ export class AppComponent {
 
   public static darkModeEnabled = false;
 
-  public static chapters: Chapter[] = [];
+  /* public static chapters: Chapter[] = [];
   public static allChapters: Chapter[] = [];
   private static apiService: ApiService;
   private static initDone = false;
-  private static errorChapter = new Chapter(
-    'Error 404',
-    [],
-    new Config('', '', '', '', false)
-  );
+
+  private static errorChapter = new Chapter('Error 404', '', []);
+
   static currentChapter: Chapter = AppComponent.errorChapter;
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     AppComponent.apiService = apiService;
-  }
+  } */
 
   ngOnInit() {
     AppComponent.lightMode();
   }
 
-  static async init() {
+  /* static async init() {
     if (AppComponent.initDone) return;
     AppComponent.allChapters = await this.apiService
       .getAllChapters()
       .toPromise();
+    for (let chapter of AppComponent.allChapters) {
+      if (chapter.Password === undefined) {
+        chapter.Password = '';
+      }
+      if (chapter.Language === undefined) {
+        chapter.Language = '';
+      }
+      if (chapter.Author === undefined) {
+        chapter.Author = '';
+      }
+      if (chapter.IsPrivate === undefined) {
+        chapter.IsPrivate = false;
+      }
+      if (chapter.Description === undefined) {
+        chapter.Description = '';
+      }
+      if (chapter.Pages === undefined) {
+        chapter.Pages = [];
+      }
+
+      //chapter.setUndefinedValues();
+      if (chapter.Password === '') {
+        VerifyCache.verifyChapter(chapter.Title);
+      }
+    }
     AppComponent.chapters = AppComponent.allChapters;
     AppComponent.initDone = true;
   }
@@ -49,17 +71,17 @@ export class AppComponent {
     chapterName = chapterName.toLowerCase();
     for (let chapter of AppComponent.chapters) {
       if (replaceWhitespaces) {
-        if (chapter.title.replace(/\s/g, '-').toLowerCase() == chapterName) {
+        if (chapter.Title.replace(/\s/g, '-').toLowerCase() == chapterName) {
           return chapter;
         }
       } else {
-        if (chapter.title.toLowerCase() == chapterName) {
+        if (chapter.Title.toLowerCase() == chapterName) {
           return chapter;
         }
       }
     }
     return AppComponent.errorChapter;
-  }
+  } */
 
   static darkMode() {
     document.documentElement.setAttribute('data-theme', 'dark');

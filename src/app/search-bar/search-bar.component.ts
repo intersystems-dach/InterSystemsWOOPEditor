@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
+import { ChaptermanagerService } from '../services/chaptermanager.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,9 +12,11 @@ export class SearchBarComponent {
   searchValue: string = '';
   noMatches: boolean = false;
 
+  constructor(private chapterManager: ChaptermanagerService) {}
+
   onSearchChange(): void {
     if (this.searchValue == '') {
-      AppComponent.chapters = AppComponent.allChapters;
+      this.chapterManager.chapters = this.chapterManager.allChapters;
       this.noMatches = false;
       return;
     }
@@ -32,32 +35,32 @@ export class SearchBarComponent {
     let words = lowerSearchValue.split(' ');
     let filteredChapters: Chapter[] = [];
     for (let word of words) {
-      for (let chapter of AppComponent.allChapters) {
-        if (chapter.config.isPrivate) {
+      for (let chapter of this.chapterManager.allChapters) {
+        if (chapter.IsPrivate) {
           if (UserManger.userLevel == 0) {
             continue;
           }
           if (
             UserManger.userLevel == 1 &&
-            chapter.config.author != UserManger.userName
+            chapter.Author != UserManger.userName
           ) {
             continue;
           }
         }
         if (
           (!filteredChapters.includes(chapter) &&
-            (chapter.title.toLowerCase().includes(word) ||
-              chapter.config.description.toLowerCase().includes(word) ||
-              chapter.config.language.toLowerCase().includes(word) ||
-              chapter.config.author.toLowerCase().includes(word))) ||
-          ('private'.includes(word) && chapter.config.isPrivate)
+            (chapter.Title.toLowerCase().includes(word) ||
+              chapter.Description.toLowerCase().includes(word) ||
+              chapter.Language.toLowerCase().includes(word) ||
+              chapter.Author.toLowerCase().includes(word))) ||
+          ('private'.includes(word) && chapter.IsPrivate)
         ) {
           filteredChapters.push(chapter);
         }
       }
     }
     this.noMatches = filteredChapters.length == 0;
-    AppComponent.chapters = filteredChapters;
+    this.chapterManager.chapters = filteredChapters;
   }
   @HostListener('document:keydown.control.alt.c', ['$event'])
   clear(): void {

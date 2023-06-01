@@ -5,9 +5,9 @@ import {
   Output,
   HostListener,
 } from '@angular/core';
-import { Chapter, Config, UserManger } from 'src/utils/classes';
+import { Chapter, UserManger } from 'src/utils/classes';
 import { ApiService } from '../services/api.service';
-import { AppComponent } from '../app.component';
+import { ChaptermanagerService } from '../services/chaptermanager.service';
 
 @Component({
   selector: 'app-chapter-new',
@@ -26,7 +26,10 @@ export class ChapterNewComponent {
   wrongText: string = '';
   @Output() closeEmitter = new EventEmitter<boolean>();
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private chapterManger: ChaptermanagerService
+  ) {}
 
   async submit() {
     if (this.name === '') {
@@ -37,34 +40,38 @@ export class ChapterNewComponent {
     if (this.updateChapter === undefined) {
       let newChapter = new Chapter(
         this.name,
+        UserManger.userName,
         [],
-        new Config(
-          this.password,
-          this.language,
-          UserManger.userName,
-          this.description,
-          this.isPrivate
-        )
+        this.password,
+        this.language,
+        this.description,
+        this.isPrivate
       );
-      this.apiService.addNewChapter(newChapter).subscribe((data) => {
-        if (data.ok) {
-          this.closeEmitter.emit();
-          this.name = '';
-          this.language = 'english';
-          this.password = '';
-          this.description = '';
-          this.isPrivate = false;
-          AppComponent.chapters.push(newChapter);
-        } else {
+      this.apiService.addNewChapter(newChapter).subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.closeEmitter.emit();
+            this.name = '';
+            this.language = 'english';
+            this.password = '';
+            this.description = '';
+            this.isPrivate = false;
+            this.chapterManger.chapters.push(newChapter);
+          } else {
+            this.isWrong = true;
+            this.wrongText = 'error';
+          }
+        },
+        error: (err: any) => {
           this.isWrong = true;
-          this.wrongText = data.message;
-        }
+          this.wrongText = err.message;
+        },
       });
     } else {
-      this.updateChapter.config.password = this.password;
-      this.updateChapter.config.language = this.language;
-      this.updateChapter.config.description = this.description;
-      this.updateChapter.config.isPrivate = this.isPrivate;
+      this.updateChapter.Password = this.password;
+      this.updateChapter.Language = this.language;
+      this.updateChapter.Description = this.description;
+      this.updateChapter.IsPrivate = this.isPrivate;
       this.apiService.updateChapter(this.updateChapter).subscribe((data) => {
         if (data.ok) {
           this.closeEmitter.emit();

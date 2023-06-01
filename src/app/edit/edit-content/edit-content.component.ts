@@ -29,12 +29,10 @@ export class EditContentComponent {
 
   onFocus() {
     this.focus = true;
-    console.log('focus in');
   }
 
   onFocusOut() {
     this.focus = false;
-    console.log('focus out');
   }
 
   selectionchange(event: any) {
@@ -149,16 +147,16 @@ export class EditContentComponent {
   }
 
   getData() {
-    if (this.type === 'content') this.data = this.page.content;
-    if (this.type === 'hint') this.data = this.page.hint;
-    if (this.type === 'result') this.data = this.page.result;
+    if (this.type === 'content') this.data = this.page.Content;
+    if (this.type === 'hint') this.data = this.page.Hint;
+    if (this.type === 'result') this.data = this.page.Result;
   }
 
   setData() {
     //this.autoComplete();
-    if (this.type === 'content') this.page.content = this.data;
-    if (this.type === 'hint') this.page.hint = this.data;
-    if (this.type === 'result') this.page.result = this.data;
+    if (this.type === 'content') this.page.Content = this.data;
+    if (this.type === 'hint') this.page.Hint = this.data;
+    if (this.type === 'result') this.page.Result = this.data;
     this.changeEmitter.emit();
   }
 

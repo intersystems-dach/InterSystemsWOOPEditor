@@ -23,15 +23,15 @@ export class ApiService {
   }
 
   getAllChapters(): Observable<any> {
-    return this.service.getAllChapters();
+    return this.service2.getAllChapters();
   }
 
   verifyChapter(chapterName: string, password: string): Observable<any> {
-    return this.service.verifyChapter(chapterName, password);
+    return this.service2.verifyChapter(chapterName, password);
   }
 
-  addNewChapter(chapter: Chapter): Observable<Status> {
-    return this.service.addNewChapter(chapter);
+  addNewChapter(chapter: Chapter): Observable<any> {
+    return this.service2.addNewChapter(chapter);
   }
 
   setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {

@@ -14,6 +14,7 @@ export class LogInComponent {
   entereduserName: string = '';
 
   isWrong: boolean = false;
+  wrongMessage: string = '';
   type: string = 'password';
 
   constructor(private apiService: ApiService, private location: Location) {}
@@ -21,21 +22,26 @@ export class LogInComponent {
   submit() {
     this.apiService
       .checkUser(this.entereduserName, this.enteredPassword)
-      .subscribe((data: any) => {
-        if (data.level > 0) {
-          UserManger.userLevel = data.level;
-          UserManger.userName = data.username;
-          if (data.darkmode) {
-            AppComponent.darkMode();
-          } else {
-            AppComponent.lightMode();
+      .subscribe({
+        next: (data: any) => {
+          if (data.level > 0) {
+            UserManger.userLevel = data.level;
+            UserManger.userName = data.username;
+            if (data.darkmode) {
+              AppComponent.darkMode();
+            } else {
+              AppComponent.lightMode();
+            }
+            this.close();
+            return;
           }
-          this.close();
-          return;
-        }
-        this.isWrong = true;
-        this.enteredPassword = '';
-        this.entereduserName = '';
+        },
+        error: (err: Error) => {
+          this.wrongMessage = err.message;
+          this.isWrong = true;
+          this.enteredPassword = '';
+          this.entereduserName = '';
+        },
       });
   }
   viewPassword() {

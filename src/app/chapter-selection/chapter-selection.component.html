@@ -5,21 +5,21 @@
         [class]="
           'row' +
           (getuserLevel() == 2 ||
-          (getuserLevel() == 1 && getuserName() == chapter.config.author)
+          (getuserLevel() == 1 && getuserName() == chapter.Author)
             ? ' edit'
             : '')
         "
         *ngIf="
-          !chapter.config.isPrivate ||
+          !chapter.IsPrivate ||
           getuserLevel() == 2 ||
-          (getuserLevel() == 1 && getuserName() == chapter.config.author)
+          (getuserLevel() == 1 && getuserName() == chapter.Author)
         "
       >
         <div
           class="editButton"
           *ngIf="
             getuserLevel() == 2 ||
-            (getuserLevel() == 1 && getuserName() == chapter.config.author)
+            (getuserLevel() == 1 && getuserName() == chapter.Author)
           "
         >
           <button (click)="setChapterToDelete(chapter)">
@@ -32,7 +32,7 @@
               alt="Delete"
             />
           </button>
-          <button (click)="onChapterEditSelected(chapter.title)">
+          <button (click)="onChapterEditSelected(chapter.Title)">
             <img
               [src]="
                 '../../assets/imgs/' +
@@ -45,10 +45,10 @@
         </div>
         <button
           class="chapterButton"
-          (click)="onChapterSelected(chapter.title)"
+          (click)="onChapterSelected(chapter.Title)"
         >
-          <i *ngIf="chapter.config.isPrivate">{{ chapter.title }}</i>
-          <div *ngIf="!chapter.config.isPrivate">{{ chapter.title }}</div>
+          <i *ngIf="chapter.IsPrivate">{{ chapter.Title }}</i>
+          <div *ngIf="!chapter.IsPrivate">{{ chapter.Title }}</div>
         </button>
         <app-chapter-meta-data
           [chapter]="chapter"

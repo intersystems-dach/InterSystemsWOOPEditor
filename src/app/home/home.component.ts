@@ -3,6 +3,7 @@ import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { ApiService } from '../services/api.service';
+import { ChaptermanagerService } from '../services/chaptermanager.service';
 
 @Component({
   selector: 'app-home',
@@ -14,10 +15,14 @@ export class HomeComponent {
 
   isServerOnline = false;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private apiService: ApiService,
+    private chapterManager: ChaptermanagerService
+  ) {}
 
   ngOnInit(): void {
-    AppComponent.init();
+    this.chapterManager.init();
     this.checkIfServerOnline();
     setInterval(() => {
       this.checkIfServerOnline();
@@ -44,7 +49,7 @@ export class HomeComponent {
   }
 
   getChapters() {
-    return AppComponent.chapters;
+    return this.chapterManager.chapters;
   }
 
   getuserLevel() {
