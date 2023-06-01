@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Chapter } from 'src/utils/classes';
 import { Status, User } from 'src/utils/interfaces';
-import { Observable } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +14,20 @@ export class IrisinterfaceService {
   constructor(private http: HttpClient) {}
 
   isServerOnline() {
-    return this.http.get<string>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/woop/ping'
-    );
+    return this.http
+      .get<string>(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/ping'
+      )
+      .pipe(
+        catchError((err) => {
+          console.error('error while pinging server');
+          throw new Error('error'); //Rethrow it back to component
+        })
+      );
   }
 
   /**
@@ -30,16 +37,23 @@ export class IrisinterfaceService {
    * @returns A User object
    */
   checkUser(userName: string, password: string): Observable<User> {
-    return this.http.get<any>(
+    // make request and handle 404 status
+    return this.http.get<User>(
       'http://' +
         IrisinterfaceService.host +
         ':' +
         IrisinterfaceService.port +
-        '/woop/user/check?username=' +
+        '/api/woop/user/check?username=' +
         userName +
         '&password=' +
         password
     );
+    /* .pipe(
+        catchError((err) => {
+          console.log(err);
+          throw new Error('error');
+        })
+      ); */
   }
 
   getAllChapters(): Observable<any> {
@@ -86,7 +100,7 @@ export class IrisinterfaceService {
         IrisinterfaceService.host +
         ':' +
         IrisinterfaceService.port +
-        '/woop/user/setdarkmode?username=' +
+        '/woop/user/set/darkmode?username=' +
         userName +
         '&darkmode=' +
         (darkMode ? 1 : 0),

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,27 @@ import { AppComponent } from '../app.component';
 export class HomeComponent {
   title = 'InterSystemsWOOP';
 
-  constructor(private router: Router) {}
+  isServerOnline = false;
+
+  constructor(private router: Router, private apiService: ApiService) {}
 
   ngOnInit(): void {
     AppComponent.init();
-    console.log(AppComponent.chapters.length);
+    this.checkIfServerOnline();
+    setInterval(() => {
+      this.checkIfServerOnline();
+    }, 5000);
+  }
+
+  checkIfServerOnline() {
+    this.apiService.isServerOnline().subscribe({
+      next: (data: any) => {
+        this.isServerOnline = true;
+      },
+      error: (err) => {
+        this.isServerOnline = false;
+      },
+    });
   }
 
   selectChapter(chapterName: string) {

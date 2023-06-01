@@ -27,9 +27,6 @@ export class AppComponent {
 
   constructor(private http: HttpClient, private apiService: ApiService) {
     AppComponent.apiService = apiService;
-    AppComponent.apiService.isServerOnline().subscribe((data: any) => {
-      console.log(data);
-    });
   }
 
   ngOnInit() {
