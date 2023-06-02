@@ -30,6 +30,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CodeWindowComponent } from './code-window/code-window.component';
 import { SharedModule } from './shared/shared.module';
+import { MarkdownDirective } from './markdown-content/markdown.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { SharedModule } from './shared/shared.module';
     ExportOptionsComponent,
     HomeComponent,
     CodeWindowComponent,
+    MarkdownDirective,
   ],
   imports: [
     BrowserModule,

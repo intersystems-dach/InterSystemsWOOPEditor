@@ -5,5 +5,18 @@
     [style.font-size]="getFontSize() + 'px'"
     lineHighlight
   ></markdown> -->
-  <div [innerHTML]="markdown" [style.font-size]="getFontSize() + 'px'"></div>
+  <!-- <ng-template
+    appMarkdown
+    [style.font-size]="getFontSize() + 'px'"
+  ></ng-template> -->
+  <div *ngFor="let block of blocks" [style.font-size]="getFontSize() + 'px'">
+    <!-- <div *ngIf="block.type == 'textblock'" [innerHTML]="block.code"></div> -->
+    <markdown *ngIf="block.type == 'textblock'" [data]="block.code"></markdown>
+    <app-code-window
+      *ngIf="block.type == 'codeblock'"
+      [code]="block.code"
+      [language]="block.language"
+      [title]="block.title"
+    ></app-code-window>
+  </div>
 </div>

@@ -41,6 +41,18 @@ export class ChaptermanagerService {
         chapter.Pages = [];
       }
 
+      for (let page of chapter.Pages) {
+        if (page.Content === undefined) {
+          page.Content = '';
+        }
+        if (page.Hint === undefined) {
+          page.Hint = '';
+        }
+        if (page.Result === undefined) {
+          page.Result = '';
+        }
+      }
+
       if (chapter.Password === '') {
         VerifyCache.verifyChapter(chapter.Title);
       }
