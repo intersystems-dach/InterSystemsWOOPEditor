@@ -1,0 +1,19 @@
+<div id="window">
+  <div id="navbar">
+    <div id="window-controls">
+      <div class="red dot"></div>
+      <div class="yellow dot"></div>
+      <div class="green dot"></div>
+    </div>
+    <div id="window-title">{{ title }}</div>
+    <div>
+      <div class="code">
+        <pre *ngIf="language" class="language-{{ language }}">
+          <code #codeEle class="language-{{ language }}">
+            {{code}}
+          </code>
+        </pre>
+      </div>
+    </div>
+  </div>
+</div>

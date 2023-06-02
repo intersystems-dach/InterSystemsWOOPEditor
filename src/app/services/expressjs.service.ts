@@ -14,14 +14,9 @@ export class ExpressjsService {
   constructor(private http: HttpClient) {}
 
   isServerOnline() {
-    return this.http
-      .get<string>(
-        'http://' + ExpressjsService.host + ':' + ExpressjsService.port + '/'
-      )
-      .subscribe((res) => {
-        console.log(res);
-        return true;
-      });
+    return new Observable<any>((obs) => {
+      obs.next({ status: true });
+    });
   }
 
   /**

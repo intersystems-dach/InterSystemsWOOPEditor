@@ -1,8 +1,9 @@
 <div class="contentBox">
-  <markdown
+  <!-- <markdown
     [data]="data"
     [line]="line"
     [style.font-size]="getFontSize() + 'px'"
     lineHighlight
-  ></markdown>
+  ></markdown> -->
+  <div [innerHTML]="markdown" [style.font-size]="getFontSize() + 'px'"></div>
 </div>

@@ -1,8 +1,4 @@
 import { Component } from '@angular/core';
-import { Chapter, VerifyCache } from 'src/utils/classes';
-import { HttpClient } from '@angular/common/http';
-import { ApiService } from './services/api.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -82,6 +78,10 @@ export class AppComponent {
     }
     return AppComponent.errorChapter;
   } */
+
+  isDarkModeEnabled() {
+    return AppComponent.darkModeEnabled;
+  }
 
   static darkMode() {
     document.documentElement.setAttribute('data-theme', 'dark');

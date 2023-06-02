@@ -18,23 +18,46 @@ export class MarkdownContentComponent {
   public static fontSize = 16;
 
   async ngOnInit() {
-    this.markdown = this.mdService.parse(this.data);
-    /* let markDownLines = markdownRaw.split('\n');
-    let opened = false;
-    let openedIndex = 0;
-    for (let i = 0; i < markDownLines.length; i++) {
-      console.log(markDownLines[i]);
-      if (markDownLines[i].includes('```') && !opened) {
-        opened = true;
-        openedIndex = i;
-      } else if (markDownLines[i].includes('```') && opened) {
-        opened = false;
-        this.line += openedIndex + 2 + '-' + i + ', ';
+    let lines = this.data.split('\n');
+    let codeblocks = [];
+    let x = '';
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].startsWith('```')) {
+        let language = lines[i].replace('```', '');
+        let code = '';
+        i++;
+        while (!lines[i].startsWith('```')) {
+          code += lines[i] + '\\n';
+          i++;
+        }
+        let codeblock =
+          '<app-code-window [code]="\'\\n' +
+          code +
+          '\'" language="' +
+          language +
+          '" title="' +
+          language +
+          '"></app-code-window>';
+        codeblocks.push(codeblock);
+      } else {
+        x += lines[i] + '\n';
       }
     }
-    if (this.line.length > 0)
-      this.line = this.line.substring(0, this.line.length - 2);
-    console.log(this.line); */
+
+    /*
+```javascript
+let i = 0
+i++
+let z = 3
+z++
+```
+*/
+
+    this.markdown = this.mdService.parse(x);
+    for (let codeblock of codeblocks) {
+      this.markdown += codeblock;
+    }
+    console.log(this.markdown);
   }
 
   getFontSize() {

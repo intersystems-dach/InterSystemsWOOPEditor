@@ -28,6 +28,8 @@ import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-che
 import { ExportOptionsComponent } from './user-input/export-options/export-options.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
+import { CodeWindowComponent } from './code-window/code-window.component';
+import { SharedModule } from './shared/shared.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,6 +54,7 @@ import { HomeComponent } from './home/home.component';
     MarkdownCheatSheetComponent,
     ExportOptionsComponent,
     HomeComponent,
+    CodeWindowComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { HomeComponent } from './home/home.component';
     MarkdownModule.forRoot(),
     FormsModule,
     AppRoutingModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
