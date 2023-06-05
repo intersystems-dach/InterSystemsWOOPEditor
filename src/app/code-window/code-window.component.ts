@@ -7,14 +7,7 @@ import * as Prism from 'prismjs';
   styleUrls: ['./code-window.component.sass'],
 })
 export class CodeWindowComponent {
-  @Input() code: string = `
-  // test
-  ClassMethod ping() As %Stream.Object
-  {
-    Do ..%SetStatusCode(200)
-    Quit {"status": true}.%ToJSON()
-  }
-  `;
+  @Input() code: string = '';
 
   @Input() language: string = 'javascript';
   @Input() title: string = 'mycode';

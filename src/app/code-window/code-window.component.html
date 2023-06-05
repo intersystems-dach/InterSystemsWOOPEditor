@@ -8,7 +8,7 @@
     <div id="window-title">{{ title }}</div>
     <div>
       <div class="code">
-        <pre *ngIf="language">
+        <pre prism *ngIf="language" class="twighlight">
           <code #codeEle class="language-{{ language }}">
             {{code}}
           </code>

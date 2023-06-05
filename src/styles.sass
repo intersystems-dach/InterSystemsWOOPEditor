@@ -1,11 +1,9 @@
-/* You can add global styles to this file, and also import other style files */
-//@import "./myPrism.css"
 @import "prismjs/themes/prism.css"
 //@import "prismjs/themes/prism-coy.css"
 //@import "prismjs/themes/prism-dark.css"
 //@import "prismjs/themes/prism-funky.css"
 //@import "prismjs/themes/prism-okaidia.css"
-// @import "prismjs/themes/prism-solarizedlight.css"
+//@import "prismjs/themes/prism-solarizedlight.css"
 //@import "prismjs/themes/prism-tomorrow.css"
 //@import "prismjs/themes/prism-twilight.css"
 
@@ -15,6 +13,7 @@ body
     font-family: verdana, sans-serif
 
 [data-theme="light"]
+    --prismTheme: "prismjs/themes/prism.css"
     --text-color: black
     --inverted-text-color: white
     --bg-color: #ffffff
@@ -23,6 +22,7 @@ body
     --secondary-color: #00b6b0
 
 [data-theme="dark"]
+    --prismTheme: "prismjs/themes/prism-dark.css"
     --text-color: white
     --inverted-text-color: black
     --bg-color: #1a1a2b

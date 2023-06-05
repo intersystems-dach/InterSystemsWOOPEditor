@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chapter } from 'src/utils/classes';
-import { Status, User } from 'src/utils/interfaces';
+import { User } from 'src/utils/interfaces';
 import { Observable } from 'rxjs';
 import { ExpressjsService } from './expressjs.service';
 import { IrisinterfaceService } from './irisinterface.service';
