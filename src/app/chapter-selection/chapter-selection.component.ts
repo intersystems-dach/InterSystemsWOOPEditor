@@ -45,13 +45,18 @@ export class ChapterSelectionComponent {
   }
 
   deleteChapter(chapter: Chapter) {
-    this.apiService.deleteChapter(chapter).subscribe((status) => {
-      if (status.ok) {
-        this.chapters.splice(this.chapters.indexOf(chapter), 1);
-        alert('Chapter deleted');
-      } else {
-        alert('Chapter not deleted: ' + status.message);
-      }
+    this.apiService.deleteChapter(chapter).subscribe({
+      next: (data) => {
+        if (data.status) {
+          this.chapters.splice(this.chapters.indexOf(chapter), 1);
+          alert('Chapter deleted');
+        } else {
+          alert('Chapter could not be deleted!');
+        }
+      },
+      error: (error) => {
+        alert('Chapter could not be deleted: ' + error.message + '!');
+      },
     });
   }
 

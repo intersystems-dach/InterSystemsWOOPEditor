@@ -29,8 +29,10 @@
     [showResult]="resultVisible"
   ></app-page>
   <app-page-nav-bar
-    [showPrevButton]="currentPage != 0"
-    [showNextButton]="currentPage != chapter.Pages.length - 1"
+    [showPrevButton]="currentPage != 0 && chapter.Pages.length > 0"
+    [showNextButton]="
+      currentPage != chapter.Pages.length - 1 && chapter.Pages.length > 0
+    "
     [showResultButton]="
       (chapter.Pages.length > 0
         ? chapter.Pages[currentPage].Result != ''

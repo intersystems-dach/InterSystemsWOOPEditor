@@ -8,6 +8,7 @@ import {
 import { Chapter, UserManger } from 'src/utils/classes';
 import { ApiService } from '../services/api.service';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
+import { Status } from '../../utils/interfaces';
 
 @Component({
   selector: 'app-chapter-new',
@@ -72,19 +73,25 @@ export class ChapterNewComponent {
       this.updateChapter.Language = this.language;
       this.updateChapter.Description = this.description;
       this.updateChapter.IsPrivate = this.isPrivate;
-      this.apiService.updateChapter(this.updateChapter).subscribe((data) => {
-        if (data.ok) {
-          this.closeEmitter.emit();
-          this.name = '';
-          this.language = 'english';
-          this.password = '';
-          this.description = '';
-          this.updateChapter = undefined;
-          this.isPrivate = false;
-        } else {
+      this.apiService.updateChapter(this.updateChapter).subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.closeEmitter.emit();
+            this.name = '';
+            this.language = 'english';
+            this.password = '';
+            this.description = '';
+            this.updateChapter = undefined;
+            this.isPrivate = false;
+          } else {
+            this.isWrong = true;
+            this.wrongText = 'error';
+          }
+        },
+        error: (err: any) => {
           this.isWrong = true;
-          this.wrongText = data.message;
-        }
+          this.wrongText = err.message;
+        },
       });
     }
   }

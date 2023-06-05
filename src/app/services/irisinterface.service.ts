@@ -91,6 +91,7 @@ export class IrisinterfaceService {
         })
       );
   }
+
   /**
    * Adds a new chapter to the database
    * @param chapter The chapter to add
@@ -132,24 +133,50 @@ export class IrisinterfaceService {
       {}
     );
   }
-  updateChapter(chapter: Chapter): Observable<Status> {
-    return this.http.post<Status>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/api/woop/chapter/update',
-      chapter
-    );
+
+  updateChapter(chapter: Chapter): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/update',
+        chapter
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Chapter not found');
+          } else if (err.status === 500) {
+            throw new Error('Chapter could not be updated');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
+        })
+      );
   }
-  deleteChapter(chapter: Chapter): Observable<Status> {
-    return this.http.post<Status>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/api/woop/chapter/delete',
-      chapter
-    );
+
+  deleteChapter(chapter: Chapter): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/delete',
+        chapter
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Chapter not found');
+          } else if (err.status === 500) {
+            throw new Error('Chapter could not be deleted');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
+        })
+      );
   }
 }

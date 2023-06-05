@@ -95,15 +95,20 @@ export class EditChapterComponent {
 
   @HostListener('document:keydown.control.alt.s', ['$event'])
   save(alertSaved: boolean = true) {
-    this.apiService.updateChapter(this.chapter).subscribe((status) => {
-      if (status.ok) {
-        if (alertSaved) {
-          alert('Chapter saved!');
+    this.apiService.updateChapter(this.chapter).subscribe({
+      next: (data) => {
+        if (data.status) {
+          if (alertSaved) {
+            alert('Chapter saved!');
+          }
+          this.changes = false;
+        } else {
+          alert('Error saving chapter!');
         }
-        this.changes = false;
-      } else {
-        alert('Error saving chapter: ' + status.message);
-      }
+      },
+      error: (err: any) => {
+        alert('Error saving chapter: ' + err.message);
+      },
     });
   }
 
