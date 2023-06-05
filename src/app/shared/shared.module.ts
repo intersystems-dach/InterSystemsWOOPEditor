@@ -7,6 +7,7 @@ import 'prismjs/components/prism-json';
 import 'prismjs/components/prism-scss';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-sql';
+import 'prismjs/components/prism-bash';
 
 @NgModule({
   declarations: [],

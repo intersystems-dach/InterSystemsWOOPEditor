@@ -22,7 +22,6 @@
 
 #navbar
     overflow: hidden
-    margin-bottom: 15px
     text-align: center
 
 #window-controls
@@ -48,5 +47,20 @@
 .green
     background-color: #2aca44
 
-.code
-    background: none
+.test
+    background: var(--header-color)
+    text-shadow: none !important
+
+code[class*="language-"],pre[class*="language-"]
+    text-shadow: none
+    color: var(--text-color)
+
+pre[class*="language-"] 
+    padding: 0
+    margin: 0 0
+    overflow: auto
+
+@media screen and (max-width: 800px)
+    #window
+        margin-left: 0px
+        max-width: 90%
