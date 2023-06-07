@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Chapter } from 'src/utils/classes';
-import { Status, User } from 'src/utils/interfaces';
+import { User } from 'src/utils/interfaces';
 import { Observable, catchError } from 'rxjs';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IrisinterfaceService {
-  private static host: string = 'localhost';
-  private static port: number = 52773;
+  public static host: string = 'localhost';
+  public static port: number = 52773;
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {
+    IrisinterfaceService.host = localStorageService.getServerHost();
+    IrisinterfaceService.port = localStorageService.getServerPort();
+  }
 
   isServerOnline() {
     return this.http

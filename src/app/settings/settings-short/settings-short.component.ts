@@ -1,17 +1,15 @@
 import { Component, HostListener } from '@angular/core';
-import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
-import { ApiService } from '../services/api.service';
-import { ColorSchemeService } from '../services/color-scheme.service';
-import { LocalStorageService } from '../services/local-storage.service';
+import { ColorSchemeService } from '../../services/color-scheme.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.sass'],
+  selector: 'app-settings-short',
+  templateUrl: './settings-short.component.html',
+  styleUrls: ['./settings-short.component.sass'],
 })
-export class SettingsComponent {
+export class SettingsShortComponent {
   logIn: boolean = false;
 
   constructor(
@@ -60,6 +58,10 @@ export class SettingsComponent {
 
   getDarkModeEnabled() {
     return this.colorSchemeService.darkModeEnabled;
+  }
+
+  goToAdvancedSettings() {
+    this.router.navigate(['/settings']);
   }
 
   toggleDarkMode() {

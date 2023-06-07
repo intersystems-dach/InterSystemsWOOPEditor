@@ -1,0 +1,20 @@
+<div class="header">
+  <button
+    [class]="selected == 'Storage' ? 'selected' : ''"
+    (click)="setSelected('Storage')"
+  >
+    Storage
+  </button>
+  <button
+    [class]="selected == 'Server' ? 'selected' : ''"
+    (click)="setSelected('Server')"
+  >
+    Server
+  </button>
+  <button
+    [class]="selected == 'Contact' ? 'selected' : ''"
+    (click)="setSelected('Contact')"
+  >
+    Contact
+  </button>
+</div>

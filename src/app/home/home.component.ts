@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { ApiService } from '../services/api.service';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 
@@ -26,6 +25,9 @@ export class HomeComponent {
     this.checkIfServerOnline();
     setInterval(() => {
       this.checkIfServerOnline();
+      if (!this.isServerOnline && this.router.url == '/') {
+        this.router.navigate(['/error']);
+      }
     }, 5000);
   }
 

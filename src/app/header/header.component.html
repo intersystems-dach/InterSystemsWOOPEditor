@@ -19,14 +19,13 @@
     (click)="toggleSettings()"
     alt="Settings"
   />
-  <!-- <div class="burgerMenu" (click)="toggleSettings()">
-    <div class="burgerBar"></div>
-    <div class="burgerBar"></div>
-    <div class="burgerBar"></div>
-  </div> -->
-  <p class="userLabel" *ngIf="getUserLevel() > 0">
-    {{ getUserLevel() == 1 ? "User " : "Admin " }}
+  <p class="userLabel" *ngIf="getUserLevel() > 0" (click)="logOut()">
+    <i class="userLabelExtended">Log out </i>
     <i>{{ getUserName() }}</i>
+    {{ getUserLevel() == 1 ? "User " : "Admin " }}
+  </p>
+  <p class="userLabel" *ngIf="getUserLevel() == 0" (click)="logIn()">
+    <i>Log in</i>
   </p>
 </header>
-<app-settings *ngIf="showSettings"></app-settings>
+<app-settings-short *ngIf="showSettings"></app-settings-short>

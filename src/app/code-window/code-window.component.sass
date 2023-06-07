@@ -51,14 +51,19 @@
     background: var(--header-color)
     text-shadow: none !important
 
+.code
+    .token
+        color: red !important
+        background: red !important
+
 code[class*="language-"],pre[class*="language-"]
-    text-shadow: none
-    color: var(--text-color)
+        text-shadow: none
+        color: var(--text-color)
 
 pre[class*="language-"] 
-    padding: 0
-    margin: 0 0
-    overflow: auto
+        padding: 0
+        margin: 0 0
+        overflow: auto
 
 @media screen and (max-width: 800px)
     #window

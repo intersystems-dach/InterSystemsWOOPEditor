@@ -1,0 +1,19 @@
+<app-header class="sticky"></app-header>
+
+<div class="settingsHeader">
+  <app-settings-header
+    [selected]="selected"
+    (selectedChange)="setSelected($event)"
+  ></app-settings-header>
+</div>
+<div class="settings" *ngIf="selected != ''">
+  <app-storage-settings
+    *ngIf="selected.toLowerCase() == 'storage'"
+  ></app-storage-settings>
+  <app-server-settings
+    *ngIf="selected.toLowerCase() == 'server'"
+  ></app-server-settings>
+  <app-contact-settings
+    *ngIf="selected.toLowerCase() == 'contact'"
+  ></app-contact-settings>
+</div>

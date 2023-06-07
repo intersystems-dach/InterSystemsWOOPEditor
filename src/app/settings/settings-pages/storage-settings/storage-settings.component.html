@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <p class="label">
+      {{ "Remember Page: " + (getRememberPage() ? "ON" : "OFF") }}
+    </p>
+    <button class="action" (click)="toggleRememberPage()">
+      {{ getRememberPage() ? "Turn OFF" : "Turn ON" }}
+    </button>
+  </div>
+  <div class="row">
+    <p class="label">Clear Local Storage</p>
+    <button class="red action" (click)="clearStorage()">Clear</button>
+  </div>
+</div>

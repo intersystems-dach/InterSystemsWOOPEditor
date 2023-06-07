@@ -23,7 +23,9 @@ export class EditContentComponent {
   private selectionStart: number = -1;
   private selectionEnd: number = -1;
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService) {
+    this.getData();
+  }
 
   ngOnInit() {
     this.getData();

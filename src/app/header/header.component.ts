@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
-import { AppComponent } from '../app.component';
 import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
@@ -16,6 +15,15 @@ export class HeaderComponent {
     private router: Router,
     private colorSchemeService: ColorSchemeService
   ) {}
+
+  logIn() {
+    this.router.navigate(['/login']);
+  }
+
+  logOut() {
+    UserManger.userLevel = 0;
+    UserManger.userName = '';
+  }
 
   goBack() {
     this.router.navigate(['/']);
