@@ -27,4 +27,16 @@ export class LocalStorageService {
     }
     return parseInt(fontSize);
   }
+
+  setPageForChapter(chapterTitle: string, page: number) {
+    localStorage.setItem(chapterTitle, page.toString());
+  }
+
+  getPageForChapter(chapterTitle: string): number {
+    let page = localStorage.getItem(chapterTitle);
+    if (page == null) {
+      return 0;
+    }
+    return parseInt(page);
+  }
 }

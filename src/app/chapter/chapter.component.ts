@@ -12,6 +12,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import htmlToPdfmake from 'html-to-pdfmake';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
+import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -32,7 +33,8 @@ export class ChapterComponent {
     private mdService: MarkdownService,
     private router: Router,
     private route: ActivatedRoute,
-    private chapterManger: ChaptermanagerService
+    private chapterManger: ChaptermanagerService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -69,6 +71,12 @@ export class ChapterComponent {
         }
       }
     });
+    let pageLocalStorage = this.localStorageService.getPageForChapter(
+      this.chapterName
+    );
+    console.log(pageLocalStorage);
+    this.currentPage = pageLocalStorage;
+    this.pageInput = this.currentPage + 1;
   }
 
   onPageInput() {
@@ -81,6 +89,10 @@ export class ChapterComponent {
       return;
     }
     this.currentPage = this.pageInput - 1;
+    this.localStorageService.setPageForChapter(
+      this.chapterName,
+      this.currentPage
+    );
   }
 
   verifyChapter(event: boolean) {
@@ -91,6 +103,7 @@ export class ChapterComponent {
       this.router.navigate(['/']);
     }
   }
+
   showNextPage(): void {
     if (this.currentPage == this.chapter.Pages.length - 1) {
       return;
@@ -100,6 +113,10 @@ export class ChapterComponent {
     this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });
+    this.localStorageService.setPageForChapter(
+      this.chapterName,
+      this.currentPage
+    );
   }
 
   showPrevPage(): void {
@@ -111,6 +128,10 @@ export class ChapterComponent {
     this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });
+    this.localStorageService.setPageForChapter(
+      this.chapterName,
+      this.currentPage
+    );
   }
 
   showhint() {
