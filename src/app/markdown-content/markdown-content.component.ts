@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { HttpClient } from '@angular/common/http';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-markdown-content',
@@ -14,9 +15,11 @@ export class MarkdownContentComponent {
 
   blocks: any[] = [];
 
-  constructor(private mdService: MarkdownService, private http: HttpClient) {}
-
-  public static fontSize = 16;
+  constructor(
+    private mdService: MarkdownService,
+    private http: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {}
 
   ngOnInit() {
     let lines = this.data.split('\n');
@@ -62,7 +65,6 @@ export class MarkdownContentComponent {
           language: '',
           title: '',
         });
-        console.log('gothere');
         if (i != lines.length) i--;
       }
     }
@@ -116,6 +118,6 @@ z++
   } */
 
   getFontSize() {
-    return MarkdownContentComponent.fontSize;
+    return this.localStorageService.getFontSize();
   }
 }

@@ -61,35 +61,6 @@ export enum userLevel {
   USER = 1,
   ADMIN = 2,
 }
-/* 
-export class ChapterManger {
-  private static errorChapter = new Chapter(
-    'Error 404',
-    [],
-    new Config('', '', '', '', false)
-  );
-  public static currentChapter: Chapter = ChapterManger.errorChapter;
-  public static chapters: Chapter[] = [];
-  public static allChapters: Chapter[] = [];
-
-  static getChapterByName(
-    chapterName: string,
-    replaceWhitespaces: boolean
-  ): Chapter {
-    for (let chapter of ChapterManger.chapters) {
-      if (replaceWhitespaces) {
-        if (chapter.title.replace(/\s/g, '-') == chapterName) {
-          return chapter;
-        }
-      } else {
-        if (chapter.title == chapterName) {
-          return chapter;
-        }
-      }
-    }
-    return this.errorChapter;
-  }
-} */
 
 export class UserManger {
   public static userLevel = userLevel.NONE;

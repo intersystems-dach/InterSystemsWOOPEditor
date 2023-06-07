@@ -34,9 +34,6 @@ export class ApiService {
     return this.service2.addNewChapter(chapter);
   }
 
-  setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {
-    return this.service2.setColorSchemaForUser(userName, darkMode);
-  }
   updateChapter(chapter: Chapter): Observable<any> {
     return this.service2.updateChapter(chapter);
   }

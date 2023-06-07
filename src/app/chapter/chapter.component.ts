@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { Chapter, UserManger, VerifyCache } from 'src/utils/classes';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 /* const { mdToPdf } = require('md-to-pdf'); */
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -27,6 +26,7 @@ export class ChapterComponent {
   resultVisible: boolean = false;
   exportOptionsVisible = false;
   contentVisible = false;
+  pageInput: number = 1;
 
   constructor(
     private mdService: MarkdownService,
@@ -70,6 +70,19 @@ export class ChapterComponent {
       }
     });
   }
+
+  onPageInput() {
+    if (this.pageInput < 1) {
+      this.pageInput = 1;
+      return;
+    }
+    if (this.pageInput > this.chapter.Pages.length) {
+      this.pageInput = this.chapter.Pages.length;
+      return;
+    }
+    this.currentPage = this.pageInput - 1;
+  }
+
   verifyChapter(event: boolean) {
     if (event) {
       VerifyCache.verifyChapter(this.chapter.Title);
@@ -83,6 +96,7 @@ export class ChapterComponent {
       return;
     }
     this.currentPage++;
+    this.pageInput = this.currentPage + 1;
     this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });
@@ -93,6 +107,7 @@ export class ChapterComponent {
       return;
     }
     this.currentPage--;
+    this.pageInput = this.currentPage + 1;
     this.hintVisible = false;
     this.resultVisible = false;
     window.scrollTo({ top: 0 });

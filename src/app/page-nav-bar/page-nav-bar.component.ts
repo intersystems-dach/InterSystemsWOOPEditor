@@ -5,7 +5,7 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-import { AppComponent } from '../app.component';
+import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
   selector: 'app-page-nav-bar',
@@ -23,6 +23,8 @@ export class PageNavBarComponent {
   @Output() showhintEmitter = new EventEmitter<string>();
   @Output() showResultEmitter = new EventEmitter<string>();
 
+  constructor(private colorSchemeService: ColorSchemeService) {}
+
   @HostListener('document:keydown.control.arrowright', ['$event'])
   showNext() {
     this.showNextEmitter.emit('showNext');
@@ -39,6 +41,6 @@ export class PageNavBarComponent {
     this.showResultEmitter.emit('showResult');
   }
   getDarkModeEnabled() {
-    return AppComponent.darkModeEnabled;
+    return this.colorSchemeService.darkModeEnabled;
   }
 }

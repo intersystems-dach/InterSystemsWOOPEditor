@@ -1,9 +1,10 @@
 import { Component, HostListener } from '@angular/core';
 import { MarkdownContentComponent } from '../markdown-content/markdown-content.component';
-import { AppComponent } from '../app.component';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
 import { ApiService } from '../services/api.service';
+import { ColorSchemeService } from '../services/color-scheme.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -13,20 +14,27 @@ import { ApiService } from '../services/api.service';
 export class SettingsComponent {
   logIn: boolean = false;
 
-  constructor(private router: Router, private apiService: ApiService) {}
+  constructor(
+    private router: Router,
+    private colorSchemeService: ColorSchemeService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   increaseFontSize() {
-    MarkdownContentComponent.fontSize += 2;
+    this.localStorageService.setFontSize(
+      this.localStorageService.getFontSize() + 2
+    );
   }
 
   decreaseFontSize() {
-    if (MarkdownContentComponent.fontSize > 2) {
-      MarkdownContentComponent.fontSize -= 2;
+    let fontSize = this.localStorageService.getFontSize();
+    if (fontSize > 2) {
+      this.localStorageService.setFontSize(fontSize - 2);
     }
   }
 
   getFontSize() {
-    return MarkdownContentComponent.fontSize;
+    return this.localStorageService.getFontSize();
   }
 
   @HostListener('document:keydown.control.alt.l', ['$event'])
@@ -51,26 +59,16 @@ export class SettingsComponent {
   }
 
   getDarkModeEnabled() {
-    return AppComponent.darkModeEnabled;
+    return this.colorSchemeService.darkModeEnabled;
   }
 
   toggleDarkMode() {
-    AppComponent.darkModeEnabled = !AppComponent.darkModeEnabled;
-    if (AppComponent.darkModeEnabled) {
-      AppComponent.darkMode();
+    this.colorSchemeService.darkModeEnabled =
+      !this.colorSchemeService.darkModeEnabled;
+    if (this.colorSchemeService.darkModeEnabled) {
+      this.colorSchemeService.darkMode();
     } else {
-      AppComponent.lightMode();
-    }
-
-    if (UserManger.userLevel > 0) {
-      this.apiService
-        .setColorSchemaForUser(
-          UserManger.userName,
-          AppComponent.darkModeEnabled
-        )
-        .subscribe((data: any) => {
-          console.log('set color schema');
-        });
+      this.colorSchemeService.lightMode();
     }
   }
 }

@@ -120,20 +120,6 @@ export class IrisinterfaceService {
       );
   }
 
-  setColorSchemaForUser(userName: string, darkMode: boolean): Observable<any> {
-    return this.http.post<any>(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/woop/user/set/darkmode?username=' +
-        userName +
-        '&darkmode=' +
-        (darkMode ? 1 : 0),
-      {}
-    );
-  }
-
   updateChapter(chapter: Chapter): Observable<any> {
     return this.http
       .post(

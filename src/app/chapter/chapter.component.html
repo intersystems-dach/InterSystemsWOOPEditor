@@ -14,11 +14,17 @@
   <div class="heading">
     <h1>{{ chapter.Title }}</h1>
     <p>
-      <i>{{
-        chapter.Pages.length > 0
-          ? "Page " + (currentPage + 1) + "/" + chapter.Pages.length
-          : "No Pages"
-      }}</i>
+      <i>{{ chapter.Pages.length > 0 ? "Page " : "No Pages" }}</i>
+      <input
+        class="pageInput"
+        type="number"
+        [(ngModel)]="pageInput"
+        (ngModelChange)="onPageInput()"
+        *ngIf="chapter.Pages.length > 0"
+        [min]="1"
+        [max]="chapter.Pages.length"
+      />
+      <i *ngIf="chapter.Pages.length > 0">{{ "/ " + chapter.Pages.length }}</i>
     </p>
   </div>
   <app-page

@@ -6,8 +6,8 @@ import {
   HostListener,
 } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
-import { AppComponent } from '../app.component';
 import { ApiService } from '../services/api.service';
+import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-chapter-selection',
   templateUrl: './chapter-selection.component.html',
@@ -23,7 +23,10 @@ export class ChapterSelectionComponent {
 
   chapterToDelete: Chapter | undefined = undefined;
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private apiService: ApiService,
+    private colorSchemeService: ColorSchemeService
+  ) {}
 
   onChapterSelected(chapterName: string) {
     this.chapterSelected.emit(chapterName);
@@ -80,6 +83,6 @@ export class ChapterSelectionComponent {
   }
 
   getDarkModeEnabled() {
-    return AppComponent.darkModeEnabled;
+    return this.colorSchemeService.darkModeEnabled;
   }
 }

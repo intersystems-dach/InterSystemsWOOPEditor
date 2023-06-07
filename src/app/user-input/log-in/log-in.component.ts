@@ -3,6 +3,7 @@ import { ApiService } from '../../services/api.service';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
+import { ColorSchemeService } from 'src/app/services/color-scheme.service';
 
 @Component({
   selector: 'app-log-in',
@@ -17,7 +18,11 @@ export class LogInComponent {
   wrongMessage: string = '';
   type: string = 'password';
 
-  constructor(private apiService: ApiService, private location: Location) {}
+  constructor(
+    private apiService: ApiService,
+    private location: Location,
+    private colorSchemeService: ColorSchemeService
+  ) {}
 
   submit() {
     this.apiService
@@ -27,13 +32,7 @@ export class LogInComponent {
           if (data.level > 0) {
             UserManger.userLevel = data.level;
             UserManger.userName = data.username;
-            if (data.darkmode) {
-              AppComponent.darkMode();
-            } else {
-              AppComponent.lightMode();
-            }
             this.close();
-            return;
           }
         },
         error: (err: Error) => {

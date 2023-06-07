@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
+import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,10 @@ import { AppComponent } from '../app.component';
 export class HeaderComponent {
   showSettings = false;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private colorSchemeService: ColorSchemeService
+  ) {}
 
   goBack() {
     this.router.navigate(['/']);
@@ -30,6 +34,6 @@ export class HeaderComponent {
   }
 
   getDarkModeEnabled() {
-    return AppComponent.darkModeEnabled;
+    return this.colorSchemeService.darkModeEnabled;
   }
 }

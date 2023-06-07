@@ -5,8 +5,8 @@ import {
   EventEmitter,
   HostListener,
 } from '@angular/core';
-import { MarkdownContentComponent } from '../../markdown-content/markdown-content.component';
 import { Page } from 'src/utils/classes';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-edit-content',
@@ -22,6 +22,8 @@ export class EditContentComponent {
   private slectionContent: string = '';
   private selectionStart: number = -1;
   private selectionEnd: number = -1;
+
+  constructor(private localStorageService: LocalStorageService) {}
 
   ngOnInit() {
     this.getData();
@@ -190,7 +192,7 @@ export class EditContentComponent {
   }
 
   getFontSize() {
-    return MarkdownContentComponent.fontSize;
+    return this.localStorageService.getFontSize();
   }
 
   getHeight() {
