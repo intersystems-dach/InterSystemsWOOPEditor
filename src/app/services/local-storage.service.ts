@@ -28,11 +28,8 @@ export class LocalStorageService {
     localStorage.setItem('colorScheme', darkMode ? 'dark' : 'light');
   }
 
-  getColorScheme(): string {
+  getColorScheme(): string | null {
     let colorScheme = localStorage.getItem('colorScheme');
-    if (colorScheme == null) {
-      return 'light';
-    }
     return colorScheme;
   }
 
@@ -88,6 +85,30 @@ export class LocalStorageService {
   setServerPort(serverPort: number) {
     localStorage.setItem('serverPort', serverPort.toString());
     IrisinterfaceService.port = serverPort;
+  }
+
+  getUserName(): string | null {
+    return localStorage.getItem('userName');
+  }
+
+  setUserName(userName: string) {
+    localStorage.setItem('userName', userName);
+  }
+
+  removeUserName() {
+    localStorage.removeItem('userName');
+  }
+
+  getPassword(): string | null {
+    return localStorage.getItem('password');
+  }
+
+  setPassword(password: string) {
+    localStorage.setItem('password', password);
+  }
+
+  removePassword() {
+    localStorage.removeItem('password');
   }
 
   clearAll() {

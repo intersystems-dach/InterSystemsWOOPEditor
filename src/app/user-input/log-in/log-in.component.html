@@ -19,6 +19,10 @@
     (keydown.enter)="submit()"
     placeholder="Password"
   />
+  <div class="rememberMe">
+    <input type="checkbox" [(ngModel)]="rememberMe" />
+    <p class="label">Remember me</p>
+  </div>
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
     Submit
   </button>

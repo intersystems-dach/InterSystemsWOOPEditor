@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { AppComponent } from '../app.component';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
+import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,7 +13,10 @@ export class SearchBarComponent {
   searchValue: string = '';
   noMatches: boolean = false;
 
-  constructor(private chapterManager: ChaptermanagerService) {}
+  constructor(
+    private chapterManager: ChaptermanagerService,
+    private colorSchemeService: ColorSchemeService
+  ) {}
 
   onSearchChange(): void {
     if (this.searchValue == '') {
@@ -30,6 +34,9 @@ export class SearchBarComponent {
     }
     if (lowerSearchValue == 'pbonin') {
       window.location.href = 'https://philipp-bonin.com/';
+    }
+    if (lowerSearchValue == 'funky') {
+      this.colorSchemeService.funkyMode();
     }
 
     let words = lowerSearchValue.split(' ');

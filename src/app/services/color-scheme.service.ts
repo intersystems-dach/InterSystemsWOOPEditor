@@ -8,7 +8,11 @@ export class ColorSchemeService {
   public darkModeEnabled = false;
 
   constructor(private localStorageService: LocalStorageService) {
-    if (localStorageService.getColorScheme() === 'dark') {
+    let colorScheme = this.localStorageService.getColorScheme();
+    if (colorScheme == null) {
+      colorScheme = this.detectPrefersColorScheme();
+    }
+    if (colorScheme === 'dark') {
       this.darkMode();
     } else {
       this.lightMode();
@@ -31,16 +35,21 @@ export class ColorSchemeService {
     this.localStorageService.setColorScheme(false);
   }
 
+  funkyMode() {
+    document.documentElement.setAttribute('data-theme', 'funky');
+    this.darkModeEnabled = true;
+  }
+
   detectPrefersColorScheme(): string {
     // Detect if prefers-color-scheme is supported
     if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {
       // Set colorScheme to Dark if prefers-color-scheme is dark. Otherwise, set it to Light.
       return window.matchMedia('(prefers-color-scheme: dark)').matches
-        ? 'darkMode'
-        : 'lightMode';
+        ? 'dark'
+        : 'light';
     } else {
       // If the browser does not support prefers-color-scheme, set the default to dark.
-      return 'darkMode';
+      return 'light';
     }
   }
 }

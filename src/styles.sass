@@ -1,10 +1,10 @@
-@import "prismjs/themes/prism.css"
+//@import "prismjs/themes/prism.css"
 //@import "prismjs/themes/prism-coy.css"
 //@import "prismjs/themes/prism-dark.css"
 //@import "prismjs/themes/prism-funky.css"
 //@import "prismjs/themes/prism-okaidia.css"
 //@import "prismjs/themes/prism-solarizedlight.css"
-//@import "prismjs/themes/prism-tomorrow.css"
+@import "prismjs/themes/prism-tomorrow.css"
 //@import "prismjs/themes/prism-twilight.css"
 
 .sticky
@@ -15,10 +15,11 @@
 body
     margin: 0
     background-color: var(--bg-color)
-    font-family: verdana, sans-serif
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    //font-family: Verdana, Geneva, Tahoma, sans-serif
+    //font-family: verdana, sans-serif
 
 [data-theme="light"]
-    --prismTheme: "prismjs/themes/prism.css"
     --text-color: black
     --inverted-text-color: white
     --bg-color: #ffffff
@@ -27,10 +28,17 @@ body
     --secondary-color: #00b6b0
 
 [data-theme="dark"]
-    --prismTheme: "prismjs/themes/prism-dark.css"
     --text-color: white
     --inverted-text-color: black
     --bg-color: #1a1a2b
     --header-color: #11111d
     --primary-color: #00b6b0
     --secondary-color: #2e3399
+
+[data-theme="funky"]
+    --text-color: red
+    --inverted-text-color: blue
+    --bg-color: #f3ba00
+    --header-color: #947100
+    --primary-color: #e60efa
+    --secondary-color: #34f504

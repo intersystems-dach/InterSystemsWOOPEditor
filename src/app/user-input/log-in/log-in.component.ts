@@ -4,6 +4,7 @@ import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { AppComponent } from 'src/app/app.component';
 import { ColorSchemeService } from 'src/app/services/color-scheme.service';
+import { LocalStorageService } from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-log-in',
@@ -17,12 +18,23 @@ export class LogInComponent {
   isWrong: boolean = false;
   wrongMessage: string = '';
   type: string = 'password';
-
+  rememberMe: boolean = false;
   constructor(
     private apiService: ApiService,
     private location: Location,
-    private colorSchemeService: ColorSchemeService
-  ) {}
+    private colorSchemeService: ColorSchemeService,
+    private localStorageService: LocalStorageService
+  ) {
+    let username = localStorageService.getUserName();
+    if (username != null) {
+      this.entereduserName = username;
+    }
+    let password = localStorageService.getPassword();
+    if (password != null) {
+      this.enteredPassword = password;
+      this.submit();
+    }
+  }
 
   submit() {
     this.apiService
@@ -32,6 +44,10 @@ export class LogInComponent {
           if (data.level > 0) {
             UserManger.userLevel = data.level;
             UserManger.userName = data.username;
+            if (this.rememberMe) {
+              this.localStorageService.setUserName(this.entereduserName);
+              this.localStorageService.setPassword(this.enteredPassword);
+            }
             this.close();
           }
         },
