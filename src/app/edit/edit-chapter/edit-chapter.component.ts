@@ -19,6 +19,7 @@ export class EditChapterComponent {
   editMetaData: boolean = false;
   contentVisible = false;
   chapterName: string = '';
+  pageInput: number = 1;
 
   public static autoSave: boolean = false;
   public static interval: any;
@@ -51,6 +52,18 @@ export class EditChapterComponent {
         this.router.navigate(['/login']);
       }
     });
+  }
+
+  onPageInput() {
+    if (this.pageInput < 1) {
+      this.pageInput = 1;
+      return;
+    }
+    if (this.pageInput > this.chapter.Pages.length) {
+      this.pageInput = this.chapter.Pages.length;
+      return;
+    }
+    this.currentPage = this.pageInput - 1;
   }
 
   showNextPage(): void {

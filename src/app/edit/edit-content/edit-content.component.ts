@@ -17,6 +17,7 @@ export class EditContentComponent {
   @Input() type: string = '';
   @Input() page!: Page;
   @Output() changeEmitter = new EventEmitter<Page>();
+
   data: string = '';
   focus = false;
   private slectionContent: string = '';
@@ -57,6 +58,12 @@ export class EditContentComponent {
       this.italic();
     } else if (value === 'code') {
       this.code();
+    } else if (value.startsWith('![')) {
+      this.data =
+        this.data.substr(0, this.selectionStart) +
+        value +
+        this.data.substr(this.selectionEnd);
+      this.setData();
     }
     this.focus = oldFocus;
   }
@@ -198,7 +205,7 @@ export class EditContentComponent {
   }
 
   getHeight() {
-    let height = this.data.split('\n').length * this.getFontSize() * 1.2;
+    let height = this.data.split('\n').length * this.getFontSize() * 2;
     if (height < 50) return 50;
     return height;
   }

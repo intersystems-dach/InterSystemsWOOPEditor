@@ -172,4 +172,27 @@ export class IrisinterfaceService {
         })
       );
   }
+
+  uploadImage(name: string, content: any): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/image/upload',
+        { Name: name, Content: content }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Chapter not found');
+          } else if (err.status === 500) {
+            throw new Error('Chapter could not be deleted');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error');
+        })
+      );
+  }
 }

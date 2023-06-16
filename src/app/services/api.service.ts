@@ -37,7 +37,12 @@ export class ApiService {
   updateChapter(chapter: Chapter): Observable<any> {
     return this.service2.updateChapter(chapter);
   }
+
   deleteChapter(chapter: Chapter): Observable<any> {
     return this.service2.deleteChapter(chapter);
+  }
+
+  uploadImage(name: string, content: any): Observable<any> {
+    return this.service2.uploadImage(name, content);
   }
 }

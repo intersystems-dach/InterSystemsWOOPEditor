@@ -1,7 +1,21 @@
-
 .heading
     text-align: center
     color: var(--text-color)
+    .pageInput
+        background: none
+        color: var(--text-color)
+        border: none
+        width: 20px
+        margin: 0
+        -webkit-appearance: none
+        font-size: 15px
+        text-align: center
+        transition: 0.2s
+        &:focus
+            outline: none
+            width: 50px
+    input[type=number]
+        -moz-appearance: textfield
 .sticky
     position: fixed
     top: 0
