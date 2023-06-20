@@ -18,5 +18,11 @@
       [language]="block.language"
       [title]="block.title"
     ></app-code-window>
+    <img
+      *ngIf="block.type == 'image'"
+      [src]="block.code"
+      [alt]="block.title"
+      [style]="block.language"
+    />
   </div>
 </div>

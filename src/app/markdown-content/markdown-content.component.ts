@@ -21,11 +21,12 @@ export class MarkdownContentComponent {
     private localStorageService: LocalStorageService
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
       if (lines[i].startsWith('~~~')) {
+        // code window
         let language = lines[i].replace('~~~', '');
         let title = language;
         if (language.toLowerCase() == 'objectscript') {
@@ -53,9 +54,44 @@ export class MarkdownContentComponent {
           language: language,
           title: title,
         });
+      } else if (lines[i].startsWith('![')) {
+        console.log('image');
+        //image
+        let name = lines[i].split('[')[1].split(']')[0];
+        let url = lines[i].split('(')[1].split(')')[0];
+        let style = '';
+        if (lines[i].split(')')[1].includes('{')) {
+          style = lines[i].split('{')[1].split('}')[0];
+        }
+        console.log(url.toLowerCase().includes('woop/image/get'));
+        if (url.toLowerCase().includes('woop/image/get')) {
+          console.log('getting image from woop');
+          let newURL = await this.http
+            .get(url, { responseType: 'text' })
+            .toPromise()
+            .then((res) => {
+              console.log(res);
+              return res;
+            });
+          if (newURL != undefined) {
+            url = newURL;
+          } else {
+            console.log('error getting image');
+          }
+        }
+        this.blocks.push({
+          type: 'image',
+          code: url,
+          language: style,
+          title: name,
+        });
       } else {
         let code = '';
-        while (i < lines.length && !lines[i].startsWith('~~~')) {
+        while (
+          i < lines.length &&
+          !lines[i].startsWith('~~~') &&
+          !lines[i].startsWith('![')
+        ) {
           code += lines[i] + '\n';
           i++;
         }

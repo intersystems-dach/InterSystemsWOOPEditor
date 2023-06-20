@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
+import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 
 @Component({
   selector: 'app-markdown-editor',
@@ -24,12 +25,17 @@ export class MarkdownEditorComponent {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        const base64 = reader.result as string;
-        console.log(`![${file.name}](${base64})`);
-        this.apiService.uploadImage(file.name, base64).subscribe((res) => {
+        // get as binary
+        const binary = reader.result as ArrayBuffer;
+        /* this.apiService.uploadImage(file.name, base64).subscribe((res) => {
+          console.log(res);
+        }); */
+        this.apiService.uploadImage(file.name, binary).subscribe((res) => {
           console.log(res);
         });
-        //this.emit(`![${file.name}](${base64})`);
+        this.emit(
+          `![${file.name}](http://${IrisinterfaceService.host}:${IrisinterfaceService.port}/woop/image/get/${file.name}){width:100%}`
+        );
       };
     };
     input.click();

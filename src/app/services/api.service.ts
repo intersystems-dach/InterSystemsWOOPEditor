@@ -9,40 +9,37 @@ import { IrisinterfaceService } from './irisinterface.service';
   providedIn: 'root',
 })
 export class ApiService {
-  constructor(
-    private service: ExpressjsService,
-    private service2: IrisinterfaceService
-  ) {}
+  constructor(private service: IrisinterfaceService) {}
 
   isServerOnline() {
-    return this.service2.isServerOnline();
+    return this.service.isServerOnline();
   }
 
   checkUser(userName: string, password: string): Observable<User> {
-    return this.service2.checkUser(userName, password);
+    return this.service.checkUser(userName, password);
   }
 
   getAllChapters(): Observable<any> {
-    return this.service2.getAllChapters();
+    return this.service.getAllChapters();
   }
 
   verifyChapter(chapterName: string, password: string): Observable<any> {
-    return this.service2.verifyChapter(chapterName, password);
+    return this.service.verifyChapter(chapterName, password);
   }
 
   addNewChapter(chapter: Chapter): Observable<any> {
-    return this.service2.addNewChapter(chapter);
+    return this.service.addNewChapter(chapter);
   }
 
   updateChapter(chapter: Chapter): Observable<any> {
-    return this.service2.updateChapter(chapter);
+    return this.service.updateChapter(chapter);
   }
 
   deleteChapter(chapter: Chapter): Observable<any> {
-    return this.service2.deleteChapter(chapter);
+    return this.service.deleteChapter(chapter);
   }
 
   uploadImage(name: string, content: any): Observable<any> {
-    return this.service2.uploadImage(name, content);
+    return this.service.uploadImage(name, content);
   }
 }

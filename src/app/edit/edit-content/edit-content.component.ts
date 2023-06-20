@@ -59,11 +59,7 @@ export class EditContentComponent {
     } else if (value === 'code') {
       this.code();
     } else if (value.startsWith('![')) {
-      this.data =
-        this.data.substr(0, this.selectionStart) +
-        value +
-        this.data.substr(this.selectionEnd);
-      this.setData();
+      this.data += '\n' + value;
     }
     this.focus = oldFocus;
   }
