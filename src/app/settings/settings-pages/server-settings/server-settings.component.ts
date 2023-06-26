@@ -16,7 +16,6 @@ export class ServerSettingsComponent {
   }
 
   save() {
-    console.log('' + this.host + ':' + this.port);
     this.localStorageService.setServerHost(this.host);
     this.localStorageService.setServerPort(this.port);
     window.location.href = '/';

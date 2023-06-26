@@ -1,6 +1,8 @@
 <app-header class="sticky"></app-header>
 
 <div class="settingsHeader">
+  <button (click)="goBack()" class="backButton">Back</button>
+
   <app-settings-header
     [selected]="selected"
     (selectedChange)="setSelected($event)"

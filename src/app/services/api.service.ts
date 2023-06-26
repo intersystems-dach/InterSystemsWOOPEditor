@@ -42,4 +42,8 @@ export class ApiService {
   uploadImage(name: string, content: any): Observable<any> {
     return this.service.uploadImage(name, content);
   }
+
+  getAllImageNames(): Observable<any> {
+    return this.service.getAllImageNames();
+  }
 }

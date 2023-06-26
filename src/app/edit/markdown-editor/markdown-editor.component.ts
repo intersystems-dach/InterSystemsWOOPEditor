@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { ApiService } from '../../services/api.service';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-markdown-editor',
@@ -10,7 +11,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 export class MarkdownEditorComponent {
   @Output() eventEmitter = new EventEmitter<string>();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService, private router: Router) {}
 
   emit(value: string) {
     this.eventEmitter.emit(value);
@@ -42,4 +43,11 @@ export class MarkdownEditorComponent {
   }
 
   addImage() {}
+
+  help() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree(['/markdown'])
+    );
+    window.open(url, '_blank');
+  }
 }

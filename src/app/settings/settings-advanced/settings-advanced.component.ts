@@ -23,4 +23,8 @@ export class SettingsAdvancedComponent {
   setSelected(event: string): void {
     this.selected = event;
   }
+
+  goBack() {
+    this.router.navigate(['/']);
+  }
 }

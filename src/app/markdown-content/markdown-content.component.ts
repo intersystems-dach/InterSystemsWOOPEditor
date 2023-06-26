@@ -55,7 +55,6 @@ export class MarkdownContentComponent {
           title: title,
         });
       } else if (lines[i].startsWith('![')) {
-        console.log('image');
         //image
         let name = lines[i].split('[')[1].split(']')[0];
         let url = lines[i].split('(')[1].split(')')[0];
@@ -63,14 +62,11 @@ export class MarkdownContentComponent {
         if (lines[i].split(')')[1].includes('{')) {
           style = lines[i].split('{')[1].split('}')[0];
         }
-        console.log(url.toLowerCase().includes('woop/image/get'));
         if (url.toLowerCase().includes('woop/image/get')) {
-          console.log('getting image from woop');
           let newURL = await this.http
             .get(url, { responseType: 'text' })
             .toPromise()
             .then((res) => {
-              console.log(res);
               return res;
             });
           if (newURL != undefined) {
