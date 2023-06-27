@@ -32,7 +32,7 @@ export class HomeComponent {
   }
 
   goToServerSettings() {
-    this.router.navigate(['settings/Server']);
+    this.router.navigate(['settings/server']);
   }
 
   checkIfServerOnline() {

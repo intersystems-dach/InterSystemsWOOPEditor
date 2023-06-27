@@ -1,26 +1,25 @@
 <div class="header">
   <button
-    [class]="selected == 'Storage' ? 'selected' : ''"
-    (click)="setSelected('Storage')"
+    [class]="selected == 'storage' ? 'selected' : ''"
+    (click)="setSelected('storage')"
   >
     Storage
   </button>
   <button
-    [class]="selected == 'Server' ? 'selected' : ''"
-    (click)="setSelected('Server')"
+    [class]="selected == 'server' ? 'selected' : ''"
+    (click)="setSelected('server')"
   >
     Server
   </button>
   <button
-    *ngIf="getUserLevel() > 0"
-    [class]="selected == 'User' ? 'selected' : ''"
-    (click)="setSelected('User')"
+    [class]="selected == 'user' ? 'selected' : ''"
+    (click)="setSelected('user')"
   >
     User
   </button>
   <button
-    [class]="selected == 'Contact' ? 'selected' : ''"
-    (click)="setSelected('Contact')"
+    [class]="selected == 'contact' ? 'selected' : ''"
+    (click)="setSelected('contact')"
   >
     Contact
   </button>

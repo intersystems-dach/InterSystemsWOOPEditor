@@ -63,16 +63,16 @@
     <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
   </div>
 
-  <app-chapter-new
+  <app-edit-chapter-meta-data
     [updateChapter]="chapter"
     [name]="chapter.Title"
     [description]="chapter.Description"
     [language]="chapter.Language"
-    [password]="chapter.Password"
+    [password]="chapterPassword"
     [isPrivate]="chapter.IsPrivate"
     *ngIf="editMetaData"
     (closeEmitter)="toggleEditMetaData()"
-  ></app-chapter-new>
+  ></app-edit-chapter-meta-data>
 
   <app-are-you-sure
     *ngIf="sureDelete"

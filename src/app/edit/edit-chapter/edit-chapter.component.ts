@@ -20,6 +20,8 @@ export class EditChapterComponent {
   chapterName: string = '';
   pageInput: number = 1;
 
+  chapterPassword: string = '';
+
   public static autoSave: boolean = false;
   public static interval: any;
   constructor(
@@ -140,6 +142,24 @@ export class EditChapterComponent {
 
   toggleEditMetaData() {
     this.editMetaData = !this.editMetaData;
+    if (this.editMetaData) {
+      console.log(this.chapterName);
+      this.apiService
+        .getChapterPassword(
+          this.chapter.Title,
+          UserManger.userName,
+          UserManger.password
+        )
+        .subscribe({
+          next: (data) => {
+            this.chapterPassword = data.password;
+          },
+          error: (err: any) => {
+            alert('Error getting chapter password: ' + err.message);
+            this.chapterPassword = this.chapter.Password;
+          },
+        });
+    }
   }
 
   getAutoSave() {

@@ -1,10 +1,29 @@
 <div class="container">
-  <div class="row">
+  <div class="row" *ngIf="getUserLevel() == 0">
+    <p class="label">Log in</p>
+    <button class="action" (click)="logIn()">Log in</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() > 0">
+    <p class="label">
+      Username:
+      <i>{{ getUsername() + (getUserLevel() == 2 ? " Admin" : "") }}</i>
+    </p>
+    <button class="action" (click)="logOut()">Log out</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() > 0">
     <p class="label">Change Password</p>
     <button class="action" (click)="changePassword()">Change</button>
   </div>
   <div class="row" *ngIf="getUserLevel() == 2">
     <p class="label">New User</p>
     <button class="action" (click)="addUser()">Add</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() == 2">
+    <p class="label">Delete User</p>
+    <button class="action red" (click)="deleteUser()">Delete</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() == 2">
+    <p class="label">Configure Admin Rights</p>
+    <button class="action" (click)="addUser()">Configure</button>
   </div>
 </div>

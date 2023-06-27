@@ -111,6 +111,52 @@ export class LocalStorageService {
     localStorage.removeItem('password');
   }
 
+  getAllServerConnections(): any[] {
+    let serverConnections = localStorage.getItem('serverConnections');
+    if (serverConnections == null) {
+      return [];
+    }
+    return JSON.parse(serverConnections);
+  }
+
+  getConnection(name: string) {
+    let serverConnections = this.getAllServerConnections();
+    for (let i = 0; i < serverConnections.length; i++) {
+      if (serverConnections[i].name == name) {
+        return serverConnections[i];
+      }
+    }
+    return null;
+  }
+
+  addServerConnection(name: string, host: string, port: number) {
+    let serverConnections = this.getAllServerConnections();
+    for (let i = 0; i < serverConnections.length; i++) {
+      if (serverConnections[i].name == name) {
+        serverConnections.splice(i, 1);
+      }
+    }
+    serverConnections.push({ name: name, host: host, port: port });
+    localStorage.setItem(
+      'serverConnections',
+      JSON.stringify(serverConnections)
+    );
+  }
+
+  removeServerConnection(name: string) {
+    let serverConnections = this.getAllServerConnections();
+    for (let i = 0; i < serverConnections.length; i++) {
+      if (serverConnections[i].name == name) {
+        serverConnections.splice(i, 1);
+        break;
+      }
+    }
+    localStorage.setItem(
+      'serverConnections',
+      JSON.stringify(serverConnections)
+    );
+  }
+
   clearAll() {
     localStorage.clear();
   }

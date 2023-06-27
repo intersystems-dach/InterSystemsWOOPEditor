@@ -1,5 +1,22 @@
 <div class="container">
   <div class="row">
+    <p class="label">Select Connection</p>
+    <select
+      name="Level"
+      [(ngModel)]="connection"
+      (ngModelChange)="openConnection()"
+    >
+      <option value="">NEW</option>
+      <option *ngFor="let con of getConnections()" [value]="con.name">
+        {{ con.name }}
+      </option>
+    </select>
+  </div>
+  <div class="row">
+    <p class="label">Connection Name</p>
+    <input type="text" class="action" placeholder="Name" [(ngModel)]="name" />
+  </div>
+  <div class="row">
     <p class="label">Host</p>
     <input type="text" class="action" placeholder="Host" [(ngModel)]="host" />
   </div>
@@ -9,6 +26,18 @@
   </div>
   <div class="row">
     <p class="label"></p>
-    <button class="action" (click)="save()">Save</button>
+    <button
+      class="action red"
+      (click)="removeConnection()"
+      *ngIf="connection != ''"
+    >
+      Remove
+    </button>
+    <button class="action" (click)="saveConnection()">
+      {{ connection === "" ? "Save" : "Update" }}
+    </button>
+    <button class="action green" (click)="connect()">
+      {{ "Connect" + (isCurrentConnection() ? "" : "*") }}
+    </button>
   </div>
 </div>

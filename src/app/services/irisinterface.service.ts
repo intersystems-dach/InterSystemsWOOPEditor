@@ -99,6 +99,37 @@ export class IrisinterfaceService {
       );
   }
 
+  getChapterPassword(
+    chapterName: string,
+    userName: string,
+    password: string
+  ): Observable<any> {
+    return this.http
+      .get(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/get/password?title=' +
+          chapterName +
+          '&username=' +
+          userName +
+          '&password=' +
+          password
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('Could not find chapter');
+          } else if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
   /**
    * Adds a new chapter to the database
    * @param chapter The chapter to add
@@ -238,6 +269,40 @@ export class IrisinterfaceService {
             throw new Error('Unauthorized');
           } else if (err.status === 409) {
             throw new Error('User already exists');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else {
+            console.log(err.message);
+            throw new Error('unknown error: ' + err.status);
+          }
+        })
+      );
+  }
+
+  deleteUser(
+    username: string,
+    password: string,
+    userNameToDelete: string
+  ): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/user/delete',
+        {
+          userName: username,
+          password: password,
+          userNameToDelete: userNameToDelete,
+        }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 404) {
+            throw new Error('User not found');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
           } else {

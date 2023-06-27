@@ -7,6 +7,6 @@ import { Component } from '@angular/core';
 })
 export class ErrorPageComponent {
   goToServerSettings() {
-    window.location.href = '/settings/Server';
+    window.location.href = '/settings/server';
   }
 }

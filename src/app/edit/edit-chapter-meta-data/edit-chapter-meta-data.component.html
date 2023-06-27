@@ -1,55 +1,45 @@
 <div class="background" (click)="close()"></div>
 <div class="container">
-  <h1>Create new Chapter</h1>
+  <h1>{{ updateChapter == undefined ? "" : updateChapter.Title }}</h1>
   <p class="wrong" *ngIf="isWrong">{{ wrongText }}</p>
   <button class="closeButton" (click)="close()">X</button>
-  <p style="top: 60px">Name</p>
-  <input
-    type="text"
-    class="userNameInput"
-    name="title"
-    [(ngModel)]="name"
-    (keydown.enter)="submit()"
-    style="top: 110px"
-    placeholder="Chapter name"
-  />
-  <p style="top: 130px">Language</p>
+  <p style="top: 60px">Language</p>
   <input
     type="text"
     class="userNameInput"
     name="language"
     [(ngModel)]="language"
     (keydown.enter)="submit()"
-    style="top: 180px"
+    style="top: 110px"
     placeholder="Language"
   />
-  <p style="top: 200px">Password</p>
+  <p style="top: 130px">Password</p>
   <input
     type="text"
     class="userNameInput"
     name="password"
     [(ngModel)]="password"
     (keydown.enter)="submit()"
-    style="top: 250px"
+    style="top: 180px"
     placeholder="Password"
   />
-  <p style="top: 270px">Private</p>
+  <p style="top: 200px">Private</p>
   <input
     type="checkbox"
     class="userNameInput"
     name="private"
     [(ngModel)]="isPrivate"
-    style="top: 320px; cursor: pointer"
+    style="top: 250px; cursor: pointer"
   />
-  <p style="top: 340px">Description</p>
+  <p style="top: 270px">Description</p>
   <textarea
     name="description"
-    style="top: 460px; resize: none"
+    style="top: 390px; resize: none"
     [(ngModel)]="description"
     placeholder="Description"
   ></textarea>
 
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
-    Create
+    Save
   </button>
 </div>

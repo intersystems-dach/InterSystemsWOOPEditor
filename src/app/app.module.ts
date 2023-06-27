@@ -40,6 +40,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { UserSettingsComponent } from './settings/settings-pages/user-settings/user-settings.component';
 import { AddUserComponent } from './user-input/add-user/add-user.component';
 import { ChangePasswordComponent } from './user-input/change-password/change-password.component';
+import { DeleteUserComponent } from './user-input/delete-user/delete-user.component';
+import { EditChapterMetaDataComponent } from './edit/edit-chapter-meta-data/edit-chapter-meta-data.component';
+import { GetHelpComponent } from './get-help/get-help.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -75,6 +78,9 @@ import { ChangePasswordComponent } from './user-input/change-password/change-pas
     UserSettingsComponent,
     AddUserComponent,
     ChangePasswordComponent,
+    DeleteUserComponent,
+    EditChapterMetaDataComponent,
+    GetHelpComponent,
   ],
   imports: [
     BrowserModule,

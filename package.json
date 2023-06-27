@@ -1,9 +1,9 @@
 {
-  "name": "inter-systems-wui",
-  "version": "0.0.0",
+  "name": "intersystems-woop",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node server.js",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

@@ -63,7 +63,7 @@ export class SettingsShortComponent {
   }
 
   goToAdvancedSettings() {
-    this.router.navigate(['/settings']);
+    this.router.navigate(['/settings/storage']);
   }
 
   toggleDarkMode() {
