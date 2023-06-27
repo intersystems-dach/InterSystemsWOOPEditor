@@ -61,7 +61,7 @@ export class IrisinterfaceService {
             throw new Error('Username or password is wrong');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
@@ -94,7 +94,7 @@ export class IrisinterfaceService {
             throw new Error('Could not find chapter');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
@@ -122,7 +122,7 @@ export class IrisinterfaceService {
             throw new Error('Chapter could not be saved');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
@@ -145,7 +145,7 @@ export class IrisinterfaceService {
             throw new Error('Chapter could not be updated');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
@@ -168,7 +168,7 @@ export class IrisinterfaceService {
             throw new Error('Chapter could not be deleted');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
@@ -187,10 +187,11 @@ export class IrisinterfaceService {
         catchError((err: HttpErrorResponse) => {
           if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
         })
       );
   }
+
   getAllImageNames(): Observable<any> {
     return this.http
       .get(
@@ -206,7 +207,77 @@ export class IrisinterfaceService {
             throw new Error('Could not get image names');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
-          } else throw new Error('unknown error');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
+  addUser(
+    username: string,
+    password: string,
+    newUserName: string,
+    newPassword: string
+  ): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/user/add',
+        {
+          userName: username,
+          password: password,
+          newUserName: newUserName,
+          newPassword: newPassword,
+        }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 409) {
+            throw new Error('User already exists');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else {
+            console.log(err.message);
+            throw new Error('unknown error: ' + err.status);
+          }
+        })
+      );
+  }
+
+  changePassword(
+    username: string,
+    password: string,
+    newPassword: string
+  ): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/user/change/password',
+        {
+          userName: username,
+          password: password,
+          newPassword: newPassword,
+        }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 404) {
+            throw new Error('User not found');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else {
+            console.log(err.message);
+            throw new Error('unknown error: ' + err.status);
+          }
         })
       );
   }

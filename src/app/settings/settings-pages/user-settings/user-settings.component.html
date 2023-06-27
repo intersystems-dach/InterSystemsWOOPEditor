@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <p class="label">Change Password</p>
+    <button class="action" (click)="changePassword()">Change</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() == 2">
+    <p class="label">New User</p>
+    <button class="action" (click)="addUser()">Add</button>
+  </div>
+</div>

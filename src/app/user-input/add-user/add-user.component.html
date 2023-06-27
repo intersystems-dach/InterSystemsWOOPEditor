@@ -1,6 +1,6 @@
 <div class="background" (click)="close()"></div>
 <div class="container">
-  <h1>Log in</h1>
+  <h1>Add User</h1>
   <p class="wrong" *ngIf="isWrong">{{ wrongMessage }}</p>
   <button class="closeButton" (click)="close()">X</button>
   <input
@@ -12,21 +12,22 @@
     placeholder="Username"
   />
   <input
-    [type]="type"
+    type="text"
     class="passwordInput"
     name="password"
     [(ngModel)]="enteredPassword"
     (keydown.enter)="submit()"
     placeholder="Password"
   />
-  <div class="rememberMe">
-    <input type="checkbox" [(ngModel)]="rememberMe" />
-    <p class="label">Remember me</p>
-  </div>
+  <input
+    type="text"
+    class="confirmPasswordInput"
+    name="confirmPassword"
+    [(ngModel)]="enteredConfirmPassword"
+    (keydown.enter)="submit()"
+    placeholder="Confirm Password"
+  />
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
     Submit
-  </button>
-  <button class="viewButton" (click)="viewPassword()">
-    {{ type == "password" ? "View" : "Hide" }}
   </button>
 </div>

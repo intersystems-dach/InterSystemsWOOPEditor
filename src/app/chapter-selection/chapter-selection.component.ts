@@ -6,8 +6,8 @@ import {
   HostListener,
 } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
-import { ApiService } from '../services/api.service';
 import { ColorSchemeService } from '../services/color-scheme.service';
+import { IrisinterfaceService } from '../services/irisinterface.service';
 @Component({
   selector: 'app-chapter-selection',
   templateUrl: './chapter-selection.component.html',
@@ -24,7 +24,7 @@ export class ChapterSelectionComponent {
   chapterToDelete: Chapter | undefined = undefined;
 
   constructor(
-    private apiService: ApiService,
+    private apiService: IrisinterfaceService,
     private colorSchemeService: ColorSchemeService
   ) {}
 

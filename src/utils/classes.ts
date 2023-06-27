@@ -65,6 +65,7 @@ export enum userLevel {
 export class UserManger {
   public static userLevel = userLevel.NONE;
   public static userName = '';
+  public static password = '';
 }
 
 export class VerifyCache {

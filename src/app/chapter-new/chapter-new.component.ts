@@ -6,9 +6,8 @@ import {
   HostListener,
 } from '@angular/core';
 import { Chapter, UserManger } from 'src/utils/classes';
-import { ApiService } from '../services/api.service';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
-import { Status } from '../../utils/interfaces';
+import { IrisinterfaceService } from '../services/irisinterface.service';
 
 @Component({
   selector: 'app-chapter-new',
@@ -28,7 +27,7 @@ export class ChapterNewComponent {
   @Output() closeEmitter = new EventEmitter<boolean>();
 
   constructor(
-    private apiService: ApiService,
+    private apiService: IrisinterfaceService,
     private chapterManger: ChaptermanagerService
   ) {}
 

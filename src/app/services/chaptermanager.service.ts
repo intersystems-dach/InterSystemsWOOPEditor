@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Chapter, VerifyCache } from 'src/utils/classes';
-import { ApiService } from './api.service';
+import { IrisinterfaceService } from './irisinterface.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class ChaptermanagerService {
 
   currentChapter: Chapter = this.errorChapter;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: IrisinterfaceService) {
     this.init();
   }
 

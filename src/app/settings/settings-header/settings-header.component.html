@@ -12,6 +12,13 @@
     Server
   </button>
   <button
+    *ngIf="getUserLevel() > 0"
+    [class]="selected == 'User' ? 'selected' : ''"
+    (click)="setSelected('User')"
+  >
+    User
+  </button>
+  <button
     [class]="selected == 'Contact' ? 'selected' : ''"
     (click)="setSelected('Contact')"
   >

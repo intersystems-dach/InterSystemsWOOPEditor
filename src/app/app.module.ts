@@ -37,6 +37,9 @@ import { StorageSettingsComponent } from './settings/settings-pages/storage-sett
 import { ServerSettingsComponent } from './settings/settings-pages/server-settings/server-settings.component';
 import { ContactSettingsComponent } from './settings/settings-pages/contact-settings/contact-settings.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { UserSettingsComponent } from './settings/settings-pages/user-settings/user-settings.component';
+import { AddUserComponent } from './user-input/add-user/add-user.component';
+import { ChangePasswordComponent } from './user-input/change-password/change-password.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,6 +72,9 @@ import { ErrorPageComponent } from './error-page/error-page.component';
     ServerSettingsComponent,
     ContactSettingsComponent,
     ErrorPageComponent,
+    UserSettingsComponent,
+    AddUserComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     BrowserModule,

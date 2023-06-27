@@ -12,9 +12,10 @@
 </div>
 
 <div class="serverStatus">
-  <p>Server</p>
+  <p (click)="goToServerSettings()">Server</p>
   <div
     class="statusIcon"
     [style.background]="isServerOnline ? 'green' : 'red'"
+    (click)="goToServerSettings()"
   ></div>
 </div>

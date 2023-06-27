@@ -1,10 +1,8 @@
 import { Component, HostListener } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
-import { AppComponent } from 'src/app/app.component';
-import { ColorSchemeService } from 'src/app/services/color-scheme.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 
 @Component({
   selector: 'app-log-in',
@@ -19,10 +17,10 @@ export class LogInComponent {
   wrongMessage: string = '';
   type: string = 'password';
   rememberMe: boolean = false;
+
   constructor(
-    private apiService: ApiService,
+    private apiService: IrisinterfaceService,
     private location: Location,
-    private colorSchemeService: ColorSchemeService,
     private localStorageService: LocalStorageService
   ) {
     let username = localStorageService.getUserName();
@@ -44,6 +42,7 @@ export class LogInComponent {
           if (data.level > 0) {
             UserManger.userLevel = data.level;
             UserManger.userName = data.username;
+            UserManger.password = this.enteredPassword;
             if (this.rememberMe) {
               this.localStorageService.setUserName(this.entereduserName);
               this.localStorageService.setPassword(this.enteredPassword);
@@ -59,6 +58,7 @@ export class LogInComponent {
         },
       });
   }
+
   viewPassword() {
     if (this.type === 'password') {
       this.type = 'text';
@@ -66,6 +66,7 @@ export class LogInComponent {
       this.type = 'password';
     }
   }
+
   @HostListener('document:keydown.escape', ['$event'])
   close() {
     this.isWrong = false;

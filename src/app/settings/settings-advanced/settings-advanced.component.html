@@ -15,6 +15,9 @@
   <app-server-settings
     *ngIf="selected.toLowerCase() == 'server'"
   ></app-server-settings>
+  <app-user-settings
+    *ngIf="selected.toLowerCase() == 'user' && getUserLevel() > 0"
+  ></app-user-settings>
   <app-contact-settings
     *ngIf="selected.toLowerCase() == 'contact'"
   ></app-contact-settings>

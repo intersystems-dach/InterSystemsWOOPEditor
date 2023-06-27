@@ -8,9 +8,14 @@ import { EditChapterComponent } from './edit/edit-chapter/edit-chapter.component
 import { SettingsAdvancedComponent } from './settings/settings-advanced/settings-advanced.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MarkdownCheatSheetComponent } from './markdown-cheat-sheet/markdown-cheat-sheet.component';
+import { AddUserComponent } from './user-input/add-user/add-user.component';
+import { ChangePasswordComponent } from './user-input/change-password/change-password.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LogInComponent },
+  { path: 'adduser', component: AddUserComponent },
+  { path: 'changepassword', component: ChangePasswordComponent },
   { path: 'login', component: LogInComponent },
   { path: 'error', component: ErrorPageComponent },
   { path: 'chapter/:chapterName', component: ChapterComponent },

@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 import { Router } from '@angular/router';
 
@@ -11,7 +10,10 @@ import { Router } from '@angular/router';
 export class MarkdownEditorComponent {
   @Output() eventEmitter = new EventEmitter<string>();
 
-  constructor(private apiService: ApiService, private router: Router) {}
+  constructor(
+    private apiService: IrisinterfaceService,
+    private router: Router
+  ) {}
 
   emit(value: string) {
     this.eventEmitter.emit(value);

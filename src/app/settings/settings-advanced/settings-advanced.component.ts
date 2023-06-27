@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-settings-advanced',
@@ -26,5 +27,9 @@ export class SettingsAdvancedComponent {
 
   goBack() {
     this.router.navigate(['/']);
+  }
+
+  getUserLevel() {
+    return UserManger.userLevel;
   }
 }

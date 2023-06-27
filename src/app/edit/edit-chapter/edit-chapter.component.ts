@@ -1,9 +1,8 @@
 import { Component, HostListener, Input } from '@angular/core';
 import { Chapter, Page, UserManger } from 'src/utils/classes';
-import { ApiService } from '../../services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppComponent } from 'src/app/app.component';
 import { ChaptermanagerService } from 'src/app/services/chaptermanager.service';
+import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -24,7 +23,7 @@ export class EditChapterComponent {
   public static autoSave: boolean = false;
   public static interval: any;
   constructor(
-    private apiService: ApiService,
+    private apiService: IrisinterfaceService,
     private router: Router,
     private route: ActivatedRoute,
     private chapterManager: ChaptermanagerService

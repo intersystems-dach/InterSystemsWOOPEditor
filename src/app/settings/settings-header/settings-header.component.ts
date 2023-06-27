@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../../../utils/interfaces';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-settings-header',
@@ -15,5 +17,9 @@ export class SettingsHeaderComponent {
     this.selected = selected;
     this.router.navigate(['/settings', selected]);
     this.selectedChange.emit(selected);
+  }
+
+  getUserLevel() {
+    return UserManger.userLevel;
   }
 }

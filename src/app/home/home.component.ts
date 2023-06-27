@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
-import { ApiService } from '../services/api.service';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
+import { IrisinterfaceService } from '../services/irisinterface.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +16,7 @@ export class HomeComponent {
 
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private apiService: IrisinterfaceService,
     private chapterManager: ChaptermanagerService
   ) {}
 
@@ -29,6 +29,10 @@ export class HomeComponent {
         this.router.navigate(['/error']);
       }
     }, 5000);
+  }
+
+  goToServerSettings() {
+    this.router.navigate(['settings/Server']);
   }
 
   checkIfServerOnline() {

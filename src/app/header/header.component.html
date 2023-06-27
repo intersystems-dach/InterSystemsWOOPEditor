@@ -22,7 +22,7 @@
   <p class="userLabel" *ngIf="getUserLevel() > 0" (click)="logOut()">
     <i class="userLabelExtended">Log out </i>
     <i>{{ getUserName() }}</i>
-    {{ getUserLevel() == 1 ? "User " : "Admin " }}
+    {{ getUserLevel() == 1 ? " " : "Admin " }}
   </p>
   <p class="userLabel" *ngIf="getUserLevel() == 0" (click)="logIn()">
     <i>Log in</i>

@@ -1,4 +1,4 @@
-import { ApiService } from '../../services/api.service';
+import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 import {
   Component,
   Input,
@@ -21,7 +21,7 @@ export class PasswordQueryComponent {
 
   @Output() passwordEntered = new EventEmitter<boolean>();
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: IrisinterfaceService) {}
 
   submit() {
     this.apiService
