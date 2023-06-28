@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
+import { IrisinterfaceService } from '../../../services/irisinterface.service';
 
 @Component({
   selector: 'app-server-settings',
@@ -28,6 +29,7 @@ export class ServerSettingsComponent {
     this.connection = '';
     this.openConnection();
   }
+
   saveConnection() {
     if (this.name === '') {
       alert('Name is empty!');
@@ -66,5 +68,9 @@ export class ServerSettingsComponent {
       this.localStorageService.getServerHost() === this.host &&
       this.localStorageService.getServerPort() === this.port
     );
+  }
+
+  getCurrentConnection(): string {
+    return IrisinterfaceService.host + ':' + IrisinterfaceService.port;
   }
 }
