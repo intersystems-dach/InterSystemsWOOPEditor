@@ -57,8 +57,15 @@ export class ChaptermanagerService {
         VerifyCache.verifyChapter(chapter.Title);
       }
     }
+    this.allChapters = this.sortChaptersAlphabetically(this.allChapters);
     this.chapters = this.allChapters;
     this.initDone = true;
+  }
+
+  sortChaptersAlphabetically(array: Chapter[]): Chapter[] {
+    return array.sort((a, b) => {
+      return a.Title.localeCompare(b.Title);
+    });
   }
 
   getChapterByName(chapterName: string, replaceWhitespaces: boolean): Chapter {

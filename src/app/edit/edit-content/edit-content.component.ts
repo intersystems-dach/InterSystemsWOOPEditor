@@ -59,7 +59,7 @@ export class EditContentComponent {
     } else if (value === 'code') {
       this.code();
     } else if (value.startsWith('![')) {
-      this.data += '\n' + value;
+      this.addImage(value);
     }
     this.focus = oldFocus;
   }
@@ -111,6 +111,11 @@ export class EditContentComponent {
       }
     }
     this.data = lines.join('\n');
+    this.setData();
+  }
+
+  addImage(value: string) {
+    this.data += '\n' + value;
     this.setData();
   }
 

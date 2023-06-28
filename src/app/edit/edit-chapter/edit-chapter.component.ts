@@ -72,6 +72,7 @@ export class EditChapterComponent {
       return;
     }
     this.currentPage++;
+    this.pageInput = this.currentPage + 1;
     window.scrollTo({ top: 0 });
   }
 
@@ -80,6 +81,7 @@ export class EditChapterComponent {
       return;
     }
     this.currentPage--;
+    this.pageInput = this.currentPage + 1;
     window.scrollTo({ top: 0 });
   }
 

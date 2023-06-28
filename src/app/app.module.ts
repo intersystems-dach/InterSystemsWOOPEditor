@@ -43,6 +43,7 @@ import { ChangePasswordComponent } from './user-input/change-password/change-pas
 import { DeleteUserComponent } from './user-input/delete-user/delete-user.component';
 import { EditChapterMetaDataComponent } from './edit/edit-chapter-meta-data/edit-chapter-meta-data.component';
 import { GetHelpComponent } from './get-help/get-help.component';
+import { AddImageComponent } from './user-input/add-image/add-image.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,6 +82,7 @@ import { GetHelpComponent } from './get-help/get-help.component';
     DeleteUserComponent,
     EditChapterMetaDataComponent,
     GetHelpComponent,
+    AddImageComponent,
   ],
   imports: [
     BrowserModule,

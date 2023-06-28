@@ -2,6 +2,8 @@ import { Component, Input } from '@angular/core';
 import { Chapter, UserManger, VerifyCache } from 'src/utils/classes';
 import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ChaptermanagerService } from '../services/chaptermanager.service';
+import { LocalStorageService } from '../services/local-storage.service';
 /* const { mdToPdf } = require('md-to-pdf'); */
 
 import pdfMake from 'pdfmake/build/pdfmake';
@@ -11,8 +13,6 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 import htmlToPdfmake from 'html-to-pdfmake';
-import { ChaptermanagerService } from '../services/chaptermanager.service';
-import { LocalStorageService } from '../services/local-storage.service';
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',

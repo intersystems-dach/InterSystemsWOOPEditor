@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./markdown-editor.component.sass'],
 })
 export class MarkdownEditorComponent {
+  addImageOpened = false;
+
   @Output() eventEmitter = new EventEmitter<string>();
 
   constructor(
@@ -19,32 +21,20 @@ export class MarkdownEditorComponent {
     this.eventEmitter.emit(value);
   }
 
-  uploadImage() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    input.onchange = (event: any) => {
-      const file = event.target.files[0];
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => {
-        // get as binary
-        const binary = reader.result as ArrayBuffer;
-        /* this.apiService.uploadImage(file.name, base64).subscribe((res) => {
-          console.log(res);
-        }); */
-        this.apiService.uploadImage(file.name, binary).subscribe((res) => {
-          console.log(res);
-        });
-        this.emit(
-          `![${file.name}](http://${IrisinterfaceService.host}:${IrisinterfaceService.port}/woop/image/get/${file.name}){width:100%}`
-        );
-      };
-    };
-    input.click();
+  addImage(img: string) {
+    if (img !== '') {
+      this.emit(img);
+    }
+    this.addImageOpened = false;
   }
 
-  addImage() {}
+  openAddImage() {
+    this.addImageOpened = true;
+  }
+
+  closeAddImage() {
+    this.addImageOpened = false;
+  }
 
   help() {
     const url = this.router.serializeUrl(
