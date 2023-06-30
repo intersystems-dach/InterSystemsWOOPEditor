@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IrisinterfaceService } from './irisinterface.service';
+import { UserManger } from 'src/utils/classes';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +9,16 @@ import { IrisinterfaceService } from './irisinterface.service';
 export class LocalStorageService {
   rememberPage: boolean = true;
 
-  constructor() {
+  constructor(private router: Router) {
     this.rememberPage = this.getRememberPage();
+    if (this.getStayLoggedIn()) {
+      const username = this.getUserName();
+      const password = this.getPassword();
+      if (username != null && password != null) {
+        this.router.navigate(['/login']);
+        this.setStayLoggedIn(true);
+      }
+    }
   }
 
   getRememberPage(): boolean {
@@ -93,6 +103,18 @@ export class LocalStorageService {
 
   setUserName(userName: string) {
     localStorage.setItem('userName', userName);
+  }
+
+  setStayLoggedIn(stayLoggedIn: boolean) {
+    localStorage.setItem('stayLoggedIn', stayLoggedIn ? 'true' : 'false');
+  }
+
+  getStayLoggedIn(): boolean {
+    let stayLoggedIn = localStorage.getItem('stayLoggedIn');
+    if (stayLoggedIn == null) {
+      return false;
+    }
+    return stayLoggedIn == 'true';
   }
 
   removeUserName() {

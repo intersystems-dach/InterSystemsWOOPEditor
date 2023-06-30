@@ -17,12 +17,15 @@ export class LogInComponent {
   wrongMessage: string = '';
   type: string = 'password';
   rememberMe: boolean = false;
+  stayLoggedIn: boolean = false;
 
   constructor(
     private apiService: IrisinterfaceService,
     private location: Location,
     private localStorageService: LocalStorageService
   ) {
+    this.rememberMe = localStorageService.getRememberPage();
+    this.stayLoggedIn = localStorageService.getStayLoggedIn();
     let username = localStorageService.getUserName();
     if (username != null) {
       this.entereduserName = username;
@@ -43,10 +46,11 @@ export class LogInComponent {
             UserManger.userLevel = data.level;
             UserManger.userName = data.username;
             UserManger.password = this.enteredPassword;
-            if (this.rememberMe) {
+            if (this.rememberMe || this.stayLoggedIn) {
               this.localStorageService.setUserName(this.entereduserName);
               this.localStorageService.setPassword(this.enteredPassword);
             }
+            this.localStorageService.setStayLoggedIn(this.stayLoggedIn);
             this.close();
           }
         },

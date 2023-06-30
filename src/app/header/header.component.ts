@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
+import { LocalStorageService } from '../services/local-storage.service';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent {
 
   constructor(
     private router: Router,
-    private colorSchemeService: ColorSchemeService
+    private colorSchemeService: ColorSchemeService,
+    private localStorageService: LocalStorageService
   ) {}
 
   logIn() {
@@ -23,6 +25,9 @@ export class HeaderComponent {
   logOut() {
     UserManger.userLevel = 0;
     UserManger.userName = '';
+    this.localStorageService.removePassword();
+    this.localStorageService.removeUserName();
+    this.localStorageService.setStayLoggedIn(false);
   }
 
   goBack() {

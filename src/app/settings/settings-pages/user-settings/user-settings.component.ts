@@ -35,6 +35,7 @@ export class UserSettingsComponent {
     UserManger.userName = '';
     this.localStorageService.removePassword();
     this.localStorageService.removeUserName();
+    this.localStorageService.setStayLoggedIn(false);
   }
 
   getUserLevel() {

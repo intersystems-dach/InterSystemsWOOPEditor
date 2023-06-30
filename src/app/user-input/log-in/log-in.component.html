@@ -23,6 +23,10 @@
     <input type="checkbox" [(ngModel)]="rememberMe" />
     <p class="label">Remember me</p>
   </div>
+  <div class="stayLoggedIn">
+    <input type="checkbox" [(ngModel)]="stayLoggedIn" />
+    <p class="label">Stay logged in</p>
+  </div>
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
     Submit
   </button>
