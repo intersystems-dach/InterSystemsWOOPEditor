@@ -12,12 +12,14 @@ import { AddUserComponent } from './user-input/add-user/add-user.component';
 import { ChangePasswordComponent } from './user-input/change-password/change-password.component';
 import { DeleteUserComponent } from './user-input/delete-user/delete-user.component';
 import { GetHelpComponent } from './get-help/get-help.component';
+import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LogInComponent },
   { path: 'user/add', component: AddUserComponent },
   { path: 'user/delete', component: DeleteUserComponent },
+  { path: 'user/make/admin', component: MakeAdminComponent },
   { path: 'user/change/password', component: ChangePasswordComponent },
   { path: 'login', component: LogInComponent },
   { path: 'error', component: ErrorPageComponent },

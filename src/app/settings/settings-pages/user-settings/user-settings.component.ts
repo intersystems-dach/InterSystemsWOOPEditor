@@ -26,6 +26,10 @@ export class UserSettingsComponent {
     this.router.navigate(['user/delete']);
   }
 
+  makeUserAdmin() {
+    this.router.navigate(['user/make/admin']);
+  }
+
   logIn() {
     this.router.navigate(['login']);
   }

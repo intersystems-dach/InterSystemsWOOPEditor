@@ -313,6 +313,40 @@ export class IrisinterfaceService {
       );
   }
 
+  makeUserAdmin(
+    username: string,
+    password: string,
+    userNameToMakeAdmin: string
+  ): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/user/make/admin',
+        {
+          userName: username,
+          password: password,
+          userNameToMakeAdmin: userNameToMakeAdmin,
+        }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 404) {
+            throw new Error('User not found');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else {
+            console.log(err.message);
+            throw new Error('unknown error: ' + err.status);
+          }
+        })
+      );
+  }
+
   changePassword(
     username: string,
     password: string,

@@ -1,0 +1,33 @@
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>Make User Admin</h1>
+  <p class="wrong" *ngIf="isWrong">{{ wrongMessage }}</p>
+  <button class="closeButton" (click)="close()">X</button>
+  <input
+    type="text"
+    class="userNameInput"
+    name="userName"
+    [(ngModel)]="entereduserName"
+    (keydown.enter)="submit()"
+    placeholder="Username to make admin"
+  />
+  <input
+    type="password"
+    class="passwordInput"
+    name="password"
+    [(ngModel)]="enteredPassword"
+    (keydown.enter)="submit()"
+    placeholder="Your Password"
+  />
+  <input
+    type="password"
+    class="confirmPasswordInput"
+    name="confirmPassword"
+    [(ngModel)]="enteredConfirmPassword"
+    (keydown.enter)="submit()"
+    placeholder="Confirm Your Password"
+  />
+  <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
+    Make Admin
+  </button>
+</div>

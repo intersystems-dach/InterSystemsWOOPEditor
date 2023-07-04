@@ -19,11 +19,11 @@
     <button class="action" (click)="addUser()">Add</button>
   </div>
   <div class="row" *ngIf="getUserLevel() == 2">
-    <p class="label">Delete User</p>
-    <button class="action red" (click)="deleteUser()">Delete</button>
+    <p class="label">Configure Admin Rights</p>
+    <button class="action" (click)="makeUserAdmin()">Configure</button>
   </div>
   <div class="row" *ngIf="getUserLevel() == 2">
-    <p class="label">Configure Admin Rights</p>
-    <button class="action" (click)="addUser()">Configure</button>
+    <p class="label">Delete User</p>
+    <button class="action red" (click)="deleteUser()">Delete</button>
   </div>
 </div>

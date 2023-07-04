@@ -44,6 +44,7 @@ import { DeleteUserComponent } from './user-input/delete-user/delete-user.compon
 import { EditChapterMetaDataComponent } from './edit/edit-chapter-meta-data/edit-chapter-meta-data.component';
 import { GetHelpComponent } from './get-help/get-help.component';
 import { AddImageComponent } from './user-input/add-image/add-image.component';
+import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,6 +84,7 @@ import { AddImageComponent } from './user-input/add-image/add-image.component';
     EditChapterMetaDataComponent,
     GetHelpComponent,
     AddImageComponent,
+    MakeAdminComponent,
   ],
   imports: [
     BrowserModule,
