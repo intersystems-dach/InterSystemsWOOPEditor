@@ -172,7 +172,7 @@ export class EditChapterComponent {
     if (EditChapterComponent.autoSave) {
       EditChapterComponent.interval = setInterval(() => {
         this.save(false);
-      }, 5000);
+      }, 10000);
     } else {
       clearInterval(EditChapterComponent.interval);
     }

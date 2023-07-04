@@ -7,4 +7,142 @@
     workshop. It will help you to determine the best order to present the
     material.
   </p>
+  <h2>Connect to an instance</h2>
+  <p>
+    Click on the <b>Settings Icon</b> in the top right corner of the screen.
+    Select <i>Advanced</i> and go to the <i>Server</i> tab. Type in the host
+    adress and port number of the instance you want to connect to and click
+    <b>Connect</b>. You can store the connection information by giving the
+    connection a name and click on <b>Save</b>.You can then select the
+    connection from the <i>Connection</i> dropdown menu.
+  </p>
+  <h2>Navigation</h2>
+  <ul>
+    <li>
+      You can always click on the logo in the top left corner to go back to the
+      home screen.
+    </li>
+    <li>
+      You can click on <i>Log in</i> in the top right corner to log in to
+      account or when you are already logged in, you can click on your name to
+      log out of your account.
+    </li>
+    <li>
+      You can click on the <b>Settings Icon</b> in the top right corner of the
+      screen to open the shortcut settings. From there you can select
+      <i>Advanced</i> to open the advanced settings.
+    </li>
+  </ul>
+  <h2>Create a new Chapter</h2>
+  <p>
+    <i> You have to be logged in to create a new chapter! </i>
+  </p>
+  <ol>
+    <li>Go to the home screen.</li>
+    <li>Click on the <b>+</b> icon.</li>
+    <li>
+      Fill in the following information:
+      <ul>
+        <li>
+          <b>Name</b> - The name of the chapter. This will be displayed in the
+          chapter list.
+        </li>
+        <li><b>Language</b> - The language of the chapter.</li>
+        <li>
+          <b>Password</b> - You can set a password for the chapter. If you leave
+          this field empty, the chapter will be public.
+        </li>
+        <li>
+          <b>Private</b> - If enabeled the chapter will be private and only
+          accessible by you and the admins.
+        </li>
+        <li>
+          <b>Description</b> - Add a description to the chapter. This will be
+          displayed in the chapter list.
+        </li>
+      </ul>
+    </li>
+    <li>Click on <b>Create</b> to save the chapter.</li>
+  </ol>
+  <h2>Edit a chapter</h2>
+  <p>
+    <i> You have to be logged in to edit a chapter! </i>
+  </p>
+  <p>
+    You can edit a chapter by clicking on the <b>Edit</b> icon in the chapter
+    list. Write the content of your chapters in markdown. You can find a
+    markdown cheat sheet by clicking on the <b>Help</b> button in the editor.
+  </p>
+  <p>
+    You can add a hint and a result on each page of your chapter. If you leave
+    the hint or result empty, they will not be displayed.
+  </p>
+  <p>
+    You can add and remove a page by clicking on <b>Add Page</b> and
+    <b>Remove Page</b>. To show a Preview of your chapter, click on
+    <b>Preview</b>. To save your changes, click on <b>Save</b>. You can see if
+    there are unsaved changes by looking at the <b>Save</b> button. If there
+    <b>*Save</b>
+    is displayed, there are unsaved changes. You can turn on autosave by
+    clicking on
+    <b>Autosave</b>. If autosave is turned on, your changes will be saved every
+    10 seconds. You can edit the metadata of your chapter by clicking on
+    <b>Edit meta data</b>.
+  </p>
+  <h2>Create your own instance</h2>
+  <p>
+    Before you can create your own instance, you need to have a InterSystems
+    IRIS Dataplatform instance running.
+  </p>
+  <ol>
+    <li>
+      Download the
+      <a href="" target="_blank"
+        >InterSystems Workshop Organizer and Optimizer Program</a
+      >
+      from Github.
+    </li>
+    <li>
+      In the Management Portal, go to <i>System Explorer</i> and select
+      <i>Classes</i>. Click on <b>Import</b> and select the <i>cls</i> folder
+      from the downloaded program.
+    </li>
+    <li>
+      Open an InterSystems IRIS terminal and go to the namespace where you just
+      imported the classes.
+    </li>
+    <li>
+      Run the following command: <code>Do ##class(WOOP.Installer).SetUp()</code>
+    </li>
+    <li>
+      After successful installation, you can access connect to the instance by
+      clicking on the <b>Settings Icon</b> in the top right corner of the
+      screen. Select <i>Advanced</i> and go to the <i>Server</i> tab. Type in
+      the host adress and port number of the instance you want to connect to and
+      click <b>Connect</b>.
+    </li>
+    <li>
+      You can log in with the following credentials: <br />
+      <b>Username:</b> _system <br />
+      <b>Password:</b> woop
+    </li>
+    <li>
+      Then go to the <i>User</i> tab and click on <b>Change Password</b> to
+      change the password.
+    </li>
+  </ol>
+  <div style="font-size: 10px">
+    <br />
+    <br />
+    <p>
+      by
+      <a href="https://github.com/phil1436" target="_blank"> Philipp B. </a>
+    </p>
+    <p>
+      <i>
+        This application is not supported by InterSystems Corporation. Please be
+        notified that you use it at your own responsibility.
+      </i>
+    </p>
+  </div>
 </div>

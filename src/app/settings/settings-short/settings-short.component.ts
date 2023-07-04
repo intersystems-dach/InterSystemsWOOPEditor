@@ -66,6 +66,9 @@ export class SettingsShortComponent {
   goToAdvancedSettings() {
     this.router.navigate(['/settings/storage']);
   }
+  hoToHelp() {
+    this.router.navigate(['/help']);
+  }
 
   toggleDarkMode() {
     this.colorSchemeService.darkModeEnabled =
