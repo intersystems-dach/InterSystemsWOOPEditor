@@ -6,13 +6,13 @@ import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { LocalStorageService } from '../services/local-storage.service';
 /* const { mdToPdf } = require('md-to-pdf'); */
 
-import pdfMake from 'pdfmake/build/pdfmake';
+/* import pdfMake from 'pdfmake/build/pdfmake';
 
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-import htmlToPdfmake from 'html-to-pdfmake';
+import htmlToPdfmake from 'html-to-pdfmake'; */
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -142,7 +142,7 @@ export class ChapterComponent {
     this.resultVisible = true;
   }
 
-  export(event: string) {
+  /* export(event: string) {
     this.exportOptionsVisible = !this.exportOptionsVisible;
     if (event == 'close') {
       return;
@@ -163,14 +163,9 @@ export class ChapterComponent {
       content += '\n\n';
     }
     if (asPDf) {
-      /* let pdf = await mdToPdf(
-      { content: content },
-      { dest: 'path/to/output.pdf' }
-    ); */
+
       let html = this.mdService.parse(content);
-      /* let logo =
-      '<img src="assets/imgs/InterSystemsWOOPLogo.png" width="100" height="100" />';
-    html = logo + html; */
+
       let pdfContent = htmlToPdfmake(html);
 
       const documentDefinition = { content: pdfContent };
@@ -186,7 +181,7 @@ export class ChapterComponent {
       a.click();
       document.body.removeChild(a);
     }
-  }
+  } */
 
   goBack() {
     this.router.navigate(['/']);

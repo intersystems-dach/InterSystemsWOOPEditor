@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { IrisinterfaceService } from '../../../services/irisinterface.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-server-settings',
@@ -13,7 +14,10 @@ export class ServerSettingsComponent {
   host: string = '';
   port: number = 0;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private router: Router
+  ) {
     this.host = localStorageService.getServerHost();
     this.port = localStorageService.getServerPort();
   }
@@ -21,7 +25,7 @@ export class ServerSettingsComponent {
   connect() {
     this.localStorageService.setServerHost(this.host);
     this.localStorageService.setServerPort(this.port);
-    window.location.href = '/';
+    this.router.navigate(['/']);
   }
 
   removeConnection() {
