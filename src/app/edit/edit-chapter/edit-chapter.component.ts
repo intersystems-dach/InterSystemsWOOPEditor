@@ -3,6 +3,7 @@ import { Chapter, Page, UserManger } from 'src/utils/classes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChaptermanagerService } from 'src/app/services/chaptermanager.service';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -28,7 +29,8 @@ export class EditChapterComponent {
     private apiService: IrisinterfaceService,
     private router: Router,
     private route: ActivatedRoute,
-    private chapterManager: ChaptermanagerService
+    private chapterManager: ChaptermanagerService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -53,6 +55,11 @@ export class EditChapterComponent {
         this.router.navigate(['/login']);
       }
     });
+    let pageLocalStorage = this.localStorageService.getPageForChapter(
+      this.chapterName
+    );
+    this.currentPage = pageLocalStorage;
+    this.pageInput = this.currentPage + 1;
   }
 
   onPageInput() {
@@ -88,6 +95,7 @@ export class EditChapterComponent {
   addPage(): void {
     this.chapter.Pages.push(new Page('', '', ''));
     this.currentPage = this.chapter.Pages.length - 1;
+    this.pageInput = this.currentPage + 1;
     window.scrollTo({ top: 0 });
     this.changes = true;
   }
@@ -100,9 +108,11 @@ export class EditChapterComponent {
     if (value) {
       this.chapter.Pages.splice(this.currentPage, 1);
       this.currentPage = this.currentPage - 1;
+
       if (this.currentPage < 0) {
         this.currentPage = 0;
       }
+      this.pageInput = this.currentPage + 1;
       window.scrollTo({ top: 0 });
       this.changes = true;
     }
@@ -132,6 +142,7 @@ export class EditChapterComponent {
     this.changes = true;
   }
 
+  @HostListener('document:keydown.control.alt.p', ['$event'])
   togglePreview() {
     this.preview = !this.preview;
     window.scrollTo({ top: 0 });

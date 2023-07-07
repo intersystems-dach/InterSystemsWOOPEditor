@@ -4,6 +4,7 @@ import {
   Output,
   EventEmitter,
   HostListener,
+  ViewChild,
 } from '@angular/core';
 import { Page } from 'src/utils/classes';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -19,6 +20,7 @@ export class EditContentComponent {
   @Output() changeEmitter = new EventEmitter<Page>();
 
   data: string = '';
+  dataBefore: string | undefined = undefined;
   focus = false;
   private slectionContent: string = '';
   private selectionStart: number = -1;
@@ -26,6 +28,21 @@ export class EditContentComponent {
 
   constructor(private localStorageService: LocalStorageService) {
     this.getData();
+  }
+
+  handleKeydown(event: any) {
+    if (event.key == 'Tab') {
+      event.preventDefault();
+      var start = event.target.selectionStart;
+      var end = event.target.selectionEnd;
+      event.target.value =
+        event.target.value.substring(0, start) +
+        '\t' +
+        event.target.value.substring(end);
+      event.target.selectionStart = event.target.selectionEnd = start + 1;
+      this.data = event.target.value;
+      this.setData();
+    }
   }
 
   ngOnInit() {
@@ -158,6 +175,14 @@ export class EditContentComponent {
     this.setData();
   }
 
+  @HostListener('document:keydown.control.z', ['$event'])
+  setToDatBefore() {
+    if (!this.focus || !this.dataBefore) return;
+    this.data = this.dataBefore;
+    this.dataBefore = undefined;
+    this.setData();
+  }
+
   getData() {
     if (this.type === 'content') this.data = this.page.Content;
     if (this.type === 'hint') this.data = this.page.Hint;
@@ -165,6 +190,7 @@ export class EditContentComponent {
   }
 
   setData() {
+    this.dataBefore = this.data;
     //this.autoComplete();
     if (this.type === 'content') this.page.Content = this.data;
     if (this.type === 'hint') this.page.Hint = this.data;

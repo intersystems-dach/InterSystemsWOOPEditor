@@ -3,7 +3,7 @@
   <img src="src/assets/imgs/InterSystemsWOOPLogo.png" alt="InterSystemsWOOPLogo" width="40%"/>
   <h1>InterSystems Workshop Organizer and Optimizer Program</h1>
   <p>
-     Description
+    <b>InterSystems WOOP</b> is a web application for organizing and optimizing workshops.
   </p>
 </div>
 
@@ -22,20 +22,12 @@
 
 ---
 
-- [Bugs](#bugs)
-
----
-
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.1.
 
 ---
 
-## Bugs
-
-- _no known bugs_
-
----
-
 by [Philipp B.](https://github.com/phil1436)
+
+_This application is not supported by InterSystems Corporation. Please be notified that you use it at your own responsibility_
 
 <!-- ng deploy --base-href=https://phil1436.github.io/InterSystemsWOOP/ -->

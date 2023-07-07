@@ -84,3 +84,15 @@ export class VerifyCache {
     this.verifyCache.push(chapterName);
   }
 }
+
+export class Version {
+  public version: string;
+  public date: string;
+  public changes: string[];
+
+  constructor(version: string, date: string, changes: string[]) {
+    this.version = version;
+    this.date = date;
+    this.changes = changes;
+  }
+}

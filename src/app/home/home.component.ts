@@ -3,6 +3,7 @@ import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { IrisinterfaceService } from '../services/irisinterface.service';
+import { VersionService } from '../services/version.service';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +18,8 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private apiService: IrisinterfaceService,
-    private chapterManager: ChaptermanagerService
+    private chapterManager: ChaptermanagerService,
+    private versionService: VersionService
   ) {}
 
   ngOnInit(): void {
@@ -52,6 +54,12 @@ export class HomeComponent {
 
   selectEditChapter(chapterName: string) {
     this.router.navigate(['/chapter', chapterName.replace(/\s/g, '-'), 'edit']);
+  }
+  goToWhatsNew() {
+    this.router.navigate(['/whats-new']);
+  }
+  getLatestVersion(): string {
+    return this.versionService.getLatestVersion().version;
   }
 
   getChapters() {

@@ -1,4 +1,12 @@
 <div class="container">
+  <div class="row" *ngIf="getUserLevel() > 0">
+    <p class="label">Export chapter</p>
+    <button class="action" (click)="showSelectChapter = true">Export</button>
+  </div>
+  <div class="row" *ngIf="getUserLevel() > 0">
+    <p class="label">Import chapter</p>
+    <button class="action" (click)="importChapter()">Import</button>
+  </div>
   <div class="row">
     <p class="label">
       {{ "Remember Page: " + (getRememberPage() ? "ON" : "OFF") }}
@@ -12,3 +20,8 @@
     <button class="red action" (click)="clearStorage()">Clear</button>
   </div>
 </div>
+
+<app-select-chapter
+  *ngIf="showSelectChapter"
+  (chapterEmitter)="exportChapter($event)"
+></app-select-chapter>

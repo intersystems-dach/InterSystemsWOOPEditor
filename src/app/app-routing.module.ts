@@ -13,6 +13,7 @@ import { ChangePasswordComponent } from './user-input/change-password/change-pas
 import { DeleteUserComponent } from './user-input/delete-user/delete-user.component';
 import { GetHelpComponent } from './get-help/get-help.component';
 import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
+import { WhatsNewComponent } from './whats-new/whats-new.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'settings/:settingsName', component: SettingsAdvancedComponent },
   { path: 'markdown', component: MarkdownCheatSheetComponent },
   { path: 'help', component: GetHelpComponent },
+  { path: 'whats-new', component: WhatsNewComponent },
 ];
 
 @NgModule({

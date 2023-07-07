@@ -13,13 +13,20 @@ export class ServerSettingsComponent {
   name: string = '';
   host: string = '';
   port: number = 0;
+  apiVersion: string = '';
 
   constructor(
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    private apiService: IrisinterfaceService
   ) {
     this.host = localStorageService.getServerHost();
     this.port = localStorageService.getServerPort();
+    this.apiService.getVersion().subscribe({
+      next: (data: any) => {
+        this.apiVersion = data.version;
+      },
+    });
   }
 
   connect() {

@@ -74,7 +74,6 @@ export class ChapterComponent {
     let pageLocalStorage = this.localStorageService.getPageForChapter(
       this.chapterName
     );
-    console.log(pageLocalStorage);
     this.currentPage = pageLocalStorage;
     this.pageInput = this.currentPage + 1;
   }

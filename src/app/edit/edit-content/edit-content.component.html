@@ -3,6 +3,8 @@
     (eventEmitter)="onEditorInput($event)"
   ></app-markdown-editor>
   <textarea
+    #editor
+    (keydown)="handleKeydown($event)"
     [style.font-size]="getFontSize() + 'px'"
     [(ngModel)]="data"
     (ngModelChange)="setData()"

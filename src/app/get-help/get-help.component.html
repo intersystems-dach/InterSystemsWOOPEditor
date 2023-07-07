@@ -1,6 +1,7 @@
 <app-header class="sticky"></app-header>
 
 <div class="container">
+  <button (click)="goBack()" class="backButton">Back</button>
   <h1>InterSystems Workshop Organizer and Optimizer Program <i>HELP</i></h1>
   <p>
     This program is designed to help you organize and optimize your InterSystems
@@ -114,21 +115,13 @@
     <li>
       Run the following command: <code>Do ##class(WOOP.Installer).SetUp()</code>
     </li>
+    <li>Follow the instructions on the screen.</li>
     <li>
       After successful installation, you can access connect to the instance by
       clicking on the <b>Settings Icon</b> in the top right corner of the
       screen. Select <i>Advanced</i> and go to the <i>Server</i> tab. Type in
       the host adress and port number of the instance you want to connect to and
       click <b>Connect</b>.
-    </li>
-    <li>
-      You can log in with the following credentials: <br />
-      <b>Username:</b> _system <br />
-      <b>Password:</b> woop
-    </li>
-    <li>
-      Then go to the <i>User</i> tab and click on <b>Change Password</b> to
-      change the password.
     </li>
   </ol>
   <div style="font-size: 10px">

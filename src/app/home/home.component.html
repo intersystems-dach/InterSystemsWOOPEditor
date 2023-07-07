@@ -19,3 +19,9 @@
     (click)="goToServerSettings()"
   ></div>
 </div>
+
+<div class="version">
+  <p (click)="goToWhatsNew()">
+    <i>{{ "v" + getLatestVersion() }}</i>
+  </p>
+</div>

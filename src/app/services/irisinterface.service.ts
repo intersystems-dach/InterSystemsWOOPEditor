@@ -36,6 +36,16 @@ export class IrisinterfaceService {
       );
   }
 
+  getVersion(): Observable<any> {
+    return this.http.get(
+      'http://' +
+        IrisinterfaceService.host +
+        ':' +
+        IrisinterfaceService.port +
+        '/woop/version'
+    );
+  }
+
   /**
    * Checks if the user exists and if the password is correct
    * @param userName The userName
@@ -174,6 +184,36 @@ export class IrisinterfaceService {
             throw new Error('Chapter not found');
           } else if (err.status === 500) {
             throw new Error('Chapter could not be updated');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
+  importChapter(
+    username: string,
+    password: string,
+    chapter: Chapter
+  ): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/chapter/import?username=' +
+          username +
+          '&password=' +
+          password,
+        chapter
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 500) {
+            throw new Error('Chapter could not be imported');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
           } else throw new Error('unknown error: ' + err.status);

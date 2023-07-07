@@ -45,6 +45,9 @@ import { EditChapterMetaDataComponent } from './edit/edit-chapter-meta-data/edit
 import { GetHelpComponent } from './get-help/get-help.component';
 import { AddImageComponent } from './user-input/add-image/add-image.component';
 import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
+import { AboutSettingsComponent } from './settings/settings-pages/about-settings/about-settings.component';
+import { WhatsNewComponent } from './whats-new/whats-new.component';
+import { SelectChapterComponent } from './user-input/select-chapter/select-chapter.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,6 +88,9 @@ import { MakeAdminComponent } from './user-input/make-admin/make-admin.component
     GetHelpComponent,
     AddImageComponent,
     MakeAdminComponent,
+    AboutSettingsComponent,
+    WhatsNewComponent,
+    SelectChapterComponent,
   ],
   imports: [
     BrowserModule,
