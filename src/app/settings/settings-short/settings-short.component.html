@@ -21,6 +21,7 @@
   </div>
   <button (click)="goToAdvancedSettings()">Advanced</button>
   <button (click)="hoToHelp()">Help</button>
+  <button (click)="deploy()" *ngIf="getuserLevel() > 0">Deploy</button>
   <button
     class="last"
     (click)="toggleLogIn()"

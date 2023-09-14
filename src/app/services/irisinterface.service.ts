@@ -420,4 +420,32 @@ export class IrisinterfaceService {
         })
       );
   }
+
+  deployAll(username: string, password: string): Observable<any> {
+    return this.http
+      .get(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/deploy/all?username=' +
+          username +
+          '&password=' +
+          password
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            throw new Error('Unauthorized');
+          } else if (err.status === 500) {
+            throw new Error('Something went wrong');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else {
+            console.log(err.message);
+            throw new Error('unknown error: ' + err.status);
+          }
+        })
+      );
+  }
 }

@@ -34,7 +34,7 @@ export class AddImageComponent {
 
   selectTheImage() {
     this.imageEmitter.emit(
-      `![${this.selectedImage}](http://${IrisinterfaceService.host}:${IrisinterfaceService.port}/woop/image/get/${this.selectedImage}){width:100%}`
+      `?[${this.selectedImage}](${this.selectedImage}){width:100%}`
     );
   }
 
@@ -50,10 +50,14 @@ export class AddImageComponent {
         const binary = reader.result as ArrayBuffer;
         this.apiService.uploadImage(file.name, binary).subscribe({
           next: (res) => {
-            alert('Image uploaded!');
-            this.imageEmitter.emit(
-              `![${file.name}](http://${IrisinterfaceService.host}:${IrisinterfaceService.port}/woop/image/get/${file.name}){width:100%}`
-            );
+            if (res.status) {
+              alert('Image uploaded: ' + res.newName);
+              this.imageEmitter.emit(
+                `?[${res.newName}](${res.newName}){width:100%}`
+              );
+            } else {
+              alert('Could not upload image!');
+            }
           },
           error: (err) => {
             alert('Error uploading image:' + err.message);

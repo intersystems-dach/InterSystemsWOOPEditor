@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MarkdownService } from 'ngx-markdown';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../services/local-storage.service';
+import { IrisinterfaceService } from '../services/irisinterface.service';
 
 @Component({
   selector: 'app-markdown-content',
@@ -25,6 +26,7 @@ export class MarkdownContentComponent {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
+      console.log(lines[i]);
       if (lines[i].startsWith('~~~')) {
         // code window
         let language = lines[i].replace('~~~', '');
@@ -54,7 +56,7 @@ export class MarkdownContentComponent {
           language: language,
           title: title,
         });
-      } else if (lines[i].startsWith('![')) {
+      } else if (lines[i].startsWith('![') || lines[i].startsWith('?[')) {
         //image
         let name = lines[i].split('[')[1].split(']')[0];
         let url = lines[i].split('(')[1].split(')')[0];
@@ -62,9 +64,16 @@ export class MarkdownContentComponent {
         if (lines[i].split(')')[1].includes('{')) {
           style = lines[i].split('{')[1].split('}')[0];
         }
-        if (url.toLowerCase().includes('woop/image/get')) {
+        if (lines[i].startsWith('?[')) {
+          let urlToImage =
+            'http://' +
+            IrisinterfaceService.host +
+            ':' +
+            IrisinterfaceService.port +
+            '/woop/image/get/' +
+            url;
           let newURL = await this.http
-            .get(url, { responseType: 'text' })
+            .get(urlToImage, { responseType: 'text' })
             .toPromise()
             .then((res) => {
               return res;
@@ -86,7 +95,8 @@ export class MarkdownContentComponent {
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
-          !lines[i].startsWith('![')
+          !lines[i].startsWith('![') &&
+          !lines[i].startsWith('?[')
         ) {
           code += lines[i] + '\n';
           i++;

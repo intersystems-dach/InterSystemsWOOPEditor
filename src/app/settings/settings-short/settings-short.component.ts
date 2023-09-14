@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../../services/color-scheme.service';
 import { LocalStorageService } from '../../services/local-storage.service';
+import { IrisinterfaceService } from '../../services/irisinterface.service';
 
 @Component({
   selector: 'app-settings-short',
@@ -15,7 +16,8 @@ export class SettingsShortComponent {
   constructor(
     private router: Router,
     private colorSchemeService: ColorSchemeService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private apiService: IrisinterfaceService
   ) {}
 
   increaseFontSize() {
@@ -49,6 +51,23 @@ export class SettingsShortComponent {
     this.localStorageService.removePassword();
     this.localStorageService.removeUserName();
     this.localStorageService.setStayLoggedIn(false);
+  }
+
+  deploy() {
+    this.apiService
+      .deployAll(UserManger.userName, UserManger.password)
+      .subscribe({
+        next: (data) => {
+          if (data.status) {
+            alert(data.message);
+          } else {
+            alert('ERROR: ' + data.message);
+          }
+        },
+        error: (err: any) => {
+          alert(err.message);
+        },
+      });
   }
 
   getuserLevel() {

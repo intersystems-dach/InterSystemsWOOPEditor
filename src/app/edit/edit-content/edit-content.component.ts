@@ -77,6 +77,8 @@ export class EditContentComponent {
       this.code();
     } else if (value.startsWith('![')) {
       this.addImage(value);
+    } else if (value.startsWith('?[')) {
+      this.addImage(value);
     }
     this.focus = oldFocus;
   }
