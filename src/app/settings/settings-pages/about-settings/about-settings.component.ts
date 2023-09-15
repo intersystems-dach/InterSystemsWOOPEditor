@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { VersionService } from 'src/app/services/version.service';
+import { MetaDataService } from '../../../services/meta-data.service';
 
 @Component({
   selector: 'app-about-settings',
@@ -8,7 +8,10 @@ import { VersionService } from 'src/app/services/version.service';
   styleUrls: ['./about-settings.component.sass', '../stylesheet.sass'],
 })
 export class AboutSettingsComponent {
-  constructor(private router: Router, private versionService: VersionService) {}
+  constructor(
+    private router: Router,
+    private metaDataService: MetaDataService
+  ) {}
 
   getHelp() {
     this.router.navigate(['help']);
@@ -19,6 +22,10 @@ export class AboutSettingsComponent {
   }
 
   getVersion() {
-    return this.versionService;
+    return this.metaDataService.version;
+  }
+
+  goToImpressum() {
+    this.router.navigate(['impressum']);
   }
 }

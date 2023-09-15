@@ -14,6 +14,7 @@ import { DeleteUserComponent } from './user-input/delete-user/delete-user.compon
 import { GetHelpComponent } from './get-help/get-help.component';
 import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'markdown', component: MarkdownCheatSheetComponent },
   { path: 'help', component: GetHelpComponent },
   { path: 'whats-new', component: WhatsNewComponent },
+  { path: 'impressum', component: ImpressumComponent },
 ];
 
 @NgModule({

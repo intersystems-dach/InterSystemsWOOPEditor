@@ -48,6 +48,7 @@ import { MakeAdminComponent } from './user-input/make-admin/make-admin.component
 import { AboutSettingsComponent } from './settings/settings-pages/about-settings/about-settings.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { SelectChapterComponent } from './user-input/select-chapter/select-chapter.component';
+import { ImpressumComponent } from './impressum/impressum.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +92,7 @@ import { SelectChapterComponent } from './user-input/select-chapter/select-chapt
     AboutSettingsComponent,
     WhatsNewComponent,
     SelectChapterComponent,
+    ImpressumComponent,
   ],
   imports: [
     BrowserModule,

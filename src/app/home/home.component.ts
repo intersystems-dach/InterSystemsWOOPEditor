@@ -3,7 +3,7 @@ import { UserManger } from 'src/utils/classes';
 import { Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { IrisinterfaceService } from '../services/irisinterface.service';
-import { VersionService } from '../services/version.service';
+import { MetaDataService } from '../services/meta-data.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +19,7 @@ export class HomeComponent {
     private router: Router,
     private apiService: IrisinterfaceService,
     private chapterManager: ChaptermanagerService,
-    private versionService: VersionService
+    private metaDataService: MetaDataService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class HomeComponent {
     this.router.navigate(['/whats-new']);
   }
   getLatestVersion(): string {
-    return this.versionService.getLatestVersion().version;
+    return this.metaDataService.version;
   }
 
   getChapters() {

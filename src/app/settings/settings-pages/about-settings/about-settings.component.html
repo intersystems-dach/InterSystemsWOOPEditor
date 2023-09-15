@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <p class="label">
-      Version: <i>{{ getVersion().getLatestVersion().version }}</i>
+      Version: <i>{{ getVersion() }}</i>
     </p>
     <button class="action" (click)="whatsNew()">Changes</button>
   </div>
@@ -17,6 +17,10 @@
     >
       Report
     </a>
+  </div>
+  <div class="row">
+    <p class="label">Impressum</p>
+    <button class="action" (click)="goToImpressum()">View</button>
   </div>
   <div class="row">
     <p class="label">View on GitHub</p>

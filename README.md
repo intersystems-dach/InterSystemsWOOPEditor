@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <img src="src/assets/imgs/InterSystemsWOOPLogo.png" alt="InterSystemsWOOPLogo" width="40%"/>
-  <h1>InterSystems Workshop Organizer and Optimizer Program</h1>
+  <h1>InterSystems Workshop Organizer and Optimizer Program Editor</h1>
   <p>
     <b>InterSystems WOOP</b> is a web application for organizing and optimizing workshops.
   </p>
@@ -9,14 +9,14 @@
 
 <!-- Badges -->
 <div align="center">
-   <a href="https://github.com/phil1436/InterSystemsWOOP/blob/master/LICENSE">
-       <img src="https://img.shields.io/github/license/phil1436/InterSystemsWOOP" alt="license" />
+   <a href="https://github.com/phil1436/InterSystemsWOOPEditor/blob/master/LICENSE">
+       <img src="https://img.shields.io/github/license/phil1436/InterSystemsWOOPEditor" alt="license" />
    </a>
-   <a href="https://github.com/phil1436/InterSystemsWOOP/stargazers">
-       <img src="https://img.shields.io/github/stars/phil1436/InterSystemsWOOP" alt="stars" />
+   <a href="https://github.com/phil1436/InterSystemsWOOPEditor/stargazers">
+       <img src="https://img.shields.io/github/stars/phil1436/InterSystemsWOOPEditor" alt="stars" />
    </a>
-   <a href="https://github.com/phil1436/InterSystemsWOOP/commits/master">
-       <img src="https://img.shields.io/github/last-commit/phil1436/InterSystemsWOOP" alt="last commit" />
+   <a href="https://github.com/phil1436/InterSystemsWOOPEditor/commits/master">
+       <img src="https://img.shields.io/github/last-commit/phil1436/InterSystemsWOOPEditor" alt="last commit" />
    </a>
 </div>
 
