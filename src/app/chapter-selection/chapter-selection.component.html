@@ -57,6 +57,7 @@
       </div>
     </div>
   </div>
+  <i *ngIf="chapters.length == 0" class="noChapters">No Chapters</i>
   <div class="newButton" *ngIf="getuserLevel() > 0">
     <button (click)="toggleNewChapter()">+</button>
   </div>

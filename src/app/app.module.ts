@@ -49,6 +49,7 @@ import { AboutSettingsComponent } from './settings/settings-pages/about-settings
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { SelectChapterComponent } from './user-input/select-chapter/select-chapter.component';
 import { ImpressumComponent } from './impressum/impressum.component';
+import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,6 +94,7 @@ import { ImpressumComponent } from './impressum/impressum.component';
     WhatsNewComponent,
     SelectChapterComponent,
     ImpressumComponent,
+    SearchBarHeaderComponent,
   ],
   imports: [
     BrowserModule,

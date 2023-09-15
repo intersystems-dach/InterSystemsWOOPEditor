@@ -1,7 +1,6 @@
 <app-header class="sticky"></app-header>
 
 <div class="container" *ngIf="isServerOnline">
-  <app-search-bar></app-search-bar>
 
   <app-chapter-selection
     [chapters]="getChapters()"

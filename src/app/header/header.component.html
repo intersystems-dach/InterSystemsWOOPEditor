@@ -13,19 +13,31 @@
     [src]="
       'assets/imgs/' +
       (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
-      '/settings.png'
+      '/search.png'
     "
-    class="settingsButton"
-    (click)="toggleSettings()"
-    alt="Settings"
+    class="searchButton"
+    (click)="turnOnSearchBar()"
+    alt="Search"
+    *ngIf="enableSearchBar && !searchBarOn"
   />
-  <p class="userLabel" *ngIf="getUserLevel() > 0" (click)="logOut()">
+  <img
+  [src]="
+  'assets/imgs/' +
+  (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+  '/settings.png'
+  "
+  class="settingsButton"
+  (click)="toggleSettings()"
+  alt="Settings"
+  />
+  <p class="userLabel" *ngIf="getUserLevel() > 0 && !searchBarOn" (click)="logOut()" [style.right.px]="enableSearchBar ? 140: 100">
     <i class="userLabelExtended">Log out </i>
     <i>{{ getUserName() }}</i>
     {{ getUserLevel() == 1 ? " " : "Admin " }}
   </p>
-  <p class="userLabel" *ngIf="getUserLevel() == 0" (click)="logIn()">
+  <p class="userLabel" *ngIf="getUserLevel() == 0 && !searchBarOn" (click)="logIn()" [style.right.px]="enableSearchBar ? 140: 100">
     <i>Log in</i>
   </p>
+  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter"></app-search-bar-header>
 </header>
 <app-settings-short *ngIf="showSettings"></app-settings-short>

@@ -1,0 +1,9 @@
+<div [class]="'searchBar ' + (slideOut? 'slideOut':'')">
+  <input
+    type="text"
+    [placeholder]="chapter == null ? 'Search': 'Search in chapter'"
+    [(ngModel)]="searchValue"
+    (ngModelChange)="onSearchChange()"
+  />
+  <button class="closeButton" (click)="closeSearchBar()" >X</button>
+</div>

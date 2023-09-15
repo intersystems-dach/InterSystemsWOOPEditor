@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import * as Prism from 'prismjs';
+import { ColorSchemeService } from '../services/color-scheme.service';
 
 @Component({
   selector: 'app-code-window',
@@ -14,6 +15,12 @@ export class CodeWindowComponent {
 
   @ViewChild('codeEle') codeEle!: ElementRef;
 
+  copied: boolean = false;
+
+  constructor(
+    private colorSchemeService: ColorSchemeService
+  ) {}
+
   ngAfterViewInit() {
     Prism.highlightElement(this.codeEle.nativeElement);
   }
@@ -25,5 +32,23 @@ export class CodeWindowComponent {
         Prism.highlightElement(this.codeEle.nativeElement);
       }
     }
+  }
+
+  getDarkModeEnabled() {
+    return this.colorSchemeService.darkModeEnabled;
+  }
+
+  copyCode() {
+    const el = document.createElement('textarea');
+    el.value = this.code;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    this.copied = true;
+    setTimeout(() => {
+      this.copied = false;
+    }
+    , 1000);
   }
 }

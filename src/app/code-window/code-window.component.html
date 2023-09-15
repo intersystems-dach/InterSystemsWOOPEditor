@@ -5,7 +5,21 @@
       <div class="yellow dot"></div>
       <div class="green dot"></div>
     </div>
-    <div id="window-title">{{ title }}</div>
+    <div class="test">
+      <div id="window-title">{{ title }}</div>
+      <p class="copiedMessage" *ngIf="copied">✓</p>
+      <img
+      class="copy"
+      *ngIf="!copied"
+      [src]="
+      'assets/imgs/' +
+      (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+      '/copy.png'
+      "
+      alt="Copy"
+      (click)="copyCode()"
+      />
+    </div>
     <div>
       <div class="code">
         <pre prism *ngIf="language" class="test">
@@ -15,5 +29,6 @@
         </pre>
       </div>
     </div>
+
   </div>
 </div>

@@ -8,7 +8,6 @@ header
         background: none
     .userLabel
         position: absolute
-        right: 100px
         top: 10px
         font-size: 20px
         opacity: 0.3
@@ -35,6 +34,25 @@ header
             animation-name: rotate
             animation-duration: 1200ms
             animation-fill-mode: forwards
+    .searchButton
+        color: var(--text-color)
+        position: absolute
+        right: 85px
+        height: 35px
+        width: 35px
+        cursor: pointer
+        top: 24px
+        opacity: 0.3
+        transition: 0.3s
+        &:hover
+            opacity: 1
+            scale: 1.1
+    .searchBar
+        position: absolute
+        right: 360px
+        height: 35px
+        width: 35px
+        top: 22px
     .burgerMenu
         position: absolute
         right: 30px
@@ -67,29 +85,52 @@ header
     top: 0
     width: 100%
 .logo
-    height: 40px
+    height: 45px
     margin-top: 16px
     margin-bottom: 16px
     margin-left: 50px
     transition: 0.3s
     &:hover
-        scale: 1.2
-
+        scale: 1.1
 @media screen and (max-width: 600px)
     .logo
-        &:hover
-            scale: 1
+      height: 30px
+      margin-left: 10px
+      &:hover
+          scale: 1
     header
-        .settingsButton
-            &:hover
-                animation: none
-        .userLabel
-            top: 15px
-            font-size: 15px
-            .userLabelExtended
-                display: none
-            &:hover
-                opacity: 0.3
+      .settingsButton
+        right: 10px
+        height: 30px
+        width: 30px
+        top: 20px
+        &:hover
+            opacity: 0.3
+            animation: none
+      .searchButton
+        right: 55px
+        height: 25px
+        width: 25px
+        cursor: pointer
+        top: 24px
+        opacity: 0.3
+        transition: 0.3s
+        &:hover
+            opacity: 1
+            scale: 1.1
+      .searchBar
+        position: absolute
+        right: 0px
+        height: 70px
+        width: 100%
+        top: 18px
+      .userLabel
+          top: 15px
+          font-size: 15px
+          .userLabelExtended
+              display: none
+          &:hover
+              opacity: 0.3
 
 @keyframes rotate
     0%
