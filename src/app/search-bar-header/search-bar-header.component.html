@@ -7,3 +7,4 @@
   />
   <button class="closeButton" (click)="closeSearchBar()" >X</button>
 </div>
+<app-chapter-search *ngIf="chapter != null" [results]="searchChapterResult" (pageChange)="pageChange.emit($event)"></app-chapter-search>

@@ -19,8 +19,11 @@ export class SearchBarHeaderComponent {
   searchValue: string = '';
   noMatches: boolean = false;
   slideOut: boolean = false;
+  searchChapterResult: any[] = [];
 
   @Output() close: EventEmitter<string> = new EventEmitter<string>();
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
+
 
   @Input() chapter: Chapter | null = null;
 
@@ -54,7 +57,94 @@ export class SearchBarHeaderComponent {
     }
   }
 
-  searchChapter(): void {}
+  searchChapter(): void {
+    if(this.chapter == null)
+    {
+      return;
+    }
+    this.searchChapterResult = [];
+    if (this.searchValue == '') {
+      return;
+    }
+
+    let lowerSearchValue = this.searchValue.toLowerCase();
+    let words = lowerSearchValue.split(' ');
+
+    for (let i = 0; i < this.chapter.Pages.length; i++) {
+      let page = this.chapter.Pages[i];
+      if (page == null) {
+        continue;
+      }
+      if (page.Content.toLowerCase().includes(lowerSearchValue)) {
+        // get one word before and after
+        let text = page.Content;
+        let index = text.toLowerCase().indexOf(lowerSearchValue);
+        let start = index;
+        let spaceCount = 0;
+        while (start > 0 && spaceCount < 2) {
+          start--;
+          if (text[start] == ' ') {
+            spaceCount++;
+          }
+        }
+        let end = index;
+        spaceCount = 0;
+        while (end < text.length && spaceCount < 2) {
+          end++;
+          if(text[end] == ' ') {
+            spaceCount++;
+          }
+        }
+        text = text.substring(start, end);
+        this.searchChapterResult.push({
+          page: i + 1,
+          text: text,
+        });
+      }
+    }
+
+    /* for (let word of words) {
+      if (word == '') {
+        continue;
+      }
+      for(let i = 0; i < this.chapter.Pages.length; i++) {
+        let page = this.chapter.Pages[i];
+        if (page == null) {
+          continue;
+        }
+        if (page.Content.toLowerCase().includes(word)) {
+          // get one word before and after
+          let text = page.Content;
+          let index = text.toLowerCase().indexOf(word);
+          let start = index;
+          let spaceCount = 0;
+          while (start > 0 && spaceCount < 3) {
+            if (text[start] != ' '){
+              spaceCount++;
+            }
+            start--;
+          }
+          let end = index;
+          while (end < text.length && text[end] != ' ') {
+            end++;
+          }
+          text = text.substring(start, end);
+          if (
+            this.searchChapterResult.filter(
+              (x) => x.page == i + 1 && x.text == text
+            ).length > 0
+          ) {
+            continue;
+          }
+          this.searchChapterResult.push({
+            page: i + 1,
+            text: text,
+          });
+        }
+      }
+    } */
+
+  }
 
   searchAllChapters(): void {
     if (this.searchValue == '') {
@@ -113,4 +203,6 @@ export class SearchBarHeaderComponent {
     this.searchValue = '';
     this.onSearchChange();
   }
+
+
 }

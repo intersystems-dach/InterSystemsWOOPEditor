@@ -52,6 +52,8 @@ import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
 import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
 import { TableOfContentComponent } from './table-of-content/table-of-content.component';
+import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
+import { TranslateSpecComponent } from './user-input/translate-spec/translate-spec.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,6 +101,8 @@ import { TableOfContentComponent } from './table-of-content/table-of-content.com
     SearchBarHeaderComponent,
     LoadingScreenComponent,
     TableOfContentComponent,
+    ChapterSearchComponent,
+    TranslateSpecComponent,
   ],
   imports: [
     BrowserModule,

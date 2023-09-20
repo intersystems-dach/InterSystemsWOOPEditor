@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MarkdownEditorComponent {
   addImageOpened = false;
+  translateSpecOpen = false;
 
   @Output() eventEmitter = new EventEmitter<string>();
 
@@ -32,8 +33,23 @@ export class MarkdownEditorComponent {
     this.addImageOpened = true;
   }
 
+  openTranslateSpec() {
+    this.translateSpecOpen = true;
+  }
+
+  closeTranslateSpec() {
+    this.translateSpecOpen = false;
+  }
+
   closeAddImage() {
     this.addImageOpened = false;
+  }
+
+  translateSpec(toLanguage: string) {
+    if(toLanguage !== 'close') {
+      this.emit("translate," + toLanguage);
+    }
+    this.closeTranslateSpec();
   }
 
   help() {

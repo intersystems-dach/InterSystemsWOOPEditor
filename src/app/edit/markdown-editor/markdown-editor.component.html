@@ -4,6 +4,7 @@
   <button (click)="emit('code')">Code</button>
   <!-- <button (click)="addImage()" [style.width.px]="150">Add Image</button> -->
   <button (click)="openAddImage()">Image</button>
+  <button (click)="openTranslateSpec()" [style.width.px]="100">Translate</button>
   <button (click)="help()">Help</button>
 </div>
 
@@ -11,3 +12,7 @@
   *ngIf="addImageOpened"
   (imageEmitter)="addImage($event)"
 ></app-add-image>
+<app-translate-spec
+  *ngIf="translateSpecOpen"
+  (eventEmitter)="translateSpec($event)"
+></app-translate-spec>

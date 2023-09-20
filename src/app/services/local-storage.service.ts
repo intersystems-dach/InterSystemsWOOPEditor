@@ -21,6 +21,18 @@ export class LocalStorageService {
     }
   }
 
+  getLanguageTo(): string {
+    let languageTo = localStorage.getItem('languageTo');
+    if (languageTo == null) {
+      return 'en';
+    }
+    return languageTo;
+  }
+
+  setLanguageTo(languageTo: string) {
+    localStorage.setItem('languageTo', languageTo);
+  }
+
   getRememberPage(): boolean {
     let rememberPage = localStorage.getItem('rememberPage');
     if (rememberPage == null) {

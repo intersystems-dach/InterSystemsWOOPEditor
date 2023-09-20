@@ -4,10 +4,10 @@ import {
   Output,
   EventEmitter,
   HostListener,
-  ViewChild,
 } from '@angular/core';
 import { Page } from 'src/utils/classes';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 
 @Component({
   selector: 'app-edit-content',
@@ -26,7 +26,10 @@ export class EditContentComponent {
   private selectionStart: number = -1;
   private selectionEnd: number = -1;
 
-  constructor(private localStorageService: LocalStorageService) {
+  constructor(
+    private localStorageService: LocalStorageService,
+    private apiService: IrisinterfaceService
+  ) {
     this.getData();
   }
 
@@ -79,8 +82,39 @@ export class EditContentComponent {
       this.addImage(value);
     } else if (value.startsWith('?[')) {
       this.addImage(value);
+    } else if (value.startsWith('translate')) {
+      this.translate(value.split(',')[1]);
     }
     this.focus = oldFocus;
+  }
+
+  async translate(tolang: string = 'en') {
+    let lines = this.data.split('\n');
+    let newText = '';
+    let inCodeBlock = false;
+    for(let i = 0; i < lines.length; i++) {
+      let l = lines[i];
+      if(l.startsWith('![') || l.startsWith('?[')) {
+        newText += l + '\n';
+        continue;
+      }
+      if(l.startsWith('```') || l.startsWith('~~~')) {
+        inCodeBlock = !inCodeBlock;
+        newText += l + '\n';
+        continue;
+      }
+      if(inCodeBlock) {
+        newText += l + '\n';
+        continue;
+      }
+      let translated = await this.apiService.translateText(l, tolang).toPromise().then((res) => {
+        return res.text;
+      });
+
+      newText += translated + '\n';
+    }
+    this.data = newText;
+    this.setData();
   }
 
   @HostListener('document:keydown.shift.alt.arrowup', ['$event'])

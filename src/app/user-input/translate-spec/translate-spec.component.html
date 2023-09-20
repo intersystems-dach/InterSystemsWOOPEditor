@@ -1,0 +1,17 @@
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>Translate</h1>
+  <button class="closeButton" (click)="close()">X</button>
+  <input
+    type="text"
+    class="userNameInput"
+    name="toLanguage"
+    [(ngModel)]="toLanguage"
+    (keydown.enter)="submit()"
+    placeholder="To Language"
+  />
+
+  <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
+    Submit
+  </button>
+</div>

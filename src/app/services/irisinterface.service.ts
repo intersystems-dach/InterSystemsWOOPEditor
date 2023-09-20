@@ -263,6 +263,25 @@ export class IrisinterfaceService {
       );
   }
 
+  translateText(text: string, to: string): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/translate/text',
+        { text: text, to: to }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
   getAllImageNames(): Observable<any> {
     return this.http
       .get(

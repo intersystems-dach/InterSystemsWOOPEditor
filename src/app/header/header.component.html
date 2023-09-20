@@ -38,6 +38,6 @@
   <p class="userLabel" *ngIf="getUserLevel() == 0 && !searchBarOn" (click)="logIn()" [style.right.px]="enableSearchBar ? 140: 100">
     <i>Log in</i>
   </p>
-  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter"></app-search-bar-header>
+  <app-search-bar-header *ngIf="enableSearchBar && searchBarOn" class="searchBar" (close)="turnOffSearchBar()" [chapter]="chapter" (pageChange)="pageChange.emit($event)"></app-search-bar-header>
 </header>
 <app-settings-short *ngIf="showSettings"></app-settings-short>

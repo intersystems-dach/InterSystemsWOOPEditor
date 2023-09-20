@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
@@ -14,6 +14,7 @@ export class HeaderComponent {
 
   @Input() enableSearchBar: boolean = true;
   @Input() chapter: Chapter | null = null;
+  @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
 
   searchBarOn = false;
 
@@ -54,10 +55,10 @@ export class HeaderComponent {
   getDarkModeEnabled() {
     return this.colorSchemeService.darkModeEnabled;
   }
-  turnOnSearchBar(){
+  turnOnSearchBar() {
     this.searchBarOn = true;
   }
-  turnOffSearchBar(){
+  turnOffSearchBar() {
     this.searchBarOn = false;
   }
 }
