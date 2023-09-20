@@ -1,0 +1,14 @@
+<div class="box">
+  <div class="content">
+  <button class="closeButton" (click)="close()">X</button>
+  <h2>Table of Content</h2>
+  <ul>
+    <div *ngFor="let heading of headings">
+    <li [style.font-size.px]="21 - (heading.level * 2)" [style.margin-left.px]="((heading.level -1 ) * 10)">
+      <a (click)="selectPage(heading.page)">{{heading.text}}</a>
+    </li>
+  </div>
+  </ul>
+  </div>
+
+</div>

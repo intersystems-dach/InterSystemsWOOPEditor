@@ -50,6 +50,8 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { SelectChapterComponent } from './user-input/select-chapter/select-chapter.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.component';
+import { LoadingScreenComponent } from './loading-screen/loading-screen.component';
+import { TableOfContentComponent } from './table-of-content/table-of-content.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +97,8 @@ import { SearchBarHeaderComponent } from './search-bar-header/search-bar-header.
     SelectChapterComponent,
     ImpressumComponent,
     SearchBarHeaderComponent,
+    LoadingScreenComponent,
+    TableOfContentComponent,
   ],
   imports: [
     BrowserModule,

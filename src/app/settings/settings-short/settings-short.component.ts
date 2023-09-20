@@ -13,6 +13,8 @@ import { IrisinterfaceService } from '../../services/irisinterface.service';
 export class SettingsShortComponent {
   logIn: boolean = false;
 
+  isLoading: boolean = false;
+
   constructor(
     private router: Router,
     private colorSchemeService: ColorSchemeService,
@@ -54,10 +56,13 @@ export class SettingsShortComponent {
   }
 
   deploy() {
+    this.isLoading = true;
     this.apiService
       .deployAll(UserManger.userName, UserManger.password)
       .subscribe({
         next: (data) => {
+          this.isLoading = false;
+
           if (data.status) {
             alert(data.message);
           } else {
@@ -65,6 +70,8 @@ export class SettingsShortComponent {
           }
         },
         error: (err: any) => {
+          this.isLoading = false;
+
           alert(err.message);
         },
       });

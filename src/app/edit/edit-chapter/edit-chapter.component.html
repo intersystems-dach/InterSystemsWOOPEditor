@@ -2,6 +2,11 @@
 <div *ngIf="contentVisible" class="content">
   <div class="header">
     <button *ngIf="!preview" (click)="goBack()" class="backButton">Back</button>
+    <div class="tocButton" (click)="setTOC(true)">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
   </div>
   <div *ngIf="!preview">
     <div class="heading">
@@ -22,6 +27,7 @@
         }}</i>
       </p>
     </div>
+
     <app-edit-page
       *ngFor="let p of chapter.Pages; let i = index"
       [page]="p"
@@ -62,6 +68,7 @@
     </button>
     <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
   </div>
+  <app-table-of-content *ngIf="showTOC" (event)="onTOCInput($event)" [chapter]="chapter"></app-table-of-content>
 
   <app-edit-chapter-meta-data
     [updateChapter]="chapter"

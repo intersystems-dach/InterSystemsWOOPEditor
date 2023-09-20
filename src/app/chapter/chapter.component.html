@@ -10,6 +10,11 @@
     <!-- <button (click)="exportOptionsVisible = true" class="exportButton">
       Export
     </button> -->
+    <div class="tocButton" (click)="setTOC(true)">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
   </div>
   <div class="heading">
     <h1>{{ chapter.Title }}</h1>
@@ -60,3 +65,4 @@
     (closeEmitter)="export($event)"
   ></app-export-options> -->
 </div>
+<app-table-of-content *ngIf="showTOC" (event)="onTOCInput($event)" [chapter]="chapter"></app-table-of-content>
