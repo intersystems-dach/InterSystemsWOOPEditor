@@ -32,7 +32,7 @@ const routes: Routes = [
   { path: 'settings/:settingsName', component: SettingsAdvancedComponent },
   { path: 'markdown', component: MarkdownCheatSheetComponent },
   { path: 'help', component: GetHelpComponent },
-  { path: 'whats-new', component: WhatsNewComponent },
+  { path: 'info', component: WhatsNewComponent },
   { path: 'impressum', component: ImpressumComponent },
   { path: 'connect/:host/:port', component: ConnectViaUrlComponent },
 ];

@@ -18,7 +18,7 @@ export class AboutSettingsComponent {
   }
 
   whatsNew() {
-    this.router.navigate(['whats-new']);
+    this.router.navigate(['info']);
   }
 
   getVersion() {

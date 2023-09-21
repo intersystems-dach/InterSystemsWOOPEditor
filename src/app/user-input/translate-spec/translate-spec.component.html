@@ -1,7 +1,8 @@
 <div class="background" (click)="close()"></div>
 <div class="container">
-  <h1>Translate</h1>
+  <h1>Translate Text</h1>
   <button class="closeButton" (click)="close()">X</button>
+  <p class="toLanguage">Translate to...</p>
   <input
     type="text"
     class="userNameInput"
@@ -10,8 +11,23 @@
     (keydown.enter)="submit()"
     placeholder="To Language"
   />
-
+  <div class="checkBoxCon" [style.top]="'50%'">
+    <input
+    type="checkbox"
+    name="excludeCodeBlocks"
+    [(ngModel)]="excludeCodeBlocks"
+    />
+    <p >Exclude Codeblocks</p>
+  </div>
+  <div class="checkBoxCon" [style.top]="'65%'">
+    <input
+    type="checkbox"
+    name="translatePage"
+    [(ngModel)]="translatePage"
+    />
+    <p >Translate Page</p>
+  </div>
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
-    Submit
+    Translate
   </button>
 </div>

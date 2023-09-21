@@ -9,6 +9,9 @@ import { LocalStorageService } from '../../services/local-storage.service';
 export class TranslateSpecComponent {
   toLanguage: string = 'en';
 
+  excludeCodeBlocks: boolean = true;
+  translatePage: boolean = false;
+
   @Output() eventEmitter = new EventEmitter<string>();
 
   constructor(
@@ -20,7 +23,16 @@ export class TranslateSpecComponent {
 
   submit() {
     this.localStorageService.setLanguageTo(this.toLanguage);
-    this.eventEmitter.emit(this.toLanguage);
+    let x = this.toLanguage;
+    if (this.excludeCodeBlocks) {
+      x += ',excludeCodeBlocks';
+    }
+    if (this.translatePage) {
+      x += ',translatePage';
+    }
+    this.eventEmitter.emit(x);
+    this.translatePage = false;
+    this.excludeCodeBlocks = true;
   }
 
   @HostListener('document:keydown.escape', ['$event'])

@@ -83,38 +83,81 @@ export class EditContentComponent {
     } else if (value.startsWith('?[')) {
       this.addImage(value);
     } else if (value.startsWith('translate')) {
-      this.translate(value.split(',')[1]);
+      this.translate(
+        value.split(',')[1],
+        value.includes('excludeCodeBlocks'),
+        value.includes('translatePage')
+      );
     }
     this.focus = oldFocus;
   }
 
-  async translate(tolang: string = 'en') {
-    let lines = this.data.split('\n');
+  async translate(
+    tolang: string = 'en',
+    excludeCodeBlocks: boolean,
+    translatePage: boolean
+  ) {
+    if(!translatePage){
+      this.data = await this.translateText(
+        this.data,
+        tolang,
+        excludeCodeBlocks
+      );
+      this.setData();
+    }else{
+      this.page.Content = await this.translateText(
+        this.page.Content,
+        tolang,
+        excludeCodeBlocks
+      );
+      this.page.Hint = await this.translateText(
+        this.page.Hint,
+        tolang,
+        excludeCodeBlocks
+      );
+      this.page.Result = await this.translateText(
+        this.page.Result,
+        tolang,
+        excludeCodeBlocks
+      );
+
+      this.changeEmitter.emit();
+    }
+  }
+
+  async translateText(
+    text: string,
+    tolang: string = 'en',
+    excludeCodeBlocks: boolean
+  ): Promise<string> {
+    let lines = text.split('\n');
     let newText = '';
     let inCodeBlock = false;
-    for(let i = 0; i < lines.length; i++) {
+    for (let i = 0; i < lines.length; i++) {
       let l = lines[i];
-      if(l.startsWith('![') || l.startsWith('?[')) {
+      if ((l.startsWith('![') || l.startsWith('?['))) {
         newText += l + '\n';
         continue;
       }
-      if(l.startsWith('```') || l.startsWith('~~~')) {
+      if ((l.startsWith('```') || l.startsWith('~~~')) && excludeCodeBlocks) {
         inCodeBlock = !inCodeBlock;
         newText += l + '\n';
         continue;
       }
-      if(inCodeBlock) {
+      if (inCodeBlock && excludeCodeBlocks) {
         newText += l + '\n';
         continue;
       }
-      let translated = await this.apiService.translateText(l, tolang).toPromise().then((res) => {
-        return res.text;
-      });
+      let translated = await this.apiService
+        .translateText(l, tolang)
+        .toPromise()
+        .then((res) => {
+          return res.text;
+        });
 
       newText += translated + '\n';
     }
-    this.data = newText;
-    this.setData();
+    return newText;
   }
 
   @HostListener('document:keydown.shift.alt.arrowup', ['$event'])
