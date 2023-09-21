@@ -1,4 +1,3 @@
-<app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>
 <div *ngIf="contentVisible" class="content">
   <div class="header">
     <button *ngIf="!preview" (click)="goBack()" class="backButton">Back</button>
@@ -86,3 +85,4 @@
     (sureEmitter)="deletePage($event)"
   ></app-are-you-sure>
 </div>
+<app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>

@@ -1,4 +1,3 @@
-<app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>
 <app-password-query
   *ngIf="!contentVisible"
   [chapterName]="chapter.Title"
@@ -66,3 +65,4 @@
   ></app-export-options> -->
 </div>
 <app-table-of-content *ngIf="showTOC" (event)="onTOCInput($event)" [chapter]="chapter"></app-table-of-content>
+<app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>

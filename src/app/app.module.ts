@@ -54,6 +54,7 @@ import { LoadingScreenComponent } from './loading-screen/loading-screen.componen
 import { TableOfContentComponent } from './table-of-content/table-of-content.component';
 import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
 import { TranslateSpecComponent } from './user-input/translate-spec/translate-spec.component';
+import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,6 +104,7 @@ import { TranslateSpecComponent } from './user-input/translate-spec/translate-sp
     TableOfContentComponent,
     ChapterSearchComponent,
     TranslateSpecComponent,
+    ConnectViaUrlComponent,
   ],
   imports: [
     BrowserModule,

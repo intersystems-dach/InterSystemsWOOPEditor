@@ -7,6 +7,8 @@ import { IrisinterfaceService } from './irisinterface.service';
 export class MetaDataService {
   version: string = 'unknown';
   date: string = 'unknown';
+  notes: string[] = [];
+  instanceName = 'Server';
 
   constructor(private apiService: IrisinterfaceService) {
     this.init();
@@ -17,9 +19,15 @@ export class MetaDataService {
       next: (data: any) => {
         this.version = data.version;
         this.date = data.date;
+        this.notes = data.notes.split(';');
+        this.instanceName = data.instanceName;
       },
       error: (err) => {
-        console.log(err);
+        this.version = 'unknown';
+        this.date = 'unknown';
+        this.notes = [];
+        this.instanceName = 'Server';
+
       },
     });
   }

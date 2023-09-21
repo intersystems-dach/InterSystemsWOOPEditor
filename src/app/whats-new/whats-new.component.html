@@ -11,8 +11,11 @@
     Version: <i>{{ getVersion() }}</i>
   </p>
   <p>
-    Realese date: <i>{{ getRealeseDate() }}</i>
+    Release date: <i>{{ getRealeseDate() }}</i>
   </p>
+  <h2>Release notes</h2>
+  <p *ngFor="let n of getReleaseNotes()">{{"- " + n}}</p>
+
   <div style="font-size: 10px">
     <br />
     <br />

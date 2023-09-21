@@ -15,6 +15,7 @@ import { GetHelpComponent } from './get-help/get-help.component';
 import { MakeAdminComponent } from './user-input/make-admin/make-admin.component';
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { ImpressumComponent } from './impressum/impressum.component';
+import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'help', component: GetHelpComponent },
   { path: 'whats-new', component: WhatsNewComponent },
   { path: 'impressum', component: ImpressumComponent },
+  { path: 'connect/:host/:port', component: ConnectViaUrlComponent },
 ];
 
 @NgModule({

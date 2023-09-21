@@ -19,4 +19,7 @@ export class WhatsNewComponent {
   getRealeseDate() {
     return this.metaDataService.date;
   }
+  getReleaseNotes() {
+    return this.metaDataService.notes;
+  }
 }

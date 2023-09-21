@@ -11,7 +11,7 @@
 </div>
 
 <div class="serverStatus">
-  <p (click)="goToServerSettings()">Server</p>
+  <p (click)="goToServerSettings()">{{getInstancename()}}</p>
   <div
     class="statusIcon"
     [style.background]="isServerOnline ? 'green' : 'red'"
@@ -21,7 +21,7 @@
 
 <div class="version">
   <p (click)="goToWhatsNew()">
-    <i>{{ "v" + getLatestVersion() }}</i>
+    <i>{{ (getLatestVersion() == 'unknown' ? '':"v" + getLatestVersion()) }}</i>
   </p>
 </div>
 

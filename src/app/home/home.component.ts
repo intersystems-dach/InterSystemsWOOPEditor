@@ -61,6 +61,9 @@ export class HomeComponent {
   getLatestVersion(): string {
     return this.metaDataService.version;
   }
+  getInstancename(): string {
+    return this.metaDataService.instanceName;
+  }
 
   getChapters() {
     return this.chapterManager.chapters;
