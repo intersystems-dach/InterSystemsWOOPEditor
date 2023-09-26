@@ -55,6 +55,7 @@ import { TableOfContentComponent } from './table-of-content/table-of-content.com
 import { ChapterSearchComponent } from './chapter-search/chapter-search.component';
 import { TranslateSpecComponent } from './user-input/translate-spec/translate-spec.component';
 import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,7 +115,7 @@ import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.compon
     AppRoutingModule,
     SharedModule,
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

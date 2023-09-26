@@ -25,7 +25,8 @@
             "inlineStyleLanguage": "sass",
             "assets": ["src/assets"],
             "styles": ["src/styles.sass"],
-            "scripts": []
+            "scripts": [],
+            "baseHref": "/InterSystemsWOOPEditor/"
           },
           "configurations": {
             "production": {
