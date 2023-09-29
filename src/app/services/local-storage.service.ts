@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { IrisinterfaceService } from './irisinterface.service';
-import { UserManger } from 'src/utils/classes';
+import { UserManger, VerifyCache } from 'src/utils/classes';
 import { Router } from '@angular/router';
+import { ChaptermanagerService } from './chaptermanager.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,16 @@ export class LocalStorageService {
         this.router.navigate(['/login']);
         this.setStayLoggedIn(true);
       }
+    }
+
+    let verifyCache: any = localStorage.getItem('verifyCache');
+    if (verifyCache == null) {
+      verifyCache = [];
+    } else {
+      verifyCache = JSON.parse(verifyCache);
+    }
+    for (let entry of verifyCache) {
+      VerifyCache.verifyChapter(entry.name, entry.pwd, false);
     }
   }
 

@@ -1,8 +1,8 @@
-<div id="window">
+<div id="window" [class]="db?'db':''">
   <div id="navbar">
     <div id="window-controls">
       <div class="red dot"></div>
-      <div class="yellow dot"></div>
+      <div class="yellow dot" (dblclick)="onDblClick()"></div>
       <div class="green dot"></div>
     </div>
     <div class="test">
@@ -10,7 +10,7 @@
       <p class="copiedMessage" *ngIf="copied">✓</p>
       <img
       class="copy"
-      *ngIf="!copied"
+      *ngIf="!copied && copyable"
       [src]="
       'assets/imgs/' +
       (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
@@ -22,7 +22,7 @@
     </div>
     <div>
       <div class="code">
-        <pre prism *ngIf="language" class="test">
+        <pre prism *ngIf="language" [class]="'test' + (copyable?'':' noselect')">
           <code #codeEle class="language-{{ language }}">
             {{code}}
           </code>

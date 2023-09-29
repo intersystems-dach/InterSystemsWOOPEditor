@@ -19,17 +19,28 @@ export class MarkdownContentComponent {
   constructor(
     private mdService: MarkdownService,
     private http: HttpClient,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private irisinterfaceService: IrisinterfaceService
   ) {}
 
   async ngOnInit() {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
-      console.log(lines[i]);
       if (lines[i].startsWith('~~~')) {
         // code window
         let language = lines[i].replace('~~~', '');
+
+        let settings: string[] = [];
+        if (language.includes('{')) {
+          let settingString = language.split('{')[1];
+          language = language.split('{')[0];
+          if (settingString.includes('}')) {
+            settingString = settingString.split('}')[0];
+          }
+          settings = settingString.split(',');
+        }
+
         let title = language;
         if (language.toLowerCase() == 'objectscript') {
           language = 'javascript';
@@ -55,6 +66,7 @@ export class MarkdownContentComponent {
           code: code,
           language: language,
           title: title,
+          settings: settings,
         });
       } else if (lines[i].startsWith('![') || lines[i].startsWith('?[')) {
         //image
@@ -90,12 +102,30 @@ export class MarkdownContentComponent {
           language: style,
           title: name,
         });
+      } else if (lines[i].startsWith('$$$[')) {
+        //image
+        let name = lines[i].split('[')[1].split(']')[0];
+        let url = lines[i].split('(')[1].split(')')[0];
+        /* url =
+          'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/file/get/' +
+          url; */
+        this.blocks.push({
+          type: 'file',
+          code: url,
+          language: '',
+          title: name,
+        });
       } else {
         let code = '';
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
           !lines[i].startsWith('![') &&
+          !lines[i].startsWith('$$$[') &&
           !lines[i].startsWith('?[')
         ) {
           code += lines[i] + '\n';
@@ -161,5 +191,20 @@ z++
 
   getFontSize() {
     return this.localStorageService.getFontSize();
+  }
+
+  downloadFile(fileName: string) {
+    this.irisinterfaceService.getFile(fileName).subscribe({
+      next: (res:any) => {
+        const link = document.createElement('a');
+        link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.content);
+        link.download = res.name;
+        link.click();
+      }
+      ,
+      error: (err) => {
+        alert('Error getting file:' + err.message);
+      },
+    });
   }
 }

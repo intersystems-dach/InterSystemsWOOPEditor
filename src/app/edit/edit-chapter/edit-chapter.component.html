@@ -1,7 +1,7 @@
 <div *ngIf="contentVisible" class="content">
   <div class="header">
     <button *ngIf="!preview" (click)="goBack()" class="backButton">Back</button>
-    <div class="tocButton" (click)="setTOC(true)">
+    <div *ngIf="!preview"  class="tocButton" (click)="setTOC(true)">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
@@ -56,6 +56,7 @@
       </button>
     </div>
   </div>
+  <h1 *ngIf="preview" class="previewHeading">PREVIEW</h1>
   <app-chapter
     [chapter]="chapter"
     [currentPage]="currentPage"

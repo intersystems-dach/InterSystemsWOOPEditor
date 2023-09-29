@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class MarkdownEditorComponent {
   addImageOpened = false;
+  addFileOpened = false;
   translateSpecOpen = false;
 
   @Output() eventEmitter = new EventEmitter<string>();
@@ -29,8 +30,18 @@ export class MarkdownEditorComponent {
     this.addImageOpened = false;
   }
 
+  addFile(file: string) {
+    if (file !== '') {
+      this.emit(file);
+    }
+    this.addFileOpened = false;
+  }
+
   openAddImage() {
     this.addImageOpened = true;
+  }
+  openAddFile() {
+    this.addFileOpened = true;
   }
 
   openTranslateSpec() {

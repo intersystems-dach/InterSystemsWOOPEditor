@@ -26,7 +26,7 @@ export class ChapterComponent {
   hintVisible: boolean = false;
   resultVisible: boolean = false;
   exportOptionsVisible = false;
-  contentVisible = false;
+  contentVisible = true;
   pageInput: number = 1;
   showTOC: boolean = false;
 
@@ -39,44 +39,49 @@ export class ChapterComponent {
   ) {}
 
   ngOnInit(): void {
-    let x = this.route.snapshot.paramMap.get('chapterName');
-    if (x == null) {
-      this.router.navigate(['/']);
-      return;
-    }
-    this.chapterName = x;
-    this.chapterManger.init().then(() => {
-      this.chapter = this.chapterManger.getChapterByName(
-        this.chapterName,
-        true
-      );
-      if (!this.chapter.IsPrivate) {
-        if (
-          UserManger.userLevel == 2 ||
-          (UserManger.userLevel == 1 &&
-            this.chapter.Author == UserManger.userName)
-        ) {
-          VerifyCache.verifyChapter(this.chapter.Title);
-        }
-
-        this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
-      } else {
-        if (
-          UserManger.userLevel == 2 ||
-          (UserManger.userLevel == 1 &&
-            this.chapter.Author == UserManger.userName)
-        ) {
-          this.contentVisible = true;
-        } else {
-          this.router.navigate(['/login']);
-        }
+      let x = this.route.snapshot.paramMap.get('chapterName');
+      if (x == null) {
+        this.router.navigate(['/']);
+        return;
       }
-    });
-    let pageLocalStorage = this.localStorageService.getPageForChapter(
-      this.chapterName
-    );
-    this.currentPage = pageLocalStorage;
-    this.pageInput = this.currentPage + 1;
+      this.chapterName = x;
+      this.chapterManger.init().then(() => {
+        this.chapter = this.chapterManger.getChapterByName(
+          this.chapterName,
+          true
+        );
+        if (!this.chapter.IsPrivate) {
+          if (
+            UserManger.userLevel == 2 ||
+            (UserManger.userLevel == 1 &&
+              this.chapter.Author == UserManger.userName)
+          ) {
+            VerifyCache.verifyChapter(this.chapter.Title, '', false);
+          }
+
+          this.contentVisible = VerifyCache.isChapterVerified(
+            this.chapter.Title
+          );
+        } else {
+          if (
+            UserManger.userLevel == 2 ||
+            (UserManger.userLevel == 1 &&
+              this.chapter.Author == UserManger.userName)
+          ) {
+            this.contentVisible = true;
+          } else {
+            this.router.navigate(['/login']);
+          }
+        }
+      });
+      let pageLocalStorage = this.localStorageService.getPageForChapter(
+        this.chapterName
+      );
+      if (pageLocalStorage > this.chapter.Pages.length - 1) {
+        pageLocalStorage = this.chapter.Pages.length - 1;
+      }
+      this.currentPage = pageLocalStorage;
+      this.pageInput = this.currentPage + 1;
   }
 
   onPageInput() {
@@ -95,13 +100,13 @@ export class ChapterComponent {
     );
   }
 
-  verifyChapter(event: boolean) {
-    if (event) {
-      VerifyCache.verifyChapter(this.chapter.Title);
-      this.contentVisible = true;
-    } else {
+  verifyChapter(event: string) {
+    if (event == undefined) {
       this.router.navigate(['/']);
+      return;
     }
+    VerifyCache.verifyChapter(this.chapter.Title, event);
+    this.contentVisible = true;
   }
 
   showNextPage(): void {
@@ -147,7 +152,7 @@ export class ChapterComponent {
   }
 
   onTOCInput(event: number) {
-    if(event == -1){
+    if (event == -1) {
       this.showTOC = false;
       return;
     }

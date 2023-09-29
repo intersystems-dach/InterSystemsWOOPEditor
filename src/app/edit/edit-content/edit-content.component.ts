@@ -82,6 +82,8 @@ export class EditContentComponent {
       this.addImage(value);
     } else if (value.startsWith('?[')) {
       this.addImage(value);
+    } else if (value.startsWith('$$$[')) {
+      this.addImage(value);
     } else if (value.startsWith('translate')) {
       this.translate(
         value.split(',')[1],

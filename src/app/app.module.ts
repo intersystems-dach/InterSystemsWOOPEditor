@@ -56,6 +56,7 @@ import { ChapterSearchComponent } from './chapter-search/chapter-search.componen
 import { TranslateSpecComponent } from './user-input/translate-spec/translate-spec.component';
 import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { AddFileComponent } from './user-input/add-file/add-file.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,6 +107,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ChapterSearchComponent,
     TranslateSpecComponent,
     ConnectViaUrlComponent,
+    AddFileComponent,
   ],
   imports: [
     BrowserModule,

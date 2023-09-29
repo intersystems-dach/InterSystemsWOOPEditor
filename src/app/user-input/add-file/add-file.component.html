@@ -1,0 +1,23 @@
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>{{ selectFile ? "Select File" : "Add File" }}</h1>
+  <button class="closeButton" (click)="close()">X</button>
+  <div class="buttonContainer" *ngIf="!selectFile">
+    <button class="submitButton" style="right: 30px" (click)="uploadFile()">
+      Upload
+    </button>
+    <button class="submitButton" style="left: 30px" (click)="select()">
+      Select existing
+    </button>
+  </div>
+  <div class="buttonContainer" *ngIf="selectFile">
+    <select name="SelectFile" [(ngModel)]="selectedFile">
+      <option *ngFor="let file of fileNames" [value]="file">
+        {{ file }}
+      </option>
+    </select>
+    <button class="submitButton" style="top: 40px" (click)="selectTheFile()">
+      Ok
+    </button>
+  </div>
+</div>

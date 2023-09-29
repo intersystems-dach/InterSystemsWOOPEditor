@@ -19,7 +19,7 @@ export class PasswordQueryComponent {
   type: string = 'password';
   @Input() chapterName: string = '';
 
-  @Output() passwordEntered = new EventEmitter<boolean>();
+  @Output() passwordEntered = new EventEmitter<string>();
 
   constructor(private apiService: IrisinterfaceService) {}
 
@@ -29,7 +29,7 @@ export class PasswordQueryComponent {
       .subscribe({
         next: (res: any) => {
           if (res.status) {
-            this.passwordEntered.emit(true);
+            this.passwordEntered.emit(this.enteredPassword);
             this.isWrong = false;
             this.enteredPassword = '';
           } else {
@@ -54,7 +54,7 @@ export class PasswordQueryComponent {
   }
   @HostListener('document:keydown.escape', ['$event'])
   close() {
-    this.passwordEntered.emit(false);
+    this.passwordEntered.emit(undefined);
     this.isWrong = false;
     this.enteredPassword = '';
   }

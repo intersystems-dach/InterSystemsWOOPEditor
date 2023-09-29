@@ -85,6 +85,26 @@ pre[class*="language-"]
     margin: 0 0
     overflow: auto
 
+.noselect
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+
+.db
+
+  animation: spin 0.5s linear
+  transform: rotate(180deg)
+
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(180deg)
+
+
 @media screen and (max-width: 800px)
   #window
     margin-left: 0px

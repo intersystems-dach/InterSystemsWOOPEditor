@@ -17,7 +17,7 @@ export class EditChapterComponent {
   changes: boolean = false;
   sureDelete: boolean = false;
   editMetaData: boolean = false;
-  contentVisible = false;
+  contentVisible = true;
   chapterName: string = '';
   pageInput: number = 1;
   showTOC: boolean = false;
@@ -58,6 +58,9 @@ export class EditChapterComponent {
     let pageLocalStorage = this.localStorageService.getPageForChapter(
       this.chapterName
     );
+    if (pageLocalStorage > this.chapter.Pages.length - 1) {
+      pageLocalStorage = this.chapter.Pages.length - 1;
+    }
     this.currentPage = pageLocalStorage;
     this.pageInput = this.currentPage + 1;
   }

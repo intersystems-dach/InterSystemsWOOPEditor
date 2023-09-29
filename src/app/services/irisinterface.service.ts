@@ -263,6 +263,45 @@ export class IrisinterfaceService {
       );
   }
 
+  uploadFile(name: string, content: any): Observable<any> {
+    return this.http
+      .post(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/file/upload',
+        { Name: name, Content: content }
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
+  getFile(name:string){
+    return this.http.get(
+      'http://' +
+        IrisinterfaceService.host +
+        ':' +
+        IrisinterfaceService.port +
+        '/woop/file/get/' +
+        name
+    ).pipe(
+      catchError((err: HttpErrorResponse) => {
+        if (err.status === 404) {
+          throw new Error('File not found');
+        } else if (err.status === 0) {
+          throw new Error('Server is offline');
+        } else throw new Error('unknown error: ' + err.status);
+      })
+    );
+
+  }
+
   translateText(text: string, to: string): Observable<any> {
     return this.http
       .post(
@@ -295,6 +334,26 @@ export class IrisinterfaceService {
         catchError((err: HttpErrorResponse) => {
           if (err.status === 500) {
             throw new Error('Could not get image names');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
+  }
+
+  getAllFileNames(): Observable<any> {
+    return this.http
+      .get(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/file/name/get/all'
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 500) {
+            throw new Error('Could not get file names');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
           } else throw new Error('unknown error: ' + err.status);
@@ -457,7 +516,7 @@ export class IrisinterfaceService {
           if (err.status === 401) {
             throw new Error('Unauthorized');
           } else if (err.status === 500) {
-            throw new Error('Something went wrong');
+            throw new Error('Something went wrong (500)');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
           } else {

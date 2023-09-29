@@ -73,15 +73,31 @@ export class VerifyCache {
 
   static isChapterVerified(chapterName: string): boolean {
     for (let chapter of this.verifyCache) {
-      if (chapter == chapterName) {
+      if (chapter.name == chapterName) {
         return true;
       }
     }
     return false;
   }
 
-  static verifyChapter(chapterName: string) {
-    this.verifyCache.push(chapterName);
+  static verifyChapter(chapterName: string, password: string, save = true) {
+    for (let x of this.verifyCache) {
+      if (x.name == chapterName) {
+        x.pwd = password;
+        return;
+      }
+    }
+    this.verifyCache.push({ name: chapterName, pwd: password });
+    if (password == '') {
+      return;
+    }
+    if (save) {
+      localStorage.setItem('verifyCache', JSON.stringify(this.verifyCache));
+    }
+  }
+
+  static setCache(cache: any[]) {
+    this.verifyCache = cache;
   }
 }
 
