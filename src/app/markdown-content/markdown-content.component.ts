@@ -27,6 +27,9 @@ export class MarkdownContentComponent {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
+      lines[i] = lines[i].replace('$$HOST$$', IrisinterfaceService.host);
+      lines[i] = lines[i].replace('$$PORT$$', '' + IrisinterfaceService.port);
+
       if (lines[i].startsWith('~~~')) {
         // code window
         let language = lines[i].replace('~~~', '');
