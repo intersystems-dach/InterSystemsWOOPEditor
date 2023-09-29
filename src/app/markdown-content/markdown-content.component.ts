@@ -27,8 +27,7 @@ export class MarkdownContentComponent {
     let lines = this.data.split('\n');
 
     for (let i = 0; i < lines.length; i++) {
-      lines[i] = lines[i].replace('$$HOST$$', IrisinterfaceService.host);
-      lines[i] = lines[i].replace('$$PORT$$', '' + IrisinterfaceService.port);
+      lines[i] = this.replaceHostAndPort(lines[i]);
 
       if (lines[i].startsWith('~~~')) {
         // code window
@@ -52,6 +51,7 @@ export class MarkdownContentComponent {
         let code = '';
         i++;
         while (!lines[i].startsWith('~~~') && i < lines.length) {
+          lines[i] = this.replaceHostAndPort(lines[i]);
           code += lines[i] + '\n';
           i++;
         }
@@ -132,6 +132,8 @@ export class MarkdownContentComponent {
             i++;
             continue;
           }
+          lines[i] = this.replaceHostAndPort(lines[i]);
+
           code += lines[i] + '\n';
           i++;
         }
@@ -192,6 +194,15 @@ z++
       viewContainerRef.createComponent<CodeWindowComponent>();
     componentRef.instance.data = adItem.data;
   } */
+
+  replaceHostAndPort(s: string): string{
+    s = s.replace(/\$\$HOST\$\$/g, IrisinterfaceService.host);
+    s = s.replace(
+      /\$\$PORT\$\$/g,
+      '' + IrisinterfaceService.port
+    );
+    return s;
+  }
 
   getFontSize() {
     return this.localStorageService.getFontSize();
