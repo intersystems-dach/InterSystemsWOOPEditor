@@ -53,14 +53,6 @@ export class MarkdownContentComponent {
           i++;
         }
         code = '\n' + code;
-        /* let codeblock =
-          '<app-code-window [code]="\'\\n' +
-          code +
-          '\'" language="' +
-          language +
-          '" title="' +
-          language +
-          '"></app-code-window>'; */
         this.blocks.push({
           type: 'codeblock',
           code: code,
@@ -121,6 +113,7 @@ export class MarkdownContentComponent {
         });
       } else {
         let code = '';
+        let inCodeBlock = false;
         while (
           i < lines.length &&
           !lines[i].startsWith('~~~') &&
@@ -128,6 +121,14 @@ export class MarkdownContentComponent {
           !lines[i].startsWith('$$$[') &&
           !lines[i].startsWith('?[')
         ) {
+          if (lines[i].startsWith('```')) {
+            inCodeBlock = !inCodeBlock;
+          }
+
+          if (!inCodeBlock && lines[i].startsWith('//')) {
+            i++;
+            continue;
+          }
           code += lines[i] + '\n';
           i++;
         }
@@ -195,13 +196,13 @@ z++
 
   downloadFile(fileName: string) {
     this.irisinterfaceService.getFile(fileName).subscribe({
-      next: (res:any) => {
+      next: (res: any) => {
         const link = document.createElement('a');
-        link.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(res.content);
+        link.href =
+          'data:text/plain;charset=utf-8,' + encodeURIComponent(res.content);
         link.download = res.name;
         link.click();
-      }
-      ,
+      },
       error: (err) => {
         alert('Error getting file:' + err.message);
       },

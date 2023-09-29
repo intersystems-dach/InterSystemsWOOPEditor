@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { Chapter, UserManger, VerifyCache } from 'src/utils/classes';
-import { MarkdownService } from 'ngx-markdown';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { LocalStorageService } from '../services/local-storage.service';
@@ -31,7 +30,6 @@ export class ChapterComponent {
   showTOC: boolean = false;
 
   constructor(
-    private mdService: MarkdownService,
     private router: Router,
     private route: ActivatedRoute,
     private chapterManger: ChaptermanagerService,
@@ -73,15 +71,18 @@ export class ChapterComponent {
             this.router.navigate(['/login']);
           }
         }
-      });
-      let pageLocalStorage = this.localStorageService.getPageForChapter(
-        this.chapterName
-      );
-      if (pageLocalStorage > this.chapter.Pages.length - 1) {
-        pageLocalStorage = this.chapter.Pages.length - 1;
-      }
-      this.currentPage = pageLocalStorage;
-      this.pageInput = this.currentPage + 1;
+        let pageLocalStorage = this.localStorageService.getPageForChapter(
+          this.chapterName
+          );
+          if (pageLocalStorage < 0) {
+            pageLocalStorage = 0;
+          }
+          if (pageLocalStorage > this.chapter.Pages.length - 1) {
+            pageLocalStorage = this.chapter.Pages.length - 1;
+          }
+          this.currentPage = pageLocalStorage;
+          this.pageInput = this.currentPage + 1;
+        });
   }
 
   onPageInput() {
