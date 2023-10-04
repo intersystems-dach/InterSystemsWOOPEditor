@@ -6,7 +6,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-make-admin',
   templateUrl: './make-admin.component.html',
-  styleUrls: ['./make-admin.component.sass'],
+  styleUrls: ['./make-admin.component.scss'],
 })
 export class MakeAdminComponent {
   enteredPassword: string = '';

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-contact-settings',
   templateUrl: './contact-settings.component.html',
-  styleUrls: ['./contact-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./contact-settings.component.sass', '../stylesheet.scss'],
 })
 export class ContactSettingsComponent {
   constructor(private router: Router) {}

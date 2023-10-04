@@ -8,7 +8,7 @@ import { MetaDataService } from '../services/meta-data.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.sass'],
+  styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent {
   title = 'InterSystemsWOOP';

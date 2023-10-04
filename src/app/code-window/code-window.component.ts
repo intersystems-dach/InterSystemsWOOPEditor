@@ -5,7 +5,7 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-code-window',
   templateUrl: './code-window.component.html',
-  styleUrls: ['./code-window.component.sass'],
+  styleUrls: ['./code-window.component.scss'],
 })
 export class CodeWindowComponent {
   @Input() code: string = '';

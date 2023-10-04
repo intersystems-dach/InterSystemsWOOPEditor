@@ -1,3 +1,4 @@
+
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserManger } from 'src/utils/classes';
@@ -5,7 +6,7 @@ import { UserManger } from 'src/utils/classes';
 @Component({
   selector: 'app-settings-header',
   templateUrl: './settings-header.component.html',
-  styleUrls: ['./settings-header.component.sass'],
+  styleUrls: ['./settings-header.component.scss'],
 })
 export class SettingsHeaderComponent {
   @Input() selected: string = 'storage';

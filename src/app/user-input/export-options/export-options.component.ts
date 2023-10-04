@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'app-export-options',
   templateUrl: './export-options.component.html',
-  styleUrls: ['./export-options.component.sass'],
+  styleUrls: ['./export-options.component.scss'],
 })
 export class ExportOptionsComponent {
   asPdf: boolean = true;

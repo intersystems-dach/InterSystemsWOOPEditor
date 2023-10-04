@@ -13,7 +13,7 @@ import {  Router } from '@angular/router';
 @Component({
   selector: 'app-search-bar-header',
   templateUrl: './search-bar-header.component.html',
-  styleUrls: ['./search-bar-header.component.sass'],
+  styleUrls: ['./search-bar-header.component.scss'],
 })
 export class SearchBarHeaderComponent {
   searchValue: string = '';

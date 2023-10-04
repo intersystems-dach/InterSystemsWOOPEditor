@@ -5,7 +5,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-add-file',
   templateUrl: './add-file.component.html',
-  styleUrls: ['./add-file.component.sass'],
+  styleUrls: ['./add-file.component.scss'],
 })
 export class AddFileComponent {
   @Output() fileEmitter = new EventEmitter<string>();

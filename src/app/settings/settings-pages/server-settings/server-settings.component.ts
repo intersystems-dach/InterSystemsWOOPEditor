@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-server-settings',
   templateUrl: './server-settings.component.html',
-  styleUrls: ['./server-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./server-settings.component.sass', '../stylesheet.scss'],
 })
 export class ServerSettingsComponent {
   connection: string = '';

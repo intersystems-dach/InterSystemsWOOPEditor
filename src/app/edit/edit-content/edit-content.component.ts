@@ -12,7 +12,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-edit-content',
   templateUrl: './edit-content.component.html',
-  styleUrls: ['./edit-content.component.sass'],
+  styleUrls: ['./edit-content.component.scss'],
 })
 export class EditContentComponent {
   @Input() type: string = '';

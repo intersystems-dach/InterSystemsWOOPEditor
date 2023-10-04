@@ -10,7 +10,7 @@ import {
 @Component({
   selector: 'app-password-query',
   templateUrl: './password-query.component.html',
-  styleUrls: ['./password-query.component.sass'],
+  styleUrls: ['./password-query.component.scss'],
 })
 export class PasswordQueryComponent {
   enteredPassword: string = '';

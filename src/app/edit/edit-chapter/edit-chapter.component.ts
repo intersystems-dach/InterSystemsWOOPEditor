@@ -8,7 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 @Component({
   selector: 'app-edit-chapter',
   templateUrl: './edit-chapter.component.html',
-  styleUrls: ['./edit-chapter.component.sass'],
+  styleUrls: ['./edit-chapter.component.scss'],
 })
 export class EditChapterComponent {
   @Input() chapter!: Chapter;

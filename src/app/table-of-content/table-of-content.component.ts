@@ -1,11 +1,10 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { Chapter } from 'src/utils/classes';
-import { Page } from '../../utils/classes';
 
 @Component({
   selector: 'app-table-of-content',
   templateUrl: './table-of-content.component.html',
-  styleUrls: ['./table-of-content.component.sass'],
+  styleUrls: ['./table-of-content.component.scss'],
 })
 export class TableOfContentComponent {
   @Output() event: EventEmitter<number> = new EventEmitter<number>();

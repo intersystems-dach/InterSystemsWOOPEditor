@@ -8,7 +8,7 @@ import { IrisinterfaceService } from '../../services/irisinterface.service';
 @Component({
   selector: 'app-settings-short',
   templateUrl: './settings-short.component.html',
-  styleUrls: ['./settings-short.component.sass'],
+  styleUrls: ['./settings-short.component.scss'],
 })
 export class SettingsShortComponent {
   logIn: boolean = false;

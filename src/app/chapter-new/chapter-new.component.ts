@@ -12,7 +12,7 @@ import { IrisinterfaceService } from '../services/irisinterface.service';
 @Component({
   selector: 'app-chapter-new',
   templateUrl: './chapter-new.component.html',
-  styleUrls: ['./chapter-new.component.sass'],
+  styleUrls: ['./chapter-new.component.scss'],
 })
 export class ChapterNewComponent {
   @Input() name: string = '';
@@ -36,6 +36,13 @@ export class ChapterNewComponent {
       this.wrongText = 'Please enter a name';
       return;
     }
+
+    if(this.name.includes('#')){
+      this.isWrong = true;
+      this.wrongText = 'Chapter name cannot contain #';
+      return;
+    }
+
     let newChapter = new Chapter(
       this.name,
       UserManger.userName,

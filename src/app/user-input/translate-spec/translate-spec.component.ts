@@ -4,7 +4,7 @@ import { LocalStorageService } from '../../services/local-storage.service';
 @Component({
   selector: 'app-translate-spec',
   templateUrl: './translate-spec.component.html',
-  styleUrls: ['./translate-spec.component.sass'],
+  styleUrls: ['./translate-spec.component.scss'],
 })
 export class TranslateSpecComponent {
   toLanguage: string = 'en';

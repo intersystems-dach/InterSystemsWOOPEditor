@@ -29,7 +29,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { CodeWindowComponent } from './code-window/code-window.component';
 import { SharedModule } from './shared/shared.module';
-import { MarkdownDirective } from './markdown-content/markdown.directive';
 import { SettingsShortComponent } from './settings/settings-short/settings-short.component';
 import { SettingsAdvancedComponent } from './settings/settings-advanced/settings-advanced.component';
 import { SettingsHeaderComponent } from './settings/settings-header/settings-header.component';
@@ -81,7 +80,6 @@ import { AddFileComponent } from './user-input/add-file/add-file.component';
     ExportOptionsComponent,
     HomeComponent,
     CodeWindowComponent,
-    MarkdownDirective,
     SettingsShortComponent,
     SettingsAdvancedComponent,
     SettingsHeaderComponent,

@@ -8,7 +8,7 @@ import { IrisinterfaceService } from '../../../services/irisinterface.service';
 @Component({
   selector: 'app-storage-settings',
   templateUrl: './storage-settings.component.html',
-  styleUrls: ['./storage-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./storage-settings.component.sass', '../stylesheet.scss'],
 })
 export class StorageSettingsComponent {
   showSelectChapter = false;

@@ -6,7 +6,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-delete-user',
   templateUrl: './delete-user.component.html',
-  styleUrls: ['./delete-user.component.sass'],
+  styleUrls: ['./delete-user.component.scss'],
 })
 export class DeleteUserComponent {
   enteredPassword: string = '';

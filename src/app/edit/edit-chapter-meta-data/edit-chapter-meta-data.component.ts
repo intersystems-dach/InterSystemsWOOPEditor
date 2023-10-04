@@ -11,7 +11,7 @@ import { Chapter, UserManger } from 'src/utils/classes';
 @Component({
   selector: 'app-edit-chapter-meta-data',
   templateUrl: './edit-chapter-meta-data.component.html',
-  styleUrls: ['./edit-chapter-meta-data.component.sass'],
+  styleUrls: ['./edit-chapter-meta-data.component.scss'],
 })
 export class EditChapterMetaDataComponent {
   @Input() name: string = '';

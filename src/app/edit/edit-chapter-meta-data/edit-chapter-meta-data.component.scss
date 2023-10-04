@@ -1,0 +1,104 @@
+* {
+  position: fixed;
+}
+.background {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  backdrop-filter: blur(3px);
+}
+.container {
+  width: 500px;
+  height: 550px;
+  background-color: var(--secondary-color);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+  color: var(--inverted-text-color);
+  .closeButton {
+    right: 30px;
+    top: 10px;
+    border: none;
+    background: none;
+    color: var(--inverted-text-color);
+    font-size: 20px;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  .submitButton {
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    border: none;
+    background: var(--primary-color);
+    color: var(--inverted-text-color);
+    border-radius: 5px;
+    width: 40%;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+    &:hover {
+      transform: translateX(-50%) scale(1.1);
+    }
+  }
+  h1 {
+    text-align: center;
+    margin-top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+  }
+  input {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    width: 80%;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  p {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    width: 80%;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+  }
+  textarea {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5px;
+    width: 80%;
+    height: 150px;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+    box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.5);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    &:focus-visible {
+      outline: none;
+    }
+  }
+  .wrong {
+    color: red;
+    text-align: center;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 530px;
+  }
+}

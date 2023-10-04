@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-markdown-editor',
   templateUrl: './markdown-editor.component.html',
-  styleUrls: ['./markdown-editor.component.sass'],
+  styleUrls: ['./markdown-editor.component.scss'],
 })
 export class MarkdownEditorComponent {
   addImageOpened = false;
@@ -64,9 +64,6 @@ export class MarkdownEditorComponent {
   }
 
   help() {
-    const url = this.router.serializeUrl(
-      this.router.createUrlTree(['/markdown'])
-    );
-    window.open(url, '_blank');
+    this.router.navigate(['/markdown']);
   }
 }

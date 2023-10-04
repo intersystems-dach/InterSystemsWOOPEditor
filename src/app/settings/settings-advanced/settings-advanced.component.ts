@@ -5,7 +5,7 @@ import { UserManger } from 'src/utils/classes';
 @Component({
   selector: 'app-settings-advanced',
   templateUrl: './settings-advanced.component.html',
-  styleUrls: ['./settings-advanced.component.sass'],
+  styleUrls: ['./settings-advanced.component.scss'],
 })
 export class SettingsAdvancedComponent {
   selected: string = '';

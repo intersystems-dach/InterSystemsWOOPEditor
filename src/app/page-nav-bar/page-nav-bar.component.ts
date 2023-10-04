@@ -10,7 +10,7 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-page-nav-bar',
   templateUrl: './page-nav-bar.component.html',
-  styleUrls: ['./page-nav-bar.component.sass'],
+  styleUrls: ['./page-nav-bar.component.scss'],
 })
 export class PageNavBarComponent {
   @Input() showNextButton: boolean = true;

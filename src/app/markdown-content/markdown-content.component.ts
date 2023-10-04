@@ -7,7 +7,7 @@ import { IrisinterfaceService } from '../services/irisinterface.service';
 @Component({
   selector: 'app-markdown-content',
   templateUrl: './markdown-content.component.html',
-  styleUrls: ['./markdown-content.component.sass'],
+  styleUrls: ['./markdown-content.component.scss'],
 })
 export class MarkdownContentComponent {
   @Input() data: string = '';

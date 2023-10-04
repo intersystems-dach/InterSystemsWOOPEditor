@@ -15,7 +15,7 @@ import htmlToPdfmake from 'html-to-pdfmake'; */
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
-  styleUrls: ['./chapter.component.sass'],
+  styleUrls: ['./chapter.component.scss'],
 })
 export class ChapterComponent {
   @Input() chapter!: Chapter;
@@ -42,6 +42,7 @@ export class ChapterComponent {
         this.router.navigate(['/']);
         return;
       }
+
       this.chapterName = x;
       this.chapterManger.init().then(() => {
         this.chapter = this.chapterManger.getChapterByName(

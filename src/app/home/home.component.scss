@@ -1,0 +1,57 @@
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.container {
+  padding-top: 100px;
+}
+.userLevelLabel {
+  position: fixed;
+  bottom: 10px;
+  left: 20px;
+  opacity: 0.2;
+}
+.serverStatus {
+  position: fixed;
+  bottom: 5px;
+  left: 20px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  p {
+    cursor: default;
+    color: var(--text-color);
+    opacity: 0.5;
+  }
+  .statusIcon {
+    margin-left: 10px;
+    margin-top: 3px;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+  }
+}
+.version {
+  position: fixed;
+  bottom: 30px;
+  left: 20px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  p {
+    cursor: default;
+    color: var(--text-color);
+    opacity: 0.5;
+  }
+}
+@media screen and (max-width: 600px) {
+  .serverStatus {
+    display: none;
+  }
+  .version {
+    display: none;
+  }
+};

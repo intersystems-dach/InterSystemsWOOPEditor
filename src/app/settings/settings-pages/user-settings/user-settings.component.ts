@@ -6,7 +6,7 @@ import { LocalStorageService } from '../../../services/local-storage.service';
 @Component({
   selector: 'app-user-settings',
   templateUrl: './user-settings.component.html',
-  styleUrls: ['./user-settings.component.sass', '../stylesheet.sass'],
+  styleUrls: ['./user-settings.component.sass', '../stylesheet.scss'],
 })
 export class UserSettingsComponent {
   constructor(

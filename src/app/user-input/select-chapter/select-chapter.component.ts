@@ -6,7 +6,7 @@ import { UserManger } from 'src/utils/classes';
 @Component({
   selector: 'app-select-chapter',
   templateUrl: './select-chapter.component.html',
-  styleUrls: ['./select-chapter.component.sass'],
+  styleUrls: ['./select-chapter.component.scss'],
 })
 export class SelectChapterComponent {
   @Output() chapterEmitter = new EventEmitter<string>();

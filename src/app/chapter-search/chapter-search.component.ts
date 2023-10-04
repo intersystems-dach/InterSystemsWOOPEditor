@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-chapter-search',
   templateUrl: './chapter-search.component.html',
-  styleUrls: ['./chapter-search.component.sass']
+  styleUrls: ['./chapter-search.component.scss']
 })
 export class ChapterSearchComponent {
 

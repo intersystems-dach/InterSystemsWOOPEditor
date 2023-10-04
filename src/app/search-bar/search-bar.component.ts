@@ -6,7 +6,7 @@ import { ColorSchemeService } from '../services/color-scheme.service';
 @Component({
   selector: 'app-search-bar',
   templateUrl: './search-bar.component.html',
-  styleUrls: ['./search-bar.component.sass'],
+  styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
   searchValue: string = '';

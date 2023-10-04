@@ -6,7 +6,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.sass'],
+  styleUrls: ['./change-password.component.scss'],
 })
 export class ChangePasswordComponent {
   enteredPassword: string = '';

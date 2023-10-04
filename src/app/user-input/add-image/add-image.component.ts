@@ -4,7 +4,7 @@ import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 @Component({
   selector: 'app-add-image',
   templateUrl: './add-image.component.html',
-  styleUrls: ['./add-image.component.sass'],
+  styleUrls: ['./add-image.component.scss'],
 })
 export class AddImageComponent {
   @Output() imageEmitter = new EventEmitter<string>();
