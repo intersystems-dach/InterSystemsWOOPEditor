@@ -112,6 +112,7 @@ export class EditChapterComponent {
     window.scrollTo({ top: 0 });
   }
 
+  @HostListener('document:keydown.control.alt.a', ['$event'])
   addPage(): void {
     this.chapter.Pages.push(new Page('', '', ''));
     this.currentPage = this.chapter.Pages.length - 1;

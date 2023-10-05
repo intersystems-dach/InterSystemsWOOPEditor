@@ -159,6 +159,10 @@ export class SearchBarHeaderComponent {
     if (lowerSearchValue == 'pbonin') {
       window.location.href = 'https://philipp-bonin.com/';
     }
+    if (lowerSearchValue == 'pong') {
+      window.location.href =
+        'https://intersystems-dach.github.io/InterSystemsPong/';
+    }
     if (lowerSearchValue == 'funky') {
       this.colorSchemeService.funkyMode();
     }
