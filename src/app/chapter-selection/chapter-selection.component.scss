@@ -95,6 +95,7 @@
         flex-direction: column;
         .chapterButton {
           width: 400px;
+          border-radius: 0px;
         }
         &:hover {
           .chapterButton {
@@ -128,4 +129,4 @@
   .edit {
     padding-right: 0px;
   }
-};
+}

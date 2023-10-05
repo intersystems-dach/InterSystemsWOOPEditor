@@ -1,0 +1,81 @@
+.box {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 30px;
+  z-index: 9999;
+  border: 1px solid var(--primary-color);
+  background-color: var(--header-color);
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  width: 300px;
+  padding: 10px;
+  animation: slideInFromRight 0.7s ease-in-out;
+  color: var(--text-color);
+  .heading {
+    margin-top: 0px;
+    width: 250px;
+  }
+  .closeButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: var(--inverted-text-color);
+    border: 1px solid var(--primary-color);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    &:hover {
+      scale: 1.1;
+    }
+  }
+}
+
+.slideOut {
+  animation: slideOutToButton 0.51s ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    width: 100%;
+    left: 0px;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    animation: none;
+    border-top: 1px solid var(--primary-color);
+    .closeButton {
+      right: 30px;
+    }
+  }
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(150%);
+  }
+  80% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes slideOutToButton {
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: translateY(150%);
+  }
+}

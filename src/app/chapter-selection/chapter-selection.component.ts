@@ -8,6 +8,7 @@ import {
 import { Chapter, UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
 import { IrisinterfaceService } from '../services/irisinterface.service';
+import { NotificationComponent } from '../notification/notification.component';
 @Component({
   selector: 'app-chapter-selection',
   templateUrl: './chapter-selection.component.html',
@@ -52,13 +53,26 @@ export class ChapterSelectionComponent {
       next: (data) => {
         if (data.status) {
           this.chapters.splice(this.chapters.indexOf(chapter), 1);
-          alert('Chapter deleted');
+          NotificationComponent.showNotification(
+            'Chapter deleted',
+            'The chapter was deleted successfully!'
+          );
         } else {
-          alert('Chapter could not be deleted!');
+          NotificationComponent.showNotification(
+            'Chapter could not be deleted',
+            'The chapter could not be deleted!',
+            5000,
+            true
+          );
         }
       },
       error: (error) => {
-        alert('Chapter could not be deleted: ' + error.message + '!');
+        NotificationComponent.showNotification(
+          'ERROR',
+          'Chapter could not be deleted: ' + error.message + '!',
+          -1,
+          true
+        );
       },
     });
   }

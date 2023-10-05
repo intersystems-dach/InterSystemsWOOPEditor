@@ -56,6 +56,7 @@ import { TranslateSpecComponent } from './user-input/translate-spec/translate-sp
 import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddFileComponent } from './user-input/add-file/add-file.component';
+import { NotificationComponent } from './notification/notification.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -106,6 +107,7 @@ import { AddFileComponent } from './user-input/add-file/add-file.component';
     TranslateSpecComponent,
     ConnectViaUrlComponent,
     AddFileComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

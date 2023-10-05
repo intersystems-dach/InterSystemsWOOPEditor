@@ -4,6 +4,7 @@ import { UserManger } from 'src/utils/classes';
 import { ChaptermanagerService } from 'src/app/services/chaptermanager.service';
 import { HeaderComponent } from '../../../header/header.component';
 import { IrisinterfaceService } from '../../../services/irisinterface.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-storage-settings',
@@ -21,7 +22,7 @@ export class StorageSettingsComponent {
 
   clearStorage() {
     this.localStorageService.clearAll();
-    alert('Storage cleared!');
+    NotificationComponent.showNotification('Success', 'Storage cleared!');
   }
 
   getRememberPage(): boolean {
@@ -72,14 +73,27 @@ export class StorageSettingsComponent {
           .subscribe({
             next: (data) => {
               if (data.status) {
-                alert('Chapter imported!');
+                NotificationComponent.showNotification(
+                  'Chapter imported',
+                  'The chapter was imported successfully!'
+                );
                 this.chaptermanagerService.chapters.push(chapter);
               } else {
-                alert('Chapter import failed!');
+                NotificationComponent.showNotification(
+                  'Chapter import failed',
+                  'The chapter could not be imported!',
+                  5000,
+                  true
+                );
               }
             },
             error: (err) => {
-              alert('Chapter import failed:' + err.message);
+              NotificationComponent.showNotification(
+                'ERROR',
+                'Chapter import failed: ' + err.message + '!',
+                -1,
+                true
+              );
             },
           });
       };

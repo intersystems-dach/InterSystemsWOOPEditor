@@ -8,7 +8,7 @@ import {
 import { Chapter, UserManger } from 'src/utils/classes';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { ColorSchemeService } from '../services/color-scheme.service';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar-header',
@@ -23,7 +23,6 @@ export class SearchBarHeaderComponent {
 
   @Output() close: EventEmitter<string> = new EventEmitter<string>();
   @Output() pageChange: EventEmitter<number> = new EventEmitter<number>();
-
 
   @Input() chapter: Chapter | null = null;
 
@@ -48,7 +47,6 @@ export class SearchBarHeaderComponent {
     }, 500);
   }
 
-
   onSearchChange(): void {
     if (this.chapter == null) {
       this.searchAllChapters();
@@ -58,8 +56,7 @@ export class SearchBarHeaderComponent {
   }
 
   searchChapter(): void {
-    if(this.chapter == null)
-    {
+    if (this.chapter == null) {
       return;
     }
     this.searchChapterResult = [];
@@ -91,7 +88,7 @@ export class SearchBarHeaderComponent {
         spaceCount = 0;
         while (end < text.length && spaceCount < 2) {
           end++;
-          if(text[end] == ' ') {
+          if (text[end] == ' ') {
             spaceCount++;
           }
         }
@@ -143,7 +140,6 @@ export class SearchBarHeaderComponent {
         }
       }
     } */
-
   }
 
   searchAllChapters(): void {
@@ -165,6 +161,21 @@ export class SearchBarHeaderComponent {
     }
     if (lowerSearchValue == 'funky') {
       this.colorSchemeService.funkyMode();
+    }
+    if (lowerSearchValue == 'ocean') {
+      this.colorSchemeService.oceanMode();
+    }
+    if (lowerSearchValue == 'sunset') {
+      this.colorSchemeService.sunsetMode();
+    }
+    if (lowerSearchValue == 'ruby') {
+      this.colorSchemeService.rubyMode();
+    }
+    if (lowerSearchValue == 'coral') {
+      this.colorSchemeService.coralMode();
+    }
+    if (lowerSearchValue == 'lavender') {
+      this.colorSchemeService.lavenderMode();
     }
 
     let words = lowerSearchValue.split(' ');
@@ -203,6 +214,4 @@ export class SearchBarHeaderComponent {
     this.searchValue = '';
     this.onSearchChange();
   }
-
-
 }

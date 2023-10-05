@@ -1,0 +1,7 @@
+<div [class]="'box' + (getClosing() ? ' slideOut' : '')" *ngIf="getVisible()">
+  <h2 class="heading" [style.color]="getIsError() ? 'red' : ''">
+    {{ getHeading() }}
+  </h2>
+  <p>{{ getMessage() }}</p>
+  <button class="closeButton" (click)="close()">X</button>
+</div>

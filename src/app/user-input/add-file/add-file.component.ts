@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
-
 
 @Component({
   selector: 'app-add-file',
@@ -28,15 +28,18 @@ export class AddFileComponent {
         this.selectFile = true;
       },
       error: (err) => {
-        alert('Error getting file names:' + err.message);
+        NotificationComponent.showNotification(
+          'Error getting file names',
+          err.message,
+          -1,
+          true
+        );
       },
     });
   }
 
   selectTheFile() {
-    this.fileEmitter.emit(
-      `$$$[Download](${this.selectedFile})`
-    );
+    this.fileEmitter.emit(`$$$[Download](${this.selectedFile})`);
   }
 
   uploadFile() {
@@ -55,20 +58,30 @@ export class AddFileComponent {
         this.apiService.uploadFile(file.name, reader.result).subscribe({
           next: (res) => {
             if (res.status) {
-              alert('File uploaded: ' + res.newName);
-              this.fileEmitter.emit(
-                `$$$[Download](${res.newName})`
+              NotificationComponent.showNotification(
+                'Success',
+                'File uploaded: ' + res.newName
               );
+              this.fileEmitter.emit(`$$$[Download](${res.newName})`);
             } else {
-              alert('Could not upload file!');
+              NotificationComponent.showNotification(
+                'Error uploading file',
+                'Could not upload file!',
+                5000,
+                true
+              );
             }
           },
           error: (err) => {
-            alert('Error uploading file:' + err.message);
+            NotificationComponent.showNotification(
+              'Error uploading file',
+              err.message,
+              -1,
+              true
+            );
           },
         });
       };
-
     };
     input.click();
   }

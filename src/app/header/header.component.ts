@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Chapter, UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../services/color-scheme.service';
 import { LocalStorageService } from '../services/local-storage.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-header',

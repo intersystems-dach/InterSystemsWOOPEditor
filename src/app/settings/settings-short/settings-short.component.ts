@@ -4,6 +4,7 @@ import { UserManger } from 'src/utils/classes';
 import { ColorSchemeService } from '../../services/color-scheme.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { IrisinterfaceService } from '../../services/irisinterface.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-settings-short',
@@ -64,15 +65,24 @@ export class SettingsShortComponent {
           this.isLoading = false;
 
           if (data.status) {
-            alert(data.message);
+            NotificationComponent.showNotification('Success', data.message, -1);
           } else {
-            alert('ERROR: ' + data.message);
+            NotificationComponent.showNotification(
+              'Unsuccessful',
+              data.message,
+              -1,
+              true
+            );
           }
         },
         error: (err: any) => {
           this.isLoading = false;
-
-          alert(err.message);
+          NotificationComponent.showNotification(
+            'ERROR',
+            'Error deploying: ' + err.message + '!',
+            -1,
+            true
+          );
         },
       });
   }

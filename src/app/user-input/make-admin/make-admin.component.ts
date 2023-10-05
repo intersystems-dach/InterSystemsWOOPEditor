@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-make-admin',
@@ -38,7 +39,10 @@ export class MakeAdminComponent {
       .subscribe({
         next: (data: any) => {
           if (data.status) {
-            alert('User made admin successfully!');
+            NotificationComponent.showNotification(
+              'User made admin successfully!',
+              'The user was made admin successfully!'
+            );
             this.close();
           } else {
             this.wrongMessage = 'Something went wrong!';

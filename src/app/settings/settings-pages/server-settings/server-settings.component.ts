@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from '../../../services/local-storage.service';
 import { IrisinterfaceService } from '../../../services/irisinterface.service';
 import { Router } from '@angular/router';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-server-settings',
@@ -36,7 +37,12 @@ export class ServerSettingsComponent {
 
   saveConnection() {
     if (this.name === '') {
-      alert('Name is empty!');
+      NotificationComponent.showNotification(
+        'Error',
+        'Please enter a name for the connection!',
+        -1,
+        true
+      );
       return;
     }
 
@@ -45,7 +51,7 @@ export class ServerSettingsComponent {
       this.host,
       this.port
     );
-    alert('Connection saved!');
+    NotificationComponent.showNotification('Success', 'Connection saved!');
   }
 
   openConnection() {

@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-change-password',
@@ -46,7 +47,10 @@ export class ChangePasswordComponent {
       .subscribe({
         next: (data: any) => {
           if (data.status) {
-            alert('Password changed successfully!');
+            NotificationComponent.showNotification(
+              'Password changed successfully!',
+              'The password was changed successfully!'
+            );
             this.close();
           } else {
             this.wrongMessage = 'Something went wrong!';

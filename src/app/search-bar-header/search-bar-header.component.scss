@@ -6,7 +6,7 @@
   height: 40px;
   align-items: center;
   display: flex;
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   animation: slideIn 0.5s;
   input {
     width: 90%;
@@ -81,9 +81,13 @@
     transform: translateY(0);
   }
 }
+
 @keyframes slideOutFromTop {
   0% {
     transform: translateY(0);
+  }
+  20% {
+    transform: translateY(10%);
   }
   100% {
     transform: translateY(-200%);
@@ -92,12 +96,16 @@
 
 @keyframes slideIn {
   0% {
-    transform: translateX(100%);
+    transform: translateX(150%);
+  }
+  80% {
+    transform: translateX(-10%);
   }
   100% {
     transform: translateX(0);
   }
 }
+
 @keyframes shake {
   0% {
     transform: translateX(0);
@@ -132,4 +140,4 @@
   100% {
     transform: translateX(0);
   }
-};
+}

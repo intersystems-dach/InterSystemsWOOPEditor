@@ -2,6 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { UserManger } from 'src/utils/classes';
 import { Location } from '@angular/common';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-add-user',
@@ -54,7 +55,10 @@ export class AddUserComponent {
       .subscribe({
         next: (data: any) => {
           if (data.status) {
-            alert('User added successfully!');
+            NotificationComponent.showNotification(
+              'User added successfully!',
+              'The user was added successfully!'
+            );
             this.close();
           } else {
             this.wrongMessage = 'Something went wrong!';

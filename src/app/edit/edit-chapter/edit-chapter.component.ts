@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ChaptermanagerService } from 'src/app/services/chaptermanager.service';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 
 @Component({
   selector: 'app-edit-chapter',
@@ -56,16 +57,16 @@ export class EditChapterComponent {
       }
       let pageLocalStorage = this.localStorageService.getPageForChapter(
         this.chapterName
-        );
-        if (pageLocalStorage < 0) {
-          pageLocalStorage = 0;
-        }
-        if (pageLocalStorage > this.chapter.Pages.length - 1) {
-          pageLocalStorage = this.chapter.Pages.length - 1;
-        }
-        this.currentPage = pageLocalStorage;
-        this.pageInput = this.currentPage + 1;
-      });
+      );
+      if (pageLocalStorage < 0) {
+        pageLocalStorage = 0;
+      }
+      if (pageLocalStorage > this.chapter.Pages.length - 1) {
+        pageLocalStorage = this.chapter.Pages.length - 1;
+      }
+      this.currentPage = pageLocalStorage;
+      this.pageInput = this.currentPage + 1;
+    });
   }
 
   onPageInput() {
@@ -144,15 +145,29 @@ export class EditChapterComponent {
       next: (data) => {
         if (data.status) {
           if (alertSaved) {
-            alert('Chapter saved!');
+            NotificationComponent.showNotification(
+              'Chapter saved',
+              'The chapter was saved successfully!',
+              2000
+            );
           }
           this.changes = false;
         } else {
-          alert('Error saving chapter!');
+          NotificationComponent.showNotification(
+            'Chapter could not be saved',
+            'The chapter could not be saved!',
+            5000,
+            true
+          );
         }
       },
       error: (err: any) => {
-        alert('Error saving chapter: ' + err.message);
+        NotificationComponent.showNotification(
+          'ERROR',
+          'Chapter could not be saved: ' + err.message + '!',
+          -1,
+          true
+        );
       },
     });
   }
@@ -187,7 +202,12 @@ export class EditChapterComponent {
             this.chapterPassword = data.password;
           },
           error: (err: any) => {
-            alert('Error getting chapter password: ' + err.message);
+            NotificationComponent.showNotification(
+              'ERROR',
+              'Error getting chapter password: ' + err.message + '!',
+              -1,
+              true
+            );
             this.chapterPassword = this.chapter.Password;
           },
         });

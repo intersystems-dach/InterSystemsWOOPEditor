@@ -40,6 +40,31 @@ export class ColorSchemeService {
     this.darkModeEnabled = true;
   }
 
+  oceanMode() {
+    document.documentElement.setAttribute('data-theme', 'ocean');
+    this.darkModeEnabled = false;
+  }
+
+  sunsetMode() {
+    document.documentElement.setAttribute('data-theme', 'sunset');
+    this.darkModeEnabled = false;
+  }
+
+  rubyMode() {
+    document.documentElement.setAttribute('data-theme', 'ruby');
+    this.darkModeEnabled = true;
+  }
+
+  coralMode() {
+    document.documentElement.setAttribute('data-theme', 'coral');
+    this.darkModeEnabled = false;
+  }
+
+  lavenderMode() {
+    document.documentElement.setAttribute('data-theme', 'lavender');
+    this.darkModeEnabled = true;
+  }
+
   detectPrefersColorScheme(): string {
     // Detect if prefers-color-scheme is supported
     if (window.matchMedia('(prefers-color-scheme)').media !== 'not all') {

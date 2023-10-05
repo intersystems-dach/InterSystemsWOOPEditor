@@ -3,6 +3,7 @@ import { MarkdownService } from 'ngx-markdown';
 import { HttpClient } from '@angular/common/http';
 import { LocalStorageService } from '../services/local-storage.service';
 import { IrisinterfaceService } from '../services/irisinterface.service';
+import { NotificationComponent } from '../notification/notification.component';
 
 @Component({
   selector: 'app-markdown-content',
@@ -195,12 +196,9 @@ z++
     componentRef.instance.data = adItem.data;
   } */
 
-  replaceHostAndPort(s: string): string{
+  replaceHostAndPort(s: string): string {
     s = s.replace(/\$\$HOST\$\$/g, IrisinterfaceService.host);
-    s = s.replace(
-      /\$\$PORT\$\$/g,
-      '' + IrisinterfaceService.port
-    );
+    s = s.replace(/\$\$PORT\$\$/g, '' + IrisinterfaceService.port);
     return s;
   }
 
@@ -218,7 +216,12 @@ z++
         link.click();
       },
       error: (err) => {
-        alert('Error getting file:' + err.message);
+        NotificationComponent.showNotification(
+          'ERROR',
+          'Error getting file: ' + err.message + '!',
+          -1,
+          true
+        );
       },
     });
   }

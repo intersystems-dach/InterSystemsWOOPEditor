@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { NotificationComponent } from 'src/app/notification/notification.component';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
 
 @Component({
@@ -27,7 +28,12 @@ export class AddImageComponent {
         this.selectImage = true;
       },
       error: (err) => {
-        alert('Error getting image names:' + err.message);
+        NotificationComponent.showNotification(
+          'Error getting image names',
+          err.message,
+          -1,
+          true
+        );
       },
     });
   }
@@ -51,16 +57,29 @@ export class AddImageComponent {
         this.apiService.uploadImage(file.name, binary).subscribe({
           next: (res) => {
             if (res.status) {
-              alert('Image uploaded: ' + res.newName);
+              NotificationComponent.showNotification(
+                'Success',
+                'Image uploaded: ' + res.newName
+              );
               this.imageEmitter.emit(
                 `?[${res.newName}](${res.newName}){width:100%}`
               );
             } else {
-              alert('Could not upload image!');
+              NotificationComponent.showNotification(
+                'Error uploading image',
+                'Could not upload image!',
+                5000,
+                true
+              );
             }
           },
           error: (err) => {
-            alert('Error uploading image:' + err.message);
+            NotificationComponent.showNotification(
+              'Error uploading image',
+              err.message,
+              -1,
+              true
+            );
           },
         });
       };
