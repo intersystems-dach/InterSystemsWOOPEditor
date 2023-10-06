@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Chapter, VerifyCache } from 'src/utils/classes';
+import { Chapter, Page, VerifyCache } from 'src/utils/classes';
 import { IrisinterfaceService } from './irisinterface.service';
 
 @Injectable({
@@ -10,7 +10,9 @@ export class ChaptermanagerService {
   public allChapters: Chapter[] = [];
   private initDone = false;
 
-  private errorChapter = new Chapter('Error 404', '', []);
+  private errorChapter = new Chapter('Error 404', '', [
+    new Page('**_This chapter does not exist. Please check the URL._**'),
+  ]);
 
   currentChapter: Chapter = this.errorChapter;
 
@@ -54,7 +56,7 @@ export class ChaptermanagerService {
       }
 
       if (chapter.Password === '') {
-        VerifyCache.verifyChapter(chapter.Title, "");
+        VerifyCache.verifyChapter(chapter.Title, '');
       }
     }
     this.allChapters = this.sortChaptersAlphabetically(this.allChapters);

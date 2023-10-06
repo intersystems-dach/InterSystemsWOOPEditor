@@ -5,6 +5,7 @@ import { ColorSchemeService } from '../../services/color-scheme.service';
 import { LocalStorageService } from '../../services/local-storage.service';
 import { IrisinterfaceService } from '../../services/irisinterface.service';
 import { NotificationComponent } from 'src/app/notification/notification.component';
+import { User } from '../../../utils/interfaces';
 
 @Component({
   selector: 'app-settings-short',
@@ -57,6 +58,10 @@ export class SettingsShortComponent {
   }
 
   deploy() {
+    if (UserManger.userLevel == 2) {
+      this.router.navigate(['/deploy']);
+      return;
+    }
     this.isLoading = true;
     this.apiService
       .deployAll(UserManger.userName, UserManger.password)

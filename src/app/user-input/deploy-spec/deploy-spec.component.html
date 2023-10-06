@@ -1,0 +1,25 @@
+<div class="background" (click)="close()"></div>
+<div class="container">
+  <h1>Deploy</h1>
+  <button class="closeButton" (click)="close()">X</button>
+  <div class="checkBoxCon" [style.top]="'35%'">
+    <input
+      type="checkbox"
+      name="ignoreWaitingTime"
+      [(ngModel)]="ignoreWaitingTime"
+    />
+    <p>Ignore waiting time</p>
+  </div>
+  <div class="checkBoxCon" [style.top]="'50%'">
+    <input type="checkbox" name="pushToGit" [(ngModel)]="pushToGit" />
+    <p>Push to git</p>
+  </div>
+  <div class="checkBoxCon" [style.top]="'65%'">
+    <input type="checkbox" name="pushAll" [(ngModel)]="pushAll" />
+    <p>Push all</p>
+  </div>
+  <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
+    Deploy
+  </button>
+</div>
+<app-loading-screen *ngIf="isLoading"></app-loading-screen>

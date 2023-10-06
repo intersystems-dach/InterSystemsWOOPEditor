@@ -37,9 +37,14 @@ export class ChapterNewComponent {
       return;
     }
 
-    if(this.name.includes('#')){
+    if (this.name.includes('#')) {
       this.isWrong = true;
       this.wrongText = 'Chapter name cannot contain #';
+      return;
+    }
+    if (this.name.includes('~')) {
+      this.isWrong = true;
+      this.wrongText = 'Chapter name cannot contain ~';
       return;
     }
 

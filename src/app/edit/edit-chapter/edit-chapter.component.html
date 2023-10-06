@@ -1,7 +1,7 @@
 <div *ngIf="contentVisible" class="content">
   <div class="header">
     <button *ngIf="!preview" (click)="goBack()" class="backButton">Back</button>
-    <div *ngIf="!preview"  class="tocButton" (click)="setTOC(true)">
+    <div *ngIf="!preview" class="tocButton" (click)="setTOC(true)">
       <div class="bar"></div>
       <div class="bar"></div>
       <div class="bar"></div>
@@ -68,7 +68,12 @@
     </button>
     <button (click)="save()">{{ (changes ? "*" : "") + "Save" }}</button>
   </div>
-  <app-table-of-content *ngIf="showTOC" (event)="onTOCInput($event)" [chapter]="chapter"></app-table-of-content>
+  <app-table-of-content
+    *ngIf="showTOC"
+    (event)="onTOCInput($event)"
+    [chapter]="chapter"
+    [currentPage]="currentPage"
+  ></app-table-of-content>
 
   <app-edit-chapter-meta-data
     [updateChapter]="chapter"
@@ -86,4 +91,8 @@
     (sureEmitter)="deletePage($event)"
   ></app-are-you-sure>
 </div>
-<app-header class="sticky" [chapter]="chapter" (pageChange)="onTOCInput($event - 1)"></app-header>
+<app-header
+  class="sticky"
+  [chapter]="chapter"
+  (pageChange)="onTOCInput($event - 1)"
+></app-header>

@@ -1,5 +1,5 @@
 header {
-  box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
   background-color: var(--header-color);
   z-index: 1000;
   button {
@@ -111,7 +111,7 @@ header {
     scale: 1.1;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .logo {
     height: 30px;
     margin-left: 10px;
@@ -169,4 +169,4 @@ header {
   100% {
     transform: rotateZ(360deg);
   }
-};
+}

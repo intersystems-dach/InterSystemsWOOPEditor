@@ -34,4 +34,7 @@
     Log out
   </button>
 </div>
-<app-loading-screen *ngIf="isLoading"></app-loading-screen>
+<app-loading-screen
+  *ngIf="isLoading"
+  [color]="'var(--secondary-color)'"
+></app-loading-screen>

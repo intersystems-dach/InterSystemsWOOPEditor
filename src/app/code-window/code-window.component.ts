@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import * as Prism from 'prismjs';
 import { ColorSchemeService } from '../services/color-scheme.service';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-code-window',
@@ -32,6 +33,13 @@ export class CodeWindowComponent {
         Prism.highlightElement(this.codeEle.nativeElement);
       }
     }
+  }
+
+  toggleCopyable() {
+    if (UserManger.userLevel == 0) {
+      return;
+    }
+    this.copyable = !this.copyable;
   }
 
   getDarkModeEnabled() {

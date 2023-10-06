@@ -16,6 +16,7 @@ import { MakeAdminComponent } from './user-input/make-admin/make-admin.component
 import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
+import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'user/make/admin', component: MakeAdminComponent },
   { path: 'user/change/password', component: ChangePasswordComponent },
   { path: 'login', component: LogInComponent },
+  { path: 'deploy', component: DeploySpecComponent },
   { path: 'error', component: ErrorPageComponent },
   { path: 'chapter/:chapterName', component: ChapterComponent },
   { path: 'chapter/:chapterName/edit', component: EditChapterComponent },

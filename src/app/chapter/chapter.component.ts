@@ -37,53 +37,66 @@ export class ChapterComponent {
   ) {}
 
   ngOnInit(): void {
-      let x = this.route.snapshot.paramMap.get('chapterName');
-      if (x == null) {
-        this.router.navigate(['/']);
-        return;
+    let x = this.route.snapshot.paramMap.get('chapterName');
+
+    if (x == null) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.chapterName = x;
+    this.chapterManger.init().then(() => {
+      let heading = undefined;
+      if (this.chapterName.includes('~')) {
+        heading = this.chapterName.split('~')[1].toLowerCase();
+        this.chapterName = this.chapterName.split('~')[0];
       }
+      this.chapter = this.chapterManger.getChapterByName(
+        this.chapterName,
+        true
+      );
 
-      this.chapterName = x;
-      this.chapterManger.init().then(() => {
-        this.chapter = this.chapterManger.getChapterByName(
-          this.chapterName,
-          true
-        );
-        if (!this.chapter.IsPrivate) {
-          if (
-            UserManger.userLevel == 2 ||
-            (UserManger.userLevel == 1 &&
-              this.chapter.Author == UserManger.userName)
-          ) {
-            VerifyCache.verifyChapter(this.chapter.Title, '', false);
-          }
-
-          this.contentVisible = VerifyCache.isChapterVerified(
-            this.chapter.Title
-          );
-        } else {
-          if (
-            UserManger.userLevel == 2 ||
-            (UserManger.userLevel == 1 &&
-              this.chapter.Author == UserManger.userName)
-          ) {
-            this.contentVisible = true;
-          } else {
-            this.router.navigate(['/login']);
-          }
+      if (!this.chapter.IsPrivate) {
+        if (
+          UserManger.userLevel == 2 ||
+          (UserManger.userLevel == 1 &&
+            this.chapter.Author == UserManger.userName)
+        ) {
+          VerifyCache.verifyChapter(this.chapter.Title, '', false);
         }
-        let pageLocalStorage = this.localStorageService.getPageForChapter(
-          this.chapterName
-          );
-          if (pageLocalStorage < 0) {
-            pageLocalStorage = 0;
-          }
-          if (pageLocalStorage > this.chapter.Pages.length - 1) {
-            pageLocalStorage = this.chapter.Pages.length - 1;
-          }
-          this.currentPage = pageLocalStorage;
+
+        this.contentVisible = VerifyCache.isChapterVerified(this.chapter.Title);
+      } else {
+        if (
+          UserManger.userLevel == 2 ||
+          (UserManger.userLevel == 1 &&
+            this.chapter.Author == UserManger.userName)
+        ) {
+          this.contentVisible = true;
+        } else {
+          this.router.navigate(['/login']);
+        }
+      }
+      let pageLocalStorage = this.localStorageService.getPageForChapter(
+        this.chapterName
+      );
+      if (pageLocalStorage < 0) {
+        pageLocalStorage = 0;
+      }
+      if (pageLocalStorage > this.chapter.Pages.length - 1) {
+        pageLocalStorage = this.chapter.Pages.length - 1;
+      }
+      this.currentPage = pageLocalStorage;
+      this.pageInput = this.currentPage + 1;
+
+      if (heading != undefined) {
+        let headingPage = this.chapter.getPageForHeading(heading);
+        if (headingPage != -1) {
+          this.currentPage = headingPage;
           this.pageInput = this.currentPage + 1;
-        });
+        }
+      }
+    });
   }
 
   onPageInput() {

@@ -282,24 +282,25 @@ export class IrisinterfaceService {
       );
   }
 
-  getFile(name:string){
-    return this.http.get(
-      'http://' +
-        IrisinterfaceService.host +
-        ':' +
-        IrisinterfaceService.port +
-        '/woop/file/get/' +
-        name
-    ).pipe(
-      catchError((err: HttpErrorResponse) => {
-        if (err.status === 404) {
-          throw new Error('File not found');
-        } else if (err.status === 0) {
-          throw new Error('Server is offline');
-        } else throw new Error('unknown error: ' + err.status);
-      })
-    );
-
+  getFile(name: string) {
+    return this.http
+      .get(
+        'http://' +
+          IrisinterfaceService.host +
+          ':' +
+          IrisinterfaceService.port +
+          '/woop/file/get/' +
+          name
+      )
+      .pipe(
+        catchError((err: HttpErrorResponse) => {
+          if (err.status === 404) {
+            throw new Error('File not found');
+          } else if (err.status === 0) {
+            throw new Error('Server is offline');
+          } else throw new Error('unknown error: ' + err.status);
+        })
+      );
   }
 
   translateText(text: string, to: string): Observable<any> {
@@ -499,17 +500,27 @@ export class IrisinterfaceService {
       );
   }
 
-  deployAll(username: string, password: string): Observable<any> {
+  deployAll(
+    username: string,
+    password: string,
+    ignoreWaitingTime = false,
+    pushTogit = true,
+    pushAll = false
+  ): Observable<any> {
     return this.http
-      .get(
+      .post(
         'http://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
-          '/woop/deploy/all?username=' +
-          username +
-          '&password=' +
-          password
+          '/woop/deploy/all',
+        {
+          username: username,
+          password: password,
+          ignoreWaitingTime: ignoreWaitingTime,
+          pushToGit: pushTogit,
+          pushAll: pushAll,
+        }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {

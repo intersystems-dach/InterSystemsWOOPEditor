@@ -16,12 +16,10 @@
   left: 50%;
   transform: translate(-50%, -50%);
 
-
   & div {
     position: absolute;
     width: 6px;
     height: 6px;
-    background: var(--secondary-color);
     border-radius: 50%;
     animation: lds-default 1.2s linear infinite;
   }
@@ -96,4 +94,4 @@
   50% {
     transform: scale(1.5);
   }
-};
+}

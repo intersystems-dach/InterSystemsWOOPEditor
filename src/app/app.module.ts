@@ -57,6 +57,7 @@ import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.compon
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddFileComponent } from './user-input/add-file/add-file.component';
 import { NotificationComponent } from './notification/notification.component';
+import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,6 +109,7 @@ import { NotificationComponent } from './notification/notification.component';
     ConnectViaUrlComponent,
     AddFileComponent,
     NotificationComponent,
+    DeploySpecComponent,
   ],
   imports: [
     BrowserModule,

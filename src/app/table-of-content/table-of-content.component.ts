@@ -9,6 +9,8 @@ import { Chapter } from 'src/utils/classes';
 export class TableOfContentComponent {
   @Output() event: EventEmitter<number> = new EventEmitter<number>();
   @Input() chapter: Chapter = undefined as any;
+  @Input() currentPage: number = 0;
+
   headings: any[] = [];
 
   constructor() {}
@@ -40,5 +42,14 @@ export class TableOfContentComponent {
   selectPage(page: number) {
     this.event.emit(page);
     this.event.emit(-1);
+  }
+
+  checkIfHeadingIsCurrent(i: number): boolean {
+    let startPage = this.headings[i].page;
+    let endPage = this.chapter.Pages.length;
+    if (i < this.headings.length - 1) {
+      endPage = this.headings[i + 1].page;
+    }
+    return this.currentPage >= startPage && this.currentPage < endPage;
   }
 }

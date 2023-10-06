@@ -47,11 +47,11 @@
     opacity: 0.5;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 800px) {
   .serverStatus {
     display: none;
   }
   .version {
     display: none;
   }
-};
+}

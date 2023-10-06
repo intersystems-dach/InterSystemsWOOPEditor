@@ -72,9 +72,15 @@ export class SearchBarHeaderComponent {
       if (page == null) {
         continue;
       }
-      if (page.Content.toLowerCase().includes(lowerSearchValue)) {
-        // get one word before and after
-        let text = page.Content;
+      let arr = [page.Content];
+      if (UserManger.userLevel > 0) {
+        arr.push(page.Hint);
+        arr.push(page.Result);
+      }
+      for (let text of arr) {
+        if (!text.toLowerCase().includes(lowerSearchValue)) {
+          continue;
+        }
         let index = text.toLowerCase().indexOf(lowerSearchValue);
         let start = index;
         let spaceCount = 0;

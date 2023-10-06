@@ -1,34 +1,37 @@
-<div id="window" [class]="db?'db':''">
+<div id="window" [class]="db ? 'db' : ''">
   <div id="navbar">
     <div id="window-controls">
       <div class="red dot"></div>
       <div class="yellow dot" (dblclick)="onDblClick()"></div>
-      <div class="green dot"></div>
+      <div class="green dot" (dblclick)="toggleCopyable()"></div>
     </div>
     <div class="test">
       <div id="window-title">{{ title }}</div>
       <p class="copiedMessage" *ngIf="copied">✓</p>
       <img
-      class="copy"
-      *ngIf="!copied && copyable"
-      [src]="
-      'assets/imgs/' +
-      (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
-      '/copy.png'
-      "
-      alt="Copy"
-      (click)="copyCode()"
+        class="copy"
+        *ngIf="!copied && copyable"
+        [src]="
+          'assets/imgs/' +
+          (getDarkModeEnabled() ? 'darkmode' : 'lightmode') +
+          '/copy.png'
+        "
+        alt="Copy"
+        (click)="copyCode()"
       />
     </div>
     <div>
       <div class="code">
-        <pre prism *ngIf="language" [class]="'test' + (copyable?'':' noselect')">
+        <pre
+          prism
+          *ngIf="language"
+          [class]="'test' + (copyable ? '' : ' noselect')"
+        >
           <code #codeEle class="language-{{ language }}">
             {{code}}
           </code>
         </pre>
       </div>
     </div>
-
   </div>
 </div>
