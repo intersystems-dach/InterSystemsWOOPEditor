@@ -114,9 +114,15 @@ export class EditChapterComponent {
 
   @HostListener('document:keydown.control.alt.a', ['$event'])
   addPage(): void {
-    this.chapter.Pages.push(new Page('', '', ''));
-    this.currentPage = this.chapter.Pages.length - 1;
+    //this.chapter.Pages.push(new Page('', '', ''));
+    if (this.currentPage + 1 >= this.chapter.Pages.length) {
+      this.chapter.Pages.push(new Page('', '', ''));
+    } else {
+      this.chapter.Pages.splice(this.currentPage + 1, 0, new Page('', '', ''));
+    }
+    this.currentPage++;
     this.pageInput = this.currentPage + 1;
+
     window.scrollTo({ top: 0 });
     this.changes = true;
   }

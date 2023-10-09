@@ -63,6 +63,14 @@ export class Chapter {
     }
     return -1;
   }
+
+  addPageAt(page: Page, index: number) {
+    if (index >= this.Pages.length) {
+      this.Pages.push(page);
+      return;
+    }
+    this.Pages = this.Pages.splice(index, 0, page);
+  }
 }
 
 export class Page {

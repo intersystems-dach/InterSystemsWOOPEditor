@@ -245,6 +245,7 @@ export class IrisinterfaceService {
   }
 
   uploadImage(name: string, content: any): Observable<any> {
+    name = name.replace(/ /g, '_');
     return this.http
       .post(
         'http://' +
@@ -264,6 +265,7 @@ export class IrisinterfaceService {
   }
 
   uploadFile(name: string, content: any): Observable<any> {
+    name = name.replace(/ /g, '_');
     return this.http
       .post(
         'http://' +
