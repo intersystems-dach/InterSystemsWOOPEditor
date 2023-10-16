@@ -6,9 +6,9 @@
     color: var(--text-color);
     border-radius: 10%;
     border: none;
-    width: 30px;
+    width: 50px;
     margin: 0;
-    font-size: 15px;
+    font-size: 14px;
     text-align: center;
     transition: 0.2s;
     box-shadow: none;
@@ -18,7 +18,7 @@
       width: 50px;
     }
   }
-  input[type=number] {
+  input[type="number"] {
     -moz-appearance: textfield;
   }
 }
