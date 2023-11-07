@@ -58,6 +58,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AddFileComponent } from './user-input/add-file/add-file.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
+import { HeadingComponent } from './heading/heading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -110,6 +111,7 @@ import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.compon
     AddFileComponent,
     NotificationComponent,
     DeploySpecComponent,
+    HeadingComponent,
   ],
   imports: [
     BrowserModule,
