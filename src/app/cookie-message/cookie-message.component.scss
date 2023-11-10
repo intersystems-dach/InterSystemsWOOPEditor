@@ -1,0 +1,60 @@
+.message {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 300px;
+  z-index: 100;
+  background-color: var(--header-color);
+  color: var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 25px;
+    text-align: center;
+    width: 90%;
+  }
+  .btnBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-top: 20px;
+    button {
+      margin: 0 10px;
+      border: none;
+      background-color: var(--primary-color);
+      color: var(--inverted-text-color);
+      border-radius: 5px;
+      padding: 10px;
+      font-size: 20px;
+      width: 100px;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        background-color: var(--secondary-color);
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .message {
+    p {
+      font-size: 20px;
+    }
+    .btnBox {
+      button {
+        font-size: 17px;
+        &:hover {
+          background-color: var(--primary-color);
+          transform: scale(1);
+        }
+      }
+    }
+  }
+}

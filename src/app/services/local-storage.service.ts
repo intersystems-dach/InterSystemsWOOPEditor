@@ -3,6 +3,7 @@ import { IrisinterfaceService } from './irisinterface.service';
 import { UserManger, VerifyCache } from 'src/utils/classes';
 import { Router } from '@angular/router';
 import { ChaptermanagerService } from './chaptermanager.service';
+import { CookieMessageComponent } from '../cookie-message/cookie-message.component';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,14 @@ import { ChaptermanagerService } from './chaptermanager.service';
 export class LocalStorageService {
   rememberPage: boolean = true;
 
+  static cookiesAccepted: boolean = false;
+
   constructor(private router: Router) {
+    LocalStorageService.cookiesAccepted = this.getCookiesAccepted();
+    if (!LocalStorageService.cookiesAccepted) {
+      CookieMessageComponent.show();
+    }
+
     this.rememberPage = this.getRememberPage();
     if (this.getStayLoggedIn()) {
       const username = this.getUserName();
@@ -32,6 +40,14 @@ export class LocalStorageService {
     }
   }
 
+  getCookiesAccepted(): boolean {
+    let rememberPage = localStorage.getItem('WOOPCookiesAccepted');
+    if (rememberPage == null) {
+      return false;
+    }
+    return rememberPage == 'true';
+  }
+
   getLanguageTo(): string {
     let languageTo = localStorage.getItem('languageTo');
     if (languageTo == null) {
@@ -41,7 +57,7 @@ export class LocalStorageService {
   }
 
   setLanguageTo(languageTo: string) {
-    localStorage.setItem('languageTo', languageTo);
+    LocalStorageService.setLS('languageTo', languageTo);
   }
 
   getRememberPage(): boolean {
@@ -53,12 +69,12 @@ export class LocalStorageService {
   }
 
   setRememberPage(rememberPage: boolean) {
-    localStorage.setItem('rememberPage', rememberPage ? 'true' : 'false');
+    LocalStorageService.setLS('rememberPage', rememberPage ? 'true' : 'false');
     this.rememberPage = rememberPage;
   }
 
   setColorScheme(darkMode: boolean) {
-    localStorage.setItem('colorScheme', darkMode ? 'dark' : 'light');
+    LocalStorageService.setLS('colorScheme', darkMode ? 'dark' : 'light');
   }
 
   getColorScheme(): string | null {
@@ -67,7 +83,7 @@ export class LocalStorageService {
   }
 
   setFontSize(fontSize: number) {
-    localStorage.setItem('fontSize', fontSize.toString());
+    LocalStorageService.setLS('fontSize', fontSize.toString());
   }
 
   getFontSize(): number {
@@ -79,7 +95,7 @@ export class LocalStorageService {
   }
 
   setPageForChapter(chapterTitle: string, page: number) {
-    localStorage.setItem(chapterTitle, page.toString());
+    LocalStorageService.setLS(chapterTitle, page.toString());
   }
 
   getPageForChapter(chapterTitle: string): number {
@@ -103,7 +119,7 @@ export class LocalStorageService {
   }
 
   setServerHost(serverHost: string) {
-    localStorage.setItem('serverHost', serverHost);
+    LocalStorageService.setLS('serverHost', serverHost);
     IrisinterfaceService.host = serverHost;
   }
 
@@ -116,7 +132,7 @@ export class LocalStorageService {
   }
 
   setServerPort(serverPort: number) {
-    localStorage.setItem('serverPort', serverPort.toString());
+    LocalStorageService.setLS('serverPort', serverPort.toString());
     IrisinterfaceService.port = serverPort;
   }
 
@@ -125,11 +141,11 @@ export class LocalStorageService {
   }
 
   setUserName(userName: string) {
-    localStorage.setItem('userName', userName);
+    LocalStorageService.setLS('userName', userName);
   }
 
   setStayLoggedIn(stayLoggedIn: boolean) {
-    localStorage.setItem('stayLoggedIn', stayLoggedIn ? 'true' : 'false');
+    LocalStorageService.setLS('stayLoggedIn', stayLoggedIn ? 'true' : 'false');
   }
 
   getStayLoggedIn(): boolean {
@@ -149,7 +165,7 @@ export class LocalStorageService {
   }
 
   setPassword(password: string) {
-    localStorage.setItem('password', password);
+    LocalStorageService.setLS('password', password);
   }
 
   removePassword() {
@@ -182,7 +198,7 @@ export class LocalStorageService {
       }
     }
     serverConnections.push({ name: name, host: host, port: port });
-    localStorage.setItem(
+    LocalStorageService.setLS(
       'serverConnections',
       JSON.stringify(serverConnections)
     );
@@ -196,13 +212,30 @@ export class LocalStorageService {
         break;
       }
     }
-    localStorage.setItem(
+    LocalStorageService.setLS(
       'serverConnections',
       JSON.stringify(serverConnections)
     );
   }
 
   clearAll() {
+    localStorage.clear();
+  }
+
+  static setLS(key: string, value: string) {
+    if (!this.cookiesAccepted) {
+      return;
+    }
+    localStorage.setItem(key, value);
+  }
+
+  static acceptCookies() {
+    LocalStorageService.cookiesAccepted = true;
+    LocalStorageService.setLS('WOOPCookiesAccepted', 'true');
+  }
+
+  static rejectCookies() {
+    LocalStorageService.cookiesAccepted = false;
     localStorage.clear();
   }
 }

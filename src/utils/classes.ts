@@ -1,3 +1,5 @@
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+
 export class Chapter {
   public Title: string;
   public Pages: Page[];
@@ -120,7 +122,10 @@ export class VerifyCache {
       return;
     }
     if (save) {
-      localStorage.setItem('verifyCache', JSON.stringify(this.verifyCache));
+      LocalStorageService.setLS(
+        'verifyCache',
+        JSON.stringify(this.verifyCache)
+      );
     }
   }
 

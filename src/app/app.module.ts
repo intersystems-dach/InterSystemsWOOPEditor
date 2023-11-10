@@ -59,6 +59,7 @@ import { AddFileComponent } from './user-input/add-file/add-file.component';
 import { NotificationComponent } from './notification/notification.component';
 import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
 import { HeadingComponent } from './heading/heading.component';
+import { CookieMessageComponent } from './cookie-message/cookie-message.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -112,6 +113,7 @@ import { HeadingComponent } from './heading/heading.component';
     NotificationComponent,
     DeploySpecComponent,
     HeadingComponent,
+    CookieMessageComponent,
   ],
   imports: [
     BrowserModule,

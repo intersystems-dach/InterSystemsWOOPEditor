@@ -98,40 +98,6 @@ export class MarkdownContentComponent {
           language: style,
           title: name,
         });
-      } else if (lines[i].trim().startsWith('#')) {
-        //image
-        let name = lines[i].split('[')[1].split(']')[0];
-        let url = lines[i].split('(')[1].split(')')[0];
-        let style = '';
-        if (lines[i].split(')')[1].includes('{')) {
-          style = lines[i].split('{')[1].split('}')[0];
-        }
-        if (lines[i].startsWith('?[')) {
-          let urlToImage =
-            'http://' +
-            IrisinterfaceService.host +
-            ':' +
-            IrisinterfaceService.port +
-            '/woop/image/get/' +
-            url;
-          let newURL = await this.http
-            .get(urlToImage, { responseType: 'text' })
-            .toPromise()
-            .then((res) => {
-              return res;
-            });
-          if (newURL != undefined) {
-            url = newURL;
-          } else {
-            console.log('error getting image');
-          }
-        }
-        this.blocks.push({
-          type: 'image',
-          code: url,
-          language: style,
-          title: name,
-        });
       } else if (lines[i].startsWith('$$$[')) {
         //image
         let name = lines[i].split('[')[1].split(']')[0];
@@ -157,7 +123,6 @@ export class MarkdownContentComponent {
           !lines[i].startsWith('~~~') &&
           !lines[i].startsWith('![') &&
           !lines[i].startsWith('$$$[') &&
-          !lines[i].startsWith('#') &&
           !lines[i].startsWith('?[')
         ) {
           if (lines[i].startsWith('```')) {
