@@ -1,4 +1,10 @@
 <div class="container">
+  <div class="row">
+    <p class="label">Cookies</p>
+    <button class="action" (click)="toggleCookiesAccepted()">
+      {{ coookiesAccepted() ? "Reject" : "Accept" }}
+    </button>
+  </div>
   <div class="row" *ngIf="getUserLevel() > 0">
     <p class="label">Export chapter</p>
     <button class="action" (click)="showSelectChapter = true">Export</button>

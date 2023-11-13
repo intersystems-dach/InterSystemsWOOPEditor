@@ -104,4 +104,23 @@ export class StorageSettingsComponent {
   getUserLevel() {
     return UserManger.userLevel;
   }
+  coookiesAccepted(): boolean {
+    return LocalStorageService.cookiesAccepted;
+  }
+
+  toggleCookiesAccepted() {
+    if (LocalStorageService.cookiesAccepted) {
+      LocalStorageService.rejectCookies();
+      NotificationComponent.showNotification(
+        'Cookies rejected',
+        'Cookies will not be used.'
+      );
+      return;
+    }
+    LocalStorageService.acceptCookies();
+    NotificationComponent.showNotification(
+      'Cookies accepted',
+      'Cookies will be used.'
+    );
+  }
 }
