@@ -99,14 +99,14 @@ export class EditContentComponent {
     excludeCodeBlocks: boolean,
     translatePage: boolean
   ) {
-    if(!translatePage){
+    if (!translatePage) {
       this.data = await this.translateText(
         this.data,
         tolang,
         excludeCodeBlocks
       );
       this.setData();
-    }else{
+    } else {
       this.page.Content = await this.translateText(
         this.page.Content,
         tolang,
@@ -137,7 +137,7 @@ export class EditContentComponent {
     let inCodeBlock = false;
     for (let i = 0; i < lines.length; i++) {
       let l = lines[i];
-      if ((l.startsWith('![') || l.startsWith('?['))) {
+      if (l.startsWith('![') || l.startsWith('?[')) {
         newText += l + '\n';
         continue;
       }

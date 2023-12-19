@@ -17,6 +17,7 @@ import { WhatsNewComponent } from './whats-new/whats-new.component';
 import { ImpressumComponent } from './impressum/impressum.component';
 import { ConnectViaUrlComponent } from './connect-via-url/connect-via-url.component';
 import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
+import { PlaygroundComponent } from './playground/playground.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsAdvancedComponent },
   { path: 'settings/:settingsName', component: SettingsAdvancedComponent },
   { path: 'markdown', component: MarkdownCheatSheetComponent },
+  { path: 'playground', component: PlaygroundComponent },
   { path: 'help', component: GetHelpComponent },
   { path: 'info', component: WhatsNewComponent },
   { path: 'impressum', component: ImpressumComponent },

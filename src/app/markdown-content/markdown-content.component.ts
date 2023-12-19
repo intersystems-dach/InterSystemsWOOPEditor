@@ -147,23 +147,6 @@ export class MarkdownContentComponent {
         if (i != lines.length) i--;
       }
     }
-
-    /*
-```javascript
-let i = 0
-i++
-let z = 3
-z++
-```
-*/
-
-    // https://stackoverflow.com/questions/48879695/load-component-via-innerhtml-in-angular5
-
-    /* this.markdown = this.mdService.parse(x);
-    for (let codeblock of codeblocks) {
-      this.markdown += codeblock;
-    }
-    console.log(this.markdown); */
   }
 
   /* private addComponent(template: any) {

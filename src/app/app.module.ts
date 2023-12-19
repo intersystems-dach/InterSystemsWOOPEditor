@@ -60,6 +60,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { DeploySpecComponent } from './user-input/deploy-spec/deploy-spec.component';
 import { HeadingComponent } from './heading/heading.component';
 import { CookieMessageComponent } from './cookie-message/cookie-message.component';
+import { PlaygroundComponent } from './playground/playground.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,6 +115,7 @@ import { CookieMessageComponent } from './cookie-message/cookie-message.componen
     DeploySpecComponent,
     HeadingComponent,
     CookieMessageComponent,
+    PlaygroundComponent,
   ],
   imports: [
     BrowserModule,

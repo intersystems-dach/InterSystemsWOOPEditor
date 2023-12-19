@@ -12,6 +12,10 @@ export class MarkdownCheatSheetComponent {
   goBack() {
     // go to the previous page
     this.router.navigate(['/']);
+  }
 
+  goToPlayground() {
+    // go to the previous page
+    this.router.navigate(['/playground']);
   }
 }

@@ -1,0 +1,22 @@
+<app-header class="sticky" [enableSearchBar]="false"></app-header>
+<div class="container">
+  <button (click)="goBack()" class="backButton">Back</button>
+  <h1 id="basic-syntax">Markdown Playground</h1>
+  <div class="contentBox">
+    <textarea
+      (keydown)="handleKeydown($event)"
+      [style.font-size]="getFontSize() + 'px'"
+      [(ngModel)]="data"
+      (ngModelChange)="onChange()"
+      [style.height]="getHeight() + 'px'"
+      spellcheck="false"
+    ></textarea>
+  </div>
+  <div>
+    <ng-container #outlet [ngTemplateOutlet]="content"> </ng-container>
+  </div>
+
+  <ng-template #content>
+    <app-markdown-content [data]="getData()"></app-markdown-content>
+  </ng-template>
+</div>
