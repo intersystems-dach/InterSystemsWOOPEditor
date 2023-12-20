@@ -8,15 +8,15 @@
       name="ignoreWaitingTime"
       [(ngModel)]="ignoreWaitingTime"
     />
-    <p>Ignore waiting time</p>
+    <p (click)="toggleIgnoreWaitingTime()">Ignore waiting time</p>
   </div>
   <div class="checkBoxCon" [style.top]="'50%'">
     <input type="checkbox" name="pushToGit" [(ngModel)]="pushToGit" />
-    <p>Push to git</p>
+    <p (click)="togglePushToGit()">Push to git</p>
   </div>
   <div class="checkBoxCon" [style.top]="'65%'">
     <input type="checkbox" name="pushAll" [(ngModel)]="pushAll" />
-    <p>Push all</p>
+    <p (click)="togglePushAll()">Push all</p>
   </div>
   <button class="submitButton" (click)="submit()" (keydown.enter)="submit()">
     Deploy

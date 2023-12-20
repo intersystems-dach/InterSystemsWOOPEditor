@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotificationComponent } from 'src/app/notification/notification.component';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
@@ -26,6 +26,18 @@ export class DeploySpecComponent {
     }
   }
 
+  togglePushAll() {
+    this.pushAll = !this.pushAll;
+  }
+
+  togglePushToGit() {
+    this.pushToGit = !this.pushToGit;
+  }
+
+  toggleIgnoreWaitingTime() {
+    this.ignoreWaitingTime = !this.ignoreWaitingTime;
+  }
+
   submit() {
     this.isLoading = true;
 
@@ -41,7 +53,7 @@ export class DeploySpecComponent {
         next: (data) => {
           this.isLoading = false;
 
-          if (data.status) {
+          if (data.status && !data.message.toLowerCase().startsWith('error')) {
             NotificationComponent.showNotification('Success', data.message, -1);
           } else {
             NotificationComponent.showNotification(
