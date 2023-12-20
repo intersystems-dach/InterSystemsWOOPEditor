@@ -1,16 +1,5 @@
 <div class="contentBox">
-  <!-- <markdown
-    [data]="data"
-    [line]="line"
-    [style.font-size]="getFontSize() + 'px'"
-    lineHighlight
-  ></markdown> -->
-  <!-- <ng-template
-    appMarkdown
-    [style.font-size]="getFontSize() + 'px'"
-  ></ng-template> -->
   <div *ngFor="let block of blocks" [style.font-size]="getFontSize() + 'px'">
-    <!-- <div *ngIf="block.type == 'textblock'" [innerHTML]="block.code"></div> -->
     <markdown *ngIf="block.type == 'textblock'" [data]="block.code"></markdown>
     <app-code-window
       *ngIf="block.type == 'codeblock'"
@@ -27,8 +16,17 @@
       [alt]="block.title"
       [style]="block.language"
     />
-    <button *ngIf="block.type == 'file'" class="downloadButton" (click)="downloadFile(block.code)">
+    <button
+      *ngIf="block.type == 'file'"
+      class="downloadButton"
+      (click)="downloadFile(block.code)"
+    >
       {{ block.title }}
     </button>
+    <app-heading
+      *ngIf="block.type == 'heading'"
+      [heading]="block.code"
+      [level]="block.title"
+    ></app-heading>
   </div>
 </div>

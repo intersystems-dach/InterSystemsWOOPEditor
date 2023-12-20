@@ -1,4 +1,5 @@
-<div class="heading" *ngIf="heading != ''">
+<div class="heading" *ngIf="heading != ''" (click)="onClick()">
+  <img src="assets/imgs/headingLink.png" class="linkImg" />
   <h1 *ngIf="level == 1">{{ heading }}</h1>
   <h2 *ngIf="level == 2">{{ heading }}</h2>
   <h3 *ngIf="level == 3">{{ heading }}</h3>

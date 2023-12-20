@@ -68,6 +68,6 @@ export class PlaygroundComponent {
 
   goBack() {
     // go to the previous page
-    this.router.navigate(['/markdown']);
+    this.router.navigate(['/help/edit']);
   }
 }

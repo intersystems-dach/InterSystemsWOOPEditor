@@ -1,7 +1,8 @@
 <app-header class="sticky" [enableSearchBar]="false"></app-header>
 <div class="container">
   <button (click)="goBack()" class="backButton">Back</button>
-  <h1 id="basic-syntax">Markdown Syntax</h1>
+  <h1>Editor <i>HELP</i></h1>
+  <h2 id="basic-syntax">Markdown Syntax</h2>
 
   <table>
     <tr>
@@ -127,15 +128,33 @@
         <a
           href="https://www.markdownguide.org/basic-syntax/#images-1"
           target="_blank"
-          >Image</a
+          >Remote Image</a
         >
       </td>
-      <td><code>![alt text](image.jpg)</code></td>
+      <td><code>![alt text](https://image.jpg)</code></td>
     </tr>
     <tr>
-      <td>Image with CSS</td>
+      <td>Local Image on Server</td>
+      <td><code>?[alt text](image.jpg)</code></td>
+    </tr>
+    <tr>
+      <td>Remote Image with CSS</td>
       <td>
-        <code>{{ "![alt text](image.jpg){width: 100px; height:100px}" }}</code>
+        <code>{{
+          "![alt text](https://image.jpg){width: 100px; height:100px}"
+        }}</code>
+      </td>
+    </tr>
+    <tr>
+      <td>Local Image on Server with CSS</td>
+      <td>
+        <code>{{ "?[alt text](image.jpg){width: 100px; height:100px}" }}</code>
+      </td>
+    </tr>
+    <tr>
+      <td>File Download Button</td>
+      <td>
+        <code>{{ "$$$[Button Text](file.txt)" }}</code>
       </td>
     </tr>
     <tr>
@@ -203,6 +222,18 @@
     </tr>
   </table>
 
+  <h2>Placeholders</h2>
+  <ul>
+    <li>
+      <b>$$HOST$$</b> - Will be replaced with the host address that the user
+      specified in the settings.
+    </li>
+    <li>
+      <b>$$PORT$$</b> - Will be replaced with the host address that the user
+      specified in the settings.
+    </li>
+  </ul>
+  <h2>Playground</h2>
   <p>
     You can try out the markdown syntax in the playground below. The preview
     will be updated automatically.

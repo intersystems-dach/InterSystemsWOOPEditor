@@ -115,6 +115,16 @@ export class MarkdownContentComponent {
           language: '',
           title: name,
         });
+      } else if (lines[i].trim().startsWith('#')) {
+        let heading = lines[i].replace(/#/g, '').trim();
+        let level = lines[i].split(' ')[0].length;
+        let id = heading.toLowerCase().replace(/ /g, '-');
+        this.blocks.push({
+          type: 'heading',
+          code: heading,
+          language: id,
+          title: level,
+        });
       } else {
         let code = '';
         let inCodeBlock = false;
@@ -123,7 +133,8 @@ export class MarkdownContentComponent {
           !lines[i].startsWith('~~~') &&
           !lines[i].startsWith('![') &&
           !lines[i].startsWith('$$$[') &&
-          !lines[i].startsWith('?[')
+          !lines[i].startsWith('?[') &&
+          !lines[i].trim().startsWith('#')
         ) {
           if (lines[i].startsWith('```')) {
             inCodeBlock = !inCodeBlock;
@@ -148,36 +159,6 @@ export class MarkdownContentComponent {
       }
     }
   }
-
-  /* private addComponent(template: any) {
-    @Component({ template })
-    class TemplateComponent {}
-
-    @NgModule({ declarations: [TemplateComponent] })
-    class TemplateModule {}
-
-    const mod = this.compiler.compileModuleAndAllComponentsSync(TemplateModule);
-    const factory = mod.componentFactories.find(
-      (comp) => comp.componentType === TemplateComponent
-    );
-    if (!factory) {
-      throw new Error('No factory found');
-    }
-    const component = this.container.createComponent(factory);
-    Object.assign(component.instance);
-    // If properties are changed at a later stage, the change detection
-    // may need to be triggered manually:
-    // component.changeDetectorRef.detectChanges();
-  } */
-
-  /* loadComponent(language, code) {
-    const viewContainerRef = this.appMarkdown.viewContainerRef;
-    viewContainerRef.clear();
-
-    const componentRef =
-      viewContainerRef.createComponent<CodeWindowComponent>();
-    componentRef.instance.data = adItem.data;
-  } */
 
   replaceHostAndPort(s: string): string {
     s = s.replace(/\$\$HOST\$\$/g, IrisinterfaceService.host);

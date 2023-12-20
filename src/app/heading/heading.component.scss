@@ -1,0 +1,19 @@
+.heading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.3s;
+  .linkImg {
+    transition: 0.3s;
+    height: 1.8em;
+    margin-right: 10px;
+    display: none;
+  }
+  &:hover {
+    .linkImg {
+      display: block;
+    }
+    text-decoration: underline;
+  }
+}

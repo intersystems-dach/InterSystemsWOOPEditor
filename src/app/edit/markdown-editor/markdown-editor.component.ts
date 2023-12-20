@@ -57,13 +57,13 @@ export class MarkdownEditorComponent {
   }
 
   translateSpec(toLanguage: string) {
-    if(toLanguage !== 'close') {
-      this.emit("translate," + toLanguage);
+    if (toLanguage !== 'close') {
+      this.emit('translate,' + toLanguage);
     }
     this.closeTranslateSpec();
   }
 
   help() {
-    this.router.navigate(['/markdown']);
+    this.router.navigate(['/help/edit']);
   }
 }

@@ -33,7 +33,7 @@ const routes: Routes = [
   { path: 'chapter/:chapterName/edit', component: EditChapterComponent },
   { path: 'settings', component: SettingsAdvancedComponent },
   { path: 'settings/:settingsName', component: SettingsAdvancedComponent },
-  { path: 'markdown', component: MarkdownCheatSheetComponent },
+  { path: 'help/edit', component: MarkdownCheatSheetComponent },
   { path: 'playground', component: PlaygroundComponent },
   { path: 'help', component: GetHelpComponent },
   { path: 'info', component: WhatsNewComponent },

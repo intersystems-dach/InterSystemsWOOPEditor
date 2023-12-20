@@ -3,15 +3,7 @@ import { Chapter, UserManger, VerifyCache } from 'src/utils/classes';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ChaptermanagerService } from '../services/chaptermanager.service';
 import { LocalStorageService } from '../services/local-storage.service';
-/* const { mdToPdf } = require('md-to-pdf'); */
 
-/* import pdfMake from 'pdfmake/build/pdfmake';
-
-import pdfFonts from 'pdfmake/build/vfs_fonts';
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-
-import htmlToPdfmake from 'html-to-pdfmake'; */
 @Component({
   selector: 'app-chapter',
   templateUrl: './chapter.component.html',
@@ -54,7 +46,7 @@ export class ChapterComponent {
       this.chapter = this.chapterManger.getChapterByName(
         this.chapterName,
         true
-      );
+      ) as Chapter;
 
       if (!this.chapter.IsPrivate) {
         if (
@@ -88,9 +80,12 @@ export class ChapterComponent {
       }
       this.currentPage = pageLocalStorage;
       this.pageInput = this.currentPage + 1;
-
       if (heading != undefined) {
-        let headingPage = this.chapter.getPageForHeading(heading);
+        let headingPage = Chapter.getChapterPageForHeading(
+          this.chapter,
+          heading,
+          true
+        );
         if (headingPage != -1) {
           this.currentPage = headingPage;
           this.pageInput = this.currentPage + 1;
@@ -174,47 +169,6 @@ export class ChapterComponent {
     this.currentPage = event;
     this.pageInput = this.currentPage + 1;
   }
-
-  /* export(event: string) {
-    this.exportOptionsVisible = !this.exportOptionsVisible;
-    if (event == 'close') {
-      return;
-    }
-    let asPDf = event.includes('pdf');
-    let includehint = event.includes('hint');
-    let includeResult = event.includes('result');
-
-    let content = '# ' + this.chapter.Title + '\n---\n';
-    for (let page of this.chapter.Pages) {
-      content += page.Content + '\n---\n';
-      if (page.Hint != '' && includehint) {
-        content += '## HINT\n\n' + page.Hint + '\n---\n';
-      }
-      if (page.Result != '' && includeResult) {
-        content += '## RESULT\n\n' + page.Result + '\n---\n';
-      }
-      content += '\n\n';
-    }
-    if (asPDf) {
-
-      let html = this.mdService.parse(content);
-
-      let pdfContent = htmlToPdfmake(html);
-
-      const documentDefinition = { content: pdfContent };
-
-      pdfMake.createPdf(documentDefinition).open();
-    } else {
-      let blob = new Blob([content], { type: 'text/markdown' });
-      let url = URL.createObjectURL(blob);
-      let a = document.createElement('a');
-      a.href = url;
-      a.download = this.chapter.Title + '.md';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  } */
 
   goBack() {
     this.router.navigate(['/']);
