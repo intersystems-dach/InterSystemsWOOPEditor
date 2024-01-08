@@ -57,26 +57,31 @@ export class ChapterNewComponent {
       this.description,
       this.isPrivate
     );
-    this.apiService.addNewChapter(newChapter).subscribe({
-      next: (data) => {
-        if (data.status) {
-          this.closeEmitter.emit();
-          this.name = '';
-          this.language = 'english';
-          this.password = '';
-          this.description = '';
-          this.isPrivate = false;
-          this.chapterManger.chapters.push(newChapter);
-        } else {
+    this.apiService
+      .addNewChapter(newChapter, UserManger.userName, UserManger.password)
+      .subscribe({
+        next: (data) => {
+          console.log(data);
+          if (data.status) {
+            this.closeEmitter.emit();
+            this.name = '';
+            this.language = 'english';
+            this.password = '';
+            this.description = '';
+            this.isPrivate = false;
+            this.chapterManger.chapters.push(newChapter);
+          } else {
+            this.isWrong = true;
+            this.wrongText = 'Something went wrong!';
+          }
+        },
+        error: (err: any) => {
+          console.log('err');
+          console.log(err);
           this.isWrong = true;
-          this.wrongText = 'Something went wrong!';
-        }
-      },
-      error: (err: any) => {
-        this.isWrong = true;
-        this.wrongText = err.message;
-      },
-    });
+          this.wrongText = err.message;
+        },
+      });
   }
 
   @HostListener('document:keydown.escape', ['$event'])

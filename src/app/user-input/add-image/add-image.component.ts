@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { NotificationComponent } from 'src/app/notification/notification.component';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-add-image',
@@ -54,34 +55,41 @@ export class AddImageComponent {
       reader.readAsDataURL(file);
       reader.onload = () => {
         const binary = reader.result as ArrayBuffer;
-        this.apiService.uploadImage(file.name, binary).subscribe({
-          next: (res) => {
-            if (res.status) {
-              NotificationComponent.showNotification(
-                'Success',
-                'Image uploaded: ' + res.newName
-              );
-              this.imageEmitter.emit(
-                `?[${res.newName}](${res.newName}){width:100%}`
-              );
-            } else {
+        this.apiService
+          .uploadImage(
+            file.name,
+            binary,
+            UserManger.userName,
+            UserManger.password
+          )
+          .subscribe({
+            next: (res) => {
+              if (res.status) {
+                NotificationComponent.showNotification(
+                  'Success',
+                  'Image uploaded: ' + res.newName
+                );
+                this.imageEmitter.emit(
+                  `?[${res.newName}](${res.newName}){width:100%}`
+                );
+              } else {
+                NotificationComponent.showNotification(
+                  'Error uploading image',
+                  'Could not upload image!',
+                  5000,
+                  true
+                );
+              }
+            },
+            error: (err) => {
               NotificationComponent.showNotification(
                 'Error uploading image',
-                'Could not upload image!',
-                5000,
+                err.message,
+                -1,
                 true
               );
-            }
-          },
-          error: (err) => {
-            NotificationComponent.showNotification(
-              'Error uploading image',
-              err.message,
-              -1,
-              true
-            );
-          },
-        });
+            },
+          });
       };
     };
     input.click();

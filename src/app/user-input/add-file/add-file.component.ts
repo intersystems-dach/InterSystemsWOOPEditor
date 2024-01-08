@@ -1,6 +1,7 @@
 import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { NotificationComponent } from 'src/app/notification/notification.component';
 import { IrisinterfaceService } from 'src/app/services/irisinterface.service';
+import { UserManger } from 'src/utils/classes';
 
 @Component({
   selector: 'app-add-file',
@@ -55,32 +56,39 @@ export class AddFileComponent {
       reader.onload = () => {
         // convert it to base64
 
-        this.apiService.uploadFile(file.name, reader.result).subscribe({
-          next: (res) => {
-            if (res.status) {
-              NotificationComponent.showNotification(
-                'Success',
-                'File uploaded: ' + res.newName
-              );
-              this.fileEmitter.emit(`$$$[Download](${res.newName})`);
-            } else {
+        this.apiService
+          .uploadFile(
+            file.name,
+            reader.result,
+            UserManger.userName,
+            UserManger.password
+          )
+          .subscribe({
+            next: (res) => {
+              if (res.status) {
+                NotificationComponent.showNotification(
+                  'Success',
+                  'File uploaded: ' + res.newName
+                );
+                this.fileEmitter.emit(`$$$[Download](${res.newName})`);
+              } else {
+                NotificationComponent.showNotification(
+                  'Error uploading file',
+                  'Could not upload file!',
+                  5000,
+                  true
+                );
+              }
+            },
+            error: (err) => {
               NotificationComponent.showNotification(
                 'Error uploading file',
-                'Could not upload file!',
-                5000,
+                err.message,
+                -1,
                 true
               );
-            }
-          },
-          error: (err) => {
-            NotificationComponent.showNotification(
-              'Error uploading file',
-              err.message,
-              -1,
-              true
-            );
-          },
-        });
+            },
+          });
       };
     };
     input.click();

@@ -36,26 +36,32 @@ export class EditChapterMetaDataComponent {
     this.updateChapter.Language = this.language;
     this.updateChapter.Description = this.description;
     this.updateChapter.IsPrivate = this.isPrivate;
-    this.apiService.updateChapter(this.updateChapter).subscribe({
-      next: (data) => {
-        if (data.status) {
-          this.closeEmitter.emit();
-          this.name = '';
-          this.language = 'english';
-          this.password = '';
-          this.description = '';
-          this.updateChapter = undefined;
-          this.isPrivate = false;
-        } else {
+    this.apiService
+      .updateChapter(
+        this.updateChapter,
+        UserManger.userName,
+        UserManger.password
+      )
+      .subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.closeEmitter.emit();
+            this.name = '';
+            this.language = 'english';
+            this.password = '';
+            this.description = '';
+            this.updateChapter = undefined;
+            this.isPrivate = false;
+          } else {
+            this.isWrong = true;
+            this.wrongText = 'error';
+          }
+        },
+        error: (err: any) => {
           this.isWrong = true;
-          this.wrongText = 'error';
-        }
-      },
-      error: (err: any) => {
-        this.isWrong = true;
-        this.wrongText = err.message;
-      },
-    });
+          this.wrongText = err.message;
+        },
+      });
   }
 
   @HostListener('document:keydown.escape', ['$event'])

@@ -148,35 +148,37 @@ export class EditChapterComponent {
 
   @HostListener('document:keydown.control.alt.s', ['$event'])
   save(alertSaved: boolean = true) {
-    this.apiService.updateChapter(this.chapter).subscribe({
-      next: (data) => {
-        if (data.status) {
-          if (alertSaved) {
+    this.apiService
+      .updateChapter(this.chapter, UserManger.userName, UserManger.password)
+      .subscribe({
+        next: (data) => {
+          if (data.status) {
+            if (alertSaved) {
+              NotificationComponent.showNotification(
+                'Chapter saved',
+                'The chapter was saved successfully!',
+                2000
+              );
+            }
+            this.changes = false;
+          } else {
             NotificationComponent.showNotification(
-              'Chapter saved',
-              'The chapter was saved successfully!',
-              2000
+              'Chapter could not be saved',
+              'The chapter could not be saved!',
+              5000,
+              true
             );
           }
-          this.changes = false;
-        } else {
+        },
+        error: (err: any) => {
           NotificationComponent.showNotification(
-            'Chapter could not be saved',
-            'The chapter could not be saved!',
-            5000,
+            'ERROR',
+            'Chapter could not be saved: ' + err.message + '!',
+            -1,
             true
           );
-        }
-      },
-      error: (err: any) => {
-        NotificationComponent.showNotification(
-          'ERROR',
-          'Chapter could not be saved: ' + err.message + '!',
-          -1,
-          true
-        );
-      },
-    });
+        },
+      });
   }
 
   onChange() {

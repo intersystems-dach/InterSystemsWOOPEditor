@@ -145,7 +145,11 @@ export class IrisinterfaceService {
    * @param chapter The chapter to add
    * @returns A Status object
    */
-  addNewChapter(chapter: Chapter): Observable<any> {
+  addNewChapter(
+    chapter: Chapter,
+    username: string,
+    password: string
+  ): Observable<any> {
     return this.http
       .post(
         'http://' +
@@ -153,7 +157,7 @@ export class IrisinterfaceService {
           ':' +
           IrisinterfaceService.port +
           '/woop/chapter/new',
-        chapter
+        { chapter: chapter, username: username, password: password }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {
@@ -161,6 +165,8 @@ export class IrisinterfaceService {
             throw new Error('Chapter already exists');
           } else if (err.status === 500) {
             throw new Error('Chapter could not be saved');
+          } else if (err.status === 401) {
+            throw new Error('Unauthorized');
           } else if (err.status === 0) {
             throw new Error('Server is offline');
           } else throw new Error('unknown error: ' + err.status);
@@ -168,7 +174,11 @@ export class IrisinterfaceService {
       );
   }
 
-  updateChapter(chapter: Chapter): Observable<any> {
+  updateChapter(
+    chapter: Chapter,
+    username: string,
+    password: string
+  ): Observable<any> {
     return this.http
       .post(
         'http://' +
@@ -176,7 +186,7 @@ export class IrisinterfaceService {
           ':' +
           IrisinterfaceService.port +
           '/woop/chapter/update',
-        chapter
+        { chapter: chapter, username: username, password: password }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {
@@ -221,7 +231,11 @@ export class IrisinterfaceService {
       );
   }
 
-  deleteChapter(chapter: Chapter): Observable<any> {
+  deleteChapter(
+    chapter: Chapter,
+    username: string,
+    password: string
+  ): Observable<any> {
     return this.http
       .post(
         'http://' +
@@ -229,7 +243,7 @@ export class IrisinterfaceService {
           ':' +
           IrisinterfaceService.port +
           '/woop/chapter/delete',
-        chapter
+        { chapter: chapter, username: username, password: password }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {
@@ -244,7 +258,12 @@ export class IrisinterfaceService {
       );
   }
 
-  uploadImage(name: string, content: any): Observable<any> {
+  uploadImage(
+    name: string,
+    content: any,
+    username: string,
+    password: string
+  ): Observable<any> {
     name = name.replace(/ /g, '_');
     return this.http
       .post(
@@ -253,7 +272,7 @@ export class IrisinterfaceService {
           ':' +
           IrisinterfaceService.port +
           '/woop/image/upload',
-        { Name: name, Content: content }
+        { Name: name, Content: content, username: username, password: password }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {
@@ -264,7 +283,12 @@ export class IrisinterfaceService {
       );
   }
 
-  uploadFile(name: string, content: any): Observable<any> {
+  uploadFile(
+    name: string,
+    content: any,
+    username: string,
+    password: string
+  ): Observable<any> {
     name = name.replace(/ /g, '_');
     return this.http
       .post(
@@ -273,7 +297,7 @@ export class IrisinterfaceService {
           ':' +
           IrisinterfaceService.port +
           '/woop/file/upload',
-        { Name: name, Content: content }
+        { Name: name, Content: content, username: username, password: password }
       )
       .pipe(
         catchError((err: HttpErrorResponse) => {

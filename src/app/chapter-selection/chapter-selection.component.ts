@@ -49,32 +49,34 @@ export class ChapterSelectionComponent {
   }
 
   deleteChapter(chapter: Chapter) {
-    this.apiService.deleteChapter(chapter).subscribe({
-      next: (data) => {
-        if (data.status) {
-          this.chapters.splice(this.chapters.indexOf(chapter), 1);
+    this.apiService
+      .deleteChapter(chapter, UserManger.userName, UserManger.password)
+      .subscribe({
+        next: (data) => {
+          if (data.status) {
+            this.chapters.splice(this.chapters.indexOf(chapter), 1);
+            NotificationComponent.showNotification(
+              'Chapter deleted',
+              'The chapter was deleted successfully!'
+            );
+          } else {
+            NotificationComponent.showNotification(
+              'Chapter could not be deleted',
+              'The chapter could not be deleted!',
+              5000,
+              true
+            );
+          }
+        },
+        error: (error) => {
           NotificationComponent.showNotification(
-            'Chapter deleted',
-            'The chapter was deleted successfully!'
-          );
-        } else {
-          NotificationComponent.showNotification(
-            'Chapter could not be deleted',
-            'The chapter could not be deleted!',
-            5000,
+            'ERROR',
+            'Chapter could not be deleted: ' + error.message + '!',
+            -1,
             true
           );
-        }
-      },
-      error: (error) => {
-        NotificationComponent.showNotification(
-          'ERROR',
-          'Chapter could not be deleted: ' + error.message + '!',
-          -1,
-          true
-        );
-      },
-    });
+        },
+      });
   }
 
   isChapterAccessible(chapter: Chapter): boolean {
