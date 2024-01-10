@@ -26,6 +26,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ---
 
-by [Philipp B.](https://github.com/phil1436)
+by [Philipp B.](https://github.com/cophilot)
 
 _This application is not supported by InterSystems Corporation. Please be notified that you use it at your own responsibility_
