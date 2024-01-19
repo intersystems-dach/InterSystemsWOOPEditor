@@ -25,10 +25,11 @@ export class HomeComponent {
   ngOnInit(): void {
     this.chapterManager.init();
     this.checkIfServerOnline();
-    setInterval(() => {
+    const interval = setInterval(() => {
       this.checkIfServerOnline();
       if (!this.isServerOnline && this.router.url == '/') {
         this.router.navigate(['/error']);
+        clearInterval(interval);
       }
     }, 5000);
   }

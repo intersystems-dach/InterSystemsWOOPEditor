@@ -136,6 +136,19 @@ export class LocalStorageService {
     IrisinterfaceService.port = serverPort;
   }
 
+  getServerProtocol(): string {
+    let protocol = localStorage.getItem('serverProtocol');
+    if (protocol == null) {
+      return 'http';
+    }
+    return protocol;
+  }
+
+  setServerProtocol(protocol: string) {
+    LocalStorageService.setLS('serverProtocol', protocol);
+    IrisinterfaceService.protocol = protocol;
+  }
+
   getUserName(): string | null {
     return localStorage.getItem('userName');
   }
@@ -190,14 +203,24 @@ export class LocalStorageService {
     return null;
   }
 
-  addServerConnection(name: string, host: string, port: number) {
+  addServerConnection(
+    name: string,
+    host: string,
+    port: number,
+    protocol: string
+  ) {
     let serverConnections = this.getAllServerConnections();
     for (let i = 0; i < serverConnections.length; i++) {
       if (serverConnections[i].name == name) {
         serverConnections.splice(i, 1);
       }
     }
-    serverConnections.push({ name: name, host: host, port: port });
+    serverConnections.push({
+      name: name,
+      host: host,
+      port: port,
+      protocol: protocol,
+    });
     LocalStorageService.setLS(
       'serverConnections',
       JSON.stringify(serverConnections)

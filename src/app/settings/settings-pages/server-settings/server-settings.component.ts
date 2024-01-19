@@ -11,6 +11,7 @@ import { NotificationComponent } from 'src/app/notification/notification.compone
 })
 export class ServerSettingsComponent {
   connection: string = '';
+  protocol: string = '';
   name: string = '';
   host: string = '';
   port: number = 0;
@@ -21,11 +22,13 @@ export class ServerSettingsComponent {
   ) {
     this.host = localStorageService.getServerHost();
     this.port = localStorageService.getServerPort();
+    this.protocol = localStorageService.getServerProtocol();
   }
 
   connect() {
     this.localStorageService.setServerHost(this.host);
     this.localStorageService.setServerPort(this.port);
+    this.localStorageService.setServerProtocol(this.protocol);
     this.router.navigate(['/']);
   }
 
@@ -49,7 +52,8 @@ export class ServerSettingsComponent {
     this.localStorageService.addServerConnection(
       this.name,
       this.host,
-      this.port
+      this.port,
+      this.protocol
     );
     NotificationComponent.showNotification('Success', 'Connection saved!');
   }
@@ -59,6 +63,7 @@ export class ServerSettingsComponent {
       this.name = '';
       this.host = this.localStorageService.getServerHost();
       this.port = this.localStorageService.getServerPort();
+      this.protocol = this.localStorageService.getServerProtocol();
       return;
     }
     const con = this.localStorageService.getConnection(this.connection);
@@ -66,6 +71,7 @@ export class ServerSettingsComponent {
       this.name = con.name;
       this.host = con.host;
       this.port = con.port;
+      this.protocol = con.protocol;
     }
   }
 
@@ -75,12 +81,19 @@ export class ServerSettingsComponent {
 
   isCurrentConnection(): boolean {
     return (
-      this.localStorageService.getServerHost() === this.host &&
-      this.localStorageService.getServerPort() === this.port
+      IrisinterfaceService.host === this.host &&
+      IrisinterfaceService.port === this.port &&
+      IrisinterfaceService.protocol === this.protocol
     );
   }
 
   getCurrentConnection(): string {
-    return IrisinterfaceService.host + ':' + IrisinterfaceService.port;
+    return (
+      IrisinterfaceService.protocol +
+      '://' +
+      IrisinterfaceService.host +
+      ':' +
+      IrisinterfaceService.port
+    );
   }
 }

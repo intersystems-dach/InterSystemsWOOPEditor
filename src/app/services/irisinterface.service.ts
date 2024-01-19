@@ -9,6 +9,7 @@ import { LocalStorageService } from './local-storage.service';
   providedIn: 'root',
 })
 export class IrisinterfaceService {
+  public static protocol: string = 'http';
   public static host: string = 'localhost';
   public static port: number = 52773;
 
@@ -23,7 +24,8 @@ export class IrisinterfaceService {
   isServerOnline() {
     return this.http
       .get<string>(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -38,7 +40,8 @@ export class IrisinterfaceService {
 
   getVersion(): Observable<any> {
     return this.http.get(
-      'http://' +
+      IrisinterfaceService.protocol +
+        '://' +
         IrisinterfaceService.host +
         ':' +
         IrisinterfaceService.port +
@@ -56,7 +59,8 @@ export class IrisinterfaceService {
     // make request and handle 404 status
     return this.http
       .get<User>(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -78,7 +82,8 @@ export class IrisinterfaceService {
 
   getAllChapters(): Observable<any> {
     return this.http.get(
-      'http://' +
+      IrisinterfaceService.protocol +
+        '://' +
         IrisinterfaceService.host +
         ':' +
         IrisinterfaceService.port +
@@ -89,7 +94,8 @@ export class IrisinterfaceService {
   verifyChapter(chapterName: string, password: string): Observable<any> {
     return this.http
       .get(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -116,7 +122,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .get(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -152,7 +159,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -181,7 +189,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -208,7 +217,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -238,7 +248,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -267,7 +278,8 @@ export class IrisinterfaceService {
     name = name.replace(/ /g, '_');
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -292,7 +304,8 @@ export class IrisinterfaceService {
     name = name.replace(/ /g, '_');
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -311,7 +324,8 @@ export class IrisinterfaceService {
   getFile(name: string) {
     return this.http
       .get(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -332,7 +346,8 @@ export class IrisinterfaceService {
   translateText(text: string, to: string): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -351,7 +366,8 @@ export class IrisinterfaceService {
   getAllImageNames(): Observable<any> {
     return this.http
       .get(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -371,7 +387,8 @@ export class IrisinterfaceService {
   getAllFileNames(): Observable<any> {
     return this.http
       .get(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -396,7 +413,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -431,7 +449,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -465,7 +484,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -499,7 +519,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +
@@ -535,7 +556,8 @@ export class IrisinterfaceService {
   ): Observable<any> {
     return this.http
       .post(
-        'http://' +
+        IrisinterfaceService.protocol +
+          '://' +
           IrisinterfaceService.host +
           ':' +
           IrisinterfaceService.port +

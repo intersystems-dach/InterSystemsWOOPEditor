@@ -23,6 +23,13 @@
     <input type="text" class="action" placeholder="Name" [(ngModel)]="name" />
   </div>
   <div class="row">
+    <p class="label">Protocol</p>
+    <select name="Level" [(ngModel)]="protocol" style="width: 110px">
+      <option value="http">http</option>
+      <option value="https">https</option>
+    </select>
+  </div>
+  <div class="row">
     <p class="label">Host</p>
     <input type="text" class="action" placeholder="Host" [(ngModel)]="host" />
   </div>
