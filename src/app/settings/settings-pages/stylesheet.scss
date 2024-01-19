@@ -67,20 +67,22 @@
       }
     }
     input {
-      width: 100%;
+      width: 200px !important;
       border: none;
       border-radius: 5px;
       padding: 5px;
       margin: 5px;
       box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.5);
-      cursor: default;
       background: var(--header-color);
       color: var(--text-color);
+      cursor: text !important;
       &:focus {
         outline: none;
       }
     }
     select {
+      width: 210px !important;
+
       padding: 5px;
       margin: 5px;
       margin-right: 20px;
@@ -116,4 +118,4 @@
       }
     }
   }
-};
+}
