@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'help', component: GetHelpComponent },
   { path: 'info', component: WhatsNewComponent },
   { path: 'impressum', component: ImpressumComponent },
-  { path: 'connect/:host/:port', component: ConnectViaUrlComponent },
+  { path: 'connect/:protocol/:host/:port', component: ConnectViaUrlComponent },
 ];
 
 @NgModule({

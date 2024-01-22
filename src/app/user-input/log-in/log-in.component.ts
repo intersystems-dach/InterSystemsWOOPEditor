@@ -33,11 +33,11 @@ export class LogInComponent {
     let password = localStorageService.getPassword();
     if (password != null) {
       this.enteredPassword = password;
-      this.submit();
+      this.submit(true);
     }
   }
 
-  submit() {
+  submit(onInit = false) {
     this.apiService
       .checkUser(this.entereduserName, this.enteredPassword)
       .subscribe({
@@ -55,6 +55,11 @@ export class LogInComponent {
           }
         },
         error: (err: Error) => {
+          if (onInit) {
+            this.localStorageService.removePassword();
+            this.close();
+            return;
+          }
           this.wrongMessage = err.message;
           this.isWrong = true;
           this.enteredPassword = '';

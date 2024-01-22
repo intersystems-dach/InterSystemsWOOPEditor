@@ -16,11 +16,18 @@ export class ConnectViaUrlComponent {
   ) {}
 
   ngOnInit(): void {
+    let protocol = this.route.snapshot.paramMap.get('protocol');
+    if (protocol == null) {
+      this.router.navigate(['/']);
+      return;
+    }
+
     let host = this.route.snapshot.paramMap.get('host');
     if (host == null) {
       this.router.navigate(['/']);
       return;
     }
+
     let portS = this.route.snapshot.paramMap.get('port');
     if (portS == null || isNaN(Number(portS))) {
       this.router.navigate(['/']);
@@ -29,8 +36,13 @@ export class ConnectViaUrlComponent {
     let port = Number(portS);
     this.localStorageService.setServerHost(host);
     this.localStorageService.setServerPort(port);
+    this.localStorageService.setServerProtocol(protocol);
     IrisinterfaceService.host = host;
     IrisinterfaceService.port = port;
+    IrisinterfaceService.protocol = protocol;
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
     this.router.navigate(['/']);
   }
 }

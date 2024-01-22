@@ -29,6 +29,9 @@ export class ServerSettingsComponent {
     this.localStorageService.setServerHost(this.host);
     this.localStorageService.setServerPort(this.port);
     this.localStorageService.setServerProtocol(this.protocol);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
     this.router.navigate(['/']);
   }
 
