@@ -35,7 +35,12 @@
   </div>
   <div class="row">
     <p class="label">Port</p>
-    <input type="text" class="action" placeholder="Port" [(ngModel)]="port" />
+    <input
+      type="text"
+      class="action"
+      placeholder="Port (Use -1 for default protocol port)"
+      [(ngModel)]="port"
+    />
   </div>
   <div class="row">
     <p class="label"></p>

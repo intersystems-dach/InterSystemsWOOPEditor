@@ -19,6 +19,7 @@ export class IrisinterfaceService {
   ) {
     IrisinterfaceService.host = localStorageService.getServerHost();
     IrisinterfaceService.port = localStorageService.getServerPort();
+    IrisinterfaceService.protocol = localStorageService.getServerProtocol();
   }
 
   isServerOnline() {

@@ -49,6 +49,10 @@ export class ServerSettingsComponent {
       return;
     }
 
+    if (this.port < 0) {
+      this.port = this.protocol === 'https' ? 443 : 80;
+    }
+
     this.localStorageService.addServerConnection(
       this.name,
       this.host,
