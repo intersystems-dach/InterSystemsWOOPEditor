@@ -51,11 +51,16 @@ export class AddFileComponent {
       const file = event.target.files[0];
       const reader = new FileReader();
       reader.readAsText(file);
-
-      // read the content of the file
+      if (file.name.includes('(') || file.name.includes(')')) {
+        NotificationComponent.showNotification(
+          'Error uploading file',
+          'File name cannot contain "(" or ")"',
+          5000,
+          true
+        );
+        return;
+      }
       reader.onload = () => {
-        // convert it to base64
-
         this.apiService
           .uploadFile(
             file.name,
