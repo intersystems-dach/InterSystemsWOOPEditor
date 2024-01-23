@@ -74,7 +74,8 @@ export class MarkdownContentComponent {
         }
         if (lines[i].startsWith('?[')) {
           let urlToImage =
-            'http://' +
+            IrisinterfaceService.protocol +
+            '://' +
             IrisinterfaceService.host +
             ':' +
             IrisinterfaceService.port +
